@@ -1,0 +1,111 @@
+{
+  "system": {
+    "name": "Euramax Cybersecurity Verdedigingssysteem",
+    "description": "AI-aangedreven bedreigingsdetectie en gebruikerseducatie platform",
+    "version": "1.0.0",
+    "language": "Nederlands"
+  },
+  "threats": {
+    "phishing": "Phishing-aanval",
+    "malware": "Kwaadaardige software",
+    "ransomware": "Losgeld software", 
+    "ddos": "DDoS-aanval",
+    "social_engineering": "Social engineering",
+    "data_breach": "Datalek",
+    "insider_threat": "Interne bedreiging",
+    "apt": "Geavanceerde aanhoudende bedreiging"
+  },
+  "severity": {
+    "critical": "Kritiek",
+    "high": "Hoog",
+    "medium": "Medium", 
+    "low": "Laag",
+    "info": "Informatie"
+  },
+  "actions": {
+    "quarantine": "In quarantaine plaatsen",
+    "block": "Blokkeren",
+    "monitor": "Monitoren",
+    "alert": "Waarschuwen",
+    "isolate": "Isoleren",
+    "educate": "Voorlichten"
+  },
+  "notifications": {
+    "titles": {
+      "phishing_critical": "🚨 KRITIEKE PHISHING-AANVAL GEDETECTEERD",
+      "phishing_high": "⚠️ Phishing-Aanval Gedetecteerd",
+      "phishing_medium": "🔍 Verdachte Email Activiteit",
+      "malware_critical": "🦠 KRITIEKE MALWARE GEDETECTEERD",
+      "ddos_high": "🌐 DDoS-Aanval Gedetecteerd"
+    },
+    "instructions": {
+      "phishing_critical": [
+        "OPEN GEEN verdachte emails die u recent heeft ontvangen",
+        "Controleer uw inbox op emails van onbekende afzenders",
+        "Rapporteer verdachte emails aan security@euramax.nl",
+        "Verander uw wachtwoorden als u recent op links heeft geklikt",
+        "Neem contact op met IT-beveiliging voor hulp"
+      ],
+      "malware_critical": [
+        "STOP met het gebruiken van het geïnfecteerde systeem",
+        "Koppel het systeem los van het netwerk",
+        "Neem onmiddellijk contact op met IT-beveiliging",
+        "Voer geen bestanden uit van USB-sticks of downloads",
+        "Waarschuw collega's over mogelijke besmetting"
+      ],
+      "ddos_high": [
+        "Verwacht mogelijke vertragingen in systemen",
+        "Gebruik kritieke systemen met voorzichtigheid",
+        "Rapporteer ongewone netwerkproblemen",
+        "Volg updates via officiële kanalen"
+      ]
+    },
+    "education": {
+      "phishing": "Phishing-aanvallen gebruiken vaak urgente taal en vragen om persoonlijke gegevens. Herken ze aan: onjuiste spelfouten, verdachte afzenders, urgente actie-oproepen en links naar onbekende websites.",
+      "malware": "Malware kan zich snel verspreiden en systemen beschadigen. Herken malware door: onverwachte pop-ups, langzame prestaties, onbekende programma's en verdachte netwerkactiviteit.",
+      "ddos": "DDoS-aanvallen overbelasten netwerken met verkeer. Onze systemen zijn uitgerust met automatische verdediging om de impact te minimaliseren."
+    }
+  },
+  "dashboard": {
+    "overview": "Overzicht",
+    "threats": "Bedreigingen",
+    "statistics": "Statistieken",
+    "alerts": "Waarschuwingen",
+    "settings": "Instellingen",
+    "users": "Gebruikers",
+    "reports": "Rapporten",
+    "realtime": "Real-time",
+    "performance": "Prestaties"
+  },
+  "status": {
+    "operational": "Operationeel",
+    "degraded": "Verminderd",
+    "offline": "Offline",
+    "maintenance": "Onderhoud",
+    "healthy": "Gezond",
+    "warning": "Waarschuwing",
+    "error": "Fout"
+  },
+  "buttons": {
+    "report_email": "Rapporteer Verdachte Email",
+    "contact_it": "Neem Contact Op Met IT",
+    "view_tips": "Bekijk Veiligheidstips",
+    "check_email": "Controleer Email", 
+    "report_incident": "Rapporteer Incident",
+    "view_guidelines": "Bekijk Richtlijnen",
+    "activate_emergency": "Noodprotocol Activeren",
+    "isolate_system": "Isoleer Systeem",
+    "contact_security": "Contact IT-Beveiliging",
+    "view_status": "Bekijk Systeemstatus",
+    "report_issues": "Rapporteer Problemen",
+    "view_details": "Bekijk Details"
+  },
+  "messages": {
+    "threat_detected": "Bedreiging gedetecteerd en automatisch behandeld",
+    "system_protected": "Uw systeem wordt beschermd door Euramax",
+    "notification_sent": "Notificatie verzonden naar beveiligingsteam",
+    "quarantine_success": "Verdachte content succesvol in quarantaine geplaatst",
+    "user_educated": "Gebruikerseducatie materiaal verzonden",
+    "incident_reported": "Incident gemeld en wordt onderzocht"
+  }
+}
