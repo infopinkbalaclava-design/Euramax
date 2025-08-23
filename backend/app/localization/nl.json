@@ -1,0 +1,142 @@
+{
+  "app_name": "Euramax AI Cybersecurity Defense",
+  "app_description": "AI-gestuurde phishing bescherming en cybersecurity verdediging",
+  
+  "navigation": {
+    "dashboard": "Dashboard",
+    "threats": "Bedreigingen",
+    "notifications": "Meldingen",
+    "settings": "Instellingen",
+    "help": "Help"
+  },
+  
+  "dashboard": {
+    "title": "Beveiligingsdashboard",
+    "overview": "Overzicht",
+    "threat_detection": "Bedreigingsdetectie",
+    "ai_bot": "AI-bot",
+    "notifications": "Meldingen",
+    "security_score": "Beveiligingsscore",
+    "system_status": "Systeemstatus",
+    "threats_detected_today": "Bedreigingen gedetecteerd vandaag",
+    "phishing_attempts": "Phishing-pogingen",
+    "blocked_automatically": "Automatisch geblokkeerd",
+    "success_rate": "Succespercentage"
+  },
+  
+  "threats": {
+    "title": "Gedetecteerde Bedreigingen",
+    "phishing": "Phishing",
+    "malware": "Malware",
+    "social_engineering": "Social Engineering",
+    "ddos": "DDoS",
+    "severity": {
+      "low": "Laag",
+      "medium": "Gemiddeld", 
+      "high": "Hoog",
+      "critical": "Kritiek"
+    },
+    "status": {
+      "detected": "Gedetecteerd",
+      "blocked": "Geblokkeerd",
+      "resolved": "Opgelost"
+    },
+    "scan_content": "Inhoud scannen",
+    "threat_details": "Bedreiging details"
+  },
+  
+  "notifications": {
+    "title": "Beveiligingsmeldingen",
+    "phishing_alert": "Phishing waarschuwing",
+    "threat_blocked": "Bedreiging geblokkeerd",
+    "security_update": "Beveiligingsupdate",
+    "mark_as_read": "Markeren als gelezen",
+    "unread": "Ongelezen",
+    "severity": {
+      "info": "Informatie",
+      "warning": "Waarschuwing",
+      "critical": "Kritiek"
+    }
+  },
+  
+  "ai_bot": {
+    "title": "AI Beveiligingsbot",
+    "actions_taken": "Uitgevoerde acties",
+    "blocked_domains": "Geblokkeerde domeinen",
+    "quarantined_emails": "Geïsoleerde e-mails",
+    "response_time": "Reactietijd",
+    "automatic_actions": "Automatische acties",
+    "manual_override": "Handmatige overschrijving"
+  },
+  
+  "phishing": {
+    "detected_title": "🚨 Phishing Aanval Gedetecteerd",
+    "detected_message": "Een verdachte phishing-poging is gedetecteerd en automatisch geblokkeerd.",
+    "instructions_title": "Onmiddellijke Acties:",
+    "instructions": [
+      "KLIK NIET op verdachte links in het bericht",
+      "Geef GEEN persoonlijke informatie prijs",
+      "Verwijder het bericht NIET (voor onderzoek)",
+      "Meld dit aan de IT-beveiligingsafdeling"
+    ],
+    "recognition_title": "Herkenningskenmerken:",
+    "recognition_indicators": [
+      "Urgente taal: 'onmiddellijk handelen vereist'",
+      "Dreigingen over accountopschorting",
+      "Verzoeken om persoonlijke gegevens",
+      "Verdachte afzender adressen"
+    ],
+    "status_protected": "Uw account is beschermd",
+    "status_blocked": "Automatisch geblokkeerd door AI-systeem"
+  },
+  
+  "security": {
+    "blocked_domains": "Geblokkeerde Domeinen",
+    "quarantined_emails": "Geïsoleerde E-mails",
+    "security_settings": "Beveiligingsinstellingen",
+    "threat_intelligence": "Threat Intelligence",
+    "incident_response": "Incident Response"
+  },
+  
+  "performance": {
+    "title": "Systeemprestaties",
+    "accuracy": "Nauwkeurigheid",
+    "precision": "Precisie",
+    "recall": "Recall",
+    "f1_score": "F1-score",
+    "response_times": "Reactietijden",
+    "system_resources": "Systeembronnen",
+    "uptime": "Uptime"
+  },
+  
+  "buttons": {
+    "scan": "Scannen",
+    "block": "Blokkeren",
+    "allow": "Toestaan",
+    "quarantine": "Isoleren",
+    "release": "Vrijgeven",
+    "refresh": "Vernieuwen",
+    "details": "Details",
+    "close": "Sluiten",
+    "save": "Opslaan",
+    "cancel": "Annuleren"
+  },
+  
+  "messages": {
+    "scan_complete": "Scan voltooid",
+    "threat_blocked": "Bedreiging geblokkeerd",
+    "action_successful": "Actie succesvol uitgevoerd",
+    "error_occurred": "Er is een fout opgetreden",
+    "no_threats_found": "Geen bedreigingen gevonden",
+    "system_healthy": "Systeem functioneert normaal"
+  },
+  
+  "help": {
+    "title": "Help & Documentatie",
+    "user_guide": "Gebruikershandleiding",
+    "api_documentation": "API Documentatie",
+    "security_best_practices": "Beveiligings Best Practices",
+    "contact_support": "Contact Ondersteuning",
+    "system_status": "Systeemstatus"
+  }
+}

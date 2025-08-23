@@ -1,0 +1,142 @@
+{
+  "app_name": "Euramax AI Cybersecurity Defense",
+  "app_description": "AI-powered phishing protection and cybersecurity defense",
+  
+  "navigation": {
+    "dashboard": "Dashboard",
+    "threats": "Threats",
+    "notifications": "Notifications",
+    "settings": "Settings",
+    "help": "Help"
+  },
+  
+  "dashboard": {
+    "title": "Security Dashboard",
+    "overview": "Overview",
+    "threat_detection": "Threat Detection",
+    "ai_bot": "AI Bot",
+    "notifications": "Notifications",
+    "security_score": "Security Score",
+    "system_status": "System Status",
+    "threats_detected_today": "Threats detected today",
+    "phishing_attempts": "Phishing attempts",
+    "blocked_automatically": "Blocked automatically",
+    "success_rate": "Success rate"
+  },
+  
+  "threats": {
+    "title": "Detected Threats",
+    "phishing": "Phishing",
+    "malware": "Malware",
+    "social_engineering": "Social Engineering",
+    "ddos": "DDoS",
+    "severity": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High", 
+      "critical": "Critical"
+    },
+    "status": {
+      "detected": "Detected",
+      "blocked": "Blocked",
+      "resolved": "Resolved"
+    },
+    "scan_content": "Scan content",
+    "threat_details": "Threat details"
+  },
+  
+  "notifications": {
+    "title": "Security Notifications",
+    "phishing_alert": "Phishing alert",
+    "threat_blocked": "Threat blocked",
+    "security_update": "Security update",
+    "mark_as_read": "Mark as read",
+    "unread": "Unread",
+    "severity": {
+      "info": "Information",
+      "warning": "Warning",
+      "critical": "Critical"
+    }
+  },
+  
+  "ai_bot": {
+    "title": "AI Security Bot",
+    "actions_taken": "Actions taken",
+    "blocked_domains": "Blocked domains",
+    "quarantined_emails": "Quarantined emails",
+    "response_time": "Response time",
+    "automatic_actions": "Automatic actions",
+    "manual_override": "Manual override"
+  },
+  
+  "phishing": {
+    "detected_title": "🚨 Phishing Attack Detected",
+    "detected_message": "A suspicious phishing attempt has been detected and automatically blocked.",
+    "instructions_title": "Immediate Actions:",
+    "instructions": [
+      "DO NOT click any suspicious links in the message",
+      "DO NOT provide any personal information",
+      "DO NOT delete the message (needed for investigation)",
+      "Report this to IT Security department"
+    ],
+    "recognition_title": "Recognition Indicators:",
+    "recognition_indicators": [
+      "Urgent language: 'immediate action required'",
+      "Threats about account suspension",
+      "Requests for personal information",
+      "Suspicious sender addresses"
+    ],
+    "status_protected": "Your account is protected",
+    "status_blocked": "Automatically blocked by AI system"
+  },
+  
+  "security": {
+    "blocked_domains": "Blocked Domains",
+    "quarantined_emails": "Quarantined Emails",
+    "security_settings": "Security Settings",
+    "threat_intelligence": "Threat Intelligence",
+    "incident_response": "Incident Response"
+  },
+  
+  "performance": {
+    "title": "System Performance",
+    "accuracy": "Accuracy",
+    "precision": "Precision",
+    "recall": "Recall",
+    "f1_score": "F1 Score",
+    "response_times": "Response Times",
+    "system_resources": "System Resources",
+    "uptime": "Uptime"
+  },
+  
+  "buttons": {
+    "scan": "Scan",
+    "block": "Block",
+    "allow": "Allow",
+    "quarantine": "Quarantine",
+    "release": "Release",
+    "refresh": "Refresh",
+    "details": "Details",
+    "close": "Close",
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  
+  "messages": {
+    "scan_complete": "Scan completed",
+    "threat_blocked": "Threat blocked",
+    "action_successful": "Action completed successfully",
+    "error_occurred": "An error occurred",
+    "no_threats_found": "No threats found",
+    "system_healthy": "System operating normally"
+  },
+  
+  "help": {
+    "title": "Help & Documentation",
+    "user_guide": "User Guide",
+    "api_documentation": "API Documentation",
+    "security_best_practices": "Security Best Practices",
+    "contact_support": "Contact Support",
+    "system_status": "System Status"
+  }
+}

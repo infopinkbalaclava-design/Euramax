@@ -1,0 +1,93 @@
+{
+  "app_name": "Euramax AI Cybersecurity Defense",
+  "app_description": "AI-gestuurde phishing bescherming en cybersecurity verdediging",
+  
+  "navigation": {
+    "dashboard": "Dashboard",
+    "threats": "Bedreigingen",
+    "notifications": "Meldingen",
+    "settings": "Instellingen",
+    "help": "Help"
+  },
+  
+  "dashboard": {
+    "title": "Beveiligingsdashboard",
+    "overview": "Overzicht",
+    "threat_detection": "Bedreigingsdetectie",
+    "ai_bot": "AI-bot",
+    "notifications": "Meldingen",
+    "security_score": "Beveiligingsscore",
+    "system_status": "Systeemstatus",
+    "threats_detected_today": "Bedreigingen gedetecteerd vandaag",
+    "phishing_attempts": "Phishing-pogingen",
+    "blocked_automatically": "Automatisch geblokkeerd",
+    "success_rate": "Succespercentage"
+  },
+  
+  "threats": {
+    "title": "Gedetecteerde Bedreigingen",
+    "phishing": "Phishing",
+    "malware": "Malware",
+    "social_engineering": "Social Engineering",
+    "ddos": "DDoS",
+    "severity": {
+      "low": "Laag",
+      "medium": "Gemiddeld", 
+      "high": "Hoog",
+      "critical": "Kritiek"
+    },
+    "status": {
+      "detected": "Gedetecteerd",
+      "blocked": "Geblokkeerd",
+      "resolved": "Opgelost"
+    },
+    "scan_content": "Inhoud scannen",
+    "threat_details": "Bedreiging details"
+  },
+  
+  "notifications": {
+    "title": "Beveiligingsmeldingen",
+    "phishing_alert": "Phishing waarschuwing",
+    "threat_blocked": "Bedreiging geblokkeerd",
+    "security_update": "Beveiligingsupdate",
+    "mark_as_read": "Markeren als gelezen",
+    "unread": "Ongelezen",
+    "severity": {
+      "info": "Informatie",
+      "warning": "Waarschuwing",
+      "critical": "Kritiek"
+    }
+  },
+  
+  "ai_bot": {
+    "title": "AI Beveiligingsbot",
+    "actions_taken": "Uitgevoerde acties",
+    "blocked_domains": "Geblokkeerde domeinen",
+    "quarantined_emails": "Geïsoleerde e-mails",
+    "response_time": "Reactietijd",
+    "automatic_actions": "Automatische acties",
+    "manual_override": "Handmatige overschrijving"
+  },
+  
+  "buttons": {
+    "scan": "Scannen",
+    "block": "Blokkeren",
+    "allow": "Toestaan",
+    "quarantine": "Isoleren",
+    "release": "Vrijgeven",
+    "refresh": "Vernieuwen",
+    "details": "Details",
+    "close": "Sluiten",
+    "save": "Opslaan",
+    "cancel": "Annuleren"
+  },
+  
+  "messages": {
+    "scan_complete": "Scan voltooid",
+    "threat_blocked": "Bedreiging geblokkeerd",
+    "action_successful": "Actie succesvol uitgevoerd",
+    "error_occurred": "Er is een fout opgetreden",
+    "no_threats_found": "Geen bedreigingen gevonden",
+    "system_healthy": "Systeem functioneert normaal"
+  }
+}
