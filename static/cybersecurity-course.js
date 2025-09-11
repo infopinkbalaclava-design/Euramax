@@ -15,7 +15,7 @@ let sectionStartTime = Date.now();
 let bookmarks = [];
 
 // Course sections in order
-const sections = ['intro', 'phishing', 'passwords', 'malware', 'social', 'data', 'quiz'];
+const sections = ['intro', 'phishing', 'passwords', 'malware', 'social', 'data', 'quiz', 'phishing-demo'];
 
 // Quiz questions database with detailed, challenging questions
 const quizQuestions = [
@@ -1205,9 +1205,352 @@ function getSectionName(section) {
         'malware': 'Malware & Ransomware',
         'social': 'Social Engineering',
         'data': 'Data Bescherming',
-        'quiz': 'Toets'
+        'quiz': 'Toets',
+        'phishing-demo': 'Live Phishing Simulation Demo'
     };
     return sectionNames[section] || section;
+}
+
+// Live Phishing Simulation Demo Functionality
+let demoState = {
+    currentEmailIndex: 0,
+    emailsAnalyzed: 0,
+    threatsDetected: 0,
+    startTime: null,
+    isActive: false
+};
+
+// Sample phishing emails for demonstration
+const phishingDemoEmails = [
+    {
+        id: 1,
+        from: "security@banknl-verificatie.com",
+        subject: "URGENT: Account Verification Required",
+        body: `Dear Customer,
+
+We have detected suspicious activity on your account. For your security, we need you to verify your identity immediately.
+
+Click here to verify your account: https://banknl-secure.com/verify?token=abc123
+
+If you do not verify within 24 hours, your account will be suspended.
+
+Best regards,
+Security Team
+Bank Nederland`,
+        threatLevel: "critical",
+        indicators: [
+            "Suspicious domain (banknl-verificatie.com instead of official domain)",
+            "Generic greeting ('Dear Customer')",
+            "Urgency tactics ('URGENT', '24 hours')",
+            "Suspicious verification link",
+            "Threatening language about account suspension"
+        ],
+        confidence: 0.95,
+        recommendations: [
+            "Block sender domain immediately",
+            "Quarantine email and prevent delivery",
+            "Alert security team about phishing campaign",
+            "Train users about this attack pattern",
+            "Implement additional domain filtering"
+        ]
+    },
+    {
+        id: 2,
+        from: "hr@euramax.eu",
+        subject: "New Employee Benefits Document",
+        body: `Hi there,
+
+Please find attached the updated employee benefits document. You need to fill it out and return it by Friday.
+
+The document contains sensitive HR information, so please ensure you're logged into the secure portal when opening it.
+
+Download document: https://euramax-hr.secure-docs.eu/benefits.pdf
+
+Thanks,
+HR Department`,
+        threatLevel: "high",
+        indicators: [
+            "Domain spoofing (euramax-hr.secure-docs.eu)",
+            "Request for sensitive information",
+            "External download link masquerading as internal",
+            "Social engineering using HR context",
+            "Time pressure ('by Friday')"
+        ],
+        confidence: 0.87,
+        recommendations: [
+            "Verify with HR department via phone",
+            "Block suspicious domain",
+            "Scan download link for malware",
+            "Implement sender verification policies",
+            "Educate staff about HR impersonation"
+        ]
+    },
+    {
+        id: 3,
+        from: "it-support@microsoft.com",
+        subject: "Office 365 License Expiring Today",
+        body: `Microsoft Office User,
+
+Your Office 365 license is expiring today. To avoid interruption of service, please renew immediately.
+
+Click here to renew: https://office365-renewal.microsoft-security.net/renew
+
+Your current license details:
+- User: [Your Email]
+- License Type: Office 365 Business Premium
+- Expiry: Today
+
+Microsoft Support Team`,
+        threatLevel: "medium",
+        indicators: [
+            "Suspicious renewal domain (microsoft-security.net)",
+            "Generic addressing ('Microsoft Office User')",
+            "Fake urgency ('expiring today')",
+            "Credential harvesting attempt",
+            "Impersonating Microsoft support"
+        ],
+        confidence: 0.78,
+        recommendations: [
+            "Verify Office 365 status through official portal",
+            "Report phishing attempt to Microsoft",
+            "Block fraudulent domain",
+            "Educate users about license scams",
+            "Implement multi-factor authentication"
+        ]
+    }
+];
+
+function startPhishingDemo() {
+    demoState = {
+        currentEmailIndex: 0,
+        emailsAnalyzed: 0,
+        threatsDetected: 0,
+        startTime: Date.now(),
+        isActive: true
+    };
+    
+    updateDemoProgress(10, "Initializing AI threat detection engine...");
+    
+    setTimeout(() => {
+        updateDemoProgress(25, "Loading machine learning models...");
+        setTimeout(() => {
+            updateDemoProgress(50, "Ready for email analysis");
+            loadCurrentEmail();
+        }, 1000);
+    }, 800);
+}
+
+function loadCurrentEmail() {
+    const email = phishingDemoEmails[demoState.currentEmailIndex];
+    const emailContainer = document.getElementById('demoEmailContainer');
+    const currentEmailDemo = document.getElementById('currentEmailDemo');
+    
+    emailContainer.innerHTML = `
+        <div class="email-header">
+            <div><strong>From:</strong> <span class="email-from">${email.from}</span></div>
+            <div><strong>Subject:</strong> <span class="email-subject">${email.subject}</span></div>
+            <div><strong>Received:</strong> ${new Date().toLocaleString('nl-NL')}</div>
+        </div>
+        <div class="email-body">
+            ${email.body.replace(/\n/g, '<br>').replace(/(https?:\/\/[^\s]+)/g, '<span class="suspicious-link">$1</span>')}
+        </div>
+    `;
+    
+    currentEmailDemo.style.display = 'block';
+    document.getElementById('startDemoBtn').style.display = 'none';
+    document.getElementById('analyzeBtn').style.display = 'inline-block';
+    
+    updateDemoProgress(60, `Email ${demoState.currentEmailIndex + 1}/${phishingDemoEmails.length} loaded. Ready for AI analysis.`);
+}
+
+function analyzeCurrentEmail() {
+    const email = phishingDemoEmails[demoState.currentEmailIndex];
+    const aiProcessing = document.getElementById('aiProcessing');
+    const analyzeBtn = document.getElementById('analyzeBtn');
+    
+    analyzeBtn.style.display = 'none';
+    aiProcessing.style.display = 'block';
+    
+    // Simulate AI processing steps
+    const processingSteps = [
+        "Analyzing email headers and metadata...",
+        "Scanning for malicious URLs and attachments...",
+        "Performing sentiment and linguistic analysis...",
+        "Cross-referencing with threat intelligence databases...",
+        "Applying machine learning threat classification...",
+        "Generating confidence score and recommendations..."
+    ];
+    
+    let stepIndex = 0;
+    const processInterval = setInterval(() => {
+        document.getElementById('processingStatus').textContent = processingSteps[stepIndex];
+        stepIndex++;
+        
+        if (stepIndex >= processingSteps.length) {
+            clearInterval(processInterval);
+            showThreatAnalysis(email);
+        }
+    }, 1200);
+}
+
+function showThreatAnalysis(email) {
+    document.getElementById('aiProcessing').style.display = 'none';
+    
+    const threatAnalysis = document.getElementById('threatAnalysisResults');
+    const threatContent = document.getElementById('threatAnalysisContent');
+    
+    let indicatorsHTML = email.indicators.map(indicator => 
+        `<li>🚨 ${indicator}</li>`
+    ).join('');
+    
+    threatContent.innerHTML = `
+        <div style="margin-bottom: 1rem;">
+            <h4>🔍 Detection Results</h4>
+            <span class="threat-level threat-${email.threatLevel}">
+                ${email.threatLevel.toUpperCase()} THREAT
+            </span>
+            <p style="margin-top: 0.5rem;">
+                <strong>Confidence Score:</strong> ${(email.confidence * 100).toFixed(1)}%
+            </p>
+        </div>
+        
+        <div style="margin-bottom: 1rem;">
+            <h4>⚠️ Threat Indicators Detected</h4>
+            <ul class="indicators-list">
+                ${indicatorsHTML}
+            </ul>
+        </div>
+        
+        <div style="margin-bottom: 1rem;">
+            <h4>🤖 AI Analysis Summary</h4>
+            <p>
+                Our advanced machine learning algorithms have identified this email as a 
+                <strong>${email.threatLevel}</strong> threat with <strong>${(email.confidence * 100).toFixed(1)}%</strong> confidence.
+                The email exhibits multiple indicators commonly associated with phishing attacks.
+            </p>
+        </div>
+    `;
+    
+    threatAnalysis.style.display = 'block';
+    
+    setTimeout(() => {
+        showRecommendations(email);
+    }, 2000);
+}
+
+function showRecommendations(email) {
+    const recommendationsSection = document.getElementById('recommendationsSection');
+    const recommendationsList = document.getElementById('recommendationsList');
+    
+    let recommendationsHTML = email.recommendations.map(rec => 
+        `<li>✅ ${rec}</li>`
+    ).join('');
+    
+    recommendationsList.innerHTML = recommendationsHTML;
+    recommendationsSection.style.display = 'block';
+    
+    demoState.emailsAnalyzed++;
+    if (email.confidence > 0.7) {
+        demoState.threatsDetected++;
+    }
+    
+    updateDemoProgress(70 + (demoState.currentEmailIndex * 10), 
+        `Analysis complete. ${demoState.threatsDetected} threats detected from ${demoState.emailsAnalyzed} emails.`);
+    
+    if (demoState.currentEmailIndex < phishingDemoEmails.length - 1) {
+        document.getElementById('nextExampleBtn').style.display = 'inline-block';
+    } else {
+        document.getElementById('summaryBtn').style.display = 'inline-block';
+    }
+}
+
+function nextPhishingExample() {
+    demoState.currentEmailIndex++;
+    
+    // Hide current results
+    document.getElementById('threatAnalysisResults').style.display = 'none';
+    document.getElementById('recommendationsSection').style.display = 'none';
+    document.getElementById('nextExampleBtn').style.display = 'none';
+    
+    loadCurrentEmail();
+}
+
+function showDemoSummary() {
+    document.getElementById('currentEmailDemo').style.display = 'none';
+    document.getElementById('threatAnalysisResults').style.display = 'none';
+    document.getElementById('recommendationsSection').style.display = 'none';
+    document.getElementById('summaryBtn').style.display = 'none';
+    
+    const demoSummary = document.getElementById('demoSummary');
+    const demoStats = document.getElementById('demoStats');
+    
+    const elapsedTime = Math.round((Date.now() - demoState.startTime) / 1000);
+    const avgAnalysisTime = Math.round(elapsedTime / demoState.emailsAnalyzed);
+    const detectionRate = Math.round((demoState.threatsDetected / demoState.emailsAnalyzed) * 100);
+    
+    demoStats.innerHTML = `
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1rem 0;">
+            <div style="background: #e8f5e8; padding: 1rem; border-radius: 8px; text-align: center;">
+                <div style="font-size: 2rem; font-weight: bold; color: #27ae60;">${demoState.emailsAnalyzed}</div>
+                <div style="color: #27ae60;">Emails Analyzed</div>
+            </div>
+            <div style="background: #ffebee; padding: 1rem; border-radius: 8px; text-align: center;">
+                <div style="font-size: 2rem; font-weight: bold; color: #e74c3c;">${demoState.threatsDetected}</div>
+                <div style="color: #e74c3c;">Threats Detected</div>
+            </div>
+            <div style="background: #e3f2fd; padding: 1rem; border-radius: 8px; text-align: center;">
+                <div style="font-size: 2rem; font-weight: bold; color: #3498db;">${avgAnalysisTime}s</div>
+                <div style="color: #3498db;">Avg Analysis Time</div>
+            </div>
+            <div style="background: #fff3e0; padding: 1rem; border-radius: 8px; text-align: center;">
+                <div style="font-size: 2rem; font-weight: bold; color: #f39c12;">${detectionRate}%</div>
+                <div style="color: #f39c12;">Detection Rate</div>
+            </div>
+        </div>
+        
+        <p style="margin: 1rem 0; font-size: 1.1rem;">
+            🎉 <strong>Excellent!</strong> You've successfully completed the Euramax AI Phishing Detection Demo. 
+            Our system analyzed ${demoState.emailsAnalyzed} phishing emails in ${elapsedTime} seconds, 
+            achieving a ${detectionRate}% threat detection rate.
+        </p>
+    `;
+    
+    demoSummary.style.display = 'block';
+    updateDemoProgress(100, "Demo completed successfully!");
+    
+    // Mark phishing demo as completed
+    if (!completedSections.includes('phishing-demo')) {
+        completedSections.push('phishing-demo');
+        updateProgress();
+        markSectionCompleted('phishing-demo');
+    }
+}
+
+function restartPhishingDemo() {
+    // Reset demo state
+    document.getElementById('demoSummary').style.display = 'none';
+    document.getElementById('currentEmailDemo').style.display = 'none';
+    document.getElementById('threatAnalysisResults').style.display = 'none';
+    document.getElementById('recommendationsSection').style.display = 'none';
+    document.getElementById('nextExampleBtn').style.display = 'none';
+    document.getElementById('analyzeBtn').style.display = 'none';
+    document.getElementById('summaryBtn').style.display = 'none';
+    document.getElementById('startDemoBtn').style.display = 'inline-block';
+    
+    updateDemoProgress(0, "Klik op 'Start Simulatie' om te beginnen");
+}
+
+function updateDemoProgress(percentage, statusText) {
+    const progressFill = document.getElementById('demoProgressFill');
+    const progressText = document.getElementById('demoProgressText');
+    
+    if (progressFill) {
+        progressFill.style.width = `${percentage}%`;
+    }
+    
+    if (progressText) {
+        progressText.textContent = statusText;
+    }
 }
 
 // Save progress periodically
