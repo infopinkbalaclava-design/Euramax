@@ -39,4 +39,4 @@ The AI model is trained to recognize various types of threats, including phishin
 
 ---
 
-For more information, see the [README.md](README.md) or contact [security@euramax.eu](mailto:security@euramax.eu).
+For more information, see the [README.md](README.md) or create a GitHub issue for support.

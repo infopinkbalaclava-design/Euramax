@@ -231,10 +231,10 @@ python -m pytest tests/test_course_system.py::TestCourseService::test_quiz_quest
 # Dependencies installeren
 pip install -r requirements.txt
 
-# Server starten
+# Server starten (for local development)
 uvicorn euramax.main:app --host 0.0.0.0 --port 8000
 
-# Health check
+# Health check (when backend is running)
 curl http://localhost:8000/health
 ```
 
@@ -282,7 +282,6 @@ COURSE_MAX_ATTEMPTS=3           # Max quiz pogingen
 ## Ondersteuning
 
 Voor vragen over de cursus applicatie:
-- **Email**: courses@euramax.eu
+- **GitHub Issues**: Create an issue for support
 - **Documentation**: Deze file
-- **Issue Tracking**: GitHub Issues
-- **Technical Support**: development@euramax.eu
+- **Technical Support**: GitHub Issues or Pull Requests

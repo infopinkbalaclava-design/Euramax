@@ -12,6 +12,6 @@ Thank you for your interest in contributing to the Euramax project! We welcome c
 
 ## Code of Conduct
 
-Please adhere to our [Code of Conduct](CODE_OF_CONDUCT.md) in all your interactions.
+Please adhere to our project guidelines in all your interactions with the Euramax cybersecurity platform.
 
 We appreciate your contributions!
