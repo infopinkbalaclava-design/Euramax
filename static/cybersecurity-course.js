@@ -299,33 +299,262 @@ document.addEventListener('DOMContentLoaded', function() {
     updateProgressDashboard();
     updateNavigation();
     updateTimeSpent();
+    initializeLearningPath();
+    initializeAchievements();
     console.log('Euramax Cybersecurity Course initialized with enhanced tracking');
 });
 
-// Navigation functions
-function showSection(sectionId) {
-    // Hide all sections
-    document.querySelectorAll('.course-content, .quiz-section, .quiz-results').forEach(section => {
-        section.classList.remove('active');
-    });
+// Learning Path Indicator
+function initializeLearningPath() {
+    const pathIndicator = document.getElementById('pathIndicator');
+    const sectionIcons = ['🏁', '📧', '🔐', '🦠', '👥', '💾', '📝'];
+    const sectionNames = ['Intro', 'Phishing', 'Passwords', 'Malware', 'Social', 'Data', 'Quiz'];
     
-    // Show selected section
+    pathIndicator.innerHTML = sections.map((section, index) => {
+        const isCompleted = completedSections.includes(section);
+        const isCurrent = section === currentSection;
+        const isAccessible = index === 0 || completedSections.includes(sections[index - 1]);
+        
+        return `
+            <div class="path-step ${isCompleted ? 'completed' : ''} ${isCurrent ? 'current' : ''} ${isAccessible ? 'accessible' : 'locked'}" 
+                 data-section="${section}" style="cursor: pointer;">
+                <div class="path-icon">${sectionIcons[index]}</div>
+                <div class="path-name">${sectionNames[index]}</div>
+                ${index < sections.length - 1 ? '<div class="path-connector"></div>' : ''}
+            </div>
+        `;
+    }).join('');
+    
+    // Add click handlers for accessible steps
+    pathIndicator.querySelectorAll('.path-step.accessible').forEach(step => {
+        step.addEventListener('click', () => {
+            const section = step.dataset.section;
+            showSection(section);
+        });
+    });
+}
+
+function updateLearningPath() {
+    const pathSteps = document.querySelectorAll('.path-step');
+    
+    pathSteps.forEach((step, index) => {
+        const section = sections[index];
+        const isCompleted = completedSections.includes(section);
+        const isCurrent = section === currentSection;
+        const isAccessible = index === 0 || completedSections.includes(sections[index - 1]);
+        
+        step.className = `path-step ${isCompleted ? 'completed' : ''} ${isCurrent ? 'current' : ''} ${isAccessible ? 'accessible' : 'locked'}`;
+        
+        // Update click handler
+        if (isAccessible) {
+            step.style.cursor = 'pointer';
+            step.onclick = () => showSection(section);
+        } else {
+            step.style.cursor = 'not-allowed';
+            step.onclick = null;
+        }
+    });
+}
+
+// Achievement System
+function initializeAchievements() {
+    const achievements = [
+        { id: 'first-step', name: 'Eerste Stap', icon: '🚀', description: 'Cursus gestart' },
+        { id: 'halfway', name: 'Halverwege', icon: '⚡', description: '50% voltooid' },
+        { id: 'speed-demon', name: 'Snelle Leerling', icon: '💨', description: 'Module in <5 min' },
+        { id: 'perfect-score', name: 'Perfectionist', icon: '🏆', description: '100% op toets' },
+        { id: 'completed', name: 'Afgerond', icon: '🎓', description: 'Cursus voltooid' }
+    ];
+    
+    // Load existing achievements
+    const earned = JSON.parse(localStorage.getItem('euramax-achievements') || '[]');
+    earned.forEach(achievementId => {
+        showAchievementBadge(achievements.find(a => a.id === achievementId));
+    });
+}
+
+function earnAchievement(achievementId) {
+    const earned = JSON.parse(localStorage.getItem('euramax-achievements') || '[]');
+    if (earned.includes(achievementId)) return;
+    
+    earned.push(achievementId);
+    localStorage.setItem('euramax-achievements', JSON.stringify(earned));
+    
+    const achievements = [
+        { id: 'first-step', name: 'Eerste Stap', icon: '🚀', description: 'Cursus gestart' },
+        { id: 'halfway', name: 'Halverwege', icon: '⚡', description: '50% voltooid' },
+        { id: 'speed-demon', name: 'Snelle Leerling', icon: '💨', description: 'Module in <5 min' },
+        { id: 'perfect-score', name: 'Perfectionist', icon: '🏆', description: '100% op toets' },
+        { id: 'completed', name: 'Afgerond', icon: '🎓', description: 'Cursus voltooid' }
+    ];
+    
+    const achievement = achievements.find(a => a.id === achievementId);
+    if (achievement) {
+        showAchievementBadge(achievement);
+        showAchievementNotification(achievement);
+    }
+}
+
+function showAchievementBadge(achievement) {
+    const badgesContainer = document.getElementById('achievementBadges');
+    const badge = document.createElement('div');
+    badge.className = 'achievement-badge';
+    badge.style.cssText = `
+        background: linear-gradient(135deg, #f39c12, #e67e22);
+        color: white;
+        padding: 0.25rem 0.5rem;
+        border-radius: 15px;
+        font-size: 0.75rem;
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        animation: badgeEarn 0.5s ease-out;
+    `;
+    badge.innerHTML = `${achievement.icon} ${achievement.name}`;
+    badge.title = achievement.description;
+    badgesContainer.appendChild(badge);
+}
+
+function showAchievementNotification(achievement) {
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: linear-gradient(135deg, #f39c12, #e67e22);
+        color: white;
+        padding: 1rem;
+        border-radius: 10px;
+        box-shadow: 0 8px 25px rgba(243, 156, 18, 0.3);
+        z-index: 10000;
+        animation: achievementSlide 3s ease-out forwards;
+    `;
+    
+    notification.innerHTML = `
+        <div style="font-weight: bold; display: flex; align-items: center; gap: 0.5rem;">
+            ${achievement.icon} Achievement Unlocked!
+        </div>
+        <div style="margin-top: 0.25rem; font-size: 0.9rem;">
+            ${achievement.name} - ${achievement.description}
+        </div>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Add animation styles if not exist
+    if (!document.getElementById('achievement-styles')) {
+        const style = document.createElement('style');
+        style.id = 'achievement-styles';
+        style.textContent = `
+            @keyframes achievementSlide {
+                0% { transform: translateX(100%); opacity: 0; }
+                20% { transform: translateX(0); opacity: 1; }
+                80% { transform: translateX(0); opacity: 1; }
+                100% { transform: translateX(100%); opacity: 0; }
+            }
+            @keyframes badgeEarn {
+                0% { transform: scale(0); opacity: 0; }
+                50% { transform: scale(1.2); opacity: 1; }
+                100% { transform: scale(1); opacity: 1; }
+            }
+            .path-step {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 0.5rem;
+                border-radius: 8px;
+                transition: all 0.3s ease;
+                min-width: 60px;
+                position: relative;
+            }
+            .path-step.completed {
+                background: rgba(46, 204, 113, 0.1);
+                color: #27ae60;
+            }
+            .path-step.current {
+                background: rgba(102, 126, 234, 0.1);
+                color: #667eea;
+                transform: scale(1.1);
+                box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+            }
+            .path-step.locked {
+                opacity: 0.5;
+                color: #7f8c8d;
+            }
+            .path-step.accessible:hover {
+                background: rgba(0, 0, 0, 0.05);
+                transform: scale(1.05);
+            }
+            .path-icon {
+                font-size: 1.2rem;
+                margin-bottom: 0.25rem;
+            }
+            .path-name {
+                font-size: 0.7rem;
+                text-align: center;
+                font-weight: 500;
+            }
+            .path-connector {
+                position: absolute;
+                right: -0.75rem;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 1rem;
+                height: 2px;
+                background: #ddd;
+            }
+            .path-step.completed .path-connector {
+                background: #27ae60;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.parentNode.removeChild(notification);
+        }
+    }, 3000);
+}
+
+// Navigation functions with enhanced transitions
+function showSection(sectionId, direction = 'forward') {
+    const currentActiveSection = document.querySelector('.course-content.active, .quiz-section.active, .quiz-results.active');
     const targetSection = document.getElementById(sectionId);
-    if (targetSection) {
+    
+    if (!targetSection) return;
+    
+    // Add slide-out animation to current section
+    if (currentActiveSection && currentActiveSection !== targetSection) {
+        currentActiveSection.classList.add(direction === 'forward' ? 'slide-out' : 'slide-in');
+        
+        setTimeout(() => {
+            // Hide all sections
+            document.querySelectorAll('.course-content, .quiz-section, .quiz-results').forEach(section => {
+                section.classList.remove('active', 'slide-out', 'slide-in');
+            });
+            
+            // Show target section with slide-in animation
+            targetSection.classList.add('active');
+            if (direction === 'forward') {
+                targetSection.classList.add('slide-in');
+            }
+            
+            // Remove animation classes after transition
+            setTimeout(() => {
+                targetSection.classList.remove('slide-in', 'slide-out');
+            }, 400);
+        }, 200);
+    } else {
+        // First time or same section - no animation needed
+        document.querySelectorAll('.course-content, .quiz-section, .quiz-results').forEach(section => {
+            section.classList.remove('active');
+        });
         targetSection.classList.add('active');
     }
     
-    // Update menu items
-    document.querySelectorAll('.menu-item').forEach(item => {
-        item.classList.remove('active');
-    });
-    
-    // Find and activate the corresponding menu item
-    const menuItems = document.querySelectorAll('.menu-item');
-    const sectionIndex = sections.indexOf(sectionId);
-    if (sectionIndex !== -1 && menuItems[sectionIndex]) {
-        menuItems[sectionIndex].classList.add('active');
-    }
+    // Update menu items with enhanced animations
+    updateMenuItems(sectionId);
     
     currentSection = sectionId;
     
@@ -341,19 +570,38 @@ function showSection(sectionId) {
     updateProgressDashboard();
     updateNavigation();
     saveProgress();
+    
+    // Add scroll to top with smooth behavior
+    setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 300);
+}
+
+function updateMenuItems(activeSectionId) {
+    document.querySelectorAll('.menu-item').forEach((item, index) => {
+        item.classList.remove('active');
+        
+        // Add stagger animation effect
+        setTimeout(() => {
+            if (sections[index] === activeSectionId) {
+                item.classList.add('active');
+            }
+        }, index * 50);
+    });
 }
 
 function nextSection() {
     const currentIndex = sections.indexOf(currentSection);
     if (currentIndex < sections.length - 1) {
-        // Mark current section as completed
+        // Mark current section as completed with celebration
         if (!completedSections.includes(currentSection)) {
             completedSections.push(currentSection);
             markSectionCompleted(currentSection);
+            showCompletionCelebration(currentSection);
         }
         
         const nextSectionId = sections[currentIndex + 1];
-        showSection(nextSectionId);
+        showSection(nextSectionId, 'forward');
         
         // Update progress dashboard
         updateProgressDashboard();
@@ -365,8 +613,62 @@ function previousSection() {
     const currentIndex = sections.indexOf(currentSection);
     if (currentIndex > 0) {
         const prevSectionId = sections[currentIndex - 1];
-        showSection(prevSectionId);
+        showSection(prevSectionId, 'backward');
     }
+}
+
+function showCompletionCelebration(sectionId) {
+    // Create a temporary celebration element
+    const celebration = document.createElement('div');
+    celebration.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: linear-gradient(135deg, #2ecc71, #27ae60);
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(46, 204, 113, 0.3);
+        z-index: 10000;
+        font-size: 1.1rem;
+        font-weight: bold;
+        opacity: 0;
+        animation: celebrationPop 2s ease-out forwards;
+        pointer-events: none;
+    `;
+    
+    const sectionName = getSectionName(sectionId);
+    celebration.innerHTML = `
+        🎉 ${sectionName} voltooid!
+        <div style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.9;">
+            Goed gedaan! Ga door naar de volgende module.
+        </div>
+    `;
+    
+    document.body.appendChild(celebration);
+    
+    // Add celebration animation styles if not exist
+    if (!document.getElementById('celebration-styles')) {
+        const style = document.createElement('style');
+        style.id = 'celebration-styles';
+        style.textContent = `
+            @keyframes celebrationPop {
+                0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+                20% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+                30% { transform: translate(-50%, -50%) scale(1); }
+                100% { opacity: 0; transform: translate(-50%, -50%) scale(1); }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    
+    // Remove after animation
+    setTimeout(() => {
+        if (celebration.parentNode) {
+            celebration.parentNode.removeChild(celebration);
+        }
+    }, 2000);
 }
 
 function updateNavigation() {
@@ -396,7 +698,10 @@ function updateProgress() {
     const progress = ((currentIndex + 1) / sections.length) * 100;
     
     if (progressBar) {
-        progressBar.style.width = `${progress}%`;
+        // Animate progress bar with easing
+        setTimeout(() => {
+            progressBar.style.width = `${progress}%`;
+        }, 100);
     }
 }
 
@@ -405,14 +710,25 @@ function markSectionCompleted(sectionId) {
     const sectionIndex = sections.indexOf(sectionId);
     
     if (sectionIndex !== -1 && menuItems[sectionIndex]) {
-        menuItems[sectionIndex].classList.add('completed');
+        // Add completion animation
+        const menuItem = menuItems[sectionIndex];
+        menuItem.style.transform = 'scale(1.1)';
+        
+        setTimeout(() => {
+            menuItem.classList.add('completed');
+            menuItem.style.transform = '';
+        }, 200);
     }
     
-    // Update status indicator
+    // Update status indicator with animation
     const statusElement = document.getElementById(`status-${sectionId}`);
     if (statusElement) {
-        statusElement.textContent = '✅';
-        statusElement.className = 'module-status completed';
+        statusElement.style.transform = 'scale(1.3)';
+        setTimeout(() => {
+            statusElement.textContent = '✅';
+            statusElement.className = 'module-status completed';
+            statusElement.style.transform = '';
+        }, 150);
     }
 }
 
@@ -1025,22 +1341,100 @@ function showCompletionPrompt() {
     }
 }
 
-// Add keyboard navigation
+// Enhanced keyboard navigation
 document.addEventListener('keydown', function(e) {
     if (e.ctrlKey || e.metaKey) return; // Ignore shortcuts
     
+    // Don't interfere when user is typing in inputs
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    
     switch(e.key) {
         case 'ArrowLeft':
+        case 'ArrowUp':
+            e.preventDefault();
             if (currentSection !== 'intro') {
                 previousSection();
             }
             break;
         case 'ArrowRight':
-            if (currentSection !== 'quiz') {
+        case 'ArrowDown':
+            e.preventDefault();
+            if (currentSection !== sections[sections.length - 1]) {
                 nextSection();
             }
             break;
+        case ' ': // Spacebar
+            e.preventDefault();
+            if (currentSection !== sections[sections.length - 1]) {
+                nextSection();
+            }
+            break;
+        case 'Home':
+            e.preventDefault();
+            showSection('intro');
+            break;
+        case 'End':
+            e.preventDefault();
+            if (completedSections.length >= sections.length - 2) {
+                showSection('quiz');
+            }
+            break;
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+            e.preventDefault();
+            const sectionIndex = parseInt(e.key) - 1;
+            if (sectionIndex < sections.length - 1) {
+                showSection(sections[sectionIndex]);
+            }
+            break;
     }
+});
+
+// Add keyboard hints
+function showKeyboardHints() {
+    const hints = document.createElement('div');
+    hints.id = 'keyboard-hints';
+    hints.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: rgba(0,0,0,0.8);
+        color: white;
+        padding: 1rem;
+        border-radius: 10px;
+        font-size: 0.8rem;
+        z-index: 1000;
+        max-width: 200px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    `;
+    
+    hints.innerHTML = `
+        <div style="font-weight: bold; margin-bottom: 0.5rem;">⌨️ Sneltoetsen</div>
+        <div>← → : Navigeren</div>
+        <div>Spatie : Volgende</div>
+        <div>1-6 : Direct naar module</div>
+        <div>Home : Naar begin</div>
+    `;
+    
+    document.body.appendChild(hints);
+    
+    // Show hints briefly on page load
+    setTimeout(() => {
+        hints.style.opacity = '1';
+        setTimeout(() => {
+            hints.style.opacity = '0';
+        }, 3000);
+    }, 2000);
+}
+
+// Initialize keyboard hints
+document.addEventListener('DOMContentLoaded', function() {
+    showKeyboardHints();
 });
 
 // Auto-save progress to localStorage with enhanced data
@@ -1114,6 +1508,40 @@ function updateProgressDashboard() {
             }
         }
     });
+    
+    // Update learning path
+    updateLearningPath();
+    
+    // Check for achievements
+    checkAchievements();
+}
+
+function checkAchievements() {
+    // First step achievement
+    if (completedSections.length >= 1) {
+        earnAchievement('first-step');
+    }
+    
+    // Halfway achievement
+    if (completedSections.length >= Math.ceil((sections.length - 1) / 2)) {
+        earnAchievement('halfway');
+    }
+    
+    // Speed demon (module completed in less than 5 minutes)
+    if (timeSpent <= 5 && completedSections.length > 0) {
+        earnAchievement('speed-demon');
+    }
+    
+    // Course completed
+    if (completedSections.length >= sections.length - 1) {
+        earnAchievement('completed');
+    }
+    
+    // Perfect score (checked in quiz results)
+    const lastScore = localStorage.getItem('last-quiz-score');
+    if (lastScore && parseInt(lastScore) === 100) {
+        earnAchievement('perfect-score');
+    }
 }
 
 // Time tracking
