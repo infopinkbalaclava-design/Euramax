@@ -1,48 +1,191 @@
-# Euramax - AI-Gestuurde Cybersecurity Verdedigingssysteem
+# 🛡️ Euramax - AI-Gestuurde Cybersecurity Verdedigingssysteem
 
 [![Nederlandse Implementatie](https://img.shields.io/badge/Taal-Nederlands-orange)](https://github.com/infopinkbalaclava-design/Euramax)
 [![AI-Powered](https://img.shields.io/badge/AI-Powered-blue)](https://github.com/infopinkbalaclava-design/Euramax)
 [![Real-time](https://img.shields.io/badge/Real--time-Monitoring-green)](https://github.com/infopinkbalaclava-design/Euramax)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.116+-red)](https://fastapi.tiangolo.com/)
+[![Training Ready](https://img.shields.io/badge/Cybersecurity_Training-Ready-green)](https://github.com/infopinkbalaclava-design/Euramax)
+
+## 📖 Legend & Quick Navigation
+
+### 🎯 Kerncomponenten
+- **🤖 AI Threat Detection** - Automatische bedreigingsherkenning
+- **📧 Anti-Phishing Module** - Geavanceerde phishing detectie  
+- **📚 Interactive Training** - Nederlandse cybersecurity cursus
+- **🚨 Real-time Alerts** - Onmiddellijke waarschuwingen
+- **📊 Live Dashboard** - Real-time monitoring interface
+
+### 🔗 Quick Links naar Specifieke Topics
+- [🚀 Snelle Start](#-snelle-start) - Begin direct met het systeem
+- [📚 Cybersecurity Training](#-cybersecurity-training) - Interactieve Nederlandse cursus
+- [📊 Dashboard & Monitoring](#-dashboard--monitoring) - Real-time overzicht
+- [🔧 Installatie Guide](#-gedetailleerde-installatie) - Stap-voor-stap instructies
+- [📱 Push Notificaties](#-push-notificatie-systeem) - Waarschuwingssysteem
+- [🧪 Testing](#-testing) - Test procedures
+- [🚀 Deployment](#-productie-deployment) - Productie deployment
+- [📄 API Documentatie](#-api-documentatie) - Complete API referentie
 
 ## 🛡️ Overzicht
 
-Euramax is een **volledig geautomatiseerd AI-aangedreven cybersecurity verdedigingssysteem** dat is ontworpen voor Nederlandse organisaties. Het systeem biedt **real-time bescherming** tegen alle soorten cyberbedreigingen met gespecialiseerde **anti-phishing capaciteiten** en **autonome AI-bot automatisering**.
+Euramax is een **volledig geautomatiseerd AI-aangedreven cybersecurity verdedigingssysteem** dat is ontworpen voor Nederlandse organisaties. Het systeem biedt **real-time bescherming** tegen alle soorten cyberbedreigingen met gespecialiseerde **anti-phishing capaciteiten**, **autonome AI-bot automatisering**, en een **uitgebreide Nederlandse cybersecurity training**.
 
 ### 🎯 Kernfunctionaliteiten
 
 - **🤖 Autonome AI-Bot**: Volledig geautomatiseerde bedreigingsdetectie en -respons
 - **📧 Anti-Phishing Specialist**: Geavanceerde detectie van phishing-aanvallen
+- **📚 Interactive Training Platform**: Uitgebreide Nederlandse cybersecurity cursus voor medewerkers
 - **🚨 Real-time Push Notificaties**: Onmiddellijke waarschuwingen met Nederlandse instructies
 - **🔍 Universele Threat Detection**: Detectie van alle cybersecurity bedreigingen
 - **🇳🇱 Nederlandse Implementatie**: Volledig gelokaliseerde interface en communicatie
 - **📊 Live Dashboard**: Real-time monitoring en analytics
 - **🎓 Automatische Educatie**: Contextuele gebruikersinstructies per bedreiging
 
+## 📚 Cybersecurity Training
+
+### 🎓 Interactieve Nederlandse Cursus
+Het Euramax systeem bevat een **volledige cybersecurity training** speciaal ontworpen voor Nederlandse bedrijven die werken met gevoelige data:
+
+#### 📋 Cursus Features
+- **5 Uitgebreide Modules**: Phishing, Wachtwoorden, Malware, Social Engineering, Data Bescherming
+- **Uitdagende Quiz Vragen**: 15+ moeilijke vragen die werkelijke kennis testen
+- **Fout Review Systeem**: Onjuiste antwoorden worden opnieuw aangeboden
+- **Interactieve Interface**: Moderne, responsive web interface
+- **Nederlandse Lokalisatie**: Volledig in het Nederlands met Nederlandse voorbeelden
+
+#### 🚀 Direct Starten met Training
+```bash
+# Start lokale webserver voor training
+cd Euramax
+python3 -m http.server 8080 --directory static
+
+# Open training in browser
+http://localhost:8080/cybersecurity-course.html
+```
+
+![Cybersecurity Training Screenshot](https://github.com/user-attachments/assets/16e2af73-4ea3-437c-8f6b-a5e3af7edd0c)
+
+#### 📝 Training Modules Overzicht
+1. **📧 Phishing & Email Beveiliging** (20 min) - Herkenning phishing aanvallen
+2. **🔐 Wachtwoord Beveiliging** (15 min) - Beste praktijken voor wachtwoorden  
+3. **🦠 Malware & Ransomware** (20 min) - Malware herkenning en bescherming
+4. **👥 Social Engineering** (15 min) - Sociale manipulatie technieken
+5. **💾 Data Bescherming** (20 min) - GDPR/AVG compliance en data veiligheid
+6. **📝 Kennistoets** (30 min) - 15 uitdagende vragen over alle onderwerpen
+
+![Quiz Interface Screenshot](https://github.com/user-attachments/assets/0a7bb644-548e-4463-b458-f58110f34ae7)
+
 ## 🚀 Snelle Start
 
-### Vereisten
+### 📋 Vereisten
 
 - Python 3.11+
 - PostgreSQL 15+ (optioneel voor productie)
 - Redis 7+ (optioneel voor caching)
+- Webbrowser (Chrome, Firefox, Safari, Edge)
 
-### Installatie
+### ⚡ Eenvoudige Installatie
 
+#### Optie 1: Cybersecurity Training Only (Aanbevolen voor beginners)
 ```bash
-# Clone repository
+# 1. Clone repository
 git clone https://github.com/infopinkbalaclava-design/Euramax.git
 cd Euramax
 
-# Installeer dependencies
-pip install -r requirements.txt
+# 2. Start lokale webserver
+python3 -m http.server 8080 --directory static
 
-# Start de applicatie
-python -m uvicorn euramax.main:app --host 0.0.0.0 --port 8000 --reload
+# 3. Open in browser
+# Ga naar: http://localhost:8080/cybersecurity-course.html
 ```
 
-### Eerste Test
+#### Optie 2: Volledige Installatie met AI-Backend
+```bash
+# 1. Clone repository
+git clone https://github.com/infopinkbalaclava-design/Euramax.git
+cd Euramax
 
+# 2. Installeer dependencies (kan enkele minuten duren)
+pip install -r requirements.txt
+
+# 3. Start de applicatie
+python -m uvicorn euramax.main:app --host 0.0.0.0 --port 8000 --reload
+
+# 4. Open dashboard
+# Ga naar: http://localhost:8000/static/dashboard.html
+```
+
+### 🔧 Gedetailleerde Installatie
+
+#### Stap 1: Repository Clonen
+```bash
+git clone https://github.com/infopinkbalaclava-design/Euramax.git
+cd Euramax
+```
+
+#### Stap 2: Python Environment Setup
+```bash
+# Creëer virtual environment (aanbevolen)
+python3 -m venv euramax-env
+source euramax-env/bin/activate  # Linux/Mac
+# euramax-env\Scripts\activate   # Windows
+
+# Upgrade pip
+pip install --upgrade pip
+```
+
+#### Stap 3: Dependencies Installeren
+```bash
+# Installeer alle dependencies
+pip install -r requirements.txt
+
+# Voor development
+pip install -e .[dev]
+```
+
+#### Stap 4: Configuratie
+```bash
+# Kopieer environment template
+cp .env.example .env
+
+# Bewerk .env bestand met uw configuratie
+nano .env
+```
+
+#### Stap 5: Database Setup (Optioneel)
+```bash
+# Voor productie gebruik
+# PostgreSQL database aanmaken
+createdb euramax
+
+# Database migraties uitvoeren
+alembic upgrade head
+```
+
+#### Stap 6: Applicatie Starten
+```bash
+# Development mode
+python -m uvicorn euramax.main:app --host 0.0.0.0 --port 8000 --reload
+
+# Productie mode
+gunicorn -w 4 -k uvicorn.workers.UvicornWorker euramax.main:app
+```
+
+### 🧪 Eerste Test
+
+#### Test Cybersecurity Training
+```bash
+# Start training webserver
+python3 -m http.server 8080 --directory static
+
+# Test training interface
+curl -I http://localhost:8080/cybersecurity-course.html
+# Expected: HTTP/1.0 200 OK
+
+# Open in browser voor volledige ervaring
+# http://localhost:8080/cybersecurity-course.html
+```
+
+#### Test Backend API (bij volledige installatie)
 ```bash
 # Test systeem status
 curl http://localhost:8000/health
@@ -55,6 +198,23 @@ curl -X POST "http://localhost:8000/api/v1/security/analyze/email" \
     "sender": "security@nep-bank.nl",
     "subject": "URGENT: Account Verificatie Vereist"
   }'
+
+# Test course API
+curl http://localhost:8000/api/v1/course/modules
+```
+
+## 📊 Dashboard & Monitoring
+
+### 🖥️ Live Dashboard Interface
+Het Euramax dashboard biedt real-time inzicht in:
+- **Actieve Bedreigingen**: Live threat detection status
+- **Systeem Status**: Component health monitoring  
+- **Training Voortgang**: Gebruiker course completion stats
+- **Alert History**: Recente beveiligingsincidenten
+
+```bash
+# Toegang tot dashboard
+http://localhost:8000/static/dashboard.html
 ```
 
 ## 🏗️ Architectuur
