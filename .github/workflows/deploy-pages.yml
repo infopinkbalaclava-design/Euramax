@@ -1,0 +1,111 @@
+name: Deploy Live Demo to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+        
+      - name: Create demo directory structure
+        run: |
+          mkdir -p demo
+          cp -r static/* demo/
+          
+          # Create an index.html that redirects to the main course
+          cat > demo/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html lang="nl">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>Euramax Cybersecurity Training - Live Demo</title>
+              <meta http-equiv="refresh" content="0; url=cybersecurity-course.html">
+              <style>
+                  body {
+                      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                      color: white;
+                      text-align: center;
+                      padding: 50px 20px;
+                      min-height: 100vh;
+                      margin: 0;
+                  }
+                  .container {
+                      max-width: 600px;
+                      margin: 0 auto;
+                      background: rgba(255, 255, 255, 0.1);
+                      padding: 40px;
+                      border-radius: 15px;
+                      backdrop-filter: blur(10px);
+                  }
+                  .logo {
+                      font-size: 3rem;
+                      margin-bottom: 20px;
+                  }
+                  h1 {
+                      font-size: 2rem;
+                      margin-bottom: 20px;
+                  }
+                  p {
+                      font-size: 1.2rem;
+                      margin-bottom: 30px;
+                  }
+                  .btn {
+                      display: inline-block;
+                      background: #3498db;
+                      color: white;
+                      padding: 15px 30px;
+                      text-decoration: none;
+                      border-radius: 25px;
+                      font-size: 1.1rem;
+                      transition: all 0.3s ease;
+                  }
+                  .btn:hover {
+                      background: #2980b9;
+                      transform: translateY(-2px);
+                  }
+              </style>
+          </head>
+          <body>
+              <div class="container">
+                  <div class="logo">🛡️</div>
+                  <h1>Euramax Cybersecurity Training</h1>
+                  <p>Welkom bij de live demo van onze Nederlandse cybersecurity cursus</p>
+                  <p>U wordt automatisch doorgestuurd naar de training...</p>
+                  <a href="cybersecurity-course.html" class="btn">🚀 Start Direct met de Training</a>
+              </div>
+          </body>
+          </html>
+          EOF
+          
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './demo'
+          
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
