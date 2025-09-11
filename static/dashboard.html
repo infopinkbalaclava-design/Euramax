@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Euramax Cybersecurity Dashboard</title>
+    <title>Euramax Cybersecurity Dashboard - Live Monitoring & AI Threat Detection</title>
     <style>
         * {
             margin: 0;
@@ -16,13 +16,40 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             color: #333;
+            overflow-x: hidden;
         }
         
         .header {
             background: rgba(255, 255, 255, 0.95);
-            padding: 1rem 2rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1.5rem 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
             backdrop-filter: blur(10px);
+            position: relative;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #f5576c);
+            background-size: 300% 100%;
+            animation: gradientShift 3s ease-in-out infinite;
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
         
         .header h1 {
@@ -31,79 +58,221 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            margin: 0;
         }
         
         .header .flag {
             font-size: 1.5rem;
+            animation: wave 2s ease-in-out infinite;
+        }
+        
+        @keyframes wave {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-10deg); }
+            75% { transform: rotate(10deg); }
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .nav-btn:hover::before {
+            left: 100%;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+        
+        .nav-btn.training {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+        }
+        
+        .status-indicator {
+            background: rgba(46, 204, 113, 0.2);
+            border: 2px solid #2ecc71;
+            border-radius: 15px;
+            padding: 1rem 2rem;
+            margin: 2rem auto;
+            max-width: 800px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .status-indicator::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(46, 204, 113, 0.1), transparent);
+            animation: scan 2s linear infinite;
+        }
+        
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 2rem auto;
             padding: 0 2rem;
         }
         
         .dashboard-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
             margin-bottom: 2rem;
         }
         
-        .card {
+        .dashboard-card {
             background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            padding: 1.5rem;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
         
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        .dashboard-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
         }
         
-        .card h2 {
+        .dashboard-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .dashboard-card h2 {
             color: #2c3e50;
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
         
-        .status-indicator {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            margin-right: 0.5rem;
+        .status-grid {
+            display: grid;
+            gap: 1rem;
         }
         
-        .status-operational { background-color: #27ae60; }
-        .status-warning { background-color: #f39c12; }
-        .status-critical { background-color: #e74c3c; }
-        
-        .metric {
+        .status-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid #ecf0f1;
+            padding: 1rem;
+            background: rgba(0,0,0,0.02);
+            border-radius: 10px;
+            border-left: 4px solid #2ecc71;
+            transition: all 0.3s ease;
         }
         
-        .metric:last-child {
-            border-bottom: none;
+        .status-item:hover {
+            background: rgba(0,0,0,0.05);
+            transform: translateX(5px);
         }
         
-        .metric-value {
+        .status-value {
             font-weight: bold;
             font-size: 1.1rem;
         }
         
-        .threat-list {
+        .status-value.operational {
+            color: #27ae60;
+        }
+        
+        .status-value.warning {
+            color: #f39c12;
+        }
+        
+        .status-value.critical {
+            color: #e74c3c;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(0,0,0,0.02);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-item:hover {
+            background: rgba(102, 126, 234, 0.1);
+            transform: scale(1.05);
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+        
+        .threats-list {
             list-style: none;
         }
         
@@ -111,218 +280,361 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.75rem;
-            margin: 0.5rem 0;
-            background: #f8f9fa;
-            border-radius: 8px;
-            border-left: 4px solid #3498db;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            background: rgba(0,0,0,0.02);
+            border-radius: 10px;
+            border-left: 4px solid #e74c3c;
+            transition: all 0.3s ease;
         }
         
-        .threat-item.high {
-            border-left-color: #e74c3c;
-            background: #fdeaea;
+        .threat-item:hover {
+            background: rgba(231, 76, 60, 0.05);
+            transform: translateX(5px);
         }
         
-        .threat-item.medium {
-            border-left-color: #f39c12;
-            background: #fef9e7;
+        .threat-info {
+            flex: 1;
         }
         
-        .threat-item.low {
-            border-left-color: #27ae60;
-            background: #eafaf1;
+        .threat-type {
+            font-weight: bold;
+            color: #2c3e50;
         }
         
-        .btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .threat-source {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-top: 0.2rem;
+        }
+        
+        .threat-severity {
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .severity-high {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .severity-medium {
+            background: #f39c12;
+            color: white;
+        }
+        
+        .severity-low {
+            background: #95a5a6;
+            color: white;
+        }
+        
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .action-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
             color: white;
             border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-weight: 500;
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
             text-decoration: none;
-            display: inline-block;
         }
         
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
         }
         
-        .alert {
-            background: rgba(231, 76, 60, 0.1);
-            border: 1px solid #e74c3c;
-            color: #c0392b;
-            padding: 1rem;
-            border-radius: 8px;
-            margin: 1rem 0;
+        .action-btn.primary {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
         }
         
-        .success {
-            background: rgba(39, 174, 96, 0.1);
-            border: 1px solid #27ae60;
-            color: #229954;
-            padding: 1rem;
-            border-radius: 8px;
-            margin: 1rem 0;
+        .action-btn.secondary {
+            background: linear-gradient(45deg, #2ecc71, #27ae60);
+        }
+        
+        .action-btn.info {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+        }
+        
+        .live-demo-highlight {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24) !important;
+            color: white;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
         }
         
         .footer {
-            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
             padding: 2rem;
-            color: rgba(255,255,255,0.8);
-            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 3rem;
+            backdrop-filter: blur(10px);
         }
         
+        .footer p {
+            color: #7f8c8d;
+            margin: 0;
+        }
+        
+        .real-time-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(46, 204, 113, 0.1);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #27ae60;
+        }
+        
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: #27ae60;
+            border-radius: 50%;
+            animation: pulse-dot 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .dashboard-grid {
-                grid-template-columns: 1fr;
+            .header-content {
+                flex-direction: column;
+                text-align: center;
             }
             
             .container {
                 padding: 0 1rem;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .dashboard-card {
+                padding: 1.5rem;
+            }
+            
+            .nav-buttons {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.4rem;
+            }
+            
+            .nav-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.8rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .action-buttons {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>
-            <span class="flag">🇳🇱</span>
-            Euramax Cybersecurity Verdedigingssysteem
-            <span class="status-indicator status-operational"></span>
-        </h1>
+        <div class="header-content">
+            <h1>
+                <span class="flag">🇳🇱</span>
+                Euramax Cybersecurity Verdedigingssysteem
+            </h1>
+            <div class="nav-buttons">
+                <a href="/static/cybersecurity-course.html" class="nav-btn training">
+                    🎓 Cybersecurity Training
+                </a>
+                <a href="/static/course.html" class="nav-btn">
+                    📚 Cursus Systeem
+                </a>
+                <button class="nav-btn" onclick="refreshDashboard()">
+                    🔄 Vernieuwen
+                </button>
+                <button class="nav-btn" onclick="toggleRealTimeMode()">
+                    ⚡ Real-time Mode
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="status-indicator">
+        <span class="real-time-indicator">
+            <span class="pulse-dot"></span>
+            Live Monitoring Actief
+        </span>
+        <strong>🛡️ Systeem Operationeel:</strong> 
+        Alle beveiligingscomponenten zijn actief en bewaken uw netwerk 24/7.
     </div>
 
     <div class="container">
-        <div class="success">
-            🛡️ <strong>Systeem Operationeel:</strong> Alle beveiligingscomponenten zijn actief en bewaken uw netwerk 24/7.
-        </div>
-
         <div class="dashboard-grid">
-            <!-- Systeem Status -->
-            <div class="card">
+            <div class="dashboard-card">
                 <h2>🖥️ Systeem Status</h2>
-                <div class="metric">
-                    <span>AI Bedreigingsdetectie</span>
-                    <span class="metric-value" style="color: #27ae60;">Operationeel</span>
-                </div>
-                <div class="metric">
-                    <span>Push Notificaties</span>
-                    <span class="metric-value" style="color: #27ae60;">Operationeel</span>
-                </div>
-                <div class="metric">
-                    <span>Real-time Monitoring</span>
-                    <span class="metric-value" style="color: #27ae60;">Actief</span>
-                </div>
-                <div class="metric">
-                    <span>Uptime</span>
-                    <span class="metric-value">99.9%</span>
+                <div class="status-grid">
+                    <div class="status-item">
+                        <span>AI Bedreigingsdetectie</span>
+                        <span class="status-value operational">Operationeel</span>
+                    </div>
+                    <div class="status-item">
+                        <span>Push Notificaties</span>
+                        <span class="status-value operational">Operationeel</span>
+                    </div>
+                    <div class="status-item">
+                        <span>Real-time Monitoring</span>
+                        <span class="status-value operational">Actief</span>
+                    </div>
+                    <div class="status-item">
+                        <span>Uptime</span>
+                        <span class="status-value operational">99.9%</span>
+                    </div>
                 </div>
             </div>
 
-            <!-- Bedreigingsstatistieken -->
-            <div class="card">
+            <div class="dashboard-card">
                 <h2>📊 Bedreigingsstatistieken</h2>
-                <div class="metric">
-                    <span>Totaal Scans Vandaag</span>
-                    <span class="metric-value">1,247</span>
-                </div>
-                <div class="metric">
-                    <span>Gedetecteerde Bedreigingen</span>
-                    <span class="metric-value" style="color: #e74c3c;">23</span>
-                </div>
-                <div class="metric">
-                    <span>Geblokkeerde Phishing</span>
-                    <span class="metric-value">15</span>
-                </div>
-                <div class="metric">
-                    <span>Quarantaine Malware</span>
-                    <span class="metric-value">8</span>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-value" id="totalScans">1,247</span>
+                        <div class="stat-label">Totaal Scans Vandaag</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="threatsDetected" style="color: #e74c3c;">23</span>
+                        <div class="stat-label">Gedetecteerde Bedreigingen</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="phishingBlocked" style="color: #f39c12;">15</span>
+                        <div class="stat-label">Geblokkeerde Phishing</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="malwareQuarantined" style="color: #27ae60;">8</span>
+                        <div class="stat-label">Quarantaine Malware</div>
+                    </div>
                 </div>
             </div>
 
-            <!-- AI Modellen Status -->
-            <div class="card">
+            <div class="dashboard-card">
                 <h2>🤖 AI Modellen Status</h2>
-                <div class="metric">
-                    <span>Phishing Detector</span>
-                    <span class="metric-value" style="color: #27ae60;">Actief</span>
-                </div>
-                <div class="metric">
-                    <span>Malware Scanner</span>
-                    <span class="metric-value" style="color: #27ae60;">Actief</span>
-                </div>
-                <div class="metric">
-                    <span>Behavioral Analyzer</span>
-                    <span class="metric-value" style="color: #27ae60;">Actief</span>
-                </div>
-                <div class="metric">
-                    <span>Threat Classifier</span>
-                    <span class="metric-value" style="color: #27ae60;">Actief</span>
+                <div class="status-grid">
+                    <div class="status-item">
+                        <span>Phishing Detector</span>
+                        <span class="status-value operational">Actief</span>
+                    </div>
+                    <div class="status-item">
+                        <span>Malware Scanner</span>
+                        <span class="status-value operational">Actief</span>
+                    </div>
+                    <div class="status-item">
+                        <span>Behavioral Analyzer</span>
+                        <span class="status-value operational">Actief</span>
+                    </div>
+                    <div class="status-item">
+                        <span>Threat Classifier</span>
+                        <span class="status-value operational">Actief</span>
+                    </div>
                 </div>
             </div>
 
-            <!-- Recente Bedreigingen -->
-            <div class="card">
+            <div class="dashboard-card">
                 <h2>⚠️ Recente Bedreigingen</h2>
-                <ul class="threat-list">
-                    <li class="threat-item high">
-                        <div>
-                            <strong>Phishing-aanval</strong><br>
-                            <small>security@nep-bank.nl</small>
+                <ul class="threats-list">
+                    <li class="threat-item">
+                        <div class="threat-info">
+                            <div class="threat-type">Phishing-aanval</div>
+                            <div class="threat-source">security@nep-bank.nl</div>
                         </div>
-                        <span>Hoog</span>
+                        <span class="threat-severity severity-high">Hoog</span>
                     </li>
-                    <li class="threat-item medium">
-                        <div>
-                            <strong>Verdachte bijlage</strong><br>
-                            <small>document.exe</small>
+                    <li class="threat-item">
+                        <div class="threat-info">
+                            <div class="threat-type">Verdachte bijlage</div>
+                            <div class="threat-source">document.exe</div>
                         </div>
-                        <span>Medium</span>
+                        <span class="threat-severity severity-medium">Medium</span>
                     </li>
-                    <li class="threat-item low">
-                        <div>
-                            <strong>Spam email</strong><br>
-                            <small>promotie@verdacht.com</small>
+                    <li class="threat-item">
+                        <div class="threat-info">
+                            <div class="threat-type">Spam email</div>
+                            <div class="threat-source">promotie@verdacht.com</div>
                         </div>
-                        <span>Laag</span>
+                        <span class="threat-severity severity-low">Laag</span>
                     </li>
                 </ul>
             </div>
 
-            <!-- Notificatie Instellingen -->
-            <div class="card">
+            <div class="dashboard-card">
                 <h2>🔔 Notificatie Instellingen</h2>
-                <div class="metric">
-                    <span>Email Notificaties</span>
-                    <span class="metric-value" style="color: #27ae60;">Ingeschakeld</span>
-                </div>
-                <div class="metric">
-                    <span>Push Notificaties</span>
-                    <span class="metric-value" style="color: #27ae60;">Ingeschakeld</span>
-                </div>
-                <div class="metric">
-                    <span>SMS Waarschuwingen</span>
-                    <span class="metric-value" style="color: #f39c12;">Kritiek Alleen</span>
-                </div>
-                <div class="metric">
-                    <span>Desktop Meldingen</span>
-                    <span class="metric-value" style="color: #27ae60;">Ingeschakeld</span>
+                <div class="status-grid">
+                    <div class="status-item">
+                        <span>Email Notificaties</span>
+                        <span class="status-value operational">Ingeschakeld</span>
+                    </div>
+                    <div class="status-item">
+                        <span>Push Notificaties</span>
+                        <span class="status-value operational">Ingeschakeld</span>
+                    </div>
+                    <div class="status-item">
+                        <span>SMS Waarschuwingen</span>
+                        <span class="status-value warning">Kritiek Alleen</span>
+                    </div>
+                    <div class="status-item">
+                        <span>Desktop Meldingen</span>
+                        <span class="status-value operational">Ingeschakeld</span>
+                    </div>
                 </div>
             </div>
 
-            <!-- Snelle Acties -->
-            <div class="card">
-                <h2>⚡ Snelle Acties</h2>
-                <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-                    <button class="btn" onclick="window.open('/static/course.html', '_blank')">🎓 Cybersecurity Cursus</button>
-                    <button class="btn" onclick="testNotification()">Test Notificatie Versturen</button>
-                    <button class="btn" onclick="runScan()">Handmatige Scan Uitvoeren</button>
-                    <button class="btn" onclick="viewReports()">Bekijk Rapporten</button>
-                    <button class="btn" onclick="updateSettings()">Update Instellingen</button>
+            <div class="dashboard-card live-demo-highlight">
+                <h2>⚡ Snelle Acties & Live Demo</h2>
+                <div class="action-buttons">
+                    <a href="/static/cybersecurity-course.html" class="action-btn primary">
+                        🎯 Live Phishing Demo
+                    </a>
+                    <a href="/static/cybersecurity-course.html" class="action-btn secondary">
+                        🎓 Cybersecurity Cursus
+                    </a>
+                    <button class="action-btn info" onclick="sendTestNotification()">
+                        📧 Test Notificatie
+                    </button>
+                    <button class="action-btn" onclick="runManualScan()">
+                        🔍 Handmatige Scan
+                    </button>
+                    <button class="action-btn" onclick="viewReports()">
+                        📊 Bekijk Rapporten
+                    </button>
+                    <button class="action-btn" onclick="updateSettings()">
+                        ⚙️ Update Instellingen
+                    </button>
                 </div>
             </div>
         </div>
@@ -331,54 +643,227 @@
     <div class="footer">
         <p>
             Euramax Cybersecurity Verdedigingssysteem v1.0.0 | 
-            Bescherming door AI-aangedreven Nederlandse technologie 🇳🇱
+            Bescherming door AI-aangedreven Nederlandse technologie 🇳🇱 | 
+            <span id="currentTime"></span>
         </p>
     </div>
 
     <script>
-        // Nederlandse alert functies
-        function testNotification() {
-            alert('🔔 Test notificatie verstuurd naar alle gebruikers!');
-        }
-        
-        function runScan() {
-            alert('🔍 Handmatige beveiligingsscan gestart...');
-        }
-        
-        function viewReports() {
-            alert('📊 Beveiligingsrapporten worden geladen...');
-        }
-        
-        function updateSettings() {
-            alert('⚙️ Instellingen paneel openen...');
-        }
+        // Dashboard state management
+        let realTimeMode = true;
+        let refreshInterval;
 
-        // Real-time updates simulatie
-        function updateStats() {
-            const elements = document.querySelectorAll('.metric-value');
-            // Simulate real-time stat updates (placeholder)
-        }
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            updateTime();
+            startRealTimeUpdates();
+            
+            // Update time every second
+            setInterval(updateTime, 1000);
+            
+            console.log('Euramax Dashboard initialized successfully');
+        });
 
-        // Update stats elke 30 seconden
-        setInterval(updateStats, 30000);
-        
-        // Nederlandse datum/tijd display
-        function updateDateTime() {
+        function updateTime() {
             const now = new Date();
-            const options = { 
-                weekday: 'long', 
-                year: 'numeric', 
-                month: 'long', 
+            const timeString = now.toLocaleString('nl-NL', {
+                timeZone: 'Europe/Amsterdam',
+                year: 'numeric',
+                month: 'long',
                 day: 'numeric',
                 hour: '2-digit',
-                minute: '2-digit'
-            };
-            const dutchTime = now.toLocaleDateString('nl-NL', options);
-            // Update UI met Nederlandse tijd indien gewenst
+                minute: '2-digit',
+                second: '2-digit'
+            });
+            document.getElementById('currentTime').textContent = `Laatste update: ${timeString}`;
         }
-        
-        updateDateTime();
-        setInterval(updateDateTime, 60000);
+
+        function startRealTimeUpdates() {
+            if (realTimeMode) {
+                refreshInterval = setInterval(function() {
+                    updateStatistics();
+                }, 5000); // Update every 5 seconds
+            }
+        }
+
+        function stopRealTimeUpdates() {
+            if (refreshInterval) {
+                clearInterval(refreshInterval);
+            }
+        }
+
+        function updateStatistics() {
+            // Simulate real-time statistics updates
+            const totalScans = document.getElementById('totalScans');
+            const threatsDetected = document.getElementById('threatsDetected');
+            const phishingBlocked = document.getElementById('phishingBlocked');
+            const malwareQuarantined = document.getElementById('malwareQuarantined');
+
+            if (totalScans) {
+                const currentScans = parseInt(totalScans.textContent.replace(',', ''));
+                const newScans = currentScans + Math.floor(Math.random() * 10) + 1;
+                totalScans.textContent = newScans.toLocaleString();
+
+                // Occasionally increment threats
+                if (Math.random() < 0.3) {
+                    const currentThreats = parseInt(threatsDetected.textContent);
+                    threatsDetected.textContent = currentThreats + 1;
+
+                    // Show notification animation
+                    showThreatAlert();
+                }
+
+                if (Math.random() < 0.2) {
+                    const currentPhishing = parseInt(phishingBlocked.textContent);
+                    phishingBlocked.textContent = currentPhishing + 1;
+                }
+
+                if (Math.random() < 0.1) {
+                    const currentMalware = parseInt(malwareQuarantined.textContent);
+                    malwareQuarantined.textContent = currentMalware + 1;
+                }
+            }
+        }
+
+        function showThreatAlert() {
+            // Create temporary alert notification
+            const alert = document.createElement('div');
+            alert.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(45deg, #e74c3c, #c0392b);
+                color: white;
+                padding: 1rem 2rem;
+                border-radius: 10px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                z-index: 1000;
+                animation: slideIn 0.5s ease-out;
+            `;
+            alert.innerHTML = '🚨 Nieuwe bedreiging gedetecteerd!';
+            
+            document.body.appendChild(alert);
+            
+            setTimeout(() => {
+                alert.style.animation = 'slideOut 0.5s ease-in forwards';
+                setTimeout(() => alert.remove(), 500);
+            }, 3000);
+        }
+
+        function toggleRealTimeMode() {
+            realTimeMode = !realTimeMode;
+            const button = event.target;
+            
+            if (realTimeMode) {
+                button.textContent = '⚡ Real-time Mode';
+                startRealTimeUpdates();
+                showNotification('Real-time monitoring ingeschakeld', 'success');
+            } else {
+                button.textContent = '⏸️ Paused Mode';
+                stopRealTimeUpdates();
+                showNotification('Real-time monitoring gepauzeerd', 'info');
+            }
+        }
+
+        function refreshDashboard() {
+            showNotification('Dashboard wordt vernieuwd...', 'info');
+            
+            // Animate refresh
+            const cards = document.querySelectorAll('.dashboard-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        card.style.transform = 'scale(1)';
+                    }, 150);
+                }, index * 50);
+            });
+            
+            updateStatistics();
+            setTimeout(() => {
+                showNotification('Dashboard succesvol vernieuwd!', 'success');
+            }, 1000);
+        }
+
+        function sendTestNotification() {
+            showNotification('Test notificatie wordt verstuurd...', 'info');
+            
+            setTimeout(() => {
+                showNotification('✅ Test notificatie succesvol verstuurd!', 'success');
+            }, 1500);
+        }
+
+        function runManualScan() {
+            showNotification('Handmatige scan wordt uitgevoerd...', 'info');
+            
+            setTimeout(() => {
+                const threatsFound = Math.floor(Math.random() * 3);
+                if (threatsFound > 0) {
+                    showNotification(`🔍 Scan voltooid: ${threatsFound} bedreiging(en) gevonden en geblokkeerd`, 'warning');
+                } else {
+                    showNotification('🔍 Scan voltooid: Geen bedreigingen gevonden', 'success');
+                }
+            }, 3000);
+        }
+
+        function viewReports() {
+            showNotification('Rapporten worden geladen...', 'info');
+            // In a real application, this would open a reports page
+        }
+
+        function updateSettings() {
+            showNotification('Instellingen pagina wordt geopend...', 'info');
+            // In a real application, this would open a settings page
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            const colors = {
+                success: 'linear-gradient(45deg, #2ecc71, #27ae60)',
+                warning: 'linear-gradient(45deg, #f39c12, #e67e22)',
+                error: 'linear-gradient(45deg, #e74c3c, #c0392b)',
+                info: 'linear-gradient(45deg, #3498db, #2980b9)'
+            };
+            
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${colors[type]};
+                color: white;
+                padding: 1rem 2rem;
+                border-radius: 10px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                z-index: 1000;
+                animation: slideIn 0.5s ease-out;
+                max-width: 300px;
+            `;
+            
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.5s ease-in forwards';
+                setTimeout(() => notification.remove(), 500);
+            }, 4000);
+        }
+
+        // Add CSS animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        console.log('Euramax Dashboard JavaScript loaded successfully');
     </script>
 </body>
 </html>

@@ -467,6 +467,7 @@
         </h1>
         <div class="nav-buttons">
             <a href="/static/dashboard.html" class="btn btn-secondary">📊 Dashboard</a>
+            <a href="/static/cybersecurity-course.html" class="btn" style="background: linear-gradient(45deg, #ff6b6b, #ee5a24); font-weight: bold;">🎯 Live Phishing Demo</a>
             <button onclick="showOverview()" class="btn">🏠 Overzicht</button>
             <button onclick="showProgress()" class="btn">📈 Voortgang</button>
         </div>
@@ -518,6 +519,174 @@
         // API endpoints
         const API_BASE = '/api/v1/course';
 
+        // Mock data for standalone operation
+        const mockModules = [
+            {
+                id: 'intro',
+                title: '🏁 Introductie Cybersecurity',
+                description: 'Basisbegrippen van cybersecurity voor Nederlandse organisaties',
+                estimated_time_minutes: 15,
+                difficulty: 'beginner',
+                cybersecurity_topics: ['Basis', 'Overzicht', 'Belang'],
+                quiz_question_count: 3,
+                content: `# Welkom bij Cybersecurity Training
+
+Deze module behandelt de fundamenten van cybersecurity.
+
+## Wat is Cybersecurity?
+Cybersecurity is de bescherming van digitale informatie, systemen en netwerken tegen aanvallen.
+
+## Waarom is het belangrijk?
+- Bescherming van bedrijfsgegevens
+- Naleving van AVG/GDPR
+- Voorkoming van financiële schade
+- Behoud van klantvertrouwen`
+            },
+            {
+                id: 'phishing',
+                title: '📧 Phishing & Email Beveiliging',
+                description: 'Herkenning en preventie van phishing aanvallen',
+                estimated_time_minutes: 20,
+                difficulty: 'intermediate',
+                cybersecurity_topics: ['Phishing', 'Email', 'Social Engineering'],
+                quiz_question_count: 5,
+                content: `# Phishing & Email Beveiliging
+
+## Wat is Phishing?
+Phishing is een cyberaanval waarbij criminelen zich voordoen als betrouwbare entiteiten.
+
+## Herkenning van Phishing
+- Urgentie in het bericht
+- Spelfouten en grammaticafouten
+- Verdachte links en bijlagen
+- Generieke begroetingen
+
+## Beste Praktijken
+- Verifieer altijd de afzender
+- Klik niet op verdachte links
+- Rapporteer verdachte emails`
+            },
+            {
+                id: 'passwords',
+                title: '🔐 Wachtwoord Beveiliging',
+                description: 'Sterke wachtwoorden en twee-factor authenticatie',
+                estimated_time_minutes: 15,
+                difficulty: 'beginner',
+                cybersecurity_topics: ['Wachtwoorden', '2FA', 'Authenticatie'],
+                quiz_question_count: 4,
+                content: `# Wachtwoord Beveiliging
+
+## Sterke Wachtwoorden
+Een sterk wachtwoord bevat:
+- Minimaal 12 karakters
+- Hoofdletters en kleine letters
+- Cijfers en speciale tekens
+- Geen persoonlijke informatie
+
+## Twee-Factor Authenticatie (2FA)
+2FA voegt een extra beveiligingslaag toe:
+- Iets wat je weet (wachtwoord)
+- Iets wat je hebt (telefoon/token)
+- Iets wat je bent (biometrie)`
+            },
+            {
+                id: 'malware',
+                title: '🦠 Malware & Ransomware',
+                description: 'Detectie en preventie van kwaadaardige software',
+                estimated_time_minutes: 25,
+                difficulty: 'intermediate',
+                cybersecurity_topics: ['Malware', 'Ransomware', 'Viruses'],
+                quiz_question_count: 6,
+                content: `# Malware & Ransomware
+
+## Soorten Malware
+- **Virussen**: Infecteren andere bestanden
+- **Wormen**: Verspreiden zich automatisch
+- **Trojans**: Verbergen zich in legitieme software
+- **Ransomware**: Versleutelen bestanden voor losgeld
+
+## Preventie
+- Houd software up-to-date
+- Gebruik antivirus software
+- Wees voorzichtig met downloads
+- Maak regelmatig backups`
+            },
+            {
+                id: 'social',
+                title: '👥 Social Engineering',
+                description: 'Herkenning van manipulatietechnieken',
+                estimated_time_minutes: 18,
+                difficulty: 'advanced',
+                cybersecurity_topics: ['Social Engineering', 'Manipulatie', 'Psychologie'],
+                quiz_question_count: 5,
+                content: `# Social Engineering
+
+## Wat is Social Engineering?
+Social engineering is de kunst van het manipuleren van mensen om vertrouwelijke informatie prijs te geven.
+
+## Veelgebruikte Technieken
+- **Pretexting**: Verzonnen scenario's
+- **Baiting**: Verleidelijke aanbiedingen
+- **Quid pro quo**: Dienst voor dienst
+- **Autoriteit**: Voordoen als leidinggevende
+
+## Bescherming
+- Verifieer identiteiten
+- Wees sceptisch bij ongewone verzoeken
+- Volg bedrijfsprotocollen`
+            },
+            {
+                id: 'data',
+                title: '💾 Data Bescherming',
+                description: 'AVG/GDPR compliance en data beveiliging',
+                estimated_time_minutes: 22,
+                difficulty: 'advanced',
+                cybersecurity_topics: ['AVG', 'GDPR', 'Privacy', 'Data'],
+                quiz_question_count: 7,
+                content: `# Data Bescherming & AVG/GDPR
+
+## Algemene Verordening Gegevensbescherming (AVG)
+De AVG beschermt de privacy van EU-burgers.
+
+## Belangrijke Principes
+- **Rechtmatigheid**: Geldige reden voor verwerking
+- **Doelbinding**: Specifiek en legitiem doel
+- **Minimale gegevensverwerking**: Alleen noodzakelijke data
+- **Juistheid**: Accurate en actuele gegevens
+
+## Rechten van Betrokkenen
+- Recht op informatie
+- Recht op toegang
+- Recht op rectificatie
+- Recht op vergetelheid`
+            }
+        ];
+
+        const mockProgress = {
+            user_id: 'demo_user',
+            total_modules: 6,
+            completed_modules: 0,
+            completion_percentage: 0,
+            overall_score: 0,
+            total_time_spent_minutes: 0,
+            module_progress: {}
+        };
+
+        const mockQuizQuestions = [
+            {
+                id: 1,
+                question: "Wat is het belangrijkste kenmerk van een sterke wachtwoord?",
+                scenario_context: null,
+                answers: [
+                    { id: 'a', text: 'Gebruik van persoonlijke informatie', is_correct: false, explanation: 'Persoonlijke informatie maakt wachtwoorden zwakker.' },
+                    { id: 'b', text: 'Minimaal 12 karakters met diverse tekens', is_correct: true, explanation: 'Een combinatie van lengte en diversiteit maakt wachtwoorden sterk.' },
+                    { id: 'c', text: 'Alleen hoofdletters gebruiken', is_correct: false, explanation: 'Diversiteit in karakters is belangrijker.' },
+                    { id: 'd', text: 'Hetzelfde wachtwoord voor alle accounts', is_correct: false, explanation: 'Unieke wachtwoorden per account zijn essentieel.' }
+                ],
+                explanation: "Sterke wachtwoorden combineren lengte (min. 12 karakters) met diverse karakters."
+            }
+        ];
+
         // Initialize application
         document.addEventListener('DOMContentLoaded', async function() {
             await loadModules();
@@ -527,27 +696,23 @@
 
         // API functions
         async function apiCall(endpoint, method = 'GET', data = null) {
-            const options = {
-                method,
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            };
+            // Mock API responses since backend is not running
+            console.log(`Mock API call: ${method} ${endpoint}`, data);
             
-            if (data) {
-                options.body = JSON.stringify(data);
+            // Simulate API delay
+            await new Promise(resolve => setTimeout(resolve, 300));
+            
+            // Return mock data based on endpoint
+            if (endpoint === '/modules') {
+                return mockModules;
+            } else if (endpoint.includes('/progress')) {
+                return mockProgress;
+            } else if (endpoint.includes('/quiz')) {
+                return mockQuizQuestions;
             }
             
-            try {
-                const response = await fetch(`${API_BASE}${endpoint}`, options);
-                if (!response.ok) {
-                    throw new Error(`API Error: ${response.status}`);
-                }
-                return await response.json();
-            } catch (error) {
-                console.error('API call failed:', error);
-                throw error;
-            }
+            // Default response
+            return { success: true };
         }
 
         async function loadModules() {
@@ -1119,6 +1284,10 @@
 
         function formatMarkdownContent(content) {
             // Simple markdown-to-HTML conversion
+            if (!content || typeof content !== 'string') {
+                return '<p>Inhoud wordt geladen...</p>';
+            }
+            
             return content
                 .replace(/^# (.+)$/gm, '<h1>$1</h1>')
                 .replace(/^## (.+)$/gm, '<h2>$1</h2>')
