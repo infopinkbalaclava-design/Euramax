@@ -40,6 +40,25 @@ Euramax is een **volledig geautomatiseerd AI-aangedreven cybersecurity verdedigi
 - **📊 Live Dashboard**: Real-time monitoring en analytics
 - **🎓 Automatische Educatie**: Contextuele gebruikersinstructies per bedreiging
 
+## 🌟 Live Demo
+
+### 🚀 Probeer de Training Direct Online
+**Bezoek onze live demo:** 👉 **[https://infopinkbalaclava-design.github.io/Euramax/](https://infopinkbalaclava-design.github.io/Euramax/)**
+
+De live demo bevat:
+- ✅ **Volledige cybersecurity training** - Alle 5 modules beschikbaar
+- ✅ **Interactieve quizzes** - 15+ uitdagende vragen
+- ✅ **Fout review systeem** - Onjuiste antwoorden worden opnieuw aangeboden  
+- ✅ **Nederlandse interface** - Volledig gelokaliseerd
+- ✅ **Real-time voortgang** - Volg je vooruitgang tijdens de training
+- ✅ **24/7 beschikbaar** - Gehost op betrouwbare GitHub infrastructuur
+
+![Live Demo Screenshot](https://github.com/user-attachments/assets/demo-landing-page-preview.png)
+
+### 🎯 Direct Toegang tot Specifieke Onderdelen
+- **[📚 Complete Cybersecurity Cursus](https://infopinkbalaclava-design.github.io/Euramax/cybersecurity-course.html)** - Start direct met de training
+- **[📊 Dashboard Interface](https://infopinkbalaclava-design.github.io/Euramax/dashboard.html)** - Bekijk het monitoring dashboard
+
 ## 📚 Cybersecurity Training
 
 ### 🎓 Interactieve Nederlandse Cursus
@@ -62,7 +81,7 @@ python3 -m http.server 8080 --directory static
 http://localhost:8080/cybersecurity-course.html
 ```
 
-![Cybersecurity Training Screenshot](https://github.com/user-attachments/assets/16e2af73-4ea3-437c-8f6b-a5e3af7edd0c)
+![Cybersecurity Training Screenshot](https://github.com/user-attachments/assets/4df2b054-84c3-4846-977a-4c26f436b135)
 
 #### 📝 Training Modules Overzicht
 1. **📧 Phishing & Email Beveiliging** (20 min) - Herkenning phishing aanvallen
@@ -72,7 +91,48 @@ http://localhost:8080/cybersecurity-course.html
 5. **💾 Data Bescherming** (20 min) - GDPR/AVG compliance en data veiligheid
 6. **📝 Kennistoets** (30 min) - 15 uitdagende vragen over alle onderwerpen
 
-![Quiz Interface Screenshot](https://github.com/user-attachments/assets/0a7bb644-548e-4463-b458-f58110f34ae7)
+![Quiz Interface Screenshot](https://github.com/user-attachments/assets/7ca635e9-bb20-4fee-be13-869366c36549)
+
+![Phishing Module Screenshot](https://github.com/user-attachments/assets/9f39bea7-66d5-48c1-8e5b-63e3b6bf65ba)
+
+### 🧪 Demo Testing Guide
+
+#### 📋 Volledige Functionaliteit Testen
+De live demo is uitgebreid getest en bevat alle kernfunctionaliteiten:
+
+1. **📖 Content Navigatie**
+   - Alle 5 training modules zijn volledig toegankelijk
+   - Soepele navigatie tussen secties
+   - Responsive design voor alle apparaten
+
+2. **🎯 Quiz Functionaliteit** 
+   - 15+ uitdagende meerkeuzevragen
+   - Onmiddellijke feedback op antwoorden
+   - Score berekening en weergave
+
+3. **🔄 Fout Review Systeem**
+   - Onjuiste antwoorden worden gemarkeerd
+   - Mogelijkheid tot opnieuw proberen
+   - Uitgebreide uitleg bij elk antwoord
+
+4. **💾 Voortgang Opslaan**
+   - Local storage voor voortgang tracking
+   - Hervatting waar je gebleven was
+   - Voltooiingspercentage bijhouden
+
+#### 🛡️ Demo Beveiliging
+- **Veilige hosting** op GitHub Pages infrastructuur
+- **HTTPS encryptie** voor alle communicatie  
+- **Geen gevoelige data** opslag in de demo
+- **Privacy-vriendelijk** - geen tracking of analytics
+
+#### 🌐 Browser Compatibiliteit
+De demo is getest en werkt optimaal op:
+- ✅ Chrome 90+ 
+- ✅ Firefox 88+
+- ✅ Safari 14+
+- ✅ Edge 90+
+- ✅ Mobile browsers (iOS Safari, Chrome Mobile)
 
 ## 🚀 Snelle Start
 
