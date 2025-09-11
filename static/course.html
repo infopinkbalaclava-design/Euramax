@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Euramax Cybersecurity Cursus</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(45deg, #6c757d, #495057);
+        }
+        
+        .btn-success {
+            background: linear-gradient(45deg, #28a745, #20c997);
+        }
+        
+        .btn-warning {
+            background: linear-gradient(45deg, #ffc107, #fd7e14);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .sidebar {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            height: fit-content;
+            position: sticky;
+            top: 2rem;
+        }
+        
+        .content-area {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            min-height: 600px;
+        }
+        
+        .module-list {
+            list-style: none;
+        }
+        
+        .module-item {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+        }
+        
+        .module-item:hover {
+            background: #f8f9fa;
+            border-color: #667eea;
+        }
+        
+        .module-item.active {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border-color: #667eea;
+        }
+        
+        .module-item.completed {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+        }
+        
+        .module-title {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .module-meta {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .difficulty-badge {
+            padding: 0.2rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+        
+        .difficulty-beginner {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .difficulty-intermediate {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .difficulty-advanced {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .progress-section {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .progress-bar {
+            background: #e9ecef;
+            border-radius: 10px;
+            height: 8px;
+            overflow: hidden;
+            margin: 0.5rem 0;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+        
+        .welcome-screen {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+        
+        .welcome-screen h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+        
+        .welcome-screen p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #6c757d;
+            line-height: 1.6;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 0.5rem;
+        }
+        
+        .module-content {
+            line-height: 1.8;
+        }
+        
+        .module-content h1 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+        
+        .module-content h2 {
+            color: #495057;
+            margin: 2rem 0 1rem 0;
+            font-size: 1.5rem;
+        }
+        
+        .module-content h3 {
+            color: #6c757d;
+            margin: 1.5rem 0 0.5rem 0;
+            font-size: 1.2rem;
+        }
+        
+        .module-content ul, .module-content ol {
+            margin: 1rem 0 1rem 2rem;
+        }
+        
+        .module-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .module-content code {
+            background: #f8f9fa;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .module-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        
+        .quiz-container {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: rgba(240, 248, 255, 0.8);
+            border-radius: 12px;
+            border: 2px solid #667eea;
+        }
+        
+        .quiz-question {
+            margin-bottom: 2rem;
+        }
+        
+        .question-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+        
+        .answer-options {
+            list-style: none;
+        }
+        
+        .answer-option {
+            margin-bottom: 0.8rem;
+        }
+        
+        .answer-option label {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            border: 2px solid #e9ecef;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .answer-option label:hover {
+            border-color: #667eea;
+            background: #f8f9fa;
+        }
+        
+        .answer-option input[type="radio"] {
+            margin-right: 1rem;
+            transform: scale(1.2);
+        }
+        
+        .quiz-result {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+        
+        .result-correct {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .result-incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #6c757d;
+        }
+        
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid #f5c6cb;
+            margin: 1rem 0;
+        }
+        
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid #c3e6cb;
+            margin: 1rem 0;
+        }
+        
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        
+        .topic-tag {
+            background: #e7f3ff;
+            color: #0066cc;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .completion-celebration {
+            text-align: center;
+            padding: 3rem;
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+        
+        .completion-celebration h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .completion-celebration p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .sidebar {
+                position: static;
+                order: 2;
+            }
+            
+            .content-area {
+                order: 1;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .nav-buttons {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        
+        .footer {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>
+            🛡️ Euramax Cybersecurity Cursus
+        </h1>
+        <div class="nav-buttons">
+            <a href="/static/dashboard.html" class="btn btn-secondary">📊 Dashboard</a>
+            <button onclick="showOverview()" class="btn">🏠 Overzicht</button>
+            <button onclick="showProgress()" class="btn">📈 Voortgang</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="main-content">
+            <div class="sidebar">
+                <h3>📚 Cursus Modules</h3>
+                <ul class="module-list" id="moduleList">
+                    <!-- Modules worden hier geladen -->
+                </ul>
+                
+                <div class="progress-section">
+                    <h4>📊 Uw Voortgang</h4>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="overallProgress" style="width: 0%"></div>
+                    </div>
+                    <div class="module-meta">
+                        <span id="progressText">0% voltooid</span>
+                        <span id="completedModules">0/0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-area" id="contentArea">
+                <!-- Content wordt hier geladen -->
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>
+            Euramax Cybersecurity Cursus v1.0.0 | 
+            Bescherming door AI-aangedreven Nederlandse technologie 🇳🇱
+        </p>
+    </div>
+
+    <script>
+        // Global state
+        let currentUser = 'demo_user';
+        let modules = [];
+        let userProgress = null;
+        let currentModule = null;
+        let currentQuiz = [];
+        let currentQuestionIndex = 0;
+        let quizResults = {};
+
+        // API endpoints
+        const API_BASE = '/api/v1/course';
+
+        // Initialize application
+        document.addEventListener('DOMContentLoaded', async function() {
+            await loadModules();
+            await loadUserProgress();
+            showOverview();
+        });
+
+        // API functions
+        async function apiCall(endpoint, method = 'GET', data = null) {
+            const options = {
+                method,
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            };
+            
+            if (data) {
+                options.body = JSON.stringify(data);
+            }
+            
+            try {
+                const response = await fetch(`${API_BASE}${endpoint}`, options);
+                if (!response.ok) {
+                    throw new Error(`API Error: ${response.status}`);
+                }
+                return await response.json();
+            } catch (error) {
+                console.error('API call failed:', error);
+                throw error;
+            }
+        }
+
+        async function loadModules() {
+            try {
+                modules = await apiCall('/modules');
+                renderModulesList();
+            } catch (error) {
+                showError('Kan modules niet laden: ' + error.message);
+            }
+        }
+
+        async function loadUserProgress() {
+            try {
+                userProgress = await apiCall(`/users/${currentUser}/progress`);
+                updateProgressDisplay();
+            } catch (error) {
+                // Progress might not exist yet, that's OK
+                console.log('No progress found, will create when needed');
+            }
+        }
+
+        async function startModule(moduleId) {
+            try {
+                await apiCall(`/users/${currentUser}/modules/${moduleId}/start`, 'POST');
+                await loadUserProgress();
+            } catch (error) {
+                console.error('Failed to start module:', error);
+            }
+        }
+
+        async function completeModuleContent(moduleId, timeSpent) {
+            try {
+                await apiCall(`/users/${currentUser}/modules/${moduleId}/complete-content`, 'POST', {
+                    time_spent_minutes: timeSpent
+                });
+                await loadUserProgress();
+            } catch (error) {
+                console.error('Failed to complete module content:', error);
+            }
+        }
+
+        async function loadQuizQuestions(moduleId, excludeCorrect = true) {
+            try {
+                return await apiCall(`/users/${currentUser}/modules/${moduleId}/quiz?exclude_correct=${excludeCorrect}`);
+            } catch (error) {
+                showError('Kan quiz vragen niet laden: ' + error.message);
+                return [];
+            }
+        }
+
+        async function submitQuizAnswer(moduleId, questionId, selectedAnswerId, timeSpent) {
+            try {
+                return await apiCall(`/users/${currentUser}/modules/${moduleId}/quiz/submit`, 'POST', {
+                    question_id: questionId,
+                    selected_answer_id: selectedAnswerId,
+                    time_spent_seconds: timeSpent
+                });
+            } catch (error) {
+                showError('Kan antwoord niet versturen: ' + error.message);
+                return null;
+            }
+        }
+
+        async function loadIncorrectQuestions(moduleId) {
+            try {
+                return await apiCall(`/users/${currentUser}/modules/${moduleId}/review`);
+            } catch (error) {
+                showError('Kan review vragen niet laden: ' + error.message);
+                return [];
+            }
+        }
+
+        // UI functions
+        function renderModulesList() {
+            const moduleList = document.getElementById('moduleList');
+            moduleList.innerHTML = '';
+
+            modules.forEach(module => {
+                const isCompleted = userProgress && 
+                    userProgress.module_progress[module.id] && 
+                    userProgress.module_progress[module.id].is_completed;
+
+                const li = document.createElement('li');
+                li.className = `module-item ${isCompleted ? 'completed' : ''}`;
+                li.onclick = () => showModule(module.id);
+
+                li.innerHTML = `
+                    <div class="module-title">${module.title}</div>
+                    <div class="module-meta">
+                        <span>${module.estimated_time_minutes} min</span>
+                        <span class="difficulty-badge difficulty-${module.difficulty}">
+                            ${getDifficultyLabel(module.difficulty)}
+                        </span>
+                    </div>
+                    <div class="topic-tags">
+                        ${module.cybersecurity_topics.map(topic => 
+                            `<span class="topic-tag">${topic}</span>`
+                        ).join('')}
+                    </div>
+                `;
+
+                moduleList.appendChild(li);
+            });
+        }
+
+        function getDifficultyLabel(difficulty) {
+            const labels = {
+                'beginner': 'Beginner',
+                'intermediate': 'Gemiddeld',
+                'advanced': 'Gevorderd'
+            };
+            return labels[difficulty] || difficulty;
+        }
+
+        function updateProgressDisplay() {
+            if (!userProgress) return;
+
+            const progressBar = document.getElementById('overallProgress');
+            const progressText = document.getElementById('progressText');
+            const completedModules = document.getElementById('completedModules');
+
+            const percentage = userProgress.completion_percentage || 0;
+            progressBar.style.width = `${percentage}%`;
+            progressText.textContent = `${Math.round(percentage)}% voltooid`;
+            completedModules.textContent = `${userProgress.completed_modules}/${userProgress.total_modules}`;
+
+            // Update module items
+            renderModulesList();
+        }
+
+        function showOverview() {
+            const contentArea = document.getElementById('contentArea');
+            
+            const totalQuestions = modules.reduce((sum, module) => sum + module.quiz_question_count, 0);
+            const avgTime = Math.round(modules.reduce((sum, module) => sum + module.estimated_time_minutes, 0) / modules.length);
+
+            contentArea.innerHTML = `
+                <div class="welcome-screen">
+                    <h2>🎓 Welkom bij de Euramax Cybersecurity Cursus</h2>
+                    <p>
+                        Leer hoe u uw organisatie kunt beschermen tegen cyberbedreigingen met onze 
+                        interactieve Nederlandse cursus. Ontwikkeld door beveiligingsexperts.
+                    </p>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value">${modules.length}</div>
+                            <div class="stat-label">Cursus Modules</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">${totalQuestions}</div>
+                            <div class="stat-label">Quiz Vragen</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">${avgTime}</div>
+                            <div class="stat-label">Gem. Tijd (min)</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">${userProgress ? Math.round(userProgress.completion_percentage) : 0}%</div>
+                            <div class="stat-label">Uw Voortgang</div>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button onclick="showModule('${modules[0]?.id}')" class="btn btn-success">
+                            🚀 Start Cursus
+                        </button>
+                        <button onclick="showProgress()" class="btn">
+                            📊 Bekijk Voortgang
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function showProgress() {
+            const contentArea = document.getElementById('contentArea');
+            
+            if (!userProgress) {
+                contentArea.innerHTML = `
+                    <div class="loading">
+                        <h2>📈 Cursus Voortgang</h2>
+                        <p>U heeft nog geen voortgang. Start een module om te beginnen!</p>
+                        <button onclick="showModule('${modules[0]?.id}')" class="btn btn-success">
+                            🚀 Start Eerste Module
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            let progressHtml = `
+                <h2>📈 Uw Cursus Voortgang</h2>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value">${userProgress.completed_modules}</div>
+                        <div class="stat-label">Voltooide Modules</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${Math.round(userProgress.overall_score * 100)}%</div>
+                        <div class="stat-label">Gemiddelde Score</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${userProgress.total_time_spent_minutes}</div>
+                        <div class="stat-label">Totale Tijd (min)</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${Math.round(userProgress.completion_percentage)}%</div>
+                        <div class="stat-label">Voltooiing</div>
+                    </div>
+                </div>
+
+                <h3>📚 Module Details</h3>
+            `;
+
+            modules.forEach(module => {
+                const moduleProgress = userProgress.module_progress[module.id];
+                if (moduleProgress) {
+                    const score = Math.round(moduleProgress.quiz_score * 100);
+                    const status = moduleProgress.is_completed ? 'Voltooid ✅' : 
+                                   moduleProgress.content_viewed ? 'Gestart 📖' : 'Niet gestart';
+                    
+                    progressHtml += `
+                        <div class="stat-card" style="text-align: left; margin-bottom: 1rem;">
+                            <h4>${module.title}</h4>
+                            <p><strong>Status:</strong> ${status}</p>
+                            <p><strong>Quiz Score:</strong> ${score}%</p>
+                            <p><strong>Tijd Besteed:</strong> ${moduleProgress.time_spent_minutes} minuten</p>
+                            ${moduleProgress.incorrect_questions_count > 0 ? 
+                                `<p><strong>Vragen voor Review:</strong> ${moduleProgress.incorrect_questions_count}</p>
+                                 <button onclick="showModuleReview('${module.id}')" class="btn btn-warning">
+                                    🔄 Review Fouten
+                                 </button>` : ''}
+                        </div>
+                    `;
+                } else {
+                    progressHtml += `
+                        <div class="stat-card" style="text-align: left; margin-bottom: 1rem;">
+                            <h4>${module.title}</h4>
+                            <p><strong>Status:</strong> Niet gestart</p>
+                            <button onclick="showModule('${module.id}')" class="btn">Start Module</button>
+                        </div>
+                    `;
+                }
+            });
+
+            contentArea.innerHTML = progressHtml;
+        }
+
+        async function showModule(moduleId) {
+            const module = modules.find(m => m.id === moduleId);
+            if (!module) return;
+
+            currentModule = module;
+            
+            // Mark active module in sidebar
+            document.querySelectorAll('.module-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            document.querySelectorAll('.module-item')[modules.findIndex(m => m.id === moduleId)]?.classList.add('active');
+
+            // Start module if not started
+            await startModule(moduleId);
+
+            const contentArea = document.getElementById('contentArea');
+            contentArea.innerHTML = `
+                <div class="loading">Laden van module...</div>
+            `;
+
+            try {
+                // Load full module content
+                const moduleData = await apiCall(`/modules/${moduleId}`);
+                
+                let contentHtml = `
+                    <div class="module-content">
+                        ${formatMarkdownContent(moduleData.content)}
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button onclick="startModuleQuiz('${moduleId}')" class="btn btn-success">
+                            📝 Start Quiz
+                        </button>
+                        <button onclick="completeModuleContent('${moduleId}', 5)" class="btn">
+                            ✅ Markeer als Gelezen
+                        </button>
+                    </div>
+                `;
+
+                contentArea.innerHTML = contentHtml;
+            } catch (error) {
+                showError('Kan module niet laden: ' + error.message);
+            }
+        }
+
+        async function startModuleQuiz(moduleId) {
+            try {
+                currentQuiz = await loadQuizQuestions(moduleId);
+                if (currentQuiz.length === 0) {
+                    showSuccess('Gefeliciteerd! U heeft alle vragen correct beantwoord.');
+                    return;
+                }
+                
+                currentQuestionIndex = 0;
+                quizResults = {};
+                showQuizQuestion();
+            } catch (error) {
+                showError('Kan quiz niet starten: ' + error.message);
+            }
+        }
+
+        function showQuizQuestion() {
+            const contentArea = document.getElementById('contentArea');
+            const question = currentQuiz[currentQuestionIndex];
+            
+            if (!question) {
+                showQuizResults();
+                return;
+            }
+
+            const questionHtml = `
+                <div class="quiz-container">
+                    <h2>📝 Quiz - ${currentModule.title}</h2>
+                    <p>Vraag ${currentQuestionIndex + 1} van ${currentQuiz.length}</p>
+                    
+                    <div class="quiz-question">
+                        <div class="question-text">${question.question}</div>
+                        ${question.scenario_context ? `<p><em>Scenario: ${question.scenario_context}</em></p>` : ''}
+                        
+                        <ul class="answer-options">
+                            ${question.answers.map(answer => `
+                                <li class="answer-option">
+                                    <label>
+                                        <input type="radio" name="quiz_answer" value="${answer.id}">
+                                        ${answer.text}
+                                    </label>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button onclick="submitCurrentAnswer()" class="btn btn-success">
+                            Antwoord Versturen
+                        </button>
+                        ${currentQuestionIndex > 0 ? 
+                            `<button onclick="previousQuestion()" class="btn btn-secondary">Vorige</button>` : ''}
+                    </div>
+                </div>
+            `;
+
+            contentArea.innerHTML = questionHtml;
+        }
+
+        async function submitCurrentAnswer() {
+            const selectedRadio = document.querySelector('input[name="quiz_answer"]:checked');
+            if (!selectedRadio) {
+                alert('Selecteer eerst een antwoord.');
+                return;
+            }
+
+            const question = currentQuiz[currentQuestionIndex];
+            const selectedAnswerId = selectedRadio.value;
+            
+            try {
+                const result = await submitQuizAnswer(
+                    currentModule.id, 
+                    question.id, 
+                    selectedAnswerId, 
+                    30 // 30 seconds placeholder
+                );
+                
+                if (result) {
+                    quizResults[question.id] = result;
+                    showQuestionResult(result);
+                }
+            } catch (error) {
+                showError('Kan antwoord niet versturen: ' + error.message);
+            }
+        }
+
+        function showQuestionResult(result) {
+            const contentArea = document.getElementById('contentArea');
+            const question = currentQuiz[currentQuestionIndex];
+            
+            const resultClass = result.is_correct ? 'result-correct' : 'result-incorrect';
+            const resultText = result.is_correct ? '✅ Correct!' : '❌ Onjuist';
+            
+            let resultHtml = `
+                <div class="quiz-container">
+                    <h2>📝 Quiz Resultaat</h2>
+                    
+                    <div class="quiz-question">
+                        <div class="question-text">${question.question}</div>
+                        
+                        <div class="quiz-result ${resultClass}">
+                            <strong>${resultText}</strong>
+                            <p>${result.explanation}</p>
+                            ${result.correct_answer ? `<p><strong>Correct antwoord:</strong> ${result.correct_answer}</p>` : ''}
+                            ${result.question_explanation ? `<p><strong>Uitleg:</strong> ${result.question_explanation}</p>` : ''}
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button onclick="nextQuestion()" class="btn btn-success">
+                            ${currentQuestionIndex < currentQuiz.length - 1 ? 'Volgende Vraag' : 'Bekijk Resultaten'}
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            contentArea.innerHTML = resultHtml;
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < currentQuiz.length) {
+                showQuizQuestion();
+            } else {
+                showQuizResults();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                showQuizQuestion();
+            }
+        }
+
+        async function showQuizResults() {
+            await loadUserProgress(); // Refresh progress
+            
+            const contentArea = document.getElementById('contentArea');
+            const correctCount = Object.values(quizResults).filter(r => r.is_correct).length;
+            const totalCount = Object.keys(quizResults).length;
+            const percentage = Math.round((correctCount / totalCount) * 100);
+            
+            const moduleProgress = userProgress?.module_progress[currentModule.id];
+            const isCompleted = moduleProgress?.is_completed;
+
+            let resultsHtml = `
+                <div class="quiz-container">
+                    <h2>🎯 Quiz Voltooid!</h2>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value">${correctCount}</div>
+                            <div class="stat-label">Correct</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">${totalCount - correctCount}</div>
+                            <div class="stat-label">Onjuist</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">${percentage}%</div>
+                            <div class="stat-label">Score</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">${moduleProgress?.quiz_score ? Math.round(moduleProgress.quiz_score * 100) : 0}%</div>
+                            <div class="stat-label">Totaal Score</div>
+                        </div>
+                    </div>
+            `;
+
+            if (isCompleted) {
+                resultsHtml += `
+                    <div class="completion-celebration">
+                        <h2>🎉 Module Voltooid!</h2>
+                        <p>Gefeliciteerd! U heeft deze module succesvol afgerond.</p>
+                    </div>
+                `;
+            } else if (percentage >= 80) {
+                resultsHtml += `
+                    <div class="success">
+                        <strong>Goed gedaan!</strong> U bent klaar voor de volgende module.
+                    </div>
+                `;
+            } else {
+                resultsHtml += `
+                    <div class="error">
+                        <strong>Bijna goed!</strong> Herhaal de onjuiste vragen om 80% te behalen.
+                    </div>
+                `;
+            }
+
+            resultsHtml += `
+                    <div class="action-buttons">
+                        <button onclick="showModule('${currentModule.id}')" class="btn">
+                            📖 Bekijk Module
+                        </button>
+                        <button onclick="startModuleQuiz('${currentModule.id}')" class="btn btn-warning">
+                            🔄 Probeer Opnieuw
+                        </button>
+                        <button onclick="showModuleReview('${currentModule.id}')" class="btn btn-secondary">
+                            📋 Review Fouten
+                        </button>
+                        <button onclick="showOverview()" class="btn btn-success">
+                            🏠 Terug naar Overzicht
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            contentArea.innerHTML = resultsHtml;
+        }
+
+        async function showModuleReview(moduleId) {
+            try {
+                const incorrectQuestions = await loadIncorrectQuestions(moduleId);
+                const contentArea = document.getElementById('contentArea');
+                
+                if (incorrectQuestions.length === 0) {
+                    contentArea.innerHTML = `
+                        <div class="success">
+                            <h2>🎉 Geen fouten te reviewen!</h2>
+                            <p>U heeft alle vragen correct beantwoord.</p>
+                            <button onclick="showOverview()" class="btn btn-success">Terug naar Overzicht</button>
+                        </div>
+                    `;
+                    return;
+                }
+
+                let reviewHtml = `
+                    <h2>📋 Review Onjuiste Vragen</h2>
+                    <p>Bestudeer deze vragen en hun uitleg, probeer daarna opnieuw.</p>
+                `;
+
+                incorrectQuestions.forEach((question, index) => {
+                    const correctAnswer = question.answers.find(a => a.is_correct);
+                    
+                    reviewHtml += `
+                        <div class="quiz-container" style="margin-bottom: 2rem;">
+                            <h3>Vraag ${index + 1}: ${question.question}</h3>
+                            ${question.scenario_context ? `<p><em>Scenario: ${question.scenario_context}</em></p>` : ''}
+                            
+                            <div class="result-correct">
+                                <strong>✅ Correct antwoord:</strong> ${correctAnswer.text}<br>
+                                <strong>Uitleg:</strong> ${correctAnswer.explanation}
+                            </div>
+                            
+                            <div style="margin-top: 1rem;">
+                                <strong>Algemene uitleg:</strong><br>
+                                ${question.explanation}
+                            </div>
+                        </div>
+                    `;
+                });
+
+                reviewHtml += `
+                    <div class="action-buttons">
+                        <button onclick="startModuleQuiz('${moduleId}')" class="btn btn-success">
+                            🔄 Probeer Quiz Opnieuw
+                        </button>
+                        <button onclick="showModule('${moduleId}')" class="btn">
+                            📖 Bekijk Module Content
+                        </button>
+                        <button onclick="showOverview()" class="btn btn-secondary">
+                            🏠 Terug naar Overzicht
+                        </button>
+                    </div>
+                `;
+
+                contentArea.innerHTML = reviewHtml;
+            } catch (error) {
+                showError('Kan review niet laden: ' + error.message);
+            }
+        }
+
+        function formatMarkdownContent(content) {
+            // Simple markdown-to-HTML conversion
+            return content
+                .replace(/^# (.+)$/gm, '<h1>$1</h1>')
+                .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+                .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+                .replace(/^\* (.+)$/gm, '<li>$1</li>')
+                .replace(/^- (.+)$/gm, '<li>$1</li>')
+                .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+                .replace(/`(.+?)`/g, '<code>$1</code>')
+                .replace(/```([\s\S]*?)```/g, '<pre>$1</pre>')
+                .replace(/\n\n/g, '</p><p>')
+                .replace(/\n/g, '<br>')
+                .replace(/^(.+)/gm, '<p>$1</p>')
+                .replace(/<\/p><br><p>/g, '</p><p>')
+                .replace(/<p><li>/g, '<ul><li>')
+                .replace(/<\/li><\/p>/g, '</li></ul>');
+        }
+
+        function showError(message) {
+            const contentArea = document.getElementById('contentArea');
+            contentArea.innerHTML = `
+                <div class="error">
+                    <strong>Fout:</strong> ${message}
+                </div>
+            `;
+        }
+
+        function showSuccess(message) {
+            const contentArea = document.getElementById('contentArea');
+            contentArea.innerHTML = `
+                <div class="success">
+                    <strong>Succes:</strong> ${message}
+                </div>
+            `;
+        }
+
+        // Update Nederlandse datum/tijd display
+        function updateDateTime() {
+            const now = new Date();
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                timeZone: 'Europe/Amsterdam'
+            };
+            
+            document.title = `Euramax Cursus - ${now.toLocaleDateString('nl-NL', options)}`;
+        }
+
+        // Update tijd elke minuut
+        setInterval(updateDateTime, 60000);
+        updateDateTime();
+    </script>
+</body>
+</html>
