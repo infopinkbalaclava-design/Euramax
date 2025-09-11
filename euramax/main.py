@@ -15,6 +15,7 @@ from typing import Dict, Any
 
 from euramax.core.config import settings, AppConfig
 from euramax.api.routes import security, notifications, dashboard
+from euramax.course.routes import router as course_router
 from euramax.ai.threat_detector import ThreatDetectionEngine
 from euramax.notifications.push_service import PushNotificationService
 
@@ -84,7 +85,7 @@ app.add_middleware(
 # Trusted host middleware voor beveiliging
 app.add_middleware(
     TrustedHostMiddleware,
-    allowed_hosts=["localhost", "*.euramax.nl", "127.0.0.1"]
+    allowed_hosts=["localhost", "*.euramax.eu", "127.0.0.1"]
 )
 
 
@@ -171,6 +172,12 @@ app.include_router(
     dashboard.router,
     prefix="/api/v1/dashboard",
     tags=["Dashboard API"]
+)
+
+app.include_router(
+    course_router,
+    prefix="/api/v1/course",
+    tags=["Cybersecurity Course API"]
 )
 
 # Serve static files (Nederlandse dashboard)
