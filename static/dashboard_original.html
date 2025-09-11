@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Euramax Cybersecurity Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .header .flag {
+            font-size: 1.5rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+        
+        .card h2 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+        }
+        
+        .status-operational { background-color: #27ae60; }
+        .status-warning { background-color: #f39c12; }
+        .status-critical { background-color: #e74c3c; }
+        
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        
+        .metric:last-child {
+            border-bottom: none;
+        }
+        
+        .metric-value {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .threat-list {
+            list-style: none;
+        }
+        
+        .threat-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .threat-item.high {
+            border-left-color: #e74c3c;
+            background: #fdeaea;
+        }
+        
+        .threat-item.medium {
+            border-left-color: #f39c12;
+            background: #fef9e7;
+        }
+        
+        .threat-item.low {
+            border-left-color: #27ae60;
+            background: #eafaf1;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .alert {
+            background: rgba(231, 76, 60, 0.1);
+            border: 1px solid #e74c3c;
+            color: #c0392b;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        
+        .success {
+            background: rgba(39, 174, 96, 0.1);
+            border: 1px solid #27ae60;
+            color: #229954;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: rgba(255,255,255,0.8);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>
+            <span class="flag">🇳🇱</span>
+            Euramax Cybersecurity Verdedigingssysteem
+            <span class="status-indicator status-operational"></span>
+        </h1>
+    </div>
+
+    <div class="container">
+        <div class="success">
+            🛡️ <strong>Systeem Operationeel:</strong> Alle beveiligingscomponenten zijn actief en bewaken uw netwerk 24/7.
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Systeem Status -->
+            <div class="card">
+                <h2>🖥️ Systeem Status</h2>
+                <div class="metric">
+                    <span>AI Bedreigingsdetectie</span>
+                    <span class="metric-value" style="color: #27ae60;">Operationeel</span>
+                </div>
+                <div class="metric">
+                    <span>Push Notificaties</span>
+                    <span class="metric-value" style="color: #27ae60;">Operationeel</span>
+                </div>
+                <div class="metric">
+                    <span>Real-time Monitoring</span>
+                    <span class="metric-value" style="color: #27ae60;">Actief</span>
+                </div>
+                <div class="metric">
+                    <span>Uptime</span>
+                    <span class="metric-value">99.9%</span>
+                </div>
+            </div>
+
+            <!-- Bedreigingsstatistieken -->
+            <div class="card">
+                <h2>📊 Bedreigingsstatistieken</h2>
+                <div class="metric">
+                    <span>Totaal Scans Vandaag</span>
+                    <span class="metric-value">1,247</span>
+                </div>
+                <div class="metric">
+                    <span>Gedetecteerde Bedreigingen</span>
+                    <span class="metric-value" style="color: #e74c3c;">23</span>
+                </div>
+                <div class="metric">
+                    <span>Geblokkeerde Phishing</span>
+                    <span class="metric-value">15</span>
+                </div>
+                <div class="metric">
+                    <span>Quarantaine Malware</span>
+                    <span class="metric-value">8</span>
+                </div>
+            </div>
+
+            <!-- AI Modellen Status -->
+            <div class="card">
+                <h2>🤖 AI Modellen Status</h2>
+                <div class="metric">
+                    <span>Phishing Detector</span>
+                    <span class="metric-value" style="color: #27ae60;">Actief</span>
+                </div>
+                <div class="metric">
+                    <span>Malware Scanner</span>
+                    <span class="metric-value" style="color: #27ae60;">Actief</span>
+                </div>
+                <div class="metric">
+                    <span>Behavioral Analyzer</span>
+                    <span class="metric-value" style="color: #27ae60;">Actief</span>
+                </div>
+                <div class="metric">
+                    <span>Threat Classifier</span>
+                    <span class="metric-value" style="color: #27ae60;">Actief</span>
+                </div>
+            </div>
+
+            <!-- Recente Bedreigingen -->
+            <div class="card">
+                <h2>⚠️ Recente Bedreigingen</h2>
+                <ul class="threat-list">
+                    <li class="threat-item high">
+                        <div>
+                            <strong>Phishing-aanval</strong><br>
+                            <small>security@nep-bank.nl</small>
+                        </div>
+                        <span>Hoog</span>
+                    </li>
+                    <li class="threat-item medium">
+                        <div>
+                            <strong>Verdachte bijlage</strong><br>
+                            <small>document.exe</small>
+                        </div>
+                        <span>Medium</span>
+                    </li>
+                    <li class="threat-item low">
+                        <div>
+                            <strong>Spam email</strong><br>
+                            <small>promotie@verdacht.com</small>
+                        </div>
+                        <span>Laag</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Notificatie Instellingen -->
+            <div class="card">
+                <h2>🔔 Notificatie Instellingen</h2>
+                <div class="metric">
+                    <span>Email Notificaties</span>
+                    <span class="metric-value" style="color: #27ae60;">Ingeschakeld</span>
+                </div>
+                <div class="metric">
+                    <span>Push Notificaties</span>
+                    <span class="metric-value" style="color: #27ae60;">Ingeschakeld</span>
+                </div>
+                <div class="metric">
+                    <span>SMS Waarschuwingen</span>
+                    <span class="metric-value" style="color: #f39c12;">Kritiek Alleen</span>
+                </div>
+                <div class="metric">
+                    <span>Desktop Meldingen</span>
+                    <span class="metric-value" style="color: #27ae60;">Ingeschakeld</span>
+                </div>
+            </div>
+
+            <!-- Snelle Acties -->
+            <div class="card">
+                <h2>⚡ Snelle Acties</h2>
+                <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                    <button class="btn" onclick="window.open('/static/course.html', '_blank')">🎓 Cybersecurity Cursus</button>
+                    <button class="btn" onclick="testNotification()">Test Notificatie Versturen</button>
+                    <button class="btn" onclick="runScan()">Handmatige Scan Uitvoeren</button>
+                    <button class="btn" onclick="viewReports()">Bekijk Rapporten</button>
+                    <button class="btn" onclick="updateSettings()">Update Instellingen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>
+            Euramax Cybersecurity Verdedigingssysteem v1.0.0 | 
+            Bescherming door AI-aangedreven Nederlandse technologie 🇳🇱
+        </p>
+    </div>
+
+    <script>
+        // Nederlandse alert functies
+        function testNotification() {
+            alert('🔔 Test notificatie verstuurd naar alle gebruikers!');
+        }
+        
+        function runScan() {
+            alert('🔍 Handmatige beveiligingsscan gestart...');
+        }
+        
+        function viewReports() {
+            alert('📊 Beveiligingsrapporten worden geladen...');
+        }
+        
+        function updateSettings() {
+            alert('⚙️ Instellingen paneel openen...');
+        }
+
+        // Real-time updates simulatie
+        function updateStats() {
+            const elements = document.querySelectorAll('.metric-value');
+            // Simulate real-time stat updates (placeholder)
+        }
+
+        // Update stats elke 30 seconden
+        setInterval(updateStats, 30000);
+        
+        // Nederlandse datum/tijd display
+        function updateDateTime() {
+            const now = new Date();
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            };
+            const dutchTime = now.toLocaleDateString('nl-NL', options);
+            // Update UI met Nederlandse tijd indien gewenst
+        }
+        
+        updateDateTime();
+        setInterval(updateDateTime, 60000);
+    </script>
+</body>
+</html>
