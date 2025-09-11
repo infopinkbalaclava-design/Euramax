@@ -84,7 +84,7 @@ app.add_middleware(
 # Trusted host middleware voor beveiliging
 app.add_middleware(
     TrustedHostMiddleware,
-    allowed_hosts=["localhost", "*.euramax.nl", "127.0.0.1"]
+    allowed_hosts=["localhost", "*.euramax.eu", "127.0.0.1"]
 )
 
 

@@ -187,7 +187,7 @@ gericht is op uw organisatie. Onmiddellijke actie is vereist.
 INSTRUCTIES:
 • OPEN GEEN verdachte emails die u recent heeft ontvangen
 • Controleer uw inbox op emails van onbekende afzenders
-• Rapporteer verdachte emails aan security@euramax.nl
+• Rapporteer verdachte emails aan security@euramax.eu
 • Verander uw wachtwoorden als u recent op links heeft geklikt
 ```
 
@@ -252,9 +252,9 @@ SECRET_KEY=your-secret-key-here
 ACCESS_TOKEN_EXPIRE_MINUTES=30
 
 # Email Configuratie
-SMTP_HOST=smtp.euramax.nl
-SMTP_USER=noreply@euramax.nl
-EMAIL_FROM=security@euramax.nl
+SMTP_HOST=smtp.euramax.eu
+SMTP_USER=noreply@euramax.eu
+EMAIL_FROM=security@euramax.eu
 
 # AI Configuratie
 THREAT_DETECTION_THRESHOLD=0.85
@@ -262,7 +262,7 @@ DUTCH_LANGUAGE_MODEL=nl_core_news_sm
 
 # Notificaties
 PUSH_SERVICE_KEY=your-push-service-key
-NOTIFICATION_WEBHOOK_URL=https://api.euramax.nl/notifications
+NOTIFICATION_WEBHOOK_URL=https://api.euramax.eu/notifications
 ```
 
 ## 🚀 Productie Deployment
@@ -344,9 +344,9 @@ Dit project is gelicentieerd onder de MIT License - zie het [LICENSE](LICENSE) b
 
 ## 📞 Contact & Ondersteuning
 
-- **Email**: security@euramax.nl
+- **Email**: security@euramax.eu
 - **GitHub Issues**: [Issue Tracker](https://github.com/infopinkbalaclava-design/Euramax/issues)
-- **Documentatie**: [Volledige Docs](https://docs.euramax.nl)
+- **Documentatie**: [Volledige Docs](https://docs.euramax.eu)
 
 ## 🏆 Acknowledgments
 

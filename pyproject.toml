@@ -7,7 +7,7 @@ name = "euramax"
 version = "1.0.0"
 description = "AI-Gestuurde Cybersecurity Verdedigingssysteem - Volledige Nederlandse Implementatie"
 authors = [
-    {name = "Euramax Security Team", email = "security@euramax.nl"},
+    {name = "Euramax Security Team", email = "security@euramax.eu"},
 ]
 readme = "README.md"
 requires-python = ">=3.11"

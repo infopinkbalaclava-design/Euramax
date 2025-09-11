@@ -62,7 +62,7 @@ class DutchNotificationTemplates:
             instructions=[
                 "OPEN GEEN verdachte emails die u recent heeft ontvangen",
                 "Controleer uw inbox op emails van onbekende afzenders",
-                "Rapporteer verdachte emails aan security@euramax.nl",
+                "Rapporteer verdachte emails aan security@euramax.eu",
                 "Verander uw wachtwoorden als u recent op links heeft geklikt",
                 "Neem contact op met IT-beveiliging voor hulp"
             ],
@@ -176,7 +176,7 @@ class PushNotificationService:
         self.active_users = {
             "admin": User(
                 user_id="admin",
-                email="admin@euramax.nl",
+                email="admin@euramax.eu",
                 phone="+31612345678",
                 push_token="admin_push_token",
                 notification_preferences={
@@ -190,7 +190,7 @@ class PushNotificationService:
             ),
             "user1": User(
                 user_id="user1",
-                email="gebruiker@euramax.nl",
+                email="gebruiker@euramax.eu",
                 phone="+31687654321",
                 push_token="user1_push_token",
                 notification_preferences={
