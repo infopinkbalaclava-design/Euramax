@@ -5,6 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Euramax Live Phishing Simulation Demo - Interactive Cybersecurity Training</title>
     <style>
+        :root {
+            /* Light theme colors */
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --text-primary: #2c3e50;
+            --text-secondary: #7f8c8d;
+            --background: #ffffff;
+            --surface: rgba(255, 255, 255, 0.95);
+            --surface-hover: rgba(255, 255, 255, 0.98);
+            --border: #e0e6ed;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --success: #27ae60;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --info: #3498db;
+        }
+
+        [data-theme="dark"] {
+            /* Dark theme colors */
+            --primary-gradient: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            --secondary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --accent-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --text-primary: #ecf0f1;
+            --text-secondary: #bdc3c7;
+            --background: #1a1a1a;
+            --surface: rgba(44, 62, 80, 0.95);
+            --surface-hover: rgba(44, 62, 80, 0.98);
+            --border: #34495e;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --success: #2ecc71;
+            --warning: #f1c40f;
+            --danger: #e74c3c;
+            --info: #3498db;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -12,51 +48,141 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--text-primary);
+            background: var(--primary-gradient);
             min-height: 100vh;
             padding: 20px;
+            transition: all 0.3s ease;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
+            position: relative;
+        }
+
+        /* Dark mode toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--surface);
+            border: 2px solid var(--border);
+            border-radius: 50px;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px var(--shadow);
+            backdrop-filter: blur(10px);
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--shadow);
+        }
+
+        .theme-toggle span {
+            font-size: 1.2rem;
+            margin: 0 5px;
         }
 
         .header {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 2rem;
-            border-radius: 15px;
+            background: var(--surface);
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
             margin-bottom: 2rem;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px var(--shadow);
+            backdrop-filter: blur(15px);
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 4px;
+            background: var(--accent-gradient);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            50% { left: 100%; }
+            100% { left: 100%; }
         }
 
         .header h1 {
-            color: #2c3e50;
-            font-size: 2.2rem;
+            color: var(--text-primary);
+            font-size: 2.5rem;
+            font-weight: 700;
             margin-bottom: 0.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: pulse-glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse-glow {
+            from { filter: brightness(1); }
+            to { filter: brightness(1.2); }
         }
 
         .header p {
-            color: #7f8c8d;
-            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            font-weight: 400;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         .demo-section {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 2rem;
-            border-radius: 15px;
+            background: var(--surface);
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
             margin-bottom: 2rem;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px var(--shadow);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .demo-section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px var(--shadow);
+        }
+
+        .demo-section h2, .demo-section h3 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .demo-section h2 {
+            font-size: 1.8rem;
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .demo-section p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.7;
         }
 
         .demo-grid {
@@ -69,157 +195,333 @@
         @media (max-width: 768px) {
             .demo-grid {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .header {
+                padding: 2rem 1.5rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+                flex-direction: column;
+                gap: 0.3rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+            }
+            
+            .demo-section {
+                padding: 2rem 1.5rem;
+            }
+            
+            .theme-toggle {
+                top: 15px;
+                right: 15px;
+                padding: 8px 12px;
             }
         }
 
         .email-simulator {
-            border: 2px solid #e0e6ed;
-            border-radius: 10px;
-            padding: 1.5rem;
-            background: #f8f9fa;
+            border: 2px solid var(--border);
+            border-radius: 15px;
+            padding: 2rem;
+            background: var(--surface);
+            transition: all 0.3s ease;
+        }
+
+        .email-simulator:hover {
+            border-color: var(--info);
+            box-shadow: 0 5px 20px var(--shadow);
         }
 
         .email-header {
-            background: #fff;
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            border-left: 4px solid #3498db;
+            background: var(--surface-hover);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--info);
+            transition: all 0.3s ease;
         }
 
         .email-field {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
 
         .email-field label {
-            font-weight: bold;
-            color: #2c3e50;
-            margin-right: 0.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            min-width: 80px;
+        }
+
+        .email-field span {
+            color: var(--text-secondary);
+            flex: 1;
+            min-width: 200px;
         }
 
         .email-content {
-            background: #fff;
+            background: var(--surface-hover);
             padding: 1.5rem;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            min-height: 150px;
+            border-radius: 12px;
+            border: 2px solid var(--border);
+            min-height: 200px;
             white-space: pre-wrap;
-            font-family: Arial, sans-serif;
+            font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            resize: vertical;
+        }
+
+        .email-content:focus {
+            outline: none;
+            border-color: var(--info);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
         }
 
         .ai-analysis {
-            border: 2px solid #e0e6ed;
-            border-radius: 10px;
-            padding: 1.5rem;
-            background: #f8f9fa;
+            border: 2px solid var(--border);
+            border-radius: 15px;
+            padding: 2rem;
+            background: var(--surface);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ai-analysis::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--accent-gradient);
+            opacity: 0.8;
         }
 
         .analysis-header {
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-primary);
         }
 
         .threat-indicator {
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            font-weight: bold;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
             text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .threat-indicator::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .threat-indicator:hover::before {
+            left: 100%;
         }
 
         .threat-safe {
-            background: #d4edda;
+            background: linear-gradient(135deg, #d4edda, #c3e6cb);
             color: #155724;
             border: 1px solid #c3e6cb;
+            box-shadow: 0 4px 15px rgba(21, 87, 36, 0.1);
         }
 
         .threat-low {
-            background: #fff3cd;
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
             color: #856404;
             border: 1px solid #ffeaa7;
+            box-shadow: 0 4px 15px rgba(133, 100, 4, 0.1);
         }
 
         .threat-medium {
-            background: #f8d7da;
+            background: linear-gradient(135deg, #f8d7da, #f5c6cb);
             color: #721c24;
             border: 1px solid #f5c6cb;
+            box-shadow: 0 4px 15px rgba(114, 28, 36, 0.1);
         }
 
         .threat-high {
-            background: #f5c6cb;
+            background: linear-gradient(135deg, #f5c6cb, #f1b0b7);
             color: #721c24;
             border: 1px solid #f1b0b7;
+            box-shadow: 0 4px 15px rgba(114, 28, 36, 0.15);
         }
 
         .threat-critical {
-            background: #d1ecf1;
+            background: linear-gradient(135deg, #d1ecf1, #bee5eb);
             color: #0c5460;
             border: 1px solid #bee5eb;
-            animation: pulse 2s infinite;
+            animation: pulse-critical 2s infinite;
+            box-shadow: 0 4px 15px rgba(12, 84, 96, 0.2);
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-            100% { transform: scale(1); }
+        @keyframes pulse-critical {
+            0% { transform: scale(1); box-shadow: 0 4px 15px rgba(12, 84, 96, 0.2); }
+            50% { transform: scale(1.02); box-shadow: 0 6px 20px rgba(12, 84, 96, 0.3); }
+            100% { transform: scale(1); box-shadow: 0 4px 15px rgba(12, 84, 96, 0.2); }
         }
 
         .confidence-meter {
-            margin: 1rem 0;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: var(--surface-hover);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .confidence-meter h4 {
+            color: var(--text-primary);
+            margin-bottom: 0.8rem;
+            font-weight: 600;
         }
 
         .confidence-bar {
-            background: #e0e6ed;
-            height: 10px;
-            border-radius: 5px;
+            background: var(--border);
+            height: 12px;
+            border-radius: 6px;
             overflow: hidden;
+            position: relative;
+        }
+
+        .confidence-bar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, 
+                rgba(255,255,255,0.1) 0%, 
+                rgba(255,255,255,0.3) 50%, 
+                rgba(255,255,255,0.1) 100%);
+            animation: confidence-shimmer 2s ease-in-out infinite;
+        }
+
+        @keyframes confidence-shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
 
         .confidence-fill {
             height: 100%;
-            background: linear-gradient(to right, #28a745, #ffc107, #dc3545);
-            border-radius: 5px;
-            transition: width 0.5s ease;
+            background: linear-gradient(to right, var(--success), var(--warning), var(--danger));
+            border-radius: 6px;
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .confidence-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 3px;
+            height: 100%;
+            background: rgba(255,255,255,0.8);
+            border-radius: 0 6px 6px 0;
         }
 
         .indicators-list {
-            background: #fff;
-            border-radius: 8px;
-            padding: 1rem;
-            margin: 1rem 0;
+            background: var(--surface-hover);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .indicators-list h4 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-weight: 600;
         }
 
         .indicator-item {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem;
+            gap: 0.8rem;
+            padding: 0.8rem;
             margin-bottom: 0.5rem;
-            border-radius: 5px;
-            background: #f8f9fa;
+            border-radius: 8px;
+            background: var(--surface);
+            border-left: 3px solid var(--warning);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .indicator-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 3px 10px var(--shadow);
+        }
+
+        .indicator-item:last-child {
+            margin-bottom: 0;
         }
 
         .recommendations {
-            background: #e7f3ff;
-            border: 1px solid #b3d4fc;
-            border-radius: 8px;
-            padding: 1rem;
-            margin: 1rem 0;
+            background: linear-gradient(135deg, #e7f3ff, #f0f8ff);
+            border: 2px solid var(--info);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .recommendations::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--info);
         }
 
         .recommendations h4 {
-            color: #0056b3;
-            margin-bottom: 0.5rem;
+            color: var(--info);
+            margin-bottom: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .recommendation-item {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid #ddd;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(52, 152, 219, 0.1);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            position: relative;
+            padding-left: 1rem;
+        }
+
+        .recommendation-item:hover {
+            background: rgba(52, 152, 219, 0.05);
+            padding-left: 1.5rem;
         }
 
         .recommendation-item:last-child {
@@ -232,80 +534,157 @@
 
         .sample-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1rem;
-            margin: 1rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
         }
 
         .sample-email {
-            background: #fff;
-            border: 2px solid #e0e6ed;
-            border-radius: 10px;
-            padding: 1rem;
+            background: var(--surface);
+            border: 2px solid var(--border);
+            border-radius: 15px;
+            padding: 1.5rem;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sample-email::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--accent-gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
         }
 
         .sample-email:hover {
-            border-color: #3498db;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-color: var(--info);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px var(--shadow);
+        }
+
+        .sample-email:hover::before {
+            transform: scaleX(1);
         }
 
         .sample-email h4 {
-            color: #2c3e50;
-            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            font-size: 1.1rem;
         }
 
         .sample-preview {
-            color: #7f8c8d;
+            color: var(--text-secondary);
             font-size: 0.9rem;
-            line-height: 1.4;
+            line-height: 1.5;
+            font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
         }
 
         .analyze-btn {
-            background: linear-gradient(135deg, #3498db, #2980b9);
+            background: var(--secondary-gradient);
             color: white;
             border: none;
-            padding: 1rem 2rem;
-            border-radius: 25px;
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
             font-size: 1.1rem;
-            font-weight: bold;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            margin: 1rem 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            margin: 1.5rem 0;
             display: block;
             width: 100%;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .analyze-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .analyze-btn:hover::before {
+            left: 100%;
         }
 
         .analyze-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .analyze-btn:active {
+            transform: translateY(-1px);
         }
 
         .analyze-btn:disabled {
-            background: #bdc3c7;
+            background: linear-gradient(135deg, #bdc3c7, #95a5a6);
             cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .analyze-btn:disabled:hover {
+            transform: none;
         }
 
         .loading {
             display: none;
             text-align: center;
-            padding: 2rem;
+            padding: 2.5rem;
+            background: var(--surface-hover);
+            border-radius: 12px;
+            margin: 1rem 0;
         }
 
         .loading.active {
             display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #3498db;
+            border: 4px solid var(--border);
+            border-top: 4px solid var(--info);
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             animation: spin 1s linear infinite;
-            margin: 0 auto 1rem;
+            margin: 0 auto 1.5rem;
+            position: relative;
+        }
+
+        .spinner::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--info);
+            animation: pulse-center 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse-center {
+            0%, 100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.5; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
         }
 
         @keyframes spin {
@@ -313,50 +692,315 @@
             100% { transform: rotate(360deg); }
         }
 
+        .loading p {
+            color: var(--text-secondary);
+            font-weight: 500;
+            animation: pulse-text 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-text {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
         .threat-stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
             margin: 2rem 0;
         }
 
         .stat-card {
-            background: #fff;
-            padding: 1.5rem;
-            border-radius: 10px;
+            background: var(--surface);
+            padding: 2rem 1.5rem;
+            border-radius: 15px;
             text-align: center;
-            border-left: 4px solid #3498db;
+            border-left: 4px solid var(--info);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--accent-gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px var(--shadow);
+            border-left-color: var(--success);
+        }
+
+        .stat-card:hover::before {
+            transform: scaleX(1);
         }
 
         .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #2c3e50;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .stat-label {
-            color: #7f8c8d;
-            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
             margin-top: 0.5rem;
+            font-weight: 500;
         }
 
         .back-link {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            color: #3498db;
+            color: var(--info);
             text-decoration: none;
-            font-weight: bold;
-            margin-bottom: 1rem;
-            transition: color 0.3s ease;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            padding: 0.8rem 1.2rem;
+            border-radius: 25px;
+            background: var(--surface);
+            border: 2px solid var(--border);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
         }
 
         .back-link:hover {
-            color: #2980b9;
+            color: white;
+            background: var(--info);
+            transform: translateX(-5px);
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        /* Tutorial overlay styles */
+        .tutorial-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .tutorial-step {
+            background: var(--surface);
+            border-radius: 15px;
+            padding: 2rem;
+            max-width: 500px;
+            margin: 1rem;
+            text-align: center;
+            position: relative;
+            animation: slideInUp 0.3s ease-out;
+        }
+
+        @keyframes slideInUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .tutorial-controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .tutorial-btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .tutorial-btn.primary {
+            background: var(--secondary-gradient);
+            color: white;
+        }
+
+        .tutorial-btn.secondary {
+            background: var(--border);
+            color: var(--text-primary);
+        }
+
+        .tutorial-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+        /* Enhanced Dashboard Styles */
+        .analytics-card {
+            background: var(--surface);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .analytics-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px var(--shadow);
+        }
+
+        .analytics-card h4 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .history-list {
+            max-height: 150px;
+            overflow-y: auto;
+        }
+
+        .history-item {
+            padding: 0.5rem;
+            background: var(--surface-hover);
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .comparison-view {
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Share modal styles */
+        .share-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .share-content {
+            background: var(--surface);
+            border-radius: 15px;
+            padding: 2rem;
+            max-width: 500px;
+            margin: 1rem;
+            text-align: center;
+        }
+
+        .share-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .share-btn {
+            padding: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            background: var(--surface-hover);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .share-btn:hover {
+            border-color: var(--info);
+            background: var(--info);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 480px) {
+            .sample-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .threat-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tutorial-step {
+                margin: 0.5rem;
+                padding: 1.5rem;
+            }
+            
+            .share-content {
+                margin: 0.5rem;
+                padding: 1.5rem;
+            }
+        }
+
+        /* Enhanced animations */
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .demo-section {
+            animation: fadeInScale 0.6s ease-out;
+        }
+
+        .demo-section:nth-child(even) {
+            animation-delay: 0.1s;
+        }
+
+        .demo-section:nth-child(odd) {
+            animation-delay: 0.2s;
         }
     </style>
 </head>
 <body>
+    <!-- Dark mode toggle -->
+    <div class="theme-toggle" onclick="toggleTheme()">
+        <span>🌙</span>
+        <span>☀️</span>
+    </div>
+
+    <!-- Tutorial overlay -->
+    <div class="tutorial-overlay" id="tutorialOverlay">
+        <div class="tutorial-step" id="tutorialStep">
+            <h3 id="tutorialTitle">Welcome to Phishing Simulation Demo</h3>
+            <p id="tutorialText">This interactive demo will guide you through the process of identifying phishing emails using AI analysis.</p>
+            <div class="tutorial-controls">
+                <button class="tutorial-btn secondary" onclick="skipTutorial()">Skip Tutorial</button>
+                <button class="tutorial-btn primary" onclick="nextTutorialStep()">Get Started</button>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <a href="cybersecurity-course.html" class="back-link">
             ← Terug naar Cybersecurity Training
@@ -513,20 +1157,91 @@
         </div>
 
         <div class="demo-section">
-            <h3>🎓 Leer van AI Analyse</h3>
-            <p>Deze demo toont de krachtige mogelijkheden van het Euramax AI-systeem:</p>
-            <ul style="margin: 1rem 0; padding-left: 2rem;">
-                <li><strong>Real-time detectie:</strong> Onmiddellijke analyse van email content</li>
-                <li><strong>Nederlandse taal ondersteuning:</strong> Geoptimaliseerd voor Nederlandse phishing patronen</li>
-                <li><strong>Hoge accuraatheid:</strong> Machine learning met continue verbetering</li>
-                <li><strong>Gedetailleerde rapportage:</strong> Uitgebreide analyse van gevonden indicatoren</li>
-                <li><strong>Automatische respons:</strong> Directe waarschuwingen en aanbevolen acties</li>
-            </ul>
+            <h3>🔍 Email Comparison Tool</h3>
+            <p>Compare phishing emails with legitimate ones to understand the differences and improve your detection skills.</p>
             
-            <div style="background: #e8f4f8; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
-                <strong>💡 Pro Tip:</strong> Gebruik deze demo om uw medewerkers te trainen in het herkennen van phishing-aanvallen. 
-                Het AI-systeem biedt real-time feedback en helpt bij het ontwikkelen van cybersecurity awareness.
+            <div class="comparison-controls" style="margin: 1.5rem 0;">
+                <button class="analyze-btn" onclick="showComparison()" style="width: auto; display: inline-block; margin-right: 1rem;">
+                    🔬 Compare Emails
+                </button>
+                <button class="analyze-btn" onclick="startTutorial()" style="width: auto; display: inline-block; background: var(--accent-gradient);">
+                    🎓 Start Tutorial
+                </button>
             </div>
+
+            <div class="comparison-view" id="comparisonView" style="display: none;">
+                <div class="demo-grid">
+                    <div class="email-simulator">
+                        <h4 style="color: var(--danger); margin-bottom: 1rem;">🚨 Phishing Email</h4>
+                        <div id="phishingComparison" class="email-content" style="min-height: 300px;">
+                            Loading phishing example...
+                        </div>
+                        <div id="phishingIndicators" style="margin-top: 1rem;"></div>
+                    </div>
+                    <div class="email-simulator">
+                        <h4 style="color: var(--success); margin-bottom: 1rem;">✅ Legitimate Email</h4>
+                        <div id="legitimateComparison" class="email-content" style="min-height: 300px;">
+                            Loading legitimate example...
+                        </div>
+                        <div id="legitimateIndicators" style="margin-top: 1rem;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>📊 Enhanced Analytics Dashboard</h3>
+            <div class="dashboard-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                <div class="analytics-card">
+                    <h4>📈 Detection Trends</h4>
+                    <div class="trend-chart" id="trendChart">
+                        <div class="chart-placeholder" style="height: 150px; background: var(--border); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--text-secondary);">
+                            📊 Real-time trends visualization
+                        </div>
+                    </div>
+                </div>
+                <div class="analytics-card">
+                    <h4>🎯 Analysis Results</h4>
+                    <div id="analysisHistory" class="history-list">
+                        <div class="history-item">No analysis performed yet</div>
+                    </div>
+                </div>
+                <div class="analytics-card">
+                    <h4>🌍 Global Threat Map</h4>
+                    <div class="threat-map" style="height: 150px; background: var(--border); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--text-secondary);">
+                        🗺️ Interactive threat visualization
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 2rem; text-align: center;">
+                <button class="analyze-btn" onclick="shareResults()" style="width: auto; display: inline-block; background: var(--accent-gradient);">
+                    📤 Share Analysis Results
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Share modal -->
+    <div class="share-modal" id="shareModal">
+        <div class="share-content">
+            <h3>📤 Share Analysis Results</h3>
+            <p>Share your phishing analysis results with colleagues or save for future reference.</p>
+            <div class="share-options">
+                <a href="#" class="share-btn" onclick="shareViaEmail()">
+                    📧<br>Email
+                </a>
+                <a href="#" class="share-btn" onclick="copyToClipboard()">
+                    📋<br>Copy Link
+                </a>
+                <a href="#" class="share-btn" onclick="downloadReport()">
+                    💾<br>Download
+                </a>
+                <a href="#" class="share-btn" onclick="shareToTeams()">
+                    👥<br>Teams
+                </a>
+            </div>
+            <button class="tutorial-btn secondary" onclick="closeShareModal()">Close</button>
         </div>
     </div>
 
@@ -644,6 +1359,252 @@ www.euramax.eu`
             totalScans: 0,
             threatsDetected: 0
         };
+        let analysisHistory = [];
+        let currentTutorialStep = 0;
+        let isDarkMode = false;
+
+        // Tutorial steps
+        const tutorialSteps = [
+            {
+                title: "Welcome to Phishing Simulation Demo",
+                text: "This interactive demo will guide you through the process of identifying phishing emails using AI analysis."
+            },
+            {
+                title: "Step 1: Select an Email",
+                text: "Choose one of the sample email scenarios below to see how they look in real phishing attempts."
+            },
+            {
+                title: "Step 2: AI Analysis",
+                text: "Click the 'Analyze with AI System' button to see our advanced machine learning in action."
+            },
+            {
+                title: "Step 3: Review Results",
+                text: "Examine the threat level, confidence score, and detailed indicators to understand the analysis."
+            },
+            {
+                title: "Step 4: Learn from Recommendations",
+                text: "Review the AI-generated recommendations to understand how to respond to threats."
+            },
+            {
+                title: "Tutorial Complete!",
+                text: "You're now ready to use the demo. Try different email scenarios and explore the comparison tool!"
+            }
+        ];
+
+        // Dark mode functionality
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            document.documentElement.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            
+            // Update toggle button
+            const toggle = document.querySelector('.theme-toggle');
+            toggle.style.transform = 'rotate(360deg)';
+            setTimeout(() => {
+                toggle.style.transform = 'rotate(0deg)';
+            }, 300);
+        }
+
+        // Initialize theme from localStorage
+        function initializeTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                isDarkMode = savedTheme === 'dark';
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            }
+        }
+
+        // Tutorial functionality
+        function startTutorial() {
+            currentTutorialStep = 0;
+            showTutorialStep();
+            document.getElementById('tutorialOverlay').style.display = 'flex';
+        }
+
+        function showTutorialStep() {
+            const step = tutorialSteps[currentTutorialStep];
+            document.getElementById('tutorialTitle').textContent = step.title;
+            document.getElementById('tutorialText').textContent = step.text;
+            
+            const controls = document.querySelector('.tutorial-controls');
+            if (currentTutorialStep === 0) {
+                controls.innerHTML = `
+                    <button class="tutorial-btn secondary" onclick="skipTutorial()">Skip Tutorial</button>
+                    <button class="tutorial-btn primary" onclick="nextTutorialStep()">Get Started</button>
+                `;
+            } else if (currentTutorialStep === tutorialSteps.length - 1) {
+                controls.innerHTML = `
+                    <button class="tutorial-btn secondary" onclick="previousTutorialStep()">Back</button>
+                    <button class="tutorial-btn primary" onclick="completeTutorial()">Complete</button>
+                `;
+            } else {
+                controls.innerHTML = `
+                    <button class="tutorial-btn secondary" onclick="previousTutorialStep()">Back</button>
+                    <button class="tutorial-btn primary" onclick="nextTutorialStep()">Next</button>
+                `;
+            }
+        }
+
+        function nextTutorialStep() {
+            if (currentTutorialStep < tutorialSteps.length - 1) {
+                currentTutorialStep++;
+                showTutorialStep();
+            }
+        }
+
+        function previousTutorialStep() {
+            if (currentTutorialStep > 0) {
+                currentTutorialStep--;
+                showTutorialStep();
+            }
+        }
+
+        function skipTutorial() {
+            document.getElementById('tutorialOverlay').style.display = 'none';
+        }
+
+        function completeTutorial() {
+            document.getElementById('tutorialOverlay').style.display = 'none';
+            // Show a completion notification
+            showNotification('🎓 Tutorial completed! You can now explore the demo freely.');
+        }
+
+        // Email comparison functionality
+        function showComparison() {
+            const comparisonView = document.getElementById('comparisonView');
+            if (comparisonView.style.display === 'none') {
+                comparisonView.style.display = 'block';
+                loadComparisonEmails();
+            } else {
+                comparisonView.style.display = 'none';
+            }
+        }
+
+        function loadComparisonEmails() {
+            const phishingEmail = sampleEmails.suspicious_bank;
+            const legitimateEmail = sampleEmails.legitimate_email;
+            
+            document.getElementById('phishingComparison').textContent = 
+                `From: ${phishingEmail.sender}\nSubject: ${phishingEmail.subject}\n\n${phishingEmail.content}`;
+            
+            document.getElementById('legitimateComparison').textContent = 
+                `From: ${legitimateEmail.sender}\nSubject: ${legitimateEmail.subject}\n\n${legitimateEmail.content}`;
+            
+            // Add indicators
+            document.getElementById('phishingIndicators').innerHTML = `
+                <div class="indicator-item" style="border-left-color: var(--danger);">⚠️ Suspicious domain mimicking legitimate service</div>
+                <div class="indicator-item" style="border-left-color: var(--danger);">⚠️ Urgent language creating pressure</div>
+                <div class="indicator-item" style="border-left-color: var(--danger);">⚠️ External suspicious links</div>
+            `;
+            
+            document.getElementById('legitimateIndicators').innerHTML = `
+                <div class="indicator-item" style="border-left-color: var(--success);">✅ Official domain verified</div>
+                <div class="indicator-item" style="border-left-color: var(--success);">✅ Professional tone</div>
+                <div class="indicator-item" style="border-left-color: var(--success);">✅ No suspicious requests</div>
+            `;
+        }
+
+        // Share functionality
+        function shareResults() {
+            document.getElementById('shareModal').style.display = 'flex';
+        }
+
+        function closeShareModal() {
+            document.getElementById('shareModal').style.display = 'none';
+        }
+
+        function shareViaEmail() {
+            const subject = 'Phishing Analysis Results - Euramax Demo';
+            const body = generateReportText();
+            window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            closeShareModal();
+        }
+
+        function copyToClipboard() {
+            const reportText = generateReportText();
+            navigator.clipboard.writeText(reportText).then(() => {
+                showNotification('📋 Results copied to clipboard!');
+            });
+            closeShareModal();
+        }
+
+        function downloadReport() {
+            const reportText = generateReportText();
+            const blob = new Blob([reportText], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `phishing-analysis-${new Date().toISOString().split('T')[0]}.txt`;
+            a.click();
+            URL.revokeObjectURL(url);
+            closeShareModal();
+        }
+
+        function shareToTeams() {
+            const reportText = generateReportText();
+            // This would integrate with Microsoft Teams API in a real implementation
+            showNotification('🚀 Teams integration would be implemented here');
+            closeShareModal();
+        }
+
+        function generateReportText() {
+            return `EURAMAX PHISHING ANALYSIS REPORT
+Generated: ${new Date().toLocaleString()}
+
+STATISTICS:
+- Total Emails Scanned: ${demoStats.totalScans}
+- Threats Detected: ${demoStats.threatsDetected}
+- Detection Accuracy: 98.7%
+
+RECENT ANALYSIS:
+${analysisHistory.slice(-3).map(item => `- ${item}`).join('\n')}
+
+This report was generated by the Euramax AI-powered phishing detection system.
+Visit: https://euramax.eu for more information.`;
+        }
+
+        // Enhanced notification system
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 80px;
+                right: 20px;
+                background: var(--surface);
+                color: var(--text-primary);
+                padding: 1rem 1.5rem;
+                border-radius: 12px;
+                box-shadow: 0 8px 25px var(--shadow);
+                z-index: 10001;
+                border-left: 4px solid var(--info);
+                backdrop-filter: blur(10px);
+                animation: slideInRight 0.3s ease-out;
+                max-width: 350px;
+            `;
+            
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease-in forwards';
+                setTimeout(() => notification.remove(), 300);
+            }, 4000);
+        }
+
+        // Enhanced analytics
+        function updateAnalysisHistory(emailType, result) {
+            const timestamp = new Date().toLocaleTimeString();
+            const historyItem = `${timestamp}: ${emailType} - ${result.severity.toUpperCase()} threat (${Math.round(result.confidence * 100)}% confidence)`;
+            analysisHistory.push(historyItem);
+            
+            // Update dashboard
+            const historyContainer = document.getElementById('analysisHistory');
+            if (historyContainer) {
+                historyContainer.innerHTML = analysisHistory.slice(-5).reverse()
+                    .map(item => `<div class="history-item">${item}</div>`)
+                    .join('');
+            }
+        }
 
         function loadSampleEmail(emailType) {
             const email = sampleEmails[emailType];
@@ -701,6 +1662,7 @@ www.euramax.eu`
                     demoStats.threatsDetected++;
                 }
                 updateStatistics();
+                updateAnalysisHistory(currentEmailData.sender.includes('euramax') ? 'Legitimate' : 'Phishing', result);
                 
                 // Display results after short delay for effect
                 setTimeout(() => {
@@ -897,6 +1859,28 @@ www.euramax.eu`
         // Initialize demo
         document.addEventListener('DOMContentLoaded', function() {
             console.log('Phishing Simulation Demo loaded successfully');
+            initializeTheme();
+            
+            // Add CSS animations
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideInRight {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+                
+                @keyframes slideOutRight {
+                    from { transform: translateX(0); opacity: 1; }
+                    to { transform: translateX(100%); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Auto-start tutorial for first-time visitors
+            if (!localStorage.getItem('tutorialCompleted')) {
+                setTimeout(() => startTutorial(), 1000);
+                localStorage.setItem('tutorialCompleted', 'true');
+            }
         });
     </script>
 </body>
