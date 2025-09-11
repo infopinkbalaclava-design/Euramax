@@ -520,7 +520,20 @@ function showAchievementNotification(achievement) {
 // Navigation functions with enhanced transitions
 function showSection(sectionId, direction = 'forward') {
     const currentActiveSection = document.querySelector('.course-content.active, .quiz-section.active, .quiz-results.active');
-    const targetSection = document.getElementById(sectionId);
+    
+    // Special handling for quiz section since it's dynamically created
+    let targetSection;
+    if (sectionId === 'quiz') {
+        // Create quiz section if it doesn't exist
+        let quizContainer = document.getElementById('quiz-section');
+        if (!quizContainer) {
+            createQuizSection();
+            quizContainer = document.getElementById('quiz-section');
+        }
+        targetSection = quizContainer;
+    } else {
+        targetSection = document.getElementById(sectionId);
+    }
     
     if (!targetSection) return;
     
@@ -540,6 +553,11 @@ function showSection(sectionId, direction = 'forward') {
                 targetSection.classList.add('slide-in');
             }
             
+            // Initialize quiz content if this is the quiz section
+            if (sectionId === 'quiz') {
+                displayQuiz();
+            }
+            
             // Remove animation classes after transition
             setTimeout(() => {
                 targetSection.classList.remove('slide-in', 'slide-out');
@@ -550,7 +568,13 @@ function showSection(sectionId, direction = 'forward') {
         document.querySelectorAll('.course-content, .quiz-section, .quiz-results').forEach(section => {
             section.classList.remove('active');
         });
+        
         targetSection.classList.add('active');
+        
+        // Initialize quiz content if this is the quiz section
+        if (sectionId === 'quiz') {
+            displayQuiz();
+        }
     }
     
     // Update menu items with enhanced animations
@@ -560,11 +584,6 @@ function showSection(sectionId, direction = 'forward') {
     
     // Track section changes for time measurement
     sectionStartTime = Date.now();
-    
-    // Special handling for quiz section
-    if (sectionId === 'quiz') {
-        initializeQuiz();
-    }
     
     updateProgress();
     updateProgressDashboard();
@@ -733,16 +752,6 @@ function markSectionCompleted(sectionId) {
 }
 
 // Quiz functionality
-function initializeQuiz() {
-    const quizContainer = document.getElementById('quiz-section');
-    if (!quizContainer) {
-        createQuizSection();
-    }
-    
-    document.getElementById('quiz-section').classList.add('active');
-    displayQuiz();
-}
-
 function createQuizSection() {
     const quizHTML = `
         <div class="quiz-section" id="quiz-section">
