@@ -14,9 +14,10 @@ import structlog
 from typing import Dict, Any
 
 from euramax.core.config import settings, AppConfig
-from euramax.api.routes import security, notifications, dashboard
+from euramax.api.routes import security, notifications, dashboard, course
 from euramax.ai.threat_detector import ThreatDetectionEngine
 from euramax.notifications.push_service import PushNotificationService
+from euramax.course.service import CourseService
 
 
 # Structlog configuratie voor Nederlandse logging
@@ -52,6 +53,10 @@ async def lifespan(app: FastAPI):
     app.state.notification_service = PushNotificationService()
     await app.state.notification_service.initialize()
     
+    # Initialiseer course service
+    app.state.course_service = CourseService()
+    await app.state.course_service.initialize()
+    
     logger.info("Alle systemen zijn operationeel en gereed voor bedreigingsdetectie")
     
     yield
@@ -60,6 +65,7 @@ async def lifespan(app: FastAPI):
     logger.info("Euramax systeem wordt afgesloten")
     await app.state.threat_engine.shutdown()
     await app.state.notification_service.shutdown()
+    await app.state.course_service.shutdown()
 
 
 # FastAPI applicatie initialisatie
@@ -115,11 +121,17 @@ async def health_check() -> Dict[str, Any]:
         if hasattr(app.state, 'notification_service'):
             notification_status = await app.state.notification_service.health_check()
         
+        # Controleer course service
+        course_status = "operationeel"
+        if hasattr(app.state, 'course_service'):
+            course_status = await app.state.course_service.health_check()
+        
         return {
             "systeem_status": "gezond",
             "componenten": {
                 "bedreigingsdetectie": threat_engine_status,
                 "notificaties": notification_status,
+                "cursus_systeem": course_status,
                 "database": "verbonden",  # TODO: implementeer database health check
                 "ai_modellen": "geladen"
             },
@@ -171,6 +183,12 @@ app.include_router(
     dashboard.router,
     prefix="/api/v1/dashboard",
     tags=["Dashboard API"]
+)
+
+app.include_router(
+    course.router,
+    prefix="/api/v1/course",
+    tags=["Course API"]
 )
 
 # Serve static files (Nederlandse dashboard)
