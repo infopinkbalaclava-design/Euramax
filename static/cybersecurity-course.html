@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Euramax Cybersecurity Training - Voor Medewerkers met Gevoelige Data</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+
+        .course-content {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            display: none;
+        }
+
+        .course-content.active {
+            display: block;
+        }
+
+        .course-content h2 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 0.5rem;
+        }
+
+        .course-content h3 {
+            color: #34495e;
+            font-size: 1.3rem;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        .course-content p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        .course-content ul {
+            margin: 1rem 0 1rem 2rem;
+        }
+
+        .course-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .warning-box {
+            background: #ffeaa7;
+            border-left: 5px solid #fdcb6e;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 5px;
+        }
+
+        .critical-box {
+            background: #fab1a0;
+            border-left: 5px solid #e17055;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 5px;
+        }
+
+        .info-box {
+            background: #74b9ff;
+            color: white;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 5px;
+        }
+
+        .navigation {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.3);
+            height: 10px;
+            border-radius: 5px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+            height: 100%;
+            transition: width 0.3s ease;
+            border-radius: 5px;
+        }
+
+        .course-menu {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .course-menu h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .menu-item {
+            display: block;
+            padding: 10px 15px;
+            margin: 5px 0;
+            background: #ecf0f1;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: left;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .menu-item:hover {
+            background: #d5dbdb;
+        }
+
+        .menu-item.completed {
+            background: #2ecc71;
+            color: white;
+        }
+
+        .menu-item.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .quiz-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            display: none;
+        }
+
+        .quiz-section.active {
+            display: block;
+        }
+
+        .question {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .question h4 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .answer-option {
+            display: block;
+            margin: 0.5rem 0;
+            padding: 10px;
+            background: white;
+            border: 2px solid #ecf0f1;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .answer-option:hover {
+            border-color: #667eea;
+        }
+
+        .answer-option.selected {
+            border-color: #667eea;
+            background: #f1f4fd;
+        }
+
+        .answer-option.correct {
+            border-color: #2ecc71;
+            background: #d5f5d5;
+        }
+
+        .answer-option.incorrect {
+            border-color: #e74c3c;
+            background: #fdeaea;
+        }
+
+        .quiz-results {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            display: none;
+        }
+
+        .quiz-results.active {
+            display: block;
+        }
+
+        .score-display {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: conic-gradient(#2ecc71 0deg, #2ecc71 var(--score-deg), #ecf0f1 var(--score-deg), #ecf0f1 360deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem auto;
+            position: relative;
+        }
+
+        .score-circle::before {
+            content: '';
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: white;
+            position: absolute;
+        }
+
+        .score-text {
+            z-index: 1;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #2c3e50;
+        }
+
+        .wrong-answers {
+            margin-top: 2rem;
+        }
+
+        .wrong-answer-item {
+            background: #fdeaea;
+            border: 1px solid #e74c3c;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .retry-section {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .course-content, .quiz-section, .quiz-results {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>
+                🛡️ Euramax Cybersecurity Training
+                <span style="font-size: 1.5rem;">🇳🇱</span>
+            </h1>
+            <p>Geavanceerde Cybersecurity Training voor Medewerkers met Toegang tot Gevoelige Data</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar" style="width: 0%;"></div>
+            </div>
+        </div>
+
+        <!-- Course Menu -->
+        <div class="course-menu" id="courseMenu">
+            <h3>📚 Cursus Inhoud</h3>
+            <button class="menu-item active" onclick="showSection('intro')">🏁 Introductie</button>
+            <button class="menu-item" onclick="showSection('phishing')">📧 Phishing & Email Beveiliging</button>
+            <button class="menu-item" onclick="showSection('passwords')">🔐 Wachtwoord Beveiliging</button>
+            <button class="menu-item" onclick="showSection('malware')">🦠 Malware & Ransomware</button>
+            <button class="menu-item" onclick="showSection('social')">👥 Social Engineering</button>
+            <button class="menu-item" onclick="showSection('data')">💾 Data Bescherming</button>
+            <button class="menu-item" onclick="showSection('quiz')">📝 Toets</button>
+        </div>
+
+        <!-- Introduction Section -->
+        <div class="course-content active" id="intro">
+            <h2>🏁 Welkom bij de Euramax Cybersecurity Training</h2>
+            
+            <p>Als medewerker met toegang tot gevoelige data draag je een belangrijke verantwoordelijkheid voor de veiligheid van onze organisatie. Deze training biedt je de kennis en vaardigheden om cybersecurity bedreigingen te herkennen en effectief te reageren.</p>
+
+            <div class="critical-box">
+                <strong>⚠️ Belangrijk:</strong> Deze training is verplicht voor alle medewerkers die werken met vertrouwelijke klantgegevens, financiële informatie, of strategische bedrijfsinformatie.
+            </div>
+
+            <h3>🎯 Leerdoelen</h3>
+            <p>Na het voltooien van deze training kun je:</p>
+            <ul>
+                <li>Phishing emails herkennen en correct reageren</li>
+                <li>Sterke wachtwoorden maken en beheren</li>
+                <li>Malware en ransomware bedreigingen identificeren</li>
+                <li>Social engineering aanvallen herkennen</li>
+                <li>Gevoelige data op de juiste manier beschermen</li>
+                <li>Incident response procedures toepassen</li>
+            </ul>
+
+            <h3>📊 Cursus Structuur</h3>
+            <p>De training bestaat uit vijf hoofdmodules gevolgd door een uitgebreide toets:</p>
+            <ul>
+                <li><strong>Module 1:</strong> Phishing & Email Beveiliging (20 min)</li>
+                <li><strong>Module 2:</strong> Wachtwoord Beveiliging (15 min)</li>
+                <li><strong>Module 3:</strong> Malware & Ransomware (20 min)</li>
+                <li><strong>Module 4:</strong> Social Engineering (15 min)</li>
+                <li><strong>Module 5:</strong> Data Bescherming (20 min)</li>
+                <li><strong>Toets:</strong> 15 uitdagende vragen (30 min)</li>
+            </ul>
+
+            <div class="info-box">
+                <strong>💡 Tip:</strong> Lees elke sectie zorgvuldig door. De toetsvragen zijn uitdagend en vereisen een grondige kennis van het materiaal.
+            </div>
+        </div>
+
+        <!-- Phishing & Email Security Section -->
+        <div class="course-content" id="phishing">
+            <h2>📧 Phishing & Email Beveiliging</h2>
+            
+            <p>Phishing is een van de meest voorkomende en gevaarlijke cybersecurity bedreigingen. Als medewerker met toegang tot gevoelige data ben je een aantrekkelijk doelwit voor cybercriminelen.</p>
+
+            <h3>🎣 Wat is Phishing?</h3>
+            <p>Phishing is een cybercriminele techniek waarbij aanvallers zich voordoen als vertrouwde organisaties om gevoelige informatie te stelen, zoals:</p>
+            <ul>
+                <li>Gebruikersnamen en wachtwoorden</li>
+                <li>Creditcardgegevens</li>
+                <li>Persoonlijke identificatiegegevens</li>
+                <li>Bedrijfsinformatie</li>
+                <li>Toegang tot interne systemen</li>
+            </ul>
+
+            <div class="critical-box">
+                <strong>🚨 Kritiek:</strong> 90% van alle succesvolle cyberaanvallen begint met een phishing email. Een enkele verkeerde klik kan het hele bedrijf in gevaar brengen.
+            </div>
+
+            <h3>🔍 Herkenning van Phishing Emails</h3>
+            <p>Leer de volgende kenmerken te herkennen:</p>
+            
+            <h4>📤 Afzender Controle</h4>
+            <ul>
+                <li><strong>Verdachte domeinen:</strong> banx.nl in plaats van bank.nl</li>
+                <li><strong>Verkeerde email adressen:</strong> security@euramax.com (moet .eu zijn)</li>
+                <li><strong>Algemene adressen:</strong> noreply@gmail.com voor 'officiële' berichten</li>
+                <li><strong>Display name spoofing:</strong> "ING Bank" maar het echte adres is phishing@fake.com</li>
+            </ul>
+
+            <h4>📝 Inhoud Analyse</h4>
+            <ul>
+                <li><strong>Urgentie creëren:</strong> "Account wordt binnen 24 uur geblokkeerd!"</li>
+                <li><strong>Algemene begroetingen:</strong> "Beste klant" in plaats van je naam</li>
+                <li><strong>Spelfouten en grammaticafouten:</strong> Professionele organisaties maken zelden fouten</li>
+                <li><strong>Verdachte links:</strong> Hover over links om de werkelijke URL te zien</li>
+                <li><strong>Onverwachte bijlagen:</strong> Vooral .exe, .zip, .scr bestanden</li>
+            </ul>
+
+            <div class="warning-box">
+                <strong>⚠️ Let op:</strong> Moderne phishing aanvallen zijn steeds geavanceerder. Zelfs ervaren gebruikers kunnen erin trappen. Twijfel je? Verifieer altijd via een andere communicatieweg.
+            </div>
+
+            <h3>🛡️ Beveiligingsmaatregelen</h3>
+            
+            <h4>🔐 Email Client Beveiliging</h4>
+            <ul>
+                <li><strong>Spam filters:</strong> Zorg dat deze altijd aan staan</li>
+                <li><strong>Link bescherming:</strong> Gebruik email clients met link scanning</li>
+                <li><strong>Automatische downloads:</strong> Schakel automatische downloads van bijlagen uit</li>
+                <li><strong>Preview modes:</strong> Vermijd automatische preview van emails</li>
+            </ul>
+
+            <h4>🧐 Verificatie Protocollen</h4>
+            <ul>
+                <li><strong>Twee-factor verificatie:</strong> Bel de afzender via een bekend nummer</li>
+                <li><strong>Officiële websites:</strong> Ga altijd via de officiële website, niet via links in emails</li>
+                <li><strong>IT-helpdesk:</strong> Rapporteer verdachte emails aan security@euramax.eu</li>
+                <li><strong>Cross-verificatie:</strong> Vraag collega's of zij vergelijkbare emails hebben ontvangen</li>
+            </ul>
+
+            <h3>🚨 Incident Response</h3>
+            <p>Als je vermoedt dat je op een phishing email hebt geklikt:</p>
+            <ol>
+                <li><strong>Onmiddellijk actie:</strong> Koppel je computer los van het netwerk</li>
+                <li><strong>Wachtwoorden wijzigen:</strong> Verander alle relevante wachtwoorden</li>
+                <li><strong>IT waarschuwen:</strong> Neem direct contact op met de IT-afdeling</li>
+                <li><strong>Monitoring:</strong> Houd je accounts extra in de gaten</li>
+                <li><strong>Rapportage:</strong> Documenteer het incident voor analyse</li>
+            </ol>
+
+            <div class="info-box">
+                <strong>💡 Best Practice:</strong> Behandel elke onverwachte email als verdacht totdat bewezen is dat deze legitiem is. Het is beter om voorzichtig te zijn dan spijt te hebben.
+            </div>
+        </div>
+
+        <!-- Password Security Section -->
+        <div class="course-content" id="passwords">
+            <h2>🔐 Wachtwoord Beveiliging</h2>
+            
+            <p>Sterke wachtwoorden zijn je eerste verdedigingslinie tegen cyberaanvallen. Als medewerker met toegang tot gevoelige data is wachtwoord hygiene essentieel voor de veiligheid van het hele bedrijf.</p>
+
+            <h3>🎯 Waarom Wachtwoord Beveiliging Cruciaal Is</h3>
+            <p>Zwakke wachtwoorden zijn verantwoordelijk voor:</p>
+            <ul>
+                <li>81% van alle data lekken door gehackte accounts</li>
+                <li>Gemiddeld €3.9 miljoen schade per data lek</li>
+                <li>95% van succesvolle cyberaanvallen op web applicaties</li>
+                <li>Toegang tot meerdere accounts via wachtwoord hergebruik</li>
+            </ul>
+
+            <div class="critical-box">
+                <strong>🚨 Realiteit Check:</strong> Een 8-karakter wachtwoord kan in minder dan 8 uur worden gekraakt met moderne computers. Een 12-karakter wachtwoord duurt 34.000 jaar.
+            </div>
+
+            <h3>💪 Sterke Wachtwoorden Creëren</h3>
+            
+            <h4>📏 Lengte en Complexiteit</h4>
+            <ul>
+                <li><strong>Minimaal 12 karakters</strong> voor bedrijfsaccounts</li>
+                <li><strong>Minimaal 16 karakters</strong> voor gevoelige systemen</li>
+                <li><strong>Combinatie van:</strong> hoofdletters, kleine letters, cijfers, symbolen</li>
+                <li><strong>Geen woordenboek woorden</strong> of voorspelbare patronen</li>
+            </ul>
+
+            <h4>🧠 Passphrases Methode</h4>
+            <p>Gebruik memorable zinnen met modificaties:</p>
+            <ul>
+                <li><strong>Basis zin:</strong> "Ik werk sinds 2023 bij Euramax met veel plezier!"</li>
+                <li><strong>Eerste letters:</strong> Iws2023bEmvp!</li>
+                <li><strong>Met cijfers/symbolen:</strong> Iw$2023bEur@mx!</li>
+                <li><strong>Extra complexiteit:</strong> 1w$2023bEur@mx!vP</li>
+            </ul>
+
+            <div class="warning-box">
+                <strong>⚠️ Vermijd Deze Fouten:</strong>
+                <ul>
+                    <li>Persoonlijke informatie (namen, geboortedatums)</li>
+                    <li>Sequenties (123456, qwerty)</li>
+                    <li>Eenvoudige substituties (@ voor a, 3 voor e)</li>
+                    <li>Hergebruik van oude wachtwoorden</li>
+                </ul>
+            </div>
+
+            <h3>🔧 Wachtwoord Beheer Tools</h3>
+            
+            <h4>📱 Wachtwoord Managers</h4>
+            <p>Gebruik professionele wachtwoord managers zoals:</p>
+            <ul>
+                <li><strong>1Password:</strong> Voor zakelijk gebruik aanbevolen</li>
+                <li><strong>Bitwarden:</strong> Open-source alternatief</li>
+                <li><strong>KeePass:</strong> Voor lokale opslag</li>
+                <li><strong>Lastpass:</strong> Met enterprise features</li>
+            </ul>
+
+            <h4>🛡️ Multi-Factor Authenticatie (MFA)</h4>
+            <ul>
+                <li><strong>SMS codes:</strong> Basis bescherming (niet aanbevolen voor kritieke systemen)</li>
+                <li><strong>Authenticator apps:</strong> Google Authenticator, Microsoft Authenticator</li>
+                <li><strong>Hardware tokens:</strong> YubiKey voor maximale beveiliging</li>
+                <li><strong>Biometrische data:</strong> Vingerafdruk, gezichtsherkenning</li>
+            </ul>
+
+            <h3>🔄 Wachtwoord Lifecycle Management</h3>
+            
+            <h4>⏰ Wijzigingsfrequentie</h4>
+            <ul>
+                <li><strong>Kritieke systemen:</strong> Elke 90 dagen</li>
+                <li><strong>Standaard accounts:</strong> Elke 6 maanden</li>
+                <li><strong>Na incidents:</strong> Onmiddellijk</li>
+                <li><strong>Bij vermoeden van compromittering:</strong> Direct</li>
+            </ul>
+
+            <h4>🗄️ Veilige Opslag</h4>
+            <ul>
+                <li><strong>Nooit opslaan in:</strong> Browsers, tekstbestanden, emails</li>
+                <li><strong>Wel opslaan in:</strong> Gecertificeerde wachtwoord managers</li>
+                <li><strong>Backup procedures:</strong> Versleutelde backups op veilige locaties</li>
+                <li><strong>Delen van wachtwoorden:</strong> Alleen via veilige kanalen</li>
+            </ul>
+
+            <div class="info-box">
+                <strong>💡 Euramax Policy:</strong> Alle medewerkers met toegang tot gevoelige data zijn verplicht een goedgekeurde wachtwoord manager te gebruiken en MFA in te schakelen op alle bedrijfsaccounts.
+            </div>
+        </div>
+
+        <!-- Malware & Ransomware Section -->
+        <div class="course-content" id="malware">
+            <h2>🦠 Malware & Ransomware Beveiliging</h2>
+            
+            <p>Malware (kwaadaardige software) en ransomware vormen een ernstige bedreiging voor organisaties die gevoelige data verwerken. Een enkele infectie kan leiden tot miljoenen euro's aan schade en reputatieverlies.</p>
+
+            <h3>🔬 Soorten Malware</h3>
+            
+            <h4>🦠 Virussen en Wormen</h4>
+            <ul>
+                <li><strong>Virussen:</strong> Vermenigvuldigen zich door gastheerbestanden te infecteren</li>
+                <li><strong>Wormen:</strong> Verspreiden zich automatisch door netwerken</li>
+                <li><strong>Trojan Horses:</strong> Verbergen zich in schijnbaar onschuldige software</li>
+                <li><strong>Rootkits:</strong> Verbergen zich diep in het systeem</li>
+            </ul>
+
+            <h4>💰 Ransomware</h4>
+            <p>Ransomware versleutelt je bestanden en eist losgeld voor de sleutel:</p>
+            <ul>
+                <li><strong>Crypto-ransomware:</strong> Versleutelt bestanden</li>
+                <li><strong>Locker-ransomware:</strong> Blokkeert toegang tot het systeem</li>
+                <li><strong>Double extortion:</strong> Steelt data voordat het versleutelt</li>
+                <li><strong>RaaS (Ransomware as a Service):</strong> Commerciële ransomware distributie</li>
+            </ul>
+
+            <div class="critical-box">
+                <strong>🚨 Ransomware Impact:</strong> Gemiddelde kosten van een ransomware aanval zijn €4.54 miljoen, met 287 dagen gemiddelde herstel tijd. 60% van kleine bedrijven gaat failliet binnen 6 maanden na een aanval.
+            </div>
+
+            <h3>🚪 Infectie Vectoren</h3>
+            
+            <h4>📧 Email Bijlagen</h4>
+            <ul>
+                <li><strong>Executeerbare bestanden:</strong> .exe, .scr, .bat, .cmd</li>
+                <li><strong>Office documenten:</strong> Met macro's (.docm, .xlsm)</li>
+                <li><strong>Archiefbestanden:</strong> .zip, .rar met verborgen malware</li>
+                <li><strong>PDF bestanden:</strong> Met embedded JavaScript</li>
+            </ul>
+
+            <h4>🌐 Web-based Infecties</h4>
+            <ul>
+                <li><strong>Drive-by downloads:</strong> Automatische downloads van gecompromitteerde websites</li>
+                <li><strong>Malicious ads:</strong> Geïnfecteerde advertenties</li>
+                <li><strong>Fake software updates:</strong> Valse update meldingen</li>
+                <li><strong>Gecompromitteerde websites:</strong> Legitieme sites die zijn gehackt</li>
+            </ul>
+
+            <h4>💾 Fysieke Media</h4>
+            <ul>
+                <li><strong>USB drives:</strong> Geïnfecteerde USB sticks</li>
+                <li><strong>External drives:</strong> Externe harde schijven</li>
+                <li><strong>CD/DVD media:</strong> Fysieke media van onbekende bronnen</li>
+                <li><strong>Mobile devices:</strong> Gecompromitteerde smartphones/tablets</li>
+            </ul>
+
+            <h3>🛡️ Preventie Strategieën</h3>
+            
+            <h4>🔄 Regelmatige Updates</h4>
+            <ul>
+                <li><strong>Operating system patches:</strong> Automatische updates inschakelen</li>
+                <li><strong>Software updates:</strong> Alle geïnstalleerde programma's up-to-date houden</li>
+                <li><strong>Browser updates:</strong> Laatste versies met security patches</li>
+                <li><strong>Plugin updates:</strong> Java, Flash, Adobe Reader regelmatig updaten</li>
+            </ul>
+
+            <h4>🛡️ Antivirus en Anti-malware</h4>
+            <ul>
+                <li><strong>Enterprise antivirus:</strong> Centraal beheerde bescherming</li>
+                <li><strong>Real-time scanning:</strong> Continue monitoring van bestanden</li>
+                <li><strong>Behavior analysis:</strong> Detectie van verdachte activiteiten</li>
+                <li><strong>Cloud-based protection:</strong> Leveraging van cloud intelligence</li>
+            </ul>
+
+            <h4>🔒 Application Control</h4>
+            <ul>
+                <li><strong>Whitelisting:</strong> Alleen goedgekeurde software mag draaien</li>
+                <li><strong>Blacklisting:</strong> Bekende malware wordt geblokkeerd</li>
+                <li><strong>Sandboxing:</strong> Verdachte software in geïsoleerde omgeving</li>
+                <li><strong>Privilege management:</strong> Beperkte gebruikersrechten</li>
+            </ul>
+
+            <h3>🚨 Detectie en Response</h3>
+            
+            <h4>🔍 Waarschuwingssignalen</h4>
+            <p>Herken deze symptomen van mogelijke malware infectie:</p>
+            <ul>
+                <li><strong>Prestatie problemen:</strong> Langzame computer, frequent crashes</li>
+                <li><strong>Netwerkactiviteit:</strong> Onverklaarbare internet verkeer</li>
+                <li><strong>Onbekende processen:</strong> Vreemde programma's in Task Manager</li>
+                <li><strong>Bestandswijzigingen:</strong> Bestanden die zijn versleuteld of verwijderd</li>
+                <li><strong>Pop-ups en advertenties:</strong> Ongewenste reclame</li>
+            </ul>
+
+            <h4>⚡ Incident Response Protocol</h4>
+            <ol>
+                <li><strong>Isolatie:</strong> Koppel het geïnfecteerde systeem los van het netwerk</li>
+                <li><strong>Identificatie:</strong> Bepaal het type malware en de omvang</li>
+                <li><strong>Documentatie:</strong> Log alle observaties en acties</li>
+                <li><strong>Meldingsplicht:</strong> Rapporteer aan IT Security (security@euramax.eu)</li>
+                <li><strong>Recovery:</strong> Herstel systemen van clean backups</li>
+                <li><strong>Post-incident:</strong> Analyseer en verbeter beveiligingsmaatregelen</li>
+            </ol>
+
+            <div class="warning-box">
+                <strong>⚠️ Belangrijk:</strong> Betaal NOOIT losgeld bij ransomware. Dit garandeert niet dat je data wordt teruggekregen en financiert verder crimineel gedrag. Vertrouw op backups en professional recovery services.
+            </div>
+
+            <h3>💾 Backup Strategieën</h3>
+            
+            <h4>📊 3-2-1 Backup Rule</h4>
+            <ul>
+                <li><strong>3 kopieën:</strong> Origineel + 2 backups</li>
+                <li><strong>2 verschillende media:</strong> Bijvoorbeeld disk + cloud</li>
+                <li><strong>1 offsite backup:</strong> Fysiek gescheiden locatie</li>
+            </ul>
+
+            <div class="info-box">
+                <strong>💡 Euramax Backup Policy:</strong> Alle kritieke bedrijfsdata wordt automatisch dagelijks gebackupt naar versleutelde cloud storage met 30-dagen retention. Test backups worden maandelijks uitgevoerd.
+            </div>
+        </div>
+
+        <!-- Social Engineering Section -->
+        <div class="course-content" id="social">
+            <h2>👥 Social Engineering Beveiliging</h2>
+            
+            <p>Social engineering is de kunst van menselijke manipulatie om toegang te krijgen tot gevoelige informatie of systemen. Het is vaak effectiever dan technische hacks omdat het de zwakste schakel in cybersecurity exploiteert: de mens.</p>
+
+            <h3>🧠 Psychologische Basis</h3>
+            <p>Social engineers maken gebruik van fundamentele menselijke eigenschappen:</p>
+            
+            <h4>🎭 Overtuigingstechnieken</h4>
+            <ul>
+                <li><strong>Autoriteit:</strong> Voordoen als leidinggevende of externe autoriteit</li>
+                <li><strong>Urgentie:</strong> Kunstmatige tijdsdruk creëren</li>
+                <li><strong>Vertrouwdheid:</strong> Persoonlijke connecties voorwenden</li>
+                <li><strong>Hulpvaardigheid:</strong> Misbruik maken van natuurlijke behulpzaamheid</li>
+                <li><strong>Angst:</strong> Dreigementen van negatieve gevolgen</li>
+                <li><strong>Nieuwsgierigheid:</strong> Exploiteren van natuurlijke interesse</li>
+            </ul>
+
+            <div class="critical-box">
+                <strong>🎯 Waarom Social Engineering Werkt:</strong> 98% van cyberaanvallen vertrouwt op enige vorm van sociale interactie. Mensen willen natuurlijk helpen en vertrouwen, eigenschappen die criminelen uitbuiten.
+            </div>
+
+            <h3>📞 Veel Voorkomende Aanvalstechnieken</h3>
+            
+            <h4>🎭 Pretexting</h4>
+            <p>Het creëren van een verzonnen scenario om vertrouwen te winnen:</p>
+            <ul>
+                <li><strong>IT Support:</strong> "Ik ben van de IT-afdeling en moet uw wachtwoord verifiëren"</li>
+                <li><strong>Externe Auditor:</strong> "Ik voer een beveiligingsaudit uit voor het management"</li>
+                <li><strong>Nieuwe Collega:</strong> "Ik ben nieuw en weet niet hoe ik toegang krijg tot..."</li>
+                <li><strong>Leverancier:</strong> "Ik ben van [bekende leverancier] en moet onze systemen updaten"</li>
+            </ul>
+
+            <h4>🎣 Baiting</h4>
+            <p>Het achterlaten van verleiding om nieuwsgierigheid te wekken:</p>
+            <ul>
+                <li><strong>USB drops:</strong> Geïnfecteerde USB-sticks op parkeerplaatsen</li>
+                <li><strong>Free software:</strong> "Gratis" tools met verborgen malware</li>
+                <li><strong>Fake downloads:</strong> Verleidelijke downloads op websites</li>
+                <li><strong>Physical media:</strong> CD/DVD's met interessante labels</li>
+            </ul>
+
+            <h4>💼 Business Email Compromise (BEC)</h4>
+            <p>Geavanceerde aanvallen gericht op financiële transacties:</p>
+            <ul>
+                <li><strong>CEO Fraud:</strong> E-mails die lijken van de CEO met urgente betalingsverzoeken</li>
+                <li><strong>Invoice fraud:</strong> Valse facturen van bekende leveranciers</li>
+                <li><strong>Wire transfer fraud:</strong> Verzoeken om grote geldbedragen over te maken</li>
+                <li><strong>W-2 phishing:</strong> Verzoeken om werknemersgegevens voor "belastingdoeleinden"</li>
+            </ul>
+
+            <h3>🏢 Fysieke Social Engineering</h3>
+            
+            <h4>🚪 Tailgating/Piggybacking</h4>
+            <ul>
+                <li><strong>Gewoon meelopen:</strong> Achter geautoriseerde personen aan lopen</li>
+                <li><strong>Handjes vol:</strong> Vragen om de deur open te houden</li>
+                <li><strong>Delivery person:</strong> Voordoen als bezorger of onderhoudspersoneel</li>
+                <li><strong>Emergency scenario:</strong> Noodituaties simuleren voor toegang</li>
+            </ul>
+
+            <h4>📱 Dumpster Diving</h4>
+            <ul>
+                <li><strong>Afval doorzoeken:</strong> Zoeken naar weggegoide gevoelige documenten</li>
+                <li><strong>Organisatieschema's:</strong> Interne telefoongidsen en contactgegevens</li>
+                <li><strong>Technische informatie:</strong> Oude hardware, software licenties</li>
+                <li><strong>Persoonlijke informatie:</strong> Details voor verdere sociale manipulatie</li>
+            </ul>
+
+            <div class="warning-box">
+                <strong>⚠️ Herkenning:</strong> Social engineering aanvallen zijn vaak moeilijk te herkennen omdat ze gebruikmaken van normale sociale interacties. Het belangrijkste is om altijd procedures te volgen, ongeacht wie het verzoek doet.
+            </div>
+
+            <h3>🛡️ Defensieve Strategieën</h3>
+            
+            <h4>✅ Verificatie Procedures</h4>
+            <ul>
+                <li><strong>Identity verification:</strong> Altijd identiteit verifiëren via onafhankelijke kanalen</li>
+                <li><strong>Callback procedures:</strong> Terugbellen naar bekende nummers</li>
+                <li><strong>Multiple authorization:</strong> Gevoelige acties vereisen goedkeuring van meerdere personen</li>
+                <li><strong>Documentation:</strong> Alle verzoeken en autorisaties documenteren</li>
+            </ul>
+
+            <h4>🎓 Awareness Training</h4>
+            <ul>
+                <li><strong>Regelmatige training:</strong> Kwartaalse awareness sessies</li>
+                <li><strong>Phishing simulaties:</strong> Gesimuleerde aanvallen om readiness te testen</li>
+                <li><strong>Incident reporting:</strong> Melden van verdachte benaderingen</li>
+                <li><strong>Best practices:</strong> Delen van real-world voorbeelden</li>
+            </ul>
+
+            <h3>🚨 Response Protocol</h3>
+            
+            <h4>⚡ Tijdens een Verdachte Interactie</h4>
+            <ol>
+                <li><strong>Pauzeer:</strong> Neem tijd om na te denken</li>
+                <li><strong>Verifieer:</strong> Controleer identiteit via onafhankelijke middelen</li>
+                <li><strong>Escaleer:</strong> Betrek supervisor of security bij twijfel</li>
+                <li><strong>Documenteer:</strong> Noteer details van de interactie</li>
+                <li><strong>Rapporteer:</strong> Meld aan security@euramax.eu</li>
+            </ol>
+
+            <h4>📞 Telefoon Protocol</h4>
+            <ul>
+                <li><strong>"Ik bel je terug":</strong> Gebruik dit altijd bij verzoeken om gevoelige informatie</li>
+                <li><strong>Officiële nummers:</strong> Gebruik alleen nummers uit bedrijfsdirectory</li>
+                <li><strong>Geen persoonlijke info:</strong> Deel nooit persoonlijke details aan onbekenden</li>
+                <li><strong>Supervisory approval:</strong> Grote verzoeken altijd laten goedkeuren</li>
+            </ul>
+
+            <div class="info-box">
+                <strong>💡 Gouden Regel:</strong> Het is altijd acceptabel om "Nee" te zeggen tegen verzoeken die je oncomfortabel maken, ongeacht wie het verzoek doet. Jouw voorzichtigheid beschermt het hele bedrijf.
+            </div>
+        </div>
+
+        <!-- Data Protection Section -->
+        <div class="course-content" id="data">
+            <h2>💾 Data Bescherming & Privacy</h2>
+            
+            <p>Als medewerker met toegang tot gevoelige data ben je verantwoordelijk voor de bescherming van vertrouwelijke bedrijfsinformatie en persoonlijke gegevens van klanten. Databeveiliging is niet alleen een technische kwestie, maar ook een juridische en ethische verplichting.</p>
+
+            <h3>📊 Classificatie van Gevoelige Data</h3>
+            
+            <h4>🔴 Zeer Vertrouwelijk</h4>
+            <ul>
+                <li><strong>Persoonlijke identificatiegegevens (PII):</strong> BSN, paspoortgegevens, adressen</li>
+                <li><strong>Financiële informatie:</strong> Bankrekeningnummers, creditcardgegevens</li>
+                <li><strong>Medische gegevens:</strong> Zorgverlenersinformatie, behandelgegevens</li>
+                <li><strong>Strategische bedrijfsinformatie:</strong> Fusies, overnames, financiële prestaties</li>
+                <li><strong>Intellectueel eigendom:</strong> Patenten, handelsgeheimen, algoritmes</li>
+            </ul>
+
+            <h4>🟡 Vertrouwelijk</h4>
+            <ul>
+                <li><strong>Interne bedrijfsprocessen:</strong> Procedures, beleid, organisatiestructuur</li>
+                <li><strong>Contractinformatie:</strong> Leverancierscontracten, prijsinformatie</li>
+                <li><strong>HR-gegevens:</strong> Salarissen, beoordelingen, disciplinaire acties</li>
+                <li><strong>Klantgegevens:</strong> Contactgegevens, voorkeuren, koopgedrag</li>
+            </ul>
+
+            <h4>🟢 Beperkt Intern</h4>
+            <ul>
+                <li><strong>Algemene bedrijfsinformatie:</strong> Organisatieschema's, telefoonlijsten</li>
+                <li><strong>Training materialen:</strong> Interne cursussen, handboeken</li>
+                <li><strong>Operationele gegevens:</strong> Productinformatie, algemene procedures</li>
+            </ul>
+
+            <div class="critical-box">
+                <strong>📋 AVG/GDPR Compliance:</strong> Onder de Algemene Verordening Gegevensbescherming kunnen boetes oplopen tot €20 miljoen of 4% van de jaaromzet. Persoonlijke aansprakelijkheid van medewerkers is mogelijk bij grove nalatigheid.
+            </div>
+
+            <h3>🔐 Data Beveiligingsprincipes</h3>
+            
+            <h4>🎯 Principle of Least Privilege</h4>
+            <ul>
+                <li><strong>Need-to-know basis:</strong> Alleen toegang tot data die nodig is voor je functie</li>
+                <li><strong>Role-based access:</strong> Toegangsrechten gebaseerd op functievereisten</li>
+                <li><strong>Regular review:</strong> Periodieke evaluatie van toegangsrechten</li>
+                <li><strong>Immediate revocation:</strong> Toegang intrekken bij functiewijziging</li>
+            </ul>
+
+            <h4>🔄 Data Lifecycle Management</h4>
+            <ul>
+                <li><strong>Creation:</strong> Veilige creatie en classificatie van nieuwe data</li>
+                <li><strong>Storage:</strong> Versleutelde opslag op goedgekeurde systemen</li>
+                <li><strong>Processing:</strong> Autorisatie voor alle data verwerkingsactiviteiten</li>
+                <li><strong>Sharing:</strong> Gecontroleerde distributie volgens beleid</li>
+                <li><strong>Retention:</strong> Bewaren volgens wettelijke vereisten</li>
+                <li><strong>Destruction:</strong> Veilige vernietiging na retentieperiode</li>
+            </ul>
+
+            <h3>💻 Technische Beveiligingsmaatregelen</h3>
+            
+            <h4>🔒 Versleuteling</h4>
+            <ul>
+                <li><strong>Data at rest:</strong> Versleuteling van opgeslagen bestanden</li>
+                <li><strong>Data in transit:</strong> Veilige overdracht via versleutelde kanalen</li>
+                <li><strong>End-to-end encryption:</strong> Versleuteling van zender tot ontvanger</li>
+                <li><strong>Key management:</strong> Veilig beheer van versleutelingssleutels</li>
+            </ul>
+
+            <h4>🛡️ Access Controls</h4>
+            <ul>
+                <li><strong>Multi-factor authentication:</strong> Meerdere verificatiemethoden</li>
+                <li><strong>Session management:</strong> Automatische uitlog na inactiviteit</li>
+                <li><strong>IP restrictions:</strong> Toegang beperkt tot goedgekeurde locaties</li>
+                <li><strong>Device management:</strong> Alleen geautoriseerde apparaten</li>
+            </ul>
+
+            <h4>📱 Mobile Device Security</h4>
+            <ul>
+                <li><strong>MDM solutions:</strong> Mobile Device Management voor bedrijfstoestellen</li>
+                <li><strong>App restrictions:</strong> Alleen goedgekeurde applicaties</li>
+                <li><strong>Remote wipe:</strong> Mogelijkheid tot data wissen bij verlies</li>
+                <li><strong>BYOD policy:</strong> Strikt beleid voor persoonlijke apparaten</li>
+            </ul>
+
+            <h3>📤 Veilig Data Delen</h3>
+            
+            <h4>📧 Email Beveiliging</h4>
+            <ul>
+                <li><strong>Encryption:</strong> Versleutelde email voor gevoelige informatie</li>
+                <li><strong>Secure portals:</strong> Gebruik van veilige document portals</li>
+                <li><strong>Expiration dates:</strong> Automatische vervaldatums voor links</li>
+                <li><strong>Access logging:</strong> Tracking van wie documenten heeft bekeken</li>
+            </ul>
+
+            <h4>☁️ Cloud Storage</h4>
+            <ul>
+                <li><strong>Approved providers:</strong> Alleen gecertificeerde cloud diensten</li>
+                <li><strong>Data residency:</strong> Gegevens blijven binnen EU/EER</li>
+                <li><strong>Access controls:</strong> Strikte gebruikersrechten</li>
+                <li><strong>Activity monitoring:</strong> Continue monitoring van data toegang</li>
+            </ul>
+
+            <div class="warning-box">
+                <strong>⚠️ Verboden Praktijken:</strong>
+                <ul>
+                    <li>Persoonlijke cloud accounts voor bedrijfsdata</li>
+                    <li>Onversleutelde USB-sticks voor gevoelige informatie</li>
+                    <li>Printen van vertrouwelijke documenten op thuis printers</li>
+                    <li>Screenshots van gevoelige data op persoonlijke apparaten</li>
+                </ul>
+            </div>
+
+            <h3>🚨 Incident Response & Melding</h3>
+            
+            <h4>📊 Data Breach Response</h4>
+            <ol>
+                <li><strong>Immediate containment:</strong> Stop verdere data toegang</li>
+                <li><strong>Impact assessment:</strong> Bepaal omvang en type gecompromitteerde data</li>
+                <li><strong>Notification:</strong> Meld binnen 72 uur aan toezichthouder</li>
+                <li><strong>Affected parties:</strong> Informeer betrokkenen binnen 72 uur</li>
+                <li><strong>Remediation:</strong> Implementeer corrigerende maatregelen</li>
+                <li><strong>Documentation:</strong> Volledig rapport voor compliance</li>
+            </ol>
+
+            <h4>📞 Escalatie Procedures</h4>
+            <ul>
+                <li><strong>Direct supervisor:</strong> Voor operationele vragen</li>
+                <li><strong>Data Protection Officer:</strong> Voor AVG/GDPR gerelateerde zaken</li>
+                <li><strong>IT Security team:</strong> security@euramax.eu voor technische incidenten</li>
+                <li><strong>Legal department:</strong> Voor juridische implicaties</li>
+                <li><strong>Management:</strong> Voor strategische besluiten</li>
+            </ul>
+
+            <h3>📋 Compliance & Auditing</h3>
+            
+            <h4>🔍 Regular Audits</h4>
+            <ul>
+                <li><strong>Access reviews:</strong> Kwartaalse controle van gebruikersrechten</li>
+                <li><strong>Data inventory:</strong> Jaarlijkse inventarisatie van gevoelige data</li>
+                <li><strong>Process audits:</strong> Verificatie van naleving van procedures</li>
+                <li><strong>Third-party assessments:</strong> Externe security evaluaties</li>
+            </ul>
+
+            <h4>📚 Training & Awareness</h4>
+            <ul>
+                <li><strong>Onboarding training:</strong> Verplichte training voor nieuwe medewerkers</li>
+                <li><strong>Annual refreshers:</strong> Jaarlijkse update training</li>
+                <li><strong>Role-specific training:</strong> Gespecialiseerde training per functie</li>
+                <li><strong>Incident simulations:</strong> Oefeningen voor emergency response</li>
+            </ul>
+
+            <div class="info-box">
+                <strong>💡 Euramax Data Protection Commitment:</strong> Wij hanteren een zero-tolerance beleid voor ongeautoriseerde data toegang. Alle data behandeling wordt gelogd en gemonitord. Medewerkers hebben de verantwoordelijkheid om privacy by design te implementeren in alle processen.
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="navigation">
+            <button class="btn" id="prevBtn" onclick="previousSection()" disabled>← Vorige</button>
+            <button class="btn" id="nextBtn" onclick="nextSection()">Volgende →</button>
+        </div>
+    </div>
+
+    <script src="cybersecurity-course.js"></script>
+</body>
+</html>

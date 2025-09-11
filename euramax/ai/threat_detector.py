@@ -79,7 +79,7 @@ class PhishingDetector:
         ]
         
         self.trusted_domains = {
-            "euramax.nl", "government.nl", "belastingdienst.nl",
+            "euramax.eu", "government.nl", "belastingdienst.nl",
             "ing.nl", "rabobank.nl", "abn-amro.nl"
         }
         
