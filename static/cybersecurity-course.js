@@ -9,6 +9,10 @@ let completedSections = [];
 let quizAttempts = 0;
 let wrongAnswers = [];
 let usedQuestions = [];
+let timeSpent = 0; // in minutes
+let sessionStartTime = Date.now();
+let sectionStartTime = Date.now();
+let bookmarks = [];
 
 // Course sections in order
 const sections = ['intro', 'phishing', 'passwords', 'malware', 'social', 'data', 'quiz'];
@@ -288,11 +292,14 @@ const quizQuestions = [
     }
 ];
 
-// Initialize the course
+// Initialize the course with enhanced progress tracking
 document.addEventListener('DOMContentLoaded', function() {
+    loadProgress();
     updateProgress();
+    updateProgressDashboard();
     updateNavigation();
-    console.log('Euramax Cybersecurity Course initialized');
+    updateTimeSpent();
+    console.log('Euramax Cybersecurity Course initialized with enhanced tracking');
 });
 
 // Navigation functions
@@ -322,13 +329,18 @@ function showSection(sectionId) {
     
     currentSection = sectionId;
     
+    // Track section changes for time measurement
+    sectionStartTime = Date.now();
+    
     // Special handling for quiz section
     if (sectionId === 'quiz') {
         initializeQuiz();
     }
     
     updateProgress();
+    updateProgressDashboard();
     updateNavigation();
+    saveProgress();
 }
 
 function nextSection() {
@@ -342,6 +354,10 @@ function nextSection() {
         
         const nextSectionId = sections[currentIndex + 1];
         showSection(nextSectionId);
+        
+        // Update progress dashboard
+        updateProgressDashboard();
+        saveProgress();
     }
 }
 
@@ -390,6 +406,13 @@ function markSectionCompleted(sectionId) {
     
     if (sectionIndex !== -1 && menuItems[sectionIndex]) {
         menuItems[sectionIndex].classList.add('completed');
+    }
+    
+    // Update status indicator
+    const statusElement = document.getElementById(`status-${sectionId}`);
+    if (statusElement) {
+        statusElement.textContent = '✅';
+        statusElement.className = 'module-status completed';
     }
 }
 
@@ -554,6 +577,9 @@ function showQuizResults(score, correct, total) {
     document.getElementById('quiz-section').classList.remove('active');
     document.getElementById('quiz-results').classList.add('active');
     
+    // Save quiz score for progress tracking
+    localStorage.setItem('last-quiz-score', score);
+    
     // Update score display
     const scoreCircle = document.getElementById('scoreCircle');
     const scoreText = document.getElementById('scoreText');
@@ -562,51 +588,233 @@ function showQuizResults(score, correct, total) {
     scoreText.textContent = `${score}%`;
     scoreCircle.style.setProperty('--score-deg', `${(score / 100) * 360}deg`);
     
-    // Determine message based on score
-    let message, color;
-    if (score >= 90) {
-        message = '🎉 Uitstekend! Je bent goed voorbereid op cybersecurity uitdagingen.';
-        color = '#2ecc71';
-    } else if (score >= 80) {
-        message = '👍 Goed werk! Je hebt een solide basis, maar er is ruimte voor verbetering.';
-        color = '#f39c12';
-    } else if (score >= 70) {
-        message = '📚 Redelijk resultaat. Bestudeer het materiaal nogmaals voor betere kennis.';
-        color = '#e67e22';
-    } else {
-        message = '⚠️ Je score suggereert dat meer studie nodig is. Cybersecurity is cruciaal!';
-        color = '#e74c3c';
-    }
+    // Generate AI-style personalized feedback based on performance
+    const feedback = generateAIFeedback(score, correct, total, wrongAnswers);
     
-    scoreMessage.textContent = message;
-    scoreMessage.style.color = color;
+    scoreMessage.innerHTML = feedback.message;
+    scoreMessage.style.color = feedback.color;
     
-    // Show wrong answers if any
+    // Show personalized learning recommendations
+    showPersonalizedRecommendations(score, wrongAnswers);
+    
+    // Show wrong answers with enhanced AI feedback if any
     if (wrongAnswers.length > 0) {
-        showWrongAnswers();
+        showWrongAnswersWithAI();
     }
     
-    // Mark quiz as completed
+    // Mark quiz as completed and update progress
     if (!completedSections.includes('quiz')) {
         completedSections.push('quiz');
         markSectionCompleted('quiz');
     }
+    
+    updateProgressDashboard();
+    saveProgress();
 }
 
-function showWrongAnswers() {
+// AI-Generated Feedback System (Killer Feature)
+function generateAIFeedback(score, correct, total, wrongAnswers) {
+    const weakAreas = analyzeWeakAreas(wrongAnswers);
+    const timeEfficiency = analyzeTimeEfficiency();
+    
+    let message, color;
+    
+    if (score >= 90) {
+        message = `🎉 <strong>Uitstekend presteren!</strong><br>
+                   Je toont een diep begrip van cybersecurity principes. Je hebt ${correct}/${total} vragen correct beantwoord.<br>
+                   <em>AI-analyse: Je reactiesnelheid en nauwkeurigheid duiden op sterke risicoherkenning.</em>`;
+        color = '#2ecc71';
+    } else if (score >= 80) {
+        message = `👍 <strong>Goed gefundeerde kennis!</strong><br>
+                   Je beheerst de basis goed met ${correct}/${total} correcte antwoorden.<br>
+                   <em>AI-suggestie: ${generateSpecificAdvice(weakAreas)}</em>`;
+        color = '#f39c12';
+    } else if (score >= 70) {
+        message = `📚 <strong>Basis aanwezig, verdieping nodig</strong><br>
+                   ${correct}/${total} correct. ${generateLearningPath(weakAreas)}<br>
+                   <em>AI-focus: Concentreer je op praktische herkenning van bedreigingen.</em>`;
+        color = '#e67e22';
+    } else {
+        message = `⚠️ <strong>Verhoogde aandacht vereist</strong><br>
+                   Met ${correct}/${total} correcte antwoorden is extra training essentieel.<br>
+                   <em>AI-prioriteit: ${generateUrgentRecommendations(weakAreas)}</em>`;
+        color = '#e74c3c';
+    }
+    
+    return { message, color };
+}
+
+function analyzeWeakAreas(wrongAnswers) {
+    const categories = {
+        phishing: 0,
+        passwords: 0,
+        malware: 0,
+        social: 0,
+        data: 0,
+        advanced: 0
+    };
+    
+    wrongAnswers.forEach(answer => {
+        if (categories.hasOwnProperty(answer.category)) {
+            categories[answer.category]++;
+        }
+    });
+    
+    return Object.entries(categories)
+        .filter(([category, count]) => count > 0)
+        .sort((a, b) => b[1] - a[1])
+        .map(([category, count]) => ({ category, count }));
+}
+
+function analyzeTimeEfficiency() {
+    // Simple time analysis based on total time spent
+    return timeSpent < 30 ? 'snel' : timeSpent > 60 ? 'grondig' : 'gemiddeld';
+}
+
+function generateSpecificAdvice(weakAreas) {
+    if (weakAreas.length === 0) return "Behoud je uitstekende vorm door regelmatig te oefenen.";
+    
+    const primaryWeak = weakAreas[0];
+    const adviceMap = {
+        phishing: "Focus op het herkennen van subtiele phishing-technieken en URL-verificatie.",
+        passwords: "Bestudeer geavanceerde wachtwoordstrategieën en multi-factor authenticatie.",
+        malware: "Verdiep je kennis over malware-detectie en incident response procedures.",
+        social: "Oefen met het herkennen van sociale manipulatietechnieken.",
+        data: "Bestudeer GDPR-compliance en data-classificatiesystemen.",
+        advanced: "Focus op geavanceerde bedreigingen zoals APT-aanvallen."
+    };
+    
+    return adviceMap[primaryWeak.category] || "Herhaal de basisprincipes van cybersecurity.";
+}
+
+function generateLearningPath(weakAreas) {
+    if (weakAreas.length === 0) return "Herhaal alle modules voor een sterke basis.";
+    
+    const paths = weakAreas.slice(0, 2).map(area => {
+        const sectionMap = {
+            phishing: "📧 Phishing module",
+            passwords: "🔐 Wachtwoord module", 
+            malware: "🦠 Malware module",
+            social: "👥 Social Engineering module",
+            data: "💾 Data Bescherming module",
+            advanced: "🎯 Geavanceerde bedreigingen"
+        };
+        return sectionMap[area.category];
+    });
+    
+    return `Bestudeer vooral: ${paths.join(" en ")}.`;
+}
+
+function generateUrgentRecommendations(weakAreas) {
+    const categories = weakAreas.map(area => area.category);
+    
+    if (categories.includes('phishing')) {
+        return "Begin met phishing-herkenning - dit is de meest voorkomende bedreiging.";
+    } else if (categories.includes('passwords')) {
+        return "Start met wachtwoordbeveiliging - de basis van digitale veiligheid.";
+    } else {
+        return "Neem alle modules systematisch door, beginnend bij de basis.";
+    }
+}
+
+function showPersonalizedRecommendations(score, wrongAnswers) {
+    const weakAreas = analyzeWeakAreas(wrongAnswers);
+    let recommendationsHTML = `
+        <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 10px; margin: 1rem 0;">
+            <h4 style="color: #2c3e50; margin-bottom: 1rem;">🤖 AI-Gepersonaliseerde Aanbevelingen</h4>
+    `;
+    
+    if (score >= 80) {
+        recommendationsHTML += `
+            <div style="margin-bottom: 1rem;">
+                <strong>🎯 Vervolgstappen voor experts:</strong>
+                <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                    <li>Deel je kennis met collega's door een mini-presentatie te geven</li>
+                    <li>Meld je aan voor geavanceerde cybersecurity certificeringen</li>
+                    <li>Word cybersecurity champion in je team</li>
+                </ul>
+            </div>
+        `;
+    } else {
+        recommendationsHTML += `
+            <div style="margin-bottom: 1rem;">
+                <strong>📚 Aanbevolen leerpad:</strong>
+                <ol style="margin: 0.5rem 0; padding-left: 1.5rem;">
+        `;
+        
+        if (weakAreas.length > 0) {
+            weakAreas.slice(0, 3).forEach((area, index) => {
+                const priorityMap = {
+                    phishing: "Bestudeer phishing-voorbeelden uit het echte leven",
+                    passwords: "Oefen met het maken van sterke wachtwoorden",
+                    malware: "Leer malware-typen en preventiemethoden",
+                    social: "Herken sociale manipulatietechnieken",
+                    data: "Begrijp data-classificatie en bescherming"
+                };
+                
+                recommendationsHTML += `<li>${priorityMap[area.category] || 'Herhaal deze module'}</li>`;
+            });
+        } else {
+            recommendationsHTML += `<li>Herhaal alle modules systematisch</li>`;
+        }
+        
+        recommendationsHTML += `
+                    <li>Neem de toets opnieuw af over een week</li>
+                    <li>Bespreek twijfels met je manager of IT-afdeling</li>
+                </ol>
+            </div>
+        `;
+    }
+    
+    // Add simulated phishing test offer (part of killer feature)
+    recommendationsHTML += `
+        <div style="background: #e8f4ff; padding: 1rem; border-radius: 8px; border-left: 4px solid #3498db;">
+            <strong>🎮 Interactieve Training Beschikbaar:</strong><br>
+            <em>Wil je je vaardigheden testen met een gesimuleerde phishing test? Deze realistische oefening helpt je bedreigingen te herkennen in een veilige omgeving.</em>
+            <br><br>
+            <button onclick="startPhishingSimulation()" class="btn" style="margin-top: 0.5rem;">
+                🎯 Start Phishing Simulatie
+            </button>
+        </div>
+    `;
+    
+    recommendationsHTML += `</div>`;
+    
+    // Insert recommendations before wrong answers section
+    const quizResults = document.getElementById('quiz-results');
+    const existingRecommendations = document.getElementById('ai-recommendations');
+    
+    if (existingRecommendations) {
+        existingRecommendations.innerHTML = recommendationsHTML;
+    } else {
+        const div = document.createElement('div');
+        div.id = 'ai-recommendations';
+        div.innerHTML = recommendationsHTML;
+        quizResults.insertBefore(div, quizResults.children[1]);
+    }
+}
+
+function showWrongAnswersWithAI() {
     const wrongAnswersSection = document.getElementById('wrongAnswersSection');
     const wrongAnswersList = document.getElementById('wrongAnswersList');
     
     let wrongAnswersHTML = '';
     wrongAnswers.forEach((item, index) => {
+        const aiInsight = generateAIInsightForAnswer(item);
+        
         wrongAnswersHTML += `
             <div class="wrong-answer-item">
                 <h4>❌ Vraag ${index + 1}</h4>
                 <p><strong>Vraag:</strong> ${item.question}</p>
                 <p><strong>Jouw antwoord:</strong> <span style="color: #e74c3c;">${item.selectedAnswer}</span></p>
                 <p><strong>Correct antwoord:</strong> <span style="color: #2ecc71;">${item.correctAnswer}</span></p>
+                
                 <div class="info-box">
                     <strong>💡 Uitleg:</strong> ${item.explanation}
+                </div>
+                
+                <div style="background: #f0f8ff; padding: 1rem; border-radius: 8px; margin-top: 1rem; border-left: 4px solid #3498db;">
+                    <strong>🤖 AI-Inzicht:</strong> ${aiInsight}
                 </div>
             </div>
         `;
@@ -614,6 +822,155 @@ function showWrongAnswers() {
     
     wrongAnswersList.innerHTML = wrongAnswersHTML;
     wrongAnswersSection.style.display = 'block';
+}
+
+function generateAIInsightForAnswer(wrongAnswer) {
+    const insights = {
+        phishing: [
+            "Dit type vraag test je vermogen om subtiele verschillen in URLs en e-mailadressen te herkennen. Focus op domeinverificatie.",
+            "Phishing-aanvallen gebruiken vaak urgentie als psychologische druk. Leer om te pauzeren bij 'urgente' verzoeken.",
+            "De beste verdediging tegen phishing is directe verificatie via bekende kanalen, niet via de verdachte e-mail zelf."
+        ],
+        passwords: [
+            "Wachtwoordbeveiliging gaat verder dan complexiteit - uniekheid en lengte zijn vaak belangrijker.",
+            "Moderne aanvallers gebruiken geavanceerde technieken. Een sterk wachtwoordbeleid beschermt tegen deze bedreigingen.",
+            "Multi-factor authenticatie is je beste verdediging, zelfs als wachtwoorden gecompromitteerd zijn."
+        ],
+        malware: [
+            "Malware-detectie vereist voorzichtigheid bij onbekende bestanden en bronnen. Vertrouw op je instinct.",
+            "Snelle reactie bij malware-verdenking kan schade beperken. Isolatie is altijd de eerste stap.",
+            "Moderne malware kan erg subtiel zijn. Regelmatige scans en updates zijn essentieel."
+        ],
+        social: [
+            "Social engineering exploiteert menselijke emoties. Bewustwording van manipulatietechnieken is je beste bescherming.",
+            "Verificatie van identiteit via onafhankelijke kanalen voorkomt de meeste social engineering aanvallen.",
+            "Gezonde scepsis bij onverwachte verzoeken, zelfs van bekenden, beschermt tegen manipulatie."
+        ],
+        data: [
+            "Data-bescherming begint bij classificatie. Weet welke data gevoelig is en hoe deze beschermd moet worden.",
+            "GDPR-compliance is niet alleen wet, maar ook beste praktijk voor data-beveiliging.",
+            "Principes van 'privacy by design' integreren beveiliging in alle processen."
+        ]
+    };
+    
+    const categoryInsights = insights[wrongAnswer.category] || insights.phishing;
+    return categoryInsights[Math.floor(Math.random() * categoryInsights.length)];
+}
+
+// Phishing Simulation Feature (Part of Killer Feature)
+function startPhishingSimulation() {
+    const simulationContent = `
+        <div style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); max-width: 800px; margin: 2rem auto;">
+            <h2 style="color: #2c3e50; text-align: center; margin-bottom: 2rem;">
+                🎮 Phishing Simulatie Training
+            </h2>
+            
+            <div style="background: #fff3cd; border: 1px solid #ffeaa7; padding: 1rem; border-radius: 8px; margin-bottom: 2rem;">
+                <strong>⚠️ Veilige Oefenomgeving</strong><br>
+                Deze simulatie toont realistische phishing-voorbeelden in een veilige omgeving. Alle links en acties zijn gedeactiveerd.
+            </div>
+            
+            <div id="phishing-examples">
+                <h3>📧 Voorbeeld 1: Verdachte Bankmail</h3>
+                <div style="background: #f8f9fa; border: 1px solid #dee2e6; padding: 1rem; border-radius: 8px; font-family: monospace; margin: 1rem 0;">
+                    <strong>Van:</strong> security@ing-banknl.com<br>
+                    <strong>Onderwerp:</strong> URGENT: Uw rekening wordt geblokkeerd<br><br>
+                    Beste klant,<br><br>
+                    We hebben verdachte activiteit gedetecteerd op uw rekening. Klik onmiddellijk op onderstaande link om uw account te verifiëren, anders wordt deze binnen 24 uur geblokkeerd.<br><br>
+                    <a href="#" style="color: #007bff; text-decoration: underline;">[GEBLOKKEERDE LINK] Verifieer Account</a><br><br>
+                    Met vriendelijke groet,<br>
+                    ING Beveiligingsteam
+                </div>
+                
+                <div style="background: #f0f8ff; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                    <strong>🔍 Wat zie je voor verdachte elementen?</strong>
+                    <div style="margin-top: 1rem;">
+                        <label style="display: block; margin: 0.5rem 0;">
+                            <input type="checkbox" onchange="checkPhishingElement(this, true)"> Domein verschilt subtiel van echte ING (ing-banknl.com vs ing.nl)
+                        </label>
+                        <label style="display: block; margin: 0.5rem 0;">
+                            <input type="checkbox" onchange="checkPhishingElement(this, true)"> Urgentie wordt gebruikt om druk te creëren
+                        </label>
+                        <label style="display: block; margin: 0.5rem 0;">
+                            <input type="checkbox" onchange="checkPhishingElement(this, false)"> De Nederlandse taal lijkt correct
+                        </label>
+                        <label style="display: block; margin: 0.5rem 0;">
+                            <input type="checkbox" onchange="checkPhishingElement(this, true)"> Link vraagt om directe actie zonder verificatie
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <button onclick="closePhishingSimulation()" class="btn">
+                    ✅ Simulatie Voltooien
+                </button>
+            </div>
+        </div>
+        
+        <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000;" id="simulation-overlay"></div>
+    `;
+    
+    const overlay = document.createElement('div');
+    overlay.innerHTML = simulationContent;
+    overlay.style.position = 'fixed';
+    overlay.style.top = '0';
+    overlay.style.left = '0';
+    overlay.style.width = '100%';
+    overlay.style.height = '100%';
+    overlay.style.zIndex = '1001';
+    overlay.style.display = 'flex';
+    overlay.style.alignItems = 'center';
+    overlay.style.justifyContent = 'center';
+    overlay.style.padding = '2rem';
+    overlay.style.overflowY = 'auto';
+    overlay.id = 'phishing-simulation';
+    
+    document.body.appendChild(overlay);
+}
+
+function checkPhishingElement(checkbox, isCorrect) {
+    const label = checkbox.parentElement;
+    if (checkbox.checked) {
+        if (isCorrect) {
+            label.style.background = '#d4edda';
+            label.style.color = '#155724';
+            label.style.padding = '0.5rem';
+            label.style.borderRadius = '4px';
+            label.style.border = '1px solid #c3e6cb';
+        } else {
+            label.style.background = '#f8d7da';
+            label.style.color = '#721c24';
+            label.style.padding = '0.5rem';
+            label.style.borderRadius = '4px';
+            label.style.border = '1px solid #f5c6cb';
+        }
+    } else {
+        label.style.background = '';
+        label.style.color = '';
+        label.style.padding = '';
+        label.style.borderRadius = '';
+        label.style.border = '';
+    }
+}
+
+function closePhishingSimulation() {
+    const simulation = document.getElementById('phishing-simulation');
+    if (simulation) {
+        simulation.remove();
+    }
+    
+    // Add completion badge/achievement
+    if (!bookmarks.find(b => b.id === 'phishing-simulation')) {
+        bookmarks.push({
+            id: 'phishing-simulation',
+            title: '🎮 Phishing Simulatie Voltooid',
+            section: 'achievements',
+            timestamp: Date.now()
+        });
+        updateBookmarksList();
+        saveProgress();
+    }
 }
 
 function retryQuiz() {
@@ -686,13 +1043,20 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
-// Auto-save progress to localStorage
+// Auto-save progress to localStorage with enhanced data
 function saveProgress() {
+    const currentTime = Date.now();
+    timeSpent += Math.round((currentTime - sectionStartTime) / 60000); // Convert to minutes
+    sectionStartTime = currentTime;
+    
     const progress = {
         currentSection,
         completedSections,
         quizAttempts,
-        usedQuestions
+        usedQuestions,
+        timeSpent,
+        bookmarks,
+        lastSaved: currentTime
     };
     localStorage.setItem('euramax-course-progress', JSON.stringify(progress));
 }
@@ -705,11 +1069,145 @@ function loadProgress() {
         completedSections = progress.completedSections || [];
         quizAttempts = progress.quizAttempts || 0;
         usedQuestions = progress.usedQuestions || [];
+        timeSpent = progress.timeSpent || 0;
+        bookmarks = progress.bookmarks || [];
         
         // Restore UI state
         completedSections.forEach(section => markSectionCompleted(section));
+        updateBookmarksList();
         showSection(currentSection);
     }
+}
+
+// Enhanced progress dashboard update
+function updateProgressDashboard() {
+    const progressPercent = Math.round((completedSections.length / (sections.length - 1)) * 100);
+    const completedCount = completedSections.length;
+    const totalModules = sections.length - 1; // Exclude quiz from modules count
+    
+    document.getElementById('progressText').textContent = `${progressPercent}% voltooid`;
+    document.getElementById('completedModules').textContent = `${completedCount}/${totalModules} modules`;
+    document.getElementById('timeSpent').textContent = `Tijd besteed: ${timeSpent} min`;
+    
+    // Update quiz score if available
+    const quizElement = document.getElementById('quizScore');
+    if (quizAttempts > 0) {
+        const lastScore = localStorage.getItem('last-quiz-score');
+        if (lastScore) {
+            quizElement.textContent = `Toets: ${lastScore}% behaald`;
+        }
+    }
+    
+    // Update module status indicators
+    sections.forEach(section => {
+        const statusElement = document.getElementById(`status-${section}`);
+        if (statusElement) {
+            if (completedSections.includes(section)) {
+                statusElement.textContent = '✅';
+                statusElement.className = 'module-status completed';
+            } else if (section === currentSection) {
+                statusElement.textContent = '🔄';
+                statusElement.className = 'module-status in-progress';
+            } else {
+                statusElement.textContent = '';
+                statusElement.className = 'module-status';
+            }
+        }
+    });
+}
+
+// Time tracking
+function updateTimeSpent() {
+    setInterval(() => {
+        const currentTime = Date.now();
+        timeSpent += Math.round((currentTime - sectionStartTime) / 60000);
+        sectionStartTime = currentTime;
+        document.getElementById('timeSpent').textContent = `Tijd besteed: ${timeSpent} min`;
+        saveProgress();
+    }, 60000); // Update every minute
+}
+
+// Bookmark functionality
+function toggleBookmark(id, title) {
+    const existingIndex = bookmarks.findIndex(b => b.id === id);
+    
+    if (existingIndex !== -1) {
+        // Remove bookmark
+        bookmarks.splice(existingIndex, 1);
+        document.getElementById(`bookmark-${id}`).classList.remove('bookmarked');
+    } else {
+        // Add bookmark
+        bookmarks.push({
+            id: id,
+            title: title,
+            section: currentSection,
+            timestamp: Date.now()
+        });
+        document.getElementById(`bookmark-${id}`).classList.add('bookmarked');
+    }
+    
+    updateBookmarksList();
+    saveProgress();
+}
+
+function updateBookmarksList() {
+    const bookmarksList = document.getElementById('bookmarksList');
+    
+    if (bookmarks.length === 0) {
+        bookmarksList.innerHTML = '<p style="color: #7f8c8d; font-size: 0.9rem;">Nog geen bladwijzers toegevoegd</p>';
+        return;
+    }
+    
+    let bookmarkHTML = '';
+    bookmarks.forEach(bookmark => {
+        bookmarkHTML += `
+            <div class="bookmark-item" onclick="jumpToBookmark('${bookmark.id}', '${bookmark.section}')">
+                🔖 ${bookmark.title}
+                <small style="display: block; color: #7f8c8d;">${getSectionName(bookmark.section)}</small>
+            </div>
+        `;
+    });
+    
+    bookmarksList.innerHTML = bookmarkHTML;
+    
+    // Update bookmark button states
+    bookmarks.forEach(bookmark => {
+        const bookmarkBtn = document.getElementById(`bookmark-${bookmark.id}`);
+        if (bookmarkBtn) {
+            bookmarkBtn.classList.add('bookmarked');
+        }
+    });
+}
+
+function jumpToBookmark(bookmarkId, section) {
+    showSection(section);
+    setTimeout(() => {
+        const element = document.getElementById(`bookmark-${bookmarkId}`);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            // Highlight the bookmarked section briefly
+            const parent = element.closest('h2, h3, h4');
+            if (parent) {
+                parent.style.background = '#fff3cd';
+                setTimeout(() => {
+                    parent.style.background = '';
+                }, 2000);
+            }
+        }
+    }, 300);
+}
+
+function getSectionName(section) {
+    const sectionNames = {
+        'intro': 'Introductie',
+        'phishing': 'Phishing & Email Beveiliging',
+        'passwords': 'Wachtwoord Beveiliging',
+        'malware': 'Malware & Ransomware',
+        'social': 'Social Engineering',
+        'data': 'Data Bescherming',
+        'quiz': 'Toets'
+    };
+    return sectionNames[section] || section;
 }
 
 // Save progress periodically

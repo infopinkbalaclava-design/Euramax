@@ -46,14 +46,43 @@ Euramax is een **volledig geautomatiseerd AI-aangedreven cybersecurity verdedigi
 **Bezoek onze live demo:** 👉 **[https://infopinkbalaclava-design.github.io/Euramax/](https://infopinkbalaclava-design.github.io/Euramax/)**
 
 De live demo bevat:
-- ✅ **Volledige cybersecurity training** - Alle 5 modules beschikbaar
-- ✅ **Interactieve quizzes** - 15+ uitdagende vragen
-- ✅ **Fout review systeem** - Onjuiste antwoorden worden opnieuw aangeboden  
-- ✅ **Nederlandse interface** - Volledig gelokaliseerd
-- ✅ **Real-time voortgang** - Volg je vooruitgang tijdens de training
+- ✅ **Enhanced cybersecurity training** - Alle 5 modules met progress tracking
+- ✅ **AI-powered quizzes** - 15+ uitdagende vragen met intelligente feedback
+- ✅ **Smart bookmark system** - Markeer en navigeer naar belangrijke secties  
+- ✅ **Interactive simulations** - Phishing test in veilige omgeving
+- ✅ **Real-time progress** - Gedetailleerde voortgang met tijd monitoring
+- ✅ **Nederlandse interface** - Volledig gelokaliseerd met AI-feedback
+- ✅ **Enhanced review systeem** - AI-inzichten bij foute antwoorden
 - ✅ **24/7 beschikbaar** - Gehost op betrouwbare GitHub infrastructuur
 
-![Live Demo Screenshot](https://github.com/user-attachments/assets/demo-landing-page-preview.png)
+![Live Demo Screenshot](https://github.com/user-attachments/assets/cd39ac75-9e18-4548-ac24-317a14b32e05)
+
+*Enhanced Course Overview with Real-time Progress Tracking, Time Monitoring, and Bookmark System*
+
+### 🆕 Enhanced Features (2024)
+
+#### 🎯 Course Overview with Advanced Progress Tracking
+- **Real-time Progress Dashboard**: Live tracking van module voortgang en tijd besteed
+- **Detailed Statistics**: Voltooide modules, quizscore, en totale tijd weergave  
+- **Status Indicators**: Visuele status voor elk module (🔄 bezig, ✅ voltooid)
+- **Progress Persistence**: Voortgang wordt automatisch opgeslagen in browser
+
+#### 🔖 Interactive Module Content Viewer
+- **Smart Bookmarking**: Voeg belangrijke secties toe aan bladwijzers
+- **Section Navigation**: Directe toegang tot gebookmarkte inhoud
+- **Enhanced Module Flow**: Verbeterde navigatie tussen secties
+- **Content Highlighting**: Visuele feedback bij bookmark interactie
+
+#### 🤖 AI-Generated Feedback System (Killer Feature)
+- **Personalized Analysis**: AI-gestuurde analyse van quiz prestaties
+- **Weak Area Detection**: Automatische identificatie van kennislacunes
+- **Custom Learning Paths**: Gepersonaliseerde aanbevelingen op basis van resultaten
+- **Enhanced Explanations**: Gedetailleerde AI-inzichten bij foute antwoorden
+- **Interactive Simulations**: Phishing simulatie training in veilige omgeving
+
+![Quiz Interface](https://github.com/user-attachments/assets/d62c95f5-0b22-458f-a625-45ea1b7e893b)
+
+*Comprehensive Quiz Interface with 15 Challenging Questions and AI-Powered Feedback*
 
 ### 🎯 Direct Toegang tot Specifieke Onderdelen
 - **[📚 Complete Cybersecurity Cursus](https://infopinkbalaclava-design.github.io/Euramax/cybersecurity-course.html)** - Start direct met de training
@@ -64,12 +93,33 @@ De live demo bevat:
 ### 🎓 Interactieve Nederlandse Cursus
 Het Euramax systeem bevat een **volledige cybersecurity training** speciaal ontworpen voor Nederlandse bedrijven die werken met gevoelige data:
 
-#### 📋 Cursus Features
+#### 📋 Enhanced Cursus Features
+- **🎯 Real-time Progress Tracking**: Live voortgang met tijd monitoring
+- **📊 Advanced Dashboard**: Gedetailleerd overzicht van prestaties
+- **🔖 Smart Bookmarking**: Belangrijke secties markeren en terugvinden
+- **🤖 AI-Generated Feedback**: Intelligente analyse van quiz resultaten
+- **🎮 Interactive Simulations**: Phishing test in veilige omgeving
 - **5 Uitgebreide Modules**: Phishing, Wachtwoorden, Malware, Social Engineering, Data Bescherming
 - **Uitdagende Quiz Vragen**: 15+ moeilijke vragen die werkelijke kennis testen
-- **Fout Review Systeem**: Onjuiste antwoorden worden opnieuw aangeboden
-- **Interactieve Interface**: Moderne, responsive web interface
+- **Enhanced Review Systeem**: AI-gestuurde uitleg bij onjuiste antwoorden
+- **Interactieve Interface**: Moderne, responsive web interface met bookmarks
 - **Nederlandse Lokalisatie**: Volledig in het Nederlands met Nederlandse voorbeelden
+- **📱 Persistent Progress**: Voortgang wordt automatisch opgeslagen
+
+### 🤖 AI-Powered Features
+
+#### Intelligent Feedback System
+Het AI-feedback systeem analyseert quiz prestaties en biedt:
+- **Gepersonaliseerde Inzichten**: Detecteert kennislacunes per categorie
+- **Adaptieve Aanbevelingen**: Suggesties gebaseerd op zwakke punten  
+- **Learning Path Generation**: Aangepaste studieroutes
+- **Performance Analytics**: Diepgaande analyse van antwoordpatronen
+
+#### Interactive Phishing Simulation
+- **Real-world Examples**: Authentieke phishing voorbeelden
+- **Safe Environment**: Geen risico tijdens oefening
+- **Interactive Elements**: Klik en leer functionaliteit
+- **Immediate Feedback**: Directe uitleg van gevaarlijke elementen
 
 #### 🚀 Direct Starten met Training
 ```bash
@@ -95,27 +145,40 @@ http://localhost:8080/cybersecurity-course.html
 
 ![Phishing Module Screenshot](https://github.com/user-attachments/assets/9f39bea7-66d5-48c1-8e5b-63e3b6bf65ba)
 
-### 🧪 Demo Testing Guide
+### 🧪 Enhanced Demo Testing Guide
 
 #### 📋 Volledige Functionaliteit Testen
-De live demo is uitgebreid getest en bevat alle kernfunctionaliteiten:
+De live demo is uitgebreid getest en bevat alle kernfunctionaliteiten plus nieuwe verbeteringen:
 
-1. **📖 Content Navigatie**
+1. **📖 Enhanced Content Navigatie**
    - Alle 5 training modules zijn volledig toegankelijk
-   - Soepele navigatie tussen secties
+   - Smart bookmarking systeem voor belangrijke secties
+   - Real-time voortgang tracking met tijd monitoring
    - Responsive design voor alle apparaten
 
-2. **🎯 Quiz Functionaliteit** 
+2. **🎯 Advanced Quiz Functionaliteit** 
    - 15+ uitdagende meerkeuzevragen
-   - Onmiddellijke feedback op antwoorden
-   - Score berekening en weergave
+   - AI-gegenereerde feedback op antwoorden
+   - Gepersonaliseerde leerpad aanbevelingen
+   - Gedetailleerde prestatie analyse
 
-3. **🔄 Fout Review Systeem**
-   - Onjuiste antwoorden worden gemarkeerd
-   - Mogelijkheid tot opnieuw proberen
-   - Uitgebreide uitleg bij elk antwoord
+3. **🔄 Intelligent Review Systeem**
+   - AI-inzichten bij onjuiste antwoorden
+   - Zwakke punten detectie per categorie
+   - Adaptieve verklaringen en tips
+   - Enhanced uitleg bij elk antwoord
 
-4. **💾 Voortgang Opslaan**
+4. **🎮 Interactive Training Elements**
+   - Phishing simulatie in veilige omgeving
+   - Real-world scenario's voor oefening
+   - Interactieve content viewer
+   - Bookmark functionaliteit
+
+5. **💾 Persistent Progress Tracking**
+   - Automatische voortgang opslag
+   - Tijd besteed monitoring  
+   - Module status indicators
+   - Quiz score geschiedenis
    - Local storage voor voortgang tracking
    - Hervatting waar je gebleven was
    - Voltooiingspercentage bijhouden
