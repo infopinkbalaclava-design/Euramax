@@ -1,9 +1,0 @@
-# Core Web Framework - minimal for testing
-fastapi==0.104.1
-uvicorn[standard]==0.24.0
-pydantic==2.5.0
-
-# Basic dependencies for course functionality
-python-dotenv==1.0.0
-structlog==23.2.0
-aiofiles==23.2.1
