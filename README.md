@@ -43,7 +43,7 @@ Euramax is een **volledig geautomatiseerd AI-aangedreven cybersecurity verdedigi
 ## 🌟 Live Demo
 
 ### 🚀 Probeer de Training Direct Online
-**Bezoek onze live demo:** 👉 **[https://infopinkbalaclava-design.github.io/Euramax/](https://infopinkbalaclava-design.github.io/Euramax/)**
+**Bezoek onze live demo:** 👉 **[https://infopinkbalaclava-design.github.io/Euramax/static/cybersecurity-course.html](https://infopinkbalaclava-design.github.io/Euramax/static/cybersecurity-course.html)**
 
 De live demo bevat:
 - ✅ **Enhanced cybersecurity training** - Alle 5 modules met progress tracking
@@ -55,7 +55,7 @@ De live demo bevat:
 - ✅ **Enhanced review systeem** - AI-inzichten bij foute antwoorden
 - ✅ **24/7 beschikbaar** - Gehost op betrouwbare GitHub infrastructuur
 
-![Live Demo Screenshot](https://github.com/user-attachments/assets/cd39ac75-9e18-4548-ac24-317a14b32e05)
+![Live Demo Screenshot](https://github.com/user-attachments/assets/2be417c9-32b0-4b29-80be-370e7ebb2018)
 
 *Enhanced Course Overview with Real-time Progress Tracking, Time Monitoring, and Bookmark System*
 
@@ -80,13 +80,13 @@ De live demo bevat:
 - **Enhanced Explanations**: Gedetailleerde AI-inzichten bij foute antwoorden
 - **Interactive Simulations**: Phishing simulatie training in veilige omgeving
 
-![Quiz Interface](https://github.com/user-attachments/assets/d62c95f5-0b22-458f-a625-45ea1b7e893b)
+![Quiz Interface](https://github.com/user-attachments/assets/fad874bc-3e10-4f92-83bf-94da821aa191)
 
 *Comprehensive Quiz Interface with 15 Challenging Questions and AI-Powered Feedback*
 
 ### 🎯 Direct Toegang tot Specifieke Onderdelen
-- **[📚 Complete Cybersecurity Cursus](https://infopinkbalaclava-design.github.io/Euramax/cybersecurity-course.html)** - Start direct met de training
-- **[📊 Dashboard Interface](https://infopinkbalaclava-design.github.io/Euramax/dashboard.html)** - Bekijk het monitoring dashboard
+- **[📚 Complete Cybersecurity Cursus](https://infopinkbalaclava-design.github.io/Euramax/static/cybersecurity-course.html)** - Start direct met de training
+- **[📊 Dashboard Interface](https://infopinkbalaclava-design.github.io/Euramax/static/dashboard.html)** - Bekijk het monitoring dashboard
 
 ## 📚 Cybersecurity Training
 
