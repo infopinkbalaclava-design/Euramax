@@ -202,6 +202,26 @@
             color: white;
         }
 
+        .menu-item.demo-btn {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            font-weight: bold;
+            border: 2px solid #c0392b;
+            animation: pulse-demo 2s infinite;
+        }
+
+        .menu-item.demo-btn:hover {
+            background: linear-gradient(135deg, #c0392b, #a93226);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+        }
+
+        @keyframes pulse-demo {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
         .quiz-section {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 15px;
@@ -362,6 +382,7 @@
             <button class="menu-item" onclick="showSection('social')">👥 Social Engineering</button>
             <button class="menu-item" onclick="showSection('data')">💾 Data Bescherming</button>
             <button class="menu-item" onclick="showSection('quiz')">📝 Toets</button>
+            <button class="menu-item demo-btn" onclick="window.open('phishing-simulation-demo.html', '_blank')">🤖 Live AI Demo</button>
         </div>
 
         <!-- Introduction Section -->
