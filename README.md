@@ -53,11 +53,29 @@ De live demo bevat:
 - ✅ **Real-time voortgang** - Volg je vooruitgang tijdens de training
 - ✅ **24/7 beschikbaar** - Gehost op betrouwbare GitHub infrastructuur
 
-![Live Demo Screenshot](https://github.com/user-attachments/assets/demo-landing-page-preview.png)
+![Live Demo Screenshot](https://github.com/user-attachments/assets/b5ff5db3-c675-4fd1-8058-d6fb1a33df25)
 
 ### 🎯 Direct Toegang tot Specifieke Onderdelen
 - **[📚 Complete Cybersecurity Cursus](https://infopinkbalaclava-design.github.io/Euramax/cybersecurity-course.html)** - Start direct met de training
 - **[📊 Dashboard Interface](https://infopinkbalaclava-design.github.io/Euramax/dashboard.html)** - Bekijk het monitoring dashboard
+
+### 📸 Stap-voor-Stap Visuele Gids
+
+#### 1. 🏠 Homepage & Navigatie
+![Live Demo Screenshot](https://github.com/user-attachments/assets/b5ff5db3-c675-4fd1-8058-d6fb1a33df25)
+*De homepage toont alle 5 trainingsmodules, voortgangsregistratie en Nederlandse interface*
+
+#### 2. 📧 Phishing Training Module  
+![Cybersecurity Training Screenshot](https://github.com/user-attachments/assets/e5539664-603b-43f6-b659-e2e1f1cf9793)
+*Uitgebreide phishing training met praktische voorbeelden en herkenningsrichtlijnen*
+
+#### 3. 📝 Interactieve Kennistoets
+![Quiz Interface Screenshot](https://github.com/user-attachments/assets/bfcb0903-dc48-4e8b-9e76-aded1b71d6a1)
+*15 uitdagende vragen met directe feedback en uitgebreide uitleg*
+
+#### 4. 📊 Live Monitoring Dashboard
+![Dashboard Interface Screenshot](https://github.com/user-attachments/assets/06ad8915-c822-4703-9a68-13a736add5d8)
+*Real-time beveiligingsmonitoring met AI-status en bedreigingsstatistieken*
 
 ## 📚 Cybersecurity Training
 
@@ -81,8 +99,6 @@ python3 -m http.server 8080 --directory static
 http://localhost:8080/cybersecurity-course.html
 ```
 
-![Cybersecurity Training Screenshot](https://github.com/user-attachments/assets/4df2b054-84c3-4846-977a-4c26f436b135)
-
 #### 📝 Training Modules Overzicht
 1. **📧 Phishing & Email Beveiliging** (20 min) - Herkenning phishing aanvallen
 2. **🔐 Wachtwoord Beveiliging** (15 min) - Beste praktijken voor wachtwoorden  
@@ -90,10 +106,6 @@ http://localhost:8080/cybersecurity-course.html
 4. **👥 Social Engineering** (15 min) - Sociale manipulatie technieken
 5. **💾 Data Bescherming** (20 min) - GDPR/AVG compliance en data veiligheid
 6. **📝 Kennistoets** (30 min) - 15 uitdagende vragen over alle onderwerpen
-
-![Quiz Interface Screenshot](https://github.com/user-attachments/assets/7ca635e9-bb20-4fee-be13-869366c36549)
-
-![Phishing Module Screenshot](https://github.com/user-attachments/assets/9f39bea7-66d5-48c1-8e5b-63e3b6bf65ba)
 
 ### 🧪 Demo Testing Guide
 
