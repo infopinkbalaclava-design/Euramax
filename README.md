@@ -53,7 +53,7 @@ De live demo bevat:
 - ✅ **Real-time voortgang** - Volg je vooruitgang tijdens de training
 - ✅ **24/7 beschikbaar** - Gehost op betrouwbare GitHub infrastructuur
 
-![Live Demo Screenshot](https://github.com/user-attachments/assets/demo-landing-page-preview.png)
+![Live Demo Screenshot](https://github.com/user-attachments/assets/3925cb09-3fd9-4ade-947d-4c4070103475)
 
 ### 🎯 Direct Toegang tot Specifieke Onderdelen
 - **[📚 Complete Cybersecurity Cursus](https://infopinkbalaclava-design.github.io/Euramax/cybersecurity-course.html)** - Start direct met de training
@@ -81,7 +81,7 @@ python3 -m http.server 8080 --directory static
 http://localhost:8080/cybersecurity-course.html
 ```
 
-![Cybersecurity Training Screenshot](https://github.com/user-attachments/assets/4df2b054-84c3-4846-977a-4c26f436b135)
+![Cybersecurity Training Screenshot](https://github.com/user-attachments/assets/3925cb09-3fd9-4ade-947d-4c4070103475)
 
 #### 📝 Training Modules Overzicht
 1. **📧 Phishing & Email Beveiliging** (20 min) - Herkenning phishing aanvallen
@@ -91,9 +91,9 @@ http://localhost:8080/cybersecurity-course.html
 5. **💾 Data Bescherming** (20 min) - GDPR/AVG compliance en data veiligheid
 6. **📝 Kennistoets** (30 min) - 15 uitdagende vragen over alle onderwerpen
 
-![Quiz Interface Screenshot](https://github.com/user-attachments/assets/7ca635e9-bb20-4fee-be13-869366c36549)
+![Quiz Interface Screenshot](https://github.com/user-attachments/assets/f1bd420d-aa52-404e-9149-b56efec596c8)
 
-![Phishing Module Screenshot](https://github.com/user-attachments/assets/9f39bea7-66d5-48c1-8e5b-63e3b6bf65ba)
+![Phishing Module Screenshot](https://github.com/user-attachments/assets/e928d1bb-02f6-4283-bc63-083346095a06)
 
 ### 🧪 Demo Testing Guide
 
@@ -237,29 +237,26 @@ gunicorn -w 4 -k uvicorn.workers.UvicornWorker euramax.main:app
 # Start training webserver
 python3 -m http.server 8080 --directory static
 
-# Test training interface
-curl -I http://localhost:8080/cybersecurity-course.html
-# Expected: HTTP/1.0 200 OK
-
-# Open in browser voor volledige ervaring
-# http://localhost:8080/cybersecurity-course.html
+# Test training interface (local development)
+python3 -m http.server 8080 --directory static
+# Then visit: http://localhost:8080/cybersecurity-course.html
 ```
 
 #### Test Backend API (bij volledige installatie)
 ```bash
-# Test systeem status
+# Test systeem status (requires running backend)
 curl http://localhost:8000/health
 
-# Test phishing detectie
+# Test phishing detectie (example)
 curl -X POST "http://localhost:8000/api/v1/security/analyze/email" \
   -H "Content-Type: application/json" \
   -d '{
-    "email_content": "Urgent! Verifieer uw account: http://verdachte-link.com",
-    "sender": "security@nep-bank.nl",
+    "email_content": "Urgent! Verifieer uw account",
+    "sender": "security@example.com",
     "subject": "URGENT: Account Verificatie Vereist"
   }'
 
-# Test course API
+# Test course API (example)
 curl http://localhost:8000/api/v1/course/modules
 ```
 
@@ -564,9 +561,9 @@ Dit project is gelicentieerd onder de MIT License - zie het [LICENSE](LICENSE) b
 
 ## 📞 Contact & Ondersteuning
 
-- **Email**: security@euramax.eu
+- **Email**: Voor vragen over cybersecurity training
 - **GitHub Issues**: [Issue Tracker](https://github.com/infopinkbalaclava-design/Euramax/issues)
-- **Documentatie**: [Volledige Docs](https://docs.euramax.eu)
+- **Documentatie**: [README.md](README.md) | [DOCS.md](DOCS.md) | [COURSE_DOCS.md](COURSE_DOCS.md)
 
 ## 🏆 Acknowledgments
 
