@@ -30,25 +30,25 @@ class Settings(BaseSettings):
     # Email & Notificatie Configuratie
     smtp_host: str = "localhost"
     smtp_port: int = 587
-    smtp_user: str = "admin@euramax.nl"
+    smtp_user: str = "admin@euramax.eu"
     smtp_password: str = "password"
-    email_from: str = "noreply@euramax.nl"
+    email_from: str = "noreply@euramax.eu"
     
     # Push Notificatie Configuratie
     push_service_key: Optional[str] = None
-    notification_webhook_url: str = "https://api.euramax.nl/notifications"
+    notification_webhook_url: str = "https://api.euramax.eu/notifications"
     
     # AI Model Configuratie
     ai_model_path: str = "./models/"
     threat_detection_threshold: float = 0.85
-    phishing_model_endpoint: str = "https://api.euramax.nl/ai/phishing"
+    phishing_model_endpoint: str = "https://api.euramax.eu/ai/phishing"
     
     # Nederlandse Taal Configuratie
     dutch_language_model: str = "nl_core_news_sm"
     localization_path: str = "./locales/nl/"
     
     # CORS & API Configuratie
-    cors_origins: List[str] = ["http://localhost:3000", "https://app.euramax.nl"]
+    cors_origins: List[str] = ["http://localhost:3000", "https://app.euramax.eu"]
     rate_limit_per_minute: int = 100
     max_email_size_mb: int = 25
     

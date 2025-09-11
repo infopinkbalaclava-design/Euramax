@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nederlandse Cybersecurity Cursus - Euramax</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .course-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            margin-bottom: 2rem;
+        }
+        
+        .module-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .module-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 4px solid #3498db;
+            cursor: pointer;
+        }
+        
+        .module-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .module-card.completed {
+            border-left-color: #27ae60;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9f7ef 100%);
+        }
+        
+        .module-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        
+        .module-title {
+            color: #2c3e50;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .module-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-bottom: 1rem;
+        }
+        
+        .difficulty-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .difficulty-beginner { background: #d4edda; color: #155724; }
+        .difficulty-intermediate { background: #fff3cd; color: #856404; }
+        .difficulty-advanced { background: #f8d7da; color: #721c24; }
+        
+        .module-description {
+            color: #5a6c7d;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+        
+        .module-objectives {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .objectives-list {
+            list-style: none;
+            margin-top: 0.5rem;
+        }
+        
+        .objectives-list li {
+            padding: 0.25rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .objectives-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #ecf0f1;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #27ae60, #2ecc71);
+            transition: width 0.3s ease;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            margin: 0.25rem 0.5rem 0.25rem 0;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+        }
+        
+        .btn-warning {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+        }
+        
+        .quiz-container {
+            display: none;
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 1rem;
+        }
+        
+        .question-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #3498db;
+        }
+        
+        .question-text {
+            font-size: 1.1rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .option:hover {
+            border-color: #3498db;
+            background: #f8f9fa;
+        }
+        
+        .option.selected {
+            border-color: #3498db;
+            background: #e3f2fd;
+        }
+        
+        .option input[type="radio"] {
+            margin-right: 0.75rem;
+            transform: scale(1.2);
+        }
+        
+        .user-progress {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+        
+        .progress-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #3498db;
+            display: block;
+        }
+        
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        
+        .feedback-container {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            border-left: 4px solid #3498db;
+        }
+        
+        .feedback-success {
+            border-left-color: #27ae60;
+            background: #d4edda;
+        }
+        
+        .feedback-warning {
+            border-left-color: #f39c12;
+            background: #fff3cd;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #7f8c8d;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover {
+            color: #333;
+        }
+        
+        .content-section {
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .content-section h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .content-section h2 {
+            color: #34495e;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .content-section h3 {
+            color: #5a6c7d;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .module-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .module-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .progress-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>
+            <span style="font-size: 1.5rem;">🇳🇱</span>
+            Nederlandse Cybersecurity Cursus
+            <span style="font-size: 1rem; color: #7f8c8d; margin-left: auto;">Euramax</span>
+        </h1>
+    </div>
+
+    <div class="container">
+        <!-- User Progress Section -->
+        <div id="userProgress" class="user-progress">
+            <h2 style="color: #2c3e50; margin-bottom: 1rem;">📊 Jouw Voortgang</h2>
+            <div class="progress-bar">
+                <div id="overallProgress" class="progress-fill" style="width: 0%;"></div>
+            </div>
+            <div class="progress-stats">
+                <div class="stat-item">
+                    <span id="completionPercentage" class="stat-value">0%</span>
+                    <div class="stat-label">Voltooid</div>
+                </div>
+                <div class="stat-item">
+                    <span id="completedModules" class="stat-value">0/6</span>
+                    <div class="stat-label">Modules</div>
+                </div>
+                <div class="stat-item">
+                    <span id="averageScore" class="stat-value">0%</span>
+                    <div class="stat-label">Gemiddelde Score</div>
+                </div>
+                <div class="stat-item">
+                    <span id="totalTime" class="stat-value">0</span>
+                    <div class="stat-label">Minuten Besteed</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Course Overview -->
+        <div class="course-card">
+            <h1 style="color: #2c3e50; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                🛡️ Nederlandse Cybersecurity Cursus voor Werknemers
+            </h1>
+            <p style="color: #5a6c7d; font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.5rem;">
+                Een uitgebreide interactieve cursus over cybersecurity best practices voor werknemers die met gevoelige bedrijfsdata werken. 
+                Leer essentiële vaardigheden om jezelf en je organisatie te beschermen tegen cyberbedreigingen.
+            </p>
+            
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem;">
+                <div style="background: #e3f2fd; padding: 0.75rem 1rem; border-radius: 8px; color: #1976d2;">
+                    <strong>⏱️ 2 uur totaal</strong>
+                </div>
+                <div style="background: #f3e5f5; padding: 0.75rem 1rem; border-radius: 8px; color: #7b1fa2;">
+                    <strong>📚 6 modules</strong>
+                </div>
+                <div style="background: #e8f5e8; padding: 0.75rem 1rem; border-radius: 8px; color: #388e3c;">
+                    <strong>🏆 Certificaat</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modules Section -->
+        <div id="modulesContainer" class="module-grid">
+            <!-- Modules will be loaded here -->
+        </div>
+    </div>
+
+    <!-- Module Content Modal -->
+    <div id="moduleModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="moduleContent">
+                <!-- Module content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz Modal -->
+    <div id="quizModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="quizContent">
+                <!-- Quiz content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let currentUser = 'demo_user';
+        let courseData = {};
+        let currentModule = null;
+        let currentQuiz = null;
+        let userProgress = {};
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeApp();
+        });
+
+        async function initializeApp() {
+            try {
+                // Load course data
+                await loadCourseData();
+                await loadUserProgress();
+                renderModules();
+                updateProgressDisplay();
+            } catch (error) {
+                console.error('Error initializing app:', error);
+                showError('Fout bij het laden van de cursus. Probeer de pagina te verversen.');
+            }
+        }
+
+        async function loadCourseData() {
+            const response = await fetch('/api/v1/course/');
+            courseData = await response.json();
+        }
+
+        async function loadUserProgress() {
+            try {
+                const response = await fetch(`/api/v1/course/progress/${currentUser}`);
+                userProgress = await response.json();
+            } catch (error) {
+                console.log('No existing progress found, starting fresh');
+                userProgress = {
+                    completion_percentage: 0,
+                    completed_modules: 0,
+                    total_modules: 6,
+                    average_score: 0,
+                    modules_progress: {}
+                };
+            }
+        }
+
+        function updateProgressDisplay() {
+            document.getElementById('overallProgress').style.width = userProgress.completion_percentage + '%';
+            document.getElementById('completionPercentage').textContent = userProgress.completion_percentage + '%';
+            document.getElementById('completedModules').textContent = `${userProgress.completed_modules}/${userProgress.total_modules}`;
+            document.getElementById('averageScore').textContent = userProgress.average_score + '%';
+            
+            // Calculate total time
+            let totalTime = 0;
+            if (userProgress.modules_progress) {
+                totalTime = Object.values(userProgress.modules_progress)
+                    .reduce((sum, progress) => sum + (progress.time_spent || 0), 0);
+            }
+            document.getElementById('totalTime').textContent = totalTime;
+        }
+
+        async function renderModules() {
+            const container = document.getElementById('modulesContainer');
+            container.innerHTML = '';
+
+            for (const module of courseData.modules) {
+                const moduleProgress = userProgress.modules_progress[module.id];
+                const isCompleted = moduleProgress && moduleProgress.completed;
+                const score = moduleProgress ? moduleProgress.quiz_score : null;
+
+                const moduleCard = document.createElement('div');
+                moduleCard.className = `module-card ${isCompleted ? 'completed' : ''}`;
+                
+                moduleCard.innerHTML = `
+                    <div class="module-header">
+                        <div>
+                            <div class="module-title">${module.titel}</div>
+                            <div class="module-meta">
+                                <span>⏱️ ${module.geschatte_duur} min</span>
+                                <span>❓ ${module.aantal_quiz_vragen} vragen</span>
+                                <span class="difficulty-badge difficulty-${module.moeilijkheidsgraad}">
+                                    ${module.moeilijkheidsgraad}
+                                </span>
+                            </div>
+                        </div>
+                        <div style="text-align: right;">
+                            ${isCompleted ? 
+                                `<div style="color: #27ae60; font-size: 1.5rem;">✅</div>
+                                 <div style="color: #27ae60; font-size: 0.9rem;">Score: ${score}%</div>` : 
+                                '<div style="color: #95a5a6; font-size: 1.5rem;">⏳</div>'
+                            }
+                        </div>
+                    </div>
+                    
+                    <div class="module-description">
+                        ${module.beschrijving}
+                    </div>
+                    
+                    <div style="margin-top: 1rem;">
+                        <button class="btn" onclick="openModule('${module.id}')">
+                            📖 Bekijk Inhoud
+                        </button>
+                        <button class="btn btn-secondary" onclick="startQuiz('${module.id}')">
+                            🧪 Start Quiz
+                        </button>
+                        ${!isCompleted && moduleProgress && moduleProgress.quiz_score < 80 ? 
+                            `<button class="btn btn-warning" onclick="showImprovement('${module.id}')">
+                                📈 Verbeteren
+                            </button>` : ''
+                        }
+                    </div>
+                `;
+                
+                container.appendChild(moduleCard);
+            }
+        }
+
+        async function openModule(moduleId) {
+            try {
+                const response = await fetch(`/api/v1/course/modules/${moduleId}`);
+                currentModule = await response.json();
+                
+                const modal = document.getElementById('moduleModal');
+                const content = document.getElementById('moduleContent');
+                
+                content.innerHTML = `
+                    <h1>${currentModule.titel}</h1>
+                    <p style="color: #7f8c8d; margin-bottom: 2rem;">${currentModule.beschrijving}</p>
+                    
+                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; margin-bottom: 2rem;">
+                        <h3 style="color: #2c3e50; margin-bottom: 1rem;">🎯 Leerdoelen</h3>
+                        <ul style="padding-left: 1.5rem;">
+                            ${currentModule.leerdoelen.map(objective => `<li style="margin-bottom: 0.5rem;">${objective}</li>`).join('')}
+                        </ul>
+                    </div>
+                    
+                    <div class="content-sections">
+                        ${currentModule.inhoud.map(section => {
+                            if (section.startsWith('#')) {
+                                const level = section.match(/^#+/)[0].length;
+                                const text = section.replace(/^#+\s*/, '');
+                                return `<h${level} style="color: #2c3e50; margin-top: 1.5rem; margin-bottom: 1rem;">${text}</h${level}>`;
+                            } else if (section.startsWith('**') && section.endsWith('**')) {
+                                return `<h4 style="color: #34495e; margin-top: 1rem; margin-bottom: 0.5rem;">${section.slice(2, -2)}</h4>`;
+                            } else if (section.startsWith('✅') || section.startsWith('❌') || section.startsWith('🚩')) {
+                                return `<div style="background: #f8f9fa; padding: 0.75rem; margin: 0.5rem 0; border-radius: 6px; border-left: 3px solid #3498db;">${section}</div>`;
+                            } else {
+                                return `<p style="margin-bottom: 1rem; line-height: 1.6;">${section}</p>`;
+                            }
+                        }).join('')}
+                    </div>
+                    
+                    <div style="margin-top: 2rem; text-align: center;">
+                        <button class="btn btn-success" onclick="closeModal('moduleModal'); startQuiz('${moduleId}')">
+                            🧪 Start Quiz voor Deze Module
+                        </button>
+                    </div>
+                `;
+                
+                modal.style.display = 'block';
+            } catch (error) {
+                console.error('Error loading module:', error);
+                showError('Fout bij het laden van de module inhoud.');
+            }
+        }
+
+        async function startQuiz(moduleId) {
+            try {
+                const response = await fetch(`/api/v1/course/modules/${moduleId}/quiz`);
+                currentQuiz = await response.json();
+                
+                const modal = document.getElementById('quizModal');
+                const content = document.getElementById('quizContent');
+                
+                content.innerHTML = `
+                    <h1>📋 Quiz: ${currentQuiz.module_titel}</h1>
+                    <p style="color: #7f8c8d; margin-bottom: 2rem;">
+                        ${currentQuiz.totaal_vragen} vragen • ${currentQuiz.totaal_punten} punten totaal • Slagingsgrens: 80%
+                    </p>
+                    
+                    <form id="quizForm">
+                        ${currentQuiz.vragen.map((question, index) => `
+                            <div class="question-card">
+                                <div class="question-text">
+                                    ${index + 1}. ${question.vraag_tekst}
+                                    <span style="color: #7f8c8d; font-size: 0.9rem;">(${question.punten} punt${question.punten > 1 ? 'en' : ''})</span>
+                                </div>
+                                <div class="options-container">
+                                    ${question.opties.map((option, optionIndex) => `
+                                        <label class="option" onclick="selectOption(this)">
+                                            <input type="radio" name="question_${question.id}" value="${optionIndex}" required>
+                                            ${option}
+                                        </label>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </form>
+                    
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <button class="btn btn-success" onclick="submitQuiz('${moduleId}')">
+                            ✅ Quiz Inzenden
+                        </button>
+                        <button class="btn btn-secondary" onclick="closeModal('quizModal')">
+                            ❌ Annuleren
+                        </button>
+                    </div>
+                `;
+                
+                modal.style.display = 'block';
+            } catch (error) {
+                console.error('Error loading quiz:', error);
+                showError('Fout bij het laden van de quiz.');
+            }
+        }
+
+        function selectOption(label) {
+            // Remove selected class from other options in the same question
+            const questionCard = label.closest('.question-card');
+            questionCard.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+            
+            // Add selected class to clicked option
+            label.classList.add('selected');
+        }
+
+        async function submitQuiz(moduleId) {
+            try {
+                const form = document.getElementById('quizForm');
+                const formData = new FormData(form);
+                
+                // Convert form data to required format
+                const answers = {};
+                for (let [key, value] of formData.entries()) {
+                    const questionId = key.replace('question_', '');
+                    answers[questionId] = parseInt(value);
+                }
+                
+                const submission = {
+                    user_id: currentUser,
+                    module_id: moduleId,
+                    answers: answers
+                };
+                
+                const response = await fetch(`/api/v1/course/modules/${moduleId}/quiz/submit`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(submission)
+                });
+                
+                const result = await response.json();
+                showQuizResults(result);
+                
+                // Refresh progress
+                await loadUserProgress();
+                updateProgressDisplay();
+                renderModules();
+                
+            } catch (error) {
+                console.error('Error submitting quiz:', error);
+                showError('Fout bij het indienen van de quiz.');
+            }
+        }
+
+        function showQuizResults(result) {
+            const content = document.getElementById('quizContent');
+            const passed = result.geslaagd;
+            
+            content.innerHTML = `
+                <h1>${passed ? '🎉 Gefeliciteerd!' : '📚 Quiz Resultaat'}</h1>
+                
+                <div class="feedback-container ${passed ? 'feedback-success' : 'feedback-warning'}">
+                    <h2 style="margin-bottom: 1rem;">${result.module_titel}</h2>
+                    <div style="font-size: 1.2rem; margin-bottom: 1rem;">
+                        <strong>Score: ${result.score}%</strong> 
+                        ${passed ? '(Geslaagd ✅)' : '(Niet geslaagd ❌)'}
+                    </div>
+                    <p>
+                        ${result.fout_beantwoorde_vragen} van ${result.totaal_vragen} vragen fout beantwoord
+                    </p>
+                </div>
+                
+                ${result.feedback ? `
+                    <div style="margin-top: 2rem;">
+                        <h3 style="color: #2c3e50; margin-bottom: 1rem;">💡 Feedback</h3>
+                        <p style="margin-bottom: 1rem;">${result.feedback.bericht}</p>
+                        
+                        ${result.feedback.verbeteringspunten && result.feedback.verbeteringspunten.length > 0 ? `
+                            <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px;">
+                                <h4 style="margin-bottom: 1rem;">📖 Bestudeer opnieuw:</h4>
+                                ${result.feedback.verbeteringspunten.map(point => `<p style="margin-bottom: 0.5rem;">${point}</p>`).join('')}
+                            </div>
+                        ` : ''}
+                    </div>
+                ` : ''}
+                
+                <div style="text-align: center; margin-top: 2rem;">
+                    ${passed ? `
+                        <button class="btn btn-success" onclick="closeModal('quizModal')">
+                            🎯 Ga Door Naar Volgende Module
+                        </button>
+                    ` : `
+                        <button class="btn btn-warning" onclick="retryQuiz('${result.module_id || moduleId}')">
+                            🔄 Probeer Opnieuw
+                        </button>
+                        <button class="btn btn-secondary" onclick="showImprovement('${result.module_id || moduleId}')">
+                            📈 Bekijk Verbeteringen
+                        </button>
+                    `}
+                    <button class="btn btn-secondary" onclick="closeModal('quizModal')">
+                        🏠 Terug naar Overzicht
+                    </button>
+                </div>
+            `;
+        }
+
+        async function retryQuiz(moduleId) {
+            closeModal('quizModal');
+            await startQuiz(moduleId);
+        }
+
+        async function showImprovement(moduleId) {
+            try {
+                const response = await fetch(`/api/v1/course/improvement/${currentUser}/${moduleId}`);
+                const improvement = await response.json();
+                
+                if (!improvement.verbetering_nodig) {
+                    alert('Je hebt deze module al succesvol voltooid!');
+                    return;
+                }
+                
+                const modal = document.getElementById('moduleModal');
+                const content = document.getElementById('moduleContent');
+                
+                content.innerHTML = `
+                    <h1>📈 Verbeteringsplan: ${improvement.module_titel}</h1>
+                    
+                    <div style="background: #fff3cd; padding: 1rem; border-radius: 8px; margin-bottom: 2rem; border-left: 4px solid #f39c12;">
+                        <strong>Huidige score: ${improvement.huidige_score}%</strong><br>
+                        <strong>Doel score: ${improvement.doel_score}%</strong>
+                    </div>
+                    
+                    <div style="margin-bottom: 2rem;">
+                        <h3 style="color: #2c3e50; margin-bottom: 1rem;">💡 Algemene Aanbevelingen</h3>
+                        <ul style="padding-left: 1.5rem;">
+                            ${improvement.aanbevelingen.algemeen.map(tip => `<li style="margin-bottom: 0.5rem;">${tip}</li>`).join('')}
+                        </ul>
+                    </div>
+                    
+                    ${improvement.aanbevelingen.specifiek && improvement.aanbevelingen.specifiek.length > 0 ? `
+                        <div style="margin-bottom: 2rem;">
+                            <h3 style="color: #2c3e50; margin-bottom: 1rem;">🎯 Specifieke Verbeterpunten</h3>
+                            <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px;">
+                                ${improvement.aanbevelingen.specifiek.map(point => `<p style="margin-bottom: 1rem; line-height: 1.6;">${point}</p>`).join('')}
+                            </div>
+                        </div>
+                    ` : ''}
+                    
+                    <div style="margin-bottom: 2rem;">
+                        <h3 style="color: #2c3e50; margin-bottom: 1rem;">🚀 Volgende Stappen</h3>
+                        <ol style="padding-left: 1.5rem;">
+                            ${improvement.volgende_stappen.map(step => `<li style="margin-bottom: 0.5rem;">${step}</li>`).join('')}
+                        </ol>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <button class="btn" onclick="openModule('${moduleId}')">
+                            📖 Bekijk Module Inhoud
+                        </button>
+                        <button class="btn btn-success" onclick="closeModal('moduleModal'); startQuiz('${moduleId}')">
+                            🧪 Probeer Quiz Opnieuw
+                        </button>
+                    </div>
+                `;
+                
+                modal.style.display = 'block';
+                
+            } catch (error) {
+                console.error('Error loading improvement plan:', error);
+                showError('Fout bij het laden van het verbeteringsplan.');
+            }
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        function showError(message) {
+            alert('❌ ' + message);
+        }
+
+        // Modal close functionality
+        document.querySelectorAll('.close').forEach(closeBtn => {
+            closeBtn.onclick = function() {
+                this.closest('.modal').style.display = 'none';
+            }
+        });
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
