@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Euramax Cybersecurity Training - Live Demo</title>
+    <meta http-equiv="refresh" content="3; url=cybersecurity-course.html">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+        .logo {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        .description {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        .btn {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+        .btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .features {
+            text-align: left;
+            margin: 30px 0;
+            font-size: 1rem;
+        }
+        .features li {
+            margin: 10px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        .features li::before {
+            content: "✅";
+            position: absolute;
+            left: 0;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        .redirect-info {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">🛡️</div>
+        <h1>Euramax Cybersecurity Training</h1>
+        <div class="subtitle">🇳🇱 Nederlandse Cybersecurity Cursus - Live Demo</div>
+        
+        <div class="description">
+            Welkom bij de interactieve Nederlandse cybersecurity training voor medewerkers 
+            met toegang tot gevoelige data. Deze demo bevat alle functies van de volledige cursus.
+        </div>
+
+        <ul class="features">
+            <li><strong>5 Uitgebreide Modules</strong> - Phishing, wachtwoorden, malware, social engineering, data bescherming</li>
+            <li><strong>15+ Uitdagende Quiz Vragen</strong> - Test uw werkelijke kennis</li>
+            <li><strong>Intelligente Fout Review</strong> - Leer van foute antwoorden</li>
+            <li><strong>Nederlandse Interface</strong> - Volledig gelokaliseerd</li>
+            <li><strong>Responsive Design</strong> - Werkt op alle apparaten</li>
+            <li><strong>HTTPS Veilig</strong> - Beveiligde verbinding</li>
+        </ul>
+
+        <div>
+            <a href="cybersecurity-course.html" class="btn">🚀 Start Training Direct</a>
+            <a href="dashboard.html" class="btn">📊 Bekijk Dashboard</a>
+        </div>
+
+        <div class="redirect-info">
+            💡 U wordt automatisch doorgestuurd naar de training over 3 seconden...
+        </div>
+    </div>
+
+    <script>
+        // Add some interactivity
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Euramax Live Demo loaded successfully');
+            
+            // Optional: Add click tracking
+            document.querySelectorAll('.btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    console.log('Navigation to:', this.getAttribute('href'));
+                });
+            });
+        });
+    </script>
+</body>
+</html>
