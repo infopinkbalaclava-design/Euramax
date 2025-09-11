@@ -15,7 +15,8 @@ let sectionStartTime = Date.now();
 let bookmarks = [];
 
 // Course sections in order
-const sections = ['intro', 'phishing', 'passwords', 'malware', 'social', 'data', 'quiz', 'phishing-demo'];
+const sections = ['intro', 'phishing', 'passwords', 'malware', 'social', 'data', 'quiz'];
+const contentSections = ['intro', 'phishing', 'passwords', 'malware', 'social', 'data']; // Actual learning modules
 
 // Quiz questions database with detailed, challenging questions
 const quizQuestions = [
@@ -314,12 +315,14 @@ function initializeLearningPath() {
         const isCompleted = completedSections.includes(section);
         const isCurrent = section === currentSection;
         const isAccessible = index === 0 || completedSections.includes(sections[index - 1]);
+        const icon = sectionIcons[index] || '📋'; // Fallback icon
+        const name = sectionNames[index] || 'Module'; // Fallback name
         
         return `
             <div class="path-step ${isCompleted ? 'completed' : ''} ${isCurrent ? 'current' : ''} ${isAccessible ? 'accessible' : 'locked'}" 
                  data-section="${section}" style="cursor: pointer;">
-                <div class="path-icon">${sectionIcons[index]}</div>
-                <div class="path-name">${sectionNames[index]}</div>
+                <div class="path-icon">${icon}</div>
+                <div class="path-name">${name}</div>
                 ${index < sections.length - 1 ? '<div class="path-connector"></div>' : ''}
             </div>
         `;
@@ -543,8 +546,8 @@ function showSection(sectionId, direction = 'forward') {
             // Remove animation classes after transition
             setTimeout(() => {
                 targetSection.classList.remove('slide-in', 'slide-out');
-            }, 400);
-        }, 200);
+            }, 300); // Reduced from 400ms for smoother experience
+        }, 150); // Reduced from 200ms for faster transitions
     } else {
         // First time or same section - no animation needed
         document.querySelectorAll('.course-content, .quiz-section, .quiz-results').forEach(section => {
@@ -574,7 +577,7 @@ function showSection(sectionId, direction = 'forward') {
     // Add scroll to top with smooth behavior
     setTimeout(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 300);
+    }, 200); // Reduced from 300ms
 }
 
 function updateMenuItems(activeSectionId) {
@@ -1407,10 +1410,11 @@ function showKeyboardHints() {
         padding: 1rem;
         border-radius: 10px;
         font-size: 0.8rem;
-        z-index: 1000;
+        z-index: 999;
         max-width: 200px;
         opacity: 0;
         transition: opacity 0.3s ease;
+        pointer-events: none;
     `;
     
     hints.innerHTML = `
@@ -1475,9 +1479,9 @@ function loadProgress() {
 
 // Enhanced progress dashboard update
 function updateProgressDashboard() {
-    const progressPercent = Math.round((completedSections.length / (sections.length - 1)) * 100);
-    const completedCount = completedSections.length;
-    const totalModules = sections.length - 1; // Exclude quiz from modules count
+    const progressPercent = Math.round((completedSections.filter(s => contentSections.includes(s)).length / contentSections.length) * 100);
+    const completedCount = completedSections.filter(s => contentSections.includes(s)).length;
+    const totalModules = contentSections.length; // Only count actual content modules
     
     document.getElementById('progressText').textContent = `${progressPercent}% voltooid`;
     document.getElementById('completedModules').textContent = `${completedCount}/${totalModules} modules`;
@@ -1517,23 +1521,25 @@ function updateProgressDashboard() {
 }
 
 function checkAchievements() {
+    const contentCompletedCount = completedSections.filter(s => contentSections.includes(s)).length;
+    
     // First step achievement
-    if (completedSections.length >= 1) {
+    if (contentCompletedCount >= 1) {
         earnAchievement('first-step');
     }
     
     // Halfway achievement
-    if (completedSections.length >= Math.ceil((sections.length - 1) / 2)) {
+    if (contentCompletedCount >= Math.ceil(contentSections.length / 2)) {
         earnAchievement('halfway');
     }
     
     // Speed demon (module completed in less than 5 minutes)
-    if (timeSpent <= 5 && completedSections.length > 0) {
+    if (timeSpent <= 5 && contentCompletedCount > 0) {
         earnAchievement('speed-demon');
     }
     
     // Course completed
-    if (completedSections.length >= sections.length - 1) {
+    if (contentCompletedCount >= contentSections.length) {
         earnAchievement('completed');
     }
     
