@@ -27,7 +27,7 @@
 
 ## 🛡️ Overzicht
 
-Euramax is een **volledig geautomatiseerd AI-aangedreven cybersecurity verdedigingssysteem** dat is ontworpen voor Nederlandse organisaties. Het systeem biedt **real-time bescherming** tegen alle soorten cyberbedreigingen met gespecialiseerde **anti-phishing capaciteiten**, **autonome AI-bot automatisering**, en een **uitgebreide Nederlandse cybersecurity training**.
+ **Volledig geautomatiseerd AI-aangedreven cybersecurity verdedigingssysteem** dat is ontworpen voor Euramax Het systeem biedt **real-time bescherming** tegen alle soorten cyberbedreigingen met gespecialiseerde **anti-phishing capaciteiten**, **autonome AI-bot automatisering**, en een **uitgebreide Nederlandse cybersecurity training**.
 
 ### 🎯 Kernfunctionaliteiten
 
@@ -59,7 +59,7 @@ De live demo bevat:
 
 *Enhanced Course Overview with Real-time Progress Tracking, Time Monitoring, and Bookmark System*
 
-### 🆕 Enhanced Features (2024)
+### 🆕 Enhanced Features
 
 #### 🎯 Course Overview with Advanced Progress Tracking
 - **Real-time Progress Dashboard**: Live tracking van module voortgang en tijd besteed
