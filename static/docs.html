@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interne Documentatie - Euramax Beveiligingssysteem</title>
+    <meta name="description" content="Uitgebreide interne documentatie voor het Euramax beveiligingssysteem inclusief API docs, deployment guides en ontwikkelaarsgidsen.">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/docs.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">Euramax</a>
+                
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="about.html" class="nav-link">Over Ons</a></li>
+                    <li><a href="services.html" class="nav-link">Functies</a></li>
+                    <li><a href="education.html" class="nav-link">Training</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                    <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                    <li><a href="docs.html" class="nav-link active">Documentatie</a></li>
+                    <li><a href="login.html" class="btn btn-primary">Inloggen</a></li>
+                </ul>
+                
+                <div class="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb">
+        <div class="container">
+            <a href="index.html">Home</a> > <span>Interne Documentatie</span>
+        </div>
+    </nav>
+
+    <!-- Documentation Layout -->
+    <div class="docs-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="docs-sidebar">
+            <div class="docs-search">
+                <input type="text" placeholder="Zoek in documentatie..." id="docs-search">
+            </div>
+            
+            <nav class="docs-nav">
+                <div class="nav-section">
+                    <h3>Aan de Slag</h3>
+                    <ul>
+                        <li><a href="#quick-start" class="active">Snelle Start</a></li>
+                        <li><a href="#installation">Installatie</a></li>
+                        <li><a href="#configuration">Configuratie</a></li>
+                        <li><a href="#user-management">Gebruikersbeheer</a></li>
+                    </ul>
+                </div>
+                
+                <div class="nav-section">
+                    <h3>API Documentatie</h3>
+                    <ul>
+                        <li><a href="#api-overview">API Overzicht</a></li>
+                        <li><a href="#authentication">Authenticatie</a></li>
+                        <li><a href="#threat-api">Bedreigingen API</a></li>
+                        <li><a href="#training-api">Training API</a></li>
+                        <li><a href="#reporting-api">Rapportage API</a></li>
+                    </ul>
+                </div>
+                
+                <div class="nav-section">
+                    <h3>Ontwikkelaarsgids</h3>
+                    <ul>
+                        <li><a href="#development-setup">Development Setup</a></li>
+                        <li><a href="#code-standards">Coding Standards</a></li>
+                        <li><a href="#testing">Testing</a></li>
+                        <li><a href="#deployment">Deployment</a></li>
+                    </ul>
+                </div>
+                
+                <div class="nav-section">
+                    <h3>Systeembeheer</h3>
+                    <ul>
+                        <li><a href="#monitoring">Monitoring</a></li>
+                        <li><a href="#backup">Backup Procedures</a></li>
+                        <li><a href="#security">Security Policies</a></li>
+                        <li><a href="#troubleshooting">Troubleshooting</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Documentation Content -->
+        <main class="docs-content">
+            <header class="docs-header">
+                <h1>Euramax Intern Beveiligingssysteem Documentatie</h1>
+                <p>Uitgebreide technische documentatie voor ontwikkelaars, systeembeheerders en eindgebruikers</p>
+                <div class="docs-meta">
+                    <span class="version">Versie 2.1.4</span>
+                    <span class="last-updated">Laatst bijgewerkt: 15 maart 2024</span>
+                </div>
+            </header>
+
+            <!-- Quick Start Section -->
+            <section id="quick-start" class="docs-section">
+                <h2>Snelle Start</h2>
+                <p>Welkom bij de Euramax intern beveiligingssysteem documentatie. Dit platform biedt AI-aangedreven phishing bescherming speciaal ontwikkeld voor Euramax medewerkers.</p>
+                
+                <div class="alert info">
+                    <strong>Let op:</strong> Dit is een intern systeem exclusief voor Euramax medewerkers. Toegang vereist interne authenticatie.
+                </div>
+
+                <h3>Systeemvereisten</h3>
+                <ul>
+                    <li>Windows 10/11 of macOS 10.14+</li>
+                    <li>Moderne webbrowser (Chrome 90+, Firefox 88+, Safari 14+)</li>
+                    <li>Actieve VPN-verbinding met Euramax netwerk</li>
+                    <li>Geldige Euramax Active Directory account</li>
+                </ul>
+
+                <h3>Eerste Toegang</h3>
+                <div class="code-block">
+                    <pre><code>1. Verbind met Euramax VPN
+2. Navigeer naar https://security.internal.euramax.nl
+3. Log in met je AD-credentials
+4. Voltooi de initiële beveiligingstraining
+5. Configureer je notificatie-instellingen</code></pre>
+                </div>
+            </section>
+
+            <!-- Installation Section -->
+            <section id="installation" class="docs-section">
+                <h2>Installatie & Setup</h2>
+                
+                <h3>Server Installatie</h3>
+                <p>Voor IT-beheerders die het systeem installeren op nieuwe servers:</p>
+                
+                <div class="code-block">
+                    <pre><code># Clone repository (intern GitLab)
+git clone https://gitlab.internal.euramax.nl/security/phishing-protection.git
+
+# Installeer dependencies
+npm install
+
+# Configureer environment
+cp .env.example .env.production
+nano .env.production
+
+# Start productie server
+npm run start:production</code></pre>
+                </div>
+
+                <h3>Database Setup</h3>
+                <div class="code-block">
+                    <pre><code># Connectie met interne SQL Server
+Server: sql-prod.internal.euramax.nl
+Database: EuramaxSecurity
+Authentication: Integrated (AD)</code></pre>
+                </div>
+            </section>
+
+            <!-- API Documentation -->
+            <section id="api-overview" class="docs-section">
+                <h2>API Overzicht</h2>
+                <p>Het Euramax beveiligingssysteem biedt een RESTful API voor integratie met interne systemen.</p>
+
+                <h3>Base URL</h3>
+                <div class="code-block">
+                    <pre><code>https://security-api.internal.euramax.nl/v2/</code></pre>
+                </div>
+
+                <h3>Authenticatie</h3>
+                <p>Alle API-calls vereisen een geldige JWT token verkregen via AD-authenticatie:</p>
+                
+                <div class="code-block">
+                    <pre><code>POST /auth/login
+Content-Type: application/json
+
+{
+  "username": "gebruiker@euramax.nl",
+  "password": "wachtwoord",
+  "domain": "EURAMAX"
+}</code></pre>
+                </div>
+
+                <h3>Response Format</h3>
+                <div class="code-block">
+                    <pre><code>{
+  "success": true,
+  "data": {...},
+  "timestamp": "2024-03-15T10:30:00Z",
+  "version": "2.1.4"
+}</code></pre>
+                </div>
+            </section>
+
+            <!-- Threat API -->
+            <section id="threat-api" class="docs-section">
+                <h2>Bedreigingen API</h2>
+                
+                <h3>Recente Bedreigingen Ophalen</h3>
+                <div class="code-block">
+                    <pre><code>GET /threats/recent
+Authorization: Bearer {jwt_token}
+
+Parameters:
+- limit: aantal resultaten (max 100)
+- department: filter op afdeling
+- severity: filter op ernst (low, medium, high, critical)</code></pre>
+                </div>
+
+                <h3>Bedreiging Rapporteren</h3>
+                <div class="code-block">
+                    <pre><code>POST /threats/report
+Content-Type: application/json
+Authorization: Bearer {jwt_token}
+
+{
+  "type": "phishing_email",
+  "source": "external_email",
+  "target_email": "medewerker@euramax.nl",
+  "subject": "Verdachte e-mail onderwerp",
+  "sender": "verdacht@example.com",
+  "severity": "high"
+}</code></pre>
+                </div>
+            </section>
+
+            <!-- Development Setup -->
+            <section id="development-setup" class="docs-section">
+                <h2>Development Setup</h2>
+                
+                <h3>Lokale Ontwikkelomgeving</h3>
+                <div class="code-block">
+                    <pre><code># Clone development branch
+git clone -b development https://gitlab.internal.euramax.nl/security/phishing-protection.git
+
+# Install development dependencies
+npm install --include=dev
+
+# Start development server
+npm run dev
+
+# Run tests
+npm test
+
+# Build voor productie
+npm run build</code></pre>
+                </div>
+
+                <h3>Code Standards</h3>
+                <ul>
+                    <li>TypeScript voor alle nieuwe code</li>
+                    <li>ESLint configuratie volgens Euramax standards</li>
+                    <li>Jest voor unit tests (minimum 80% coverage)</li>
+                    <li>Prettier voor code formatting</li>
+                </ul>
+
+                <h3>Git Workflow</h3>
+                <div class="code-block">
+                    <pre><code># Feature branch naming
+feature/JIRA-123-beschrijving
+
+# Commit message format
+type(scope): beschrijving
+
+# Bijvoorbeeld:
+feat(api): voeg nieuwe threat detection endpoint toe
+fix(ui): repareer dashboard loading bug
+docs(readme): update installatie instructies</code></pre>
+                </div>
+            </section>
+
+            <!-- Security Policies -->
+            <section id="security" class="docs-section">
+                <h2>Security Policies</h2>
+                
+                <h3>Toegangsbeheer</h3>
+                <ul>
+                    <li><strong>Admin Level:</strong> Volledige systeem toegang (IT Security Team)</li>
+                    <li><strong>Manager Level:</strong> Departement overzichten en rapportages</li>
+                    <li><strong>User Level:</strong> Basis dashboard en training toegang</li>
+                </ul>
+
+                <h3>Data Retention</h3>
+                <div class="alert warning">
+                    <strong>Belangrijk:</strong> Alle security logs worden 2 jaar bewaard conform Euramax data retention policy.
+                </div>
+
+                <h3>Incident Response</h3>
+                <div class="code-block">
+                    <pre><code>Critieke bedreigingen:
+1. Automatische blokkering binnen 30 seconden
+2. Directe notificatie naar IT Security Team
+3. Email quarantine van gerelateerde berichten
+4. Incident ticket aangemaakt in ServiceNow</code></pre>
+                </div>
+            </section>
+
+            <!-- Troubleshooting -->
+            <section id="troubleshooting" class="docs-section">
+                <h2>Troubleshooting</h2>
+                
+                <h3>Veelvoorkomende Problemen</h3>
+                
+                <div class="troubleshoot-item">
+                    <h4>🔒 Login problemen</h4>
+                    <p><strong>Symptoom:</strong> Kan niet inloggen met AD-credentials</p>
+                    <p><strong>Oplossing:</strong></p>
+                    <ul>
+                        <li>Controleer VPN-verbinding</li>
+                        <li>Verifieer AD-wachtwoord via andere systemen</li>
+                        <li>Clear browser cache en cookies</li>
+                        <li>Contact IT Helpdesk: +31 20 123 4567</li>
+                    </ul>
+                </div>
+
+                <div class="troubleshoot-item">
+                    <h4>📧 Emails worden niet gescand</h4>
+                    <p><strong>Symptoom:</strong> Verdachte emails komen door zonder detectie</p>
+                    <p><strong>Oplossing:</strong></p>
+                    <ul>
+                        <li>Controleer systeem status op dashboard</li>
+                        <li>Rapporteer handmatig via dashboard</li>
+                        <li>Escaleer naar security@euramax.nl</li>
+                    </ul>
+                </div>
+
+                <h3>Log Bestanden</h3>
+                <div class="code-block">
+                    <pre><code># Applicatie logs
+/var/log/euramax-security/app.log
+
+# System logs  
+/var/log/euramax-security/system.log
+
+# Error logs
+/var/log/euramax-security/error.log</code></pre>
+                </div>
+            </section>
+
+            <!-- Support Information -->
+            <section class="docs-section">
+                <h2>Support & Contact</h2>
+                
+                <div class="support-grid">
+                    <div class="support-card">
+                        <h3>🚨 Kritieke Security Issues</h3>
+                        <p>Voor directe security bedreigingen</p>
+                        <strong>security@euramax.nl</strong>
+                        <br>
+                        <strong>+31 20 123 4567 (24/7)</strong>
+                    </div>
+                    
+                    <div class="support-card">
+                        <h3>🛠️ Technische Support</h3>
+                        <p>Voor technische problemen en vragen</p>
+                        <strong>itsupport@euramax.nl</strong>
+                        <br>
+                        <strong>+31 20 123 4568</strong>
+                    </div>
+                    
+                    <div class="support-card">
+                        <h3>📚 Training & Educatie</h3>
+                        <p>Voor training gerelateerde vragen</p>
+                        <strong>training@euramax.nl</strong>
+                        <br>
+                        <strong>Intern: 4568</strong>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Euramax Intern Systeem</h4>
+                    <p>Uitgebreide technische documentatie voor het intern ontwikkelde AI-beveiligingsplatform.</p>
+                    <p class="version">Documentatie Versie 2.1.4 | API Versie 2.1.4</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Documentatie Secties</h4>
+                    <ul>
+                        <li><a href="#quick-start">Snelle Start</a></li>
+                        <li><a href="#api-overview">API Documentatie</a></li>
+                        <li><a href="#development-setup">Ontwikkelaarsgids</a></li>
+                        <li><a href="#security">Security Policies</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Intern Support</h4>
+                    <ul>
+                        <li><a href="contact.html">IT Helpdesk</a></li>
+                        <li><a href="support.html">Support Tickets</a></li>
+                        <li><a href="team.html">Development Team</a></li>
+                        <li><a href="dashboard.html">Systeemstatus</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Euramax Intern Beveiligingssysteem. Interne documentatie - Vertrouwelijk.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/docs.js"></script>
+</body>
+</html>

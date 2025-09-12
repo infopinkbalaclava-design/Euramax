@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intern Dashboard - Euramax Beveiligingssysteem</title>
+    <meta name="description" content="Intern dashboard voor Euramax beveiligingssysteem met real-time bedreigingsmonitoring, medewerkerstraining voortgang en beveiligingsanalyses.">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">Euramax</a>
+                
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="about.html" class="nav-link">Over Ons</a></li>
+                    <li><a href="services.html" class="nav-link">Functies</a></li>
+                    <li><a href="education.html" class="nav-link">Training</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                    <li><a href="dashboard.html" class="nav-link active">Dashboard</a></li>
+                    <li><a href="docs.html" class="nav-link">Documentatie</a></li>
+                    <li><a href="login.html" class="btn btn-primary">Inloggen</a></li>
+                </ul>
+                
+                <div class="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb">
+        <div class="container">
+            <a href="index.html">Home</a> > <span>Intern Dashboard</span>
+        </div>
+    </nav>
+
+    <!-- Dashboard Hero -->
+    <section class="dashboard-hero">
+        <div class="container">
+            <div class="dashboard-header">
+                <h1>Euramax Intern Beveiligingsdashboard</h1>
+                <p>Real-time overzicht van beveiligingsstatus, bedreigingen en medewerkerstraining</p>
+                <div class="user-info">
+                    <span class="user-role">Admin - IT Beveiliging</span>
+                    <span class="last-login">Laatst ingelogd: vandaag 09:15</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Stats -->
+    <section class="dashboard-stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card threat-level">
+                    <div class="stat-icon">⚠️</div>
+                    <div class="stat-content">
+                        <h3>Huidige Bedreigingsniveau</h3>
+                        <div class="stat-value green">Laag</div>
+                        <p>Laatste update: 2 min geleden</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">🛡️</div>
+                    <div class="stat-content">
+                        <h3>Geblokkeerde Aanvallen Vandaag</h3>
+                        <div class="stat-value">47</div>
+                        <p class="stat-change positive">↗ +12% vs gisteren</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-content">
+                        <h3>Actieve Medewerkers</h3>
+                        <div class="stat-value">1,247</div>
+                        <p>Beschermd door systeem</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-content">
+                        <h3>Training Voltooiingspercentage</h3>
+                        <div class="stat-value">94%</div>
+                        <p class="stat-change positive">↗ +8% deze maand</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Content -->
+    <section class="dashboard-content">
+        <div class="container">
+            <div class="dashboard-grid">
+                <!-- Recent Threats -->
+                <div class="dashboard-panel">
+                    <div class="panel-header">
+                        <h3>Recente Bedreigingen</h3>
+                        <a href="#" class="view-all">Bekijk alle</a>
+                    </div>
+                    <div class="threat-list">
+                        <div class="threat-item blocked">
+                            <div class="threat-info">
+                                <div class="threat-type">Phishing Email</div>
+                                <div class="threat-target">Marketing@euramax.nl</div>
+                                <div class="threat-time">10:34 AM</div>
+                            </div>
+                            <div class="threat-status">Geblokkeerd</div>
+                        </div>
+                        <div class="threat-item blocked">
+                            <div class="threat-info">
+                                <div class="threat-type">Malicious Link</div>
+                                <div class="threat-target">Verkoop@euramax.nl</div>
+                                <div class="threat-time">09:47 AM</div>
+                            </div>
+                            <div class="threat-status">Geblokkeerd</div>
+                        </div>
+                        <div class="threat-item warning">
+                            <div class="threat-info">
+                                <div class="threat-type">Verdachte Bijlage</div>
+                                <div class="threat-target">HR@euramax.nl</div>
+                                <div class="threat-time">08:22 AM</div>
+                            </div>
+                            <div class="threat-status">In Onderzoek</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Training Progress -->
+                <div class="dashboard-panel">
+                    <div class="panel-header">
+                        <h3>Training Voortgang</h3>
+                        <a href="education.html" class="view-all">Ga naar Training</a>
+                    </div>
+                    <div class="training-progress">
+                        <div class="progress-item">
+                            <div class="department">IT Afdeling</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 100%"></div>
+                            </div>
+                            <div class="progress-text">100%</div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="department">Marketing</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 95%"></div>
+                            </div>
+                            <div class="progress-text">95%</div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="department">Verkoop</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 87%"></div>
+                            </div>
+                            <div class="progress-text">87%</div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="department">HR</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 92%"></div>
+                            </div>
+                            <div class="progress-text">92%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="dashboard-panel">
+                    <div class="panel-header">
+                        <h3>Snelle Acties</h3>
+                    </div>
+                    <div class="quick-actions">
+                        <a href="docs.html" class="action-btn">
+                            <div class="action-icon">📚</div>
+                            <div class="action-text">Documentatie</div>
+                        </a>
+                        <a href="support.html" class="action-btn">
+                            <div class="action-icon">🎫</div>
+                            <div class="action-text">Support Ticket</div>
+                        </a>
+                        <a href="team.html" class="action-btn">
+                            <div class="action-icon">👥</div>
+                            <div class="action-text">Team Directory</div>
+                        </a>
+                        <a href="reports.html" class="action-btn">
+                            <div class="action-icon">📊</div>
+                            <div class="action-text">Rapporten</div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- System Status -->
+                <div class="dashboard-panel">
+                    <div class="panel-header">
+                        <h3>Systeemstatus</h3>
+                    </div>
+                    <div class="system-status">
+                        <div class="status-item">
+                            <div class="status-indicator online"></div>
+                            <div class="status-label">AI Engine</div>
+                            <div class="status-value">Online</div>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-indicator online"></div>
+                            <div class="status-label">Email Scanner</div>
+                            <div class="status-value">Online</div>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-indicator online"></div>
+                            <div class="status-label">Database</div>
+                            <div class="status-value">Online</div>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-indicator warning"></div>
+                            <div class="status-label">Backup System</div>
+                            <div class="status-value">Onderhoud</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Euramax Intern Systeem</h4>
+                    <p>Ons intern ontwikkelde AI-beveiligingsplatform beschermt Euramax medewerkers tegen cyber-bedreigingen met geavanceerde detectie en training.</p>
+                    <p class="version">Versie 2.1.4 | Build 2024.03.15</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Interne Functies</h4>
+                    <ul>
+                        <li><a href="services.html">AI Bedreigingsdetectie</a></li>
+                        <li><a href="education.html">Medewerkerstraining</a></li>
+                        <li><a href="dashboard.html">Real-time Monitoring</a></li>
+                        <li><a href="reports.html">Incident Response</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Intern Support</h4>
+                    <ul>
+                        <li><a href="docs.html">IT Helpdesk</a></li>
+                        <li><a href="contact.html">Interne Documentatie</a></li>
+                        <li><a href="team.html">Systeemstatus</a></li>
+                        <li><a href="support.html">Gebruikershandleiding</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Euramax Intern Beveiligingssysteem. Alle rechten voorbehouden aan Euramax organisatie.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

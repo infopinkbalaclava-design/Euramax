@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intern Support Systeem - Euramax Beveiligingssysteem</title>
+    <meta name="description" content="Intern support ticket systeem voor Euramax beveiligingssysteem. Rapporteer problemen, stel vragen en volg de status van je support aanvragen.">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/support.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">Euramax</a>
+                
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="about.html" class="nav-link">Over Ons</a></li>
+                    <li><a href="services.html" class="nav-link">Functies</a></li>
+                    <li><a href="education.html" class="nav-link">Training</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                    <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                    <li><a href="docs.html" class="nav-link">Documentatie</a></li>
+                    <li><a href="team.html" class="nav-link">Team</a></li>
+                    <li><a href="support.html" class="nav-link active">Support</a></li>
+                    <li><a href="login.html" class="btn btn-primary">Inloggen</a></li>
+                </ul>
+                
+                <div class="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb">
+        <div class="container">
+            <a href="index.html">Home</a> > <span>Intern Support Systeem</span>
+        </div>
+    </nav>
+
+    <!-- Support Hero -->
+    <section class="support-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Euramax Intern Support Systeem</h1>
+                <p>Krijg snelle hulp van ons interne IT security team. Rapporteer problemen, stel vragen of vraag technische ondersteuning aan.</p>
+                <div class="support-stats">
+                    <div class="stat">
+                        <span class="stat-number">< 2u</span>
+                        <span class="stat-label">Gemiddelde Responstijd</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">98%</span>
+                        <span class="stat-label">Tevredenheidscore</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Kritieke Support</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Dashboard -->
+    <section class="support-dashboard">
+        <div class="container">
+            <div class="dashboard-tabs">
+                <button class="tab-btn active" data-tab="new-ticket">Nieuw Ticket</button>
+                <button class="tab-btn" data-tab="my-tickets">Mijn Tickets</button>
+                <button class="tab-btn" data-tab="knowledge-base">Knowledge Base</button>
+                <button class="tab-btn" data-tab="system-status">Systeemstatus</button>
+            </div>
+
+            <!-- New Ticket Tab -->
+            <div class="tab-content active" id="new-ticket">
+                <div class="ticket-form-container">
+                    <h2>Nieuw Support Ticket Aanmaken</h2>
+                    <p>Vul onderstaand formulier in om een nieuw support ticket aan te maken. Ons team zal zo snel mogelijk reageren.</p>
+                    
+                    <form class="support-form" id="ticketForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="employee-name">Naam Medewerker *</label>
+                                <input type="text" id="employee-name" name="employeeName" required placeholder="Volledige naam">
+                            </div>
+                            <div class="form-group">
+                                <label for="employee-email">E-mail Adres *</label>
+                                <input type="email" id="employee-email" name="employeeEmail" required placeholder="naam@euramax.nl">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="department">Afdeling *</label>
+                                <select id="department" name="department" required>
+                                    <option value="">Selecteer afdeling</option>
+                                    <option value="it">IT Afdeling</option>
+                                    <option value="marketing">Marketing</option>
+                                    <option value="sales">Verkoop</option>
+                                    <option value="hr">Human Resources</option>
+                                    <option value="finance">Financiën</option>
+                                    <option value="operations">Operations</option>
+                                    <option value="management">Management</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="priority">Prioriteit *</label>
+                                <select id="priority" name="priority" required>
+                                    <option value="">Selecteer prioriteit</option>
+                                    <option value="critical">🚨 Kritiek (Security Incident)</option>
+                                    <option value="high">🔴 Hoog (Systeem Down)</option>
+                                    <option value="medium">🟡 Gemiddeld (Functionaliteit Probleem)</option>
+                                    <option value="low">🟢 Laag (Vraag/Verbetering)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="category">Categorie *</label>
+                            <select id="category" name="category" required>
+                                <option value="">Selecteer categorie</option>
+                                <option value="phishing-detection">🛡️ Phishing Detectie</option>
+                                <option value="false-positive">⚠️ False Positive</option>
+                                <option value="training">📚 Training & Educatie</option>
+                                <option value="login-access">🔐 Inlog & Toegang</option>
+                                <option value="dashboard">📊 Dashboard Problemen</option>
+                                <option value="email-scanning">📧 Email Scanning</option>
+                                <option value="reporting">📈 Rapportage</option>
+                                <option value="api-integration">🔌 API & Integratie</option>
+                                <option value="performance">⚡ Performance</option>
+                                <option value="feature-request">💡 Feature Verzoek</option>
+                                <option value="other">❓ Overig</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">Onderwerp *</label>
+                            <input type="text" id="subject" name="subject" required placeholder="Korte beschrijving van het probleem">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Gedetailleerde Beschrijving *</label>
+                            <textarea id="description" name="description" required rows="6" placeholder="Beschrijf het probleem zo gedetailleerd mogelijk. Vermeld:
+- Wat probeerde je te doen?
+- Wat ging er mis?
+- Welke foutmeldingen zag je?
+- Wanneer gebeurde dit?
+- Is dit al eerder voorgekomen?"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="steps-to-reproduce">Stappen om te Reproduceren</label>
+                            <textarea id="steps-to-reproduce" name="stepsToReproduce" rows="4" placeholder="1. Ga naar...
+2. Klik op...
+3. Vul in...
+4. Zie fout..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="browser-info">Browser & Systeem Informatie</label>
+                            <textarea id="browser-info" name="browserInfo" rows="3" placeholder="Bijv: Chrome 122, Windows 11, vanaf kantoor/thuis"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="attachments">Bijlagen</label>
+                            <div class="file-upload">
+                                <input type="file" id="attachments" name="attachments" multiple accept=".png,.jpg,.jpeg,.pdf,.txt,.log">
+                                <label for="attachments" class="file-upload-label">
+                                    📎 Klik om bestanden toe te voegen (Screenshots, logs, etc.)
+                                </label>
+                                <div class="file-list" id="fileList"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary">Opslaan als Concept</button>
+                            <button type="submit" class="btn btn-primary">Ticket Indienen</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- My Tickets Tab -->
+            <div class="tab-content" id="my-tickets">
+                <div class="tickets-container">
+                    <div class="tickets-header">
+                        <h2>Mijn Support Tickets</h2>
+                        <div class="tickets-filters">
+                            <select class="filter-select">
+                                <option value="all">Alle Statussen</option>
+                                <option value="open">Open</option>
+                                <option value="in-progress">In Behandeling</option>
+                                <option value="waiting">Wachten op Respons</option>
+                                <option value="resolved">Opgelost</option>
+                                <option value="closed">Gesloten</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="tickets-list">
+                        <div class="ticket-item open">
+                            <div class="ticket-header">
+                                <div class="ticket-id">#SEC-2024-0156</div>
+                                <div class="ticket-status status-open">Open</div>
+                                <div class="ticket-priority priority-high">🔴 Hoog</div>
+                            </div>
+                            <div class="ticket-content">
+                                <h3>Phishing email niet gedetecteerd door systeem</h3>
+                                <p>Het AI-systeem heeft een verdachte phishing email niet geblokkeerd die gisteren is binnengekomen...</p>
+                                <div class="ticket-meta">
+                                    <span>📅 15 maart 2024, 14:30</span>
+                                    <span>👤 Toegewezen aan: Emma Kuiper</span>
+                                    <span>💬 3 reacties</span>
+                                </div>
+                            </div>
+                            <div class="ticket-actions">
+                                <button class="btn-view">👁️ Bekijk</button>
+                                <button class="btn-reply">💬 Reageer</button>
+                            </div>
+                        </div>
+
+                        <div class="ticket-item in-progress">
+                            <div class="ticket-header">
+                                <div class="ticket-id">#SUP-2024-0145</div>
+                                <div class="ticket-status status-in-progress">In Behandeling</div>
+                                <div class="ticket-priority priority-medium">🟡 Gemiddeld</div>
+                            </div>
+                            <div class="ticket-content">
+                                <h3>Dashboard laadt traag op tablet</h3>
+                                <p>Het dashboard duurt meer dan 30 seconden om te laden op mijn iPad. Desktop versie werkt wel normaal...</p>
+                                <div class="ticket-meta">
+                                    <span>📅 14 maart 2024, 09:15</span>
+                                    <span>👤 Toegewezen aan: Sophie Bakker</span>
+                                    <span>💬 5 reacties</span>
+                                </div>
+                            </div>
+                            <div class="ticket-actions">
+                                <button class="btn-view">👁️ Bekijk</button>
+                                <button class="btn-reply">💬 Reageer</button>
+                            </div>
+                        </div>
+
+                        <div class="ticket-item resolved">
+                            <div class="ticket-header">
+                                <div class="ticket-id">#TRA-2024-0134</div>
+                                <div class="ticket-status status-resolved">Opgelost</div>
+                                <div class="ticket-priority priority-low">🟢 Laag</div>
+                            </div>
+                            <div class="ticket-content">
+                                <h3>Verzoek om extra training materiaal</h3>
+                                <p>Kunnen we specifieke training toevoegen voor phishing emails gericht op de financiële sector...</p>
+                                <div class="ticket-meta">
+                                    <span>📅 12 maart 2024, 16:45</span>
+                                    <span>👤 Opgelost door: Lisa Mulder</span>
+                                    <span>💬 7 reacties</span>
+                                </div>
+                            </div>
+                            <div class="ticket-actions">
+                                <button class="btn-view">👁️ Bekijk</button>
+                                <button class="btn-rate">⭐ Beoordeel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Knowledge Base Tab -->
+            <div class="tab-content" id="knowledge-base">
+                <div class="knowledge-base">
+                    <h2>Knowledge Base & Veelgestelde Vragen</h2>
+                    <div class="kb-search">
+                        <input type="text" placeholder="Zoek in knowledge base..." class="search-input">
+                        <button class="search-btn">🔍</button>
+                    </div>
+
+                    <div class="kb-categories">
+                        <div class="kb-category">
+                            <h3>🛡️ Phishing Detectie</h3>
+                            <div class="kb-articles">
+                                <a href="#" class="kb-article">
+                                    <h4>Hoe werkt het AI detectiesysteem?</h4>
+                                    <p>Uitleg over machine learning algoritmes en real-time scanning...</p>
+                                </a>
+                                <a href="#" class="kb-article">
+                                    <h4>Wat te doen bij een false positive?</h4>
+                                    <p>Stappen om een ten onrechte geblokkeerde email te rapporteren...</p>
+                                </a>
+                                <a href="#" class="kb-article">
+                                    <h4>Whitelist beheer voor vertrouwde afzenders</h4>
+                                    <p>Hoe vertrouwde email adressen toe te voegen aan de whitelist...</p>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="kb-category">
+                            <h3>🔐 Toegang & Authenticatie</h3>
+                            <div class="kb-articles">
+                                <a href="#" class="kb-article">
+                                    <h4>Inlogproblemen oplossen</h4>
+                                    <p>Veelvoorkomende login problemen en oplossingen...</p>
+                                </a>
+                                <a href="#" class="kb-article">
+                                    <h4>VPN setup voor thuiswerkers</h4>
+                                    <p>Configuratie van VPN voor toegang tot intern systeem...</p>
+                                </a>
+                                <a href="#" class="kb-article">
+                                    <h4>Wachtwoord reset procedure</h4>
+                                    <p>Stappen om je Active Directory wachtwoord te resetten...</p>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="kb-category">
+                            <h3>📊 Dashboard & Rapportage</h3>
+                            <div class="kb-articles">
+                                <a href="#" class="kb-article">
+                                    <h4>Dashboard handleiding</h4>
+                                    <p>Complete uitleg van alle dashboard functies en grafieken...</p>
+                                </a>
+                                <a href="#" class="kb-article">
+                                    <h4>Rapporten genereren en exporteren</h4>
+                                    <p>Hoe beveiligingsrapporten te maken en te delen...</p>
+                                </a>
+                                <a href="#" class="kb-article">
+                                    <h4>Notificatie-instellingen aanpassen</h4>
+                                    <p>Configureer welke alerts je wel/niet wilt ontvangen...</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Status Tab -->
+            <div class="tab-content" id="system-status">
+                <div class="system-status">
+                    <h2>Live Systeemstatus</h2>
+                    <div class="status-overview">
+                        <div class="overall-status operational">
+                            <div class="status-icon">✅</div>
+                            <div class="status-text">
+                                <h3>Alle Systemen Operationeel</h3>
+                                <p>Laatste controle: 2 minuten geleden</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="status-components">
+                        <div class="component operational">
+                            <div class="component-name">AI Engine</div>
+                            <div class="component-status">Operationeel</div>
+                            <div class="component-uptime">99.9% uptime</div>
+                        </div>
+                        <div class="component operational">
+                            <div class="component-name">Email Scanner</div>
+                            <div class="component-status">Operationeel</div>
+                            <div class="component-uptime">99.8% uptime</div>
+                        </div>
+                        <div class="component operational">
+                            <div class="component-name">Dashboard API</div>
+                            <div class="component-status">Operationeel</div>
+                            <div class="component-uptime">99.9% uptime</div>
+                        </div>
+                        <div class="component maintenance">
+                            <div class="component-name">Backup Systeem</div>
+                            <div class="component-status">Gepland Onderhoud</div>
+                            <div class="component-uptime">Verwacht eind: 16:00</div>
+                        </div>
+                        <div class="component operational">
+                            <div class="component-name">Database</div>
+                            <div class="component-status">Operationeel</div>
+                            <div class="component-uptime">99.9% uptime</div>
+                        </div>
+                        <div class="component operational">
+                            <div class="component-name">Authenticatie</div>
+                            <div class="component-status">Operationeel</div>
+                            <div class="component-uptime">99.9% uptime</div>
+                        </div>
+                    </div>
+
+                    <div class="recent-incidents">
+                        <h3>Recente Incidenten</h3>
+                        <div class="incident-list">
+                            <div class="incident resolved">
+                                <div class="incident-status">Opgelost</div>
+                                <div class="incident-details">
+                                    <h4>Tijdelijke dashboard vertraging</h4>
+                                    <p>Dashboard response times waren verhoogd door database optimalisatie</p>
+                                    <div class="incident-time">14 maart 2024, 10:30 - 11:15 (45 min)</div>
+                                </div>
+                            </div>
+                            <div class="incident resolved">
+                                <div class="incident-status">Opgelost</div>
+                                <div class="incident-details">
+                                    <h4>Email scanner update</h4>
+                                    <p>Korte onderbreking voor kritieke security update</p>
+                                    <div class="incident-time">12 maart 2024, 02:00 - 02:15 (15 min)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="maintenance-schedule">
+                        <h3>Geplande Onderhoudstijden</h3>
+                        <div class="maintenance-list">
+                            <div class="maintenance-item">
+                                <div class="maintenance-date">22 maart 2024</div>
+                                <div class="maintenance-details">
+                                    <h4>Server Security Updates</h4>
+                                    <p>Installatie van kritieke beveiligingspatches</p>
+                                    <div class="maintenance-time">02:00 - 04:00 (verwachte downtime: 2 uur)</div>
+                                </div>
+                            </div>
+                            <div class="maintenance-item">
+                                <div class="maintenance-date">1 april 2024</div>
+                                <div class="maintenance-details">
+                                    <h4>Database Optimalisatie</h4>
+                                    <p>Performance optimalisatie en index rebuild</p>
+                                    <div class="maintenance-time">01:00 - 03:00 (verwachte downtime: 30 min)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Euramax Intern Support</h4>
+                    <p>Ons toegewijde support team staat klaar om je te helpen met alle beveiligingsgerelateerde vragen en problemen.</p>
+                    <p class="support-hours">Support tijden: Ma-Vr 08:00-18:00, Weekenden/24x7 voor kritieke issues</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Support Kanalen</h4>
+                    <ul>
+                        <li><a href="#new-ticket">🎫 Support Ticket</a></li>
+                        <li><a href="team.html">👥 Direct Contact</a></li>
+                        <li><a href="#knowledge-base">📚 Knowledge Base</a></li>
+                        <li><a href="docs.html">📖 Documentatie</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Noodcontacten</h4>
+                    <ul>
+                        <li><strong>Kritiek:</strong> +31 6 1234 5678</li>
+                        <li><strong>IT Support:</strong> +31 20 123 4567</li>
+                        <li><strong>Email:</strong> support@euramax.nl</li>
+                        <li><strong>Teams:</strong> Euramax IT Support</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Euramax Intern Support Systeem. Beschikbaar 24/7 voor kritieke security issues.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/support.js"></script>
+</body>
+</html>

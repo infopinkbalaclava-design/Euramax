@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intern Team Directory - Euramax Beveiligingssysteem</title>
+    <meta name="description" content="Intern team directory van Euramax beveiligingssysteem ontwikkelaars, security specialisten en IT support medewerkers.">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/team.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">Euramax</a>
+                
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="about.html" class="nav-link">Over Ons</a></li>
+                    <li><a href="services.html" class="nav-link">Functies</a></li>
+                    <li><a href="education.html" class="nav-link">Training</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                    <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                    <li><a href="docs.html" class="nav-link">Documentatie</a></li>
+                    <li><a href="team.html" class="nav-link active">Team</a></li>
+                    <li><a href="login.html" class="btn btn-primary">Inloggen</a></li>
+                </ul>
+                
+                <div class="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb">
+        <div class="container">
+            <a href="index.html">Home</a> > <span>Intern Team Directory</span>
+        </div>
+    </nav>
+
+    <!-- Team Hero -->
+    <section class="team-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Euramax Security Team Directory</h1>
+                <p>Ontmoet het interne team dat ons AI-aangedreven beveiligingssysteem ontwikkelt en onderhoudt</p>
+                <div class="team-stats">
+                    <div class="stat">
+                        <span class="stat-number">12</span>
+                        <span class="stat-label">Team Leden</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">4</span>
+                        <span class="stat-label">Afdelingen</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">2+</span>
+                        <span class="stat-label">Jaar Ervaring</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Filters -->
+    <section class="team-filters">
+        <div class="container">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">Alle Team Leden</button>
+                <button class="filter-btn" data-filter="development">Development</button>
+                <button class="filter-btn" data-filter="security">Security</button>
+                <button class="filter-btn" data-filter="it-support">IT Support</button>
+                <button class="filter-btn" data-filter="management">Management</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Members -->
+    <section class="team-members">
+        <div class="container">
+            <div class="team-grid">
+                <!-- Development Team -->
+                <div class="team-member" data-category="development">
+                    <div class="member-avatar">
+                        <div class="avatar-placeholder">MR</div>
+                        <div class="status-indicator online"></div>
+                    </div>
+                    <div class="member-info">
+                        <h3>Mark Rijksen</h3>
+                        <p class="role">Lead Intern Ontwikkelaar</p>
+                        <p class="department">Development Team</p>
+                        <div class="contact-info">
+                            <span>📧 m.rijksen@euramax.nl</span>
+                            <span>📞 Intern: 4512</span>
+                            <span>💼 2+ jaar bij Euramax</span>
+                        </div>
+                        <div class="skills">
+                            <span class="skill">TypeScript</span>
+                            <span class="skill">Python</span>
+                            <span class="skill">AI/ML</span>
+                        </div>
+                        <div class="member-actions">
+                            <button class="btn-contact">📧 Contact</button>
+                            <button class="btn-teams">💬 Teams Chat</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member" data-category="development">
+                    <div class="member-avatar">
+                        <div class="avatar-placeholder">SB</div>
+                        <div class="status-indicator away"></div>
+                    </div>
+                    <div class="member-info">
+                        <h3>Sophie Bakker</h3>
+                        <p class="role">Frontend Ontwikkelaar</p>
+                        <p class="department">Development Team</p>
+                        <div class="contact-info">
+                            <span>📧 s.bakker@euramax.nl</span>
+                            <span>📞 Intern: 4513</span>
+                            <span>💼 1.5 jaar bij Euramax</span>
+                        </div>
+                        <div class="skills">
+                            <span class="skill">React</span>
+                            <span class="skill">CSS</span>
+                            <span class="skill">UI/UX</span>
+                        </div>
+                        <div class="member-actions">
+                            <button class="btn-contact">📧 Contact</button>
+                            <button class="btn-teams">💬 Teams Chat</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member" data-category="development">
+                    <div class="member-avatar">
+                        <div class="avatar-placeholder">JV</div>
+                        <div class="status-indicator online"></div>
+                    </div>
+                    <div class="member-info">
+                        <h3>Jan van der Berg</h3>
+                        <p class="role">Backend Ontwikkelaar</p>
+                        <p class="department">Development Team</p>
+                        <div class="contact-info">
+                            <span>📧 j.vandeberg@euramax.nl</span>
+                            <span>📞 Intern: 4514</span>
+                            <span>💼 2.5 jaar bij Euramax</span>
+                        </div>
+                        <div class="skills">
+                            <span class="skill">Node.js</span>
+                            <span class="skill">SQL Server</span>
+                            <span class="skill">API Design</span>
+                        </div>
+                        <div class="member-actions">
+                            <button class="btn-contact">📧 Contact</button>
+                            <button class="btn-teams">💬 Teams Chat</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Team -->
+                <div class="team-member" data-category="security">
+                    <div class="member-avatar">
+                        <div class="avatar-placeholder">EK</div>
+                        <div class="status-indicator online"></div>
+                    </div>
+                    <div class="member-info">
+                        <h3>Emma Kuiper</h3>
+                        <p class="role">Intern Cybersecurity Specialist</p>
+                        <p class="department">Security Team</p>
+                        <div class="contact-info">
+                            <span>📧 e.kuiper@euramax.nl</span>
+                            <span>📞 Intern: 4521</span>
+                            <span>💼 3 jaar bij Euramax</span>
+                        </div>
+                        <div class="skills">
+                            <span class="skill">Threat Analysis</span>
+                            <span class="skill">SIEM</span>
+                            <span class="skill">Incident Response</span>
+                        </div>
+                        <div class="member-actions">
+                            <button class="btn-contact">📧 Contact</button>
+                            <button class="btn-teams">💬 Teams Chat</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member" data-category="security">
+                    <div class="member-avatar">
+                        <div class="avatar-placeholder">DP</div>
+                        <div class="status-indicator online"></div>
+                    </div>
+                    <div class="member-info">
+                        <h3>David Peters</h3>
+                        <p class="role">Security Analyst</p>
+                        <p class="department">Security Team</p>
+                        <div class="contact-info">
+                            <span>📧 d.peters@euramax.nl</span>
+                            <span>📞 Intern: 4522</span>
+                            <span>💼 1 jaar bij Euramax</span>
+                        </div>
+                        <div class="skills">
+                            <span class="skill">Malware Analysis</span>
+                            <span class="skill">Forensics</span>
+                            <span class="skill">Risk Assessment</span>
+                        </div>
+                        <div class="member-actions">
+                            <button class="btn-contact">📧 Contact</button>
+                            <button class="btn-teams">💬 Teams Chat</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- IT Support Team -->
+                <div class="team-member" data-category="it-support">
+                    <div class="member-avatar">
+                        <div class="avatar-placeholder">LM</div>
+                        <div class="status-indicator online"></div>
+                    </div>
+                    <div class="member-info">
+                        <h3>Lisa Mulder</h3>
+                        <p class="role">IT Support Specialist</p>
+                        <p class="department">IT Support</p>
+                        <div class="contact-info">
+                            <span>📧 l.mulder@euramax.nl</span>
+                            <span>📞 Intern: 4531</span>
+                            <span>💼 2 jaar bij Euramax</span>
+                        </div>
+                        <div class="skills">
+                            <span class="skill">Helpdesk</span>
+                            <span class="skill">User Training</span>
+                            <span class="skill">System Admin</span>
+                        </div>
+                        <div class="member-actions">
+                            <button class="btn-contact">📧 Contact</button>
+                            <button class="btn-teams">💬 Teams Chat</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member" data-category="it-support">
+                    <div class="member-avatar">
+                        <div class="avatar-placeholder">TH</div>
+                        <div class="status-indicator away"></div>
+                    </div>
+                    <div class="member-info">
+                        <h3>Tom Hendriks</h3>
+                        <p class="role">System Administrator</p>
+                        <p class="department">IT Support</p>
+                        <div class="contact-info">
+                            <span>📧 t.hendriks@euramax.nl</span>
+                            <span>📞 Intern: 4532</span>
+                            <span>💼 4 jaar bij Euramax</span>
+                        </div>
+                        <div class="skills">
+                            <span class="skill">Windows Server</span>
+                            <span class="skill">Active Directory</span>
+                            <span class="skill">Network Security</span>
+                        </div>
+                        <div class="member-actions">
+                            <button class="btn-contact">📧 Contact</button>
+                            <button class="btn-teams">💬 Teams Chat</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Management -->
+                <div class="team-member" data-category="management">
+                    <div class="member-avatar">
+                        <div class="avatar-placeholder">RJ</div>
+                        <div class="status-indicator online"></div>
+                    </div>
+                    <div class="member-info">
+                        <h3>Robert Jansen</h3>
+                        <p class="role">IT Security Manager</p>
+                        <p class="department">Management</p>
+                        <div class="contact-info">
+                            <span>📧 r.jansen@euramax.nl</span>
+                            <span>📞 Intern: 4501</span>
+                            <span>💼 5+ jaar bij Euramax</span>
+                        </div>
+                        <div class="skills">
+                            <span class="skill">Security Strategy</span>
+                            <span class="skill">Team Leadership</span>
+                            <span class="skill">Risk Management</span>
+                        </div>
+                        <div class="member-actions">
+                            <button class="btn-contact">📧 Contact</button>
+                            <button class="btn-teams">💬 Teams Chat</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member" data-category="management">
+                    <div class="member-avatar">
+                        <div class="avatar-placeholder">AV</div>
+                        <div class="status-indicator online"></div>
+                    </div>
+                    <div class="member-info">
+                        <h3>Anna Visser</h3>
+                        <p class="role">Project Manager</p>
+                        <p class="department">Management</p>
+                        <div class="contact-info">
+                            <span>📧 a.visser@euramax.nl</span>
+                            <span>📞 Intern: 4502</span>
+                            <span>💼 3 jaar bij Euramax</span>
+                        </div>
+                        <div class="skills">
+                            <span class="skill">Agile/Scrum</span>
+                            <span class="skill">Project Planning</span>
+                            <span class="skill">Stakeholder Mgmt</span>
+                        </div>
+                        <div class="member-actions">
+                            <button class="btn-contact">📧 Contact</button>
+                            <button class="btn-teams">💬 Teams Chat</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Emergency Contacts -->
+    <section class="emergency-contacts">
+        <div class="container">
+            <h2>Noodcontacten & Escalatie</h2>
+            <div class="emergency-grid">
+                <div class="emergency-card critical">
+                    <div class="emergency-icon">🚨</div>
+                    <h3>Kritieke Security Incidents</h3>
+                    <p>Voor directe beveiligingsbedreigingen</p>
+                    <div class="contact-details">
+                        <strong>Emma Kuiper</strong> (Security Lead)<br>
+                        <span>📱 +31 6 1234 5678 (24/7)</span><br>
+                        <span>📧 security-emergency@euramax.nl</span>
+                    </div>
+                </div>
+
+                <div class="emergency-card urgent">
+                    <div class="emergency-icon">⚡</div>
+                    <h3>Systeem Down / Outages</h3>
+                    <p>Voor systeem uitval of performance problemen</p>
+                    <div class="contact-details">
+                        <strong>Tom Hendriks</strong> (SysAdmin)<br>
+                        <span>📱 +31 6 2345 6789</span><br>
+                        <span>📧 sysadmin@euramax.nl</span>
+                    </div>
+                </div>
+
+                <div class="emergency-card normal">
+                    <div class="emergency-icon">🔧</div>
+                    <h3>Development Issues</h3>
+                    <p>Voor bugs en development gerelateerde problemen</p>
+                    <div class="contact-details">
+                        <strong>Mark Rijksen</strong> (Lead Dev)<br>
+                        <span>📱 +31 6 3456 7890</span><br>
+                        <span>📧 development@euramax.nl</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Calendar -->
+    <section class="team-calendar">
+        <div class="container">
+            <h2>Team Kalender & Beschikbaarheid</h2>
+            <div class="calendar-info">
+                <p>Bekijk de beschikbaarheid van team leden en geplande onderhoudstijden</p>
+                <div class="calendar-legend">
+                    <span class="legend-item"><span class="status-dot online"></span> Beschikbaar</span>
+                    <span class="legend-item"><span class="status-dot away"></span> Afwezig/Vergadering</span>
+                    <span class="legend-item"><span class="status-dot offline"></span> Niet beschikbaar</span>
+                </div>
+            </div>
+            
+            <div class="upcoming-events">
+                <h3>Aankomende Events</h3>
+                <div class="event-list">
+                    <div class="event-item">
+                        <div class="event-date">18 maart</div>
+                        <div class="event-details">
+                            <h4>Security Review Meeting</h4>
+                            <p>Maandelijkse security review met management</p>
+                            <span class="attendees">Emma, Robert, Anna</span>
+                        </div>
+                    </div>
+                    <div class="event-item">
+                        <div class="event-date">22 maart</div>
+                        <div class="event-details">
+                            <h4>System Maintenance</h4>
+                            <p>Geplande server updates (2:00-4:00 AM)</p>
+                            <span class="attendees">Tom, Jan</span>
+                        </div>
+                    </div>
+                    <div class="event-item">
+                        <div class="event-date">25 maart</div>
+                        <div class="event-details">
+                            <h4>Sprint Planning</h4>
+                            <p>Development team sprint planning sessie</p>
+                            <span class="attendees">Development Team</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Euramax Security Team</h4>
+                    <p>Een toegewijd intern team van 12 professionals die samen werken aan de beveiliging van Euramax tegen cyber-bedreigingen.</p>
+                    <p class="team-motto">"Samen sterker tegen bedreigingen"</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Team Afdelingen</h4>
+                    <ul>
+                        <li><a href="#development">Development Team (4)</a></li>
+                        <li><a href="#security">Security Team (2)</a></li>
+                        <li><a href="#it-support">IT Support (2)</a></li>
+                        <li><a href="#management">Management (2)</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contact Opties</h4>
+                    <ul>
+                        <li><a href="mailto:team@euramax.nl">📧 team@euramax.nl</a></li>
+                        <li><a href="#">💬 Teams: Security Team</a></li>
+                        <li><a href="support.html">🎫 Support Ticket</a></li>
+                        <li><a href="docs.html">📚 Documentatie</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Euramax Security Team Directory. Intern gebruik - Vertrouwelijke informatie.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/team.js"></script>
+</body>
+</html>
