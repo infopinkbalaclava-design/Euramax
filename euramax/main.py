@@ -1,6 +1,6 @@
 """
 Euramax FastAPI Hoofdapplicatie
-Nederlandse cybersecurity verdedigingssysteem met AI-automatie
+Nederlandse publieke cybersecurity verdedigingssysteem met AI-automatie
 """
 
 from fastapi import FastAPI, HTTPException, Depends, BackgroundTasks
@@ -71,7 +71,7 @@ async def lifespan(app: FastAPI):
 # FastAPI applicatie initialisatie
 app = FastAPI(
     title=settings.app_name,
-    description="AI-Gestuurde Cybersecurity Verdedigingssysteem - Nederlandse Implementatie",
+    description="AI-Gestuurde Cybersecurity Verdedigingssysteem - Nederlandse Publieke Implementatie",
     version=settings.app_version,
     docs_url="/docs" if settings.debug else None,
     redoc_url="/redoc" if settings.debug else None,
