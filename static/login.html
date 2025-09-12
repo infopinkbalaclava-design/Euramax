@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inloggen - Euramax AI Phishing Beveiliging</title>
+    <meta name="description" content="Toegang tot uw Euramax dashboard om bedreigingen te monitoren, training te beheren en uw AI phishing beveiligingsinstellingen te configureren.">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">Euramax</a>
+                
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="about.html" class="nav-link">Over Ons</a></li>
+                    <li><a href="services.html" class="nav-link">Diensten</a></li>
+                    <li><a href="education.html" class="nav-link">Training</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                    <li><a href="login.html" class="btn btn-primary active">Inloggen</a></li>
+                </ul>
+                
+                <div class="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Login Section -->
+    <section class="section" style="padding-top: 8rem; min-height: 100vh; background: linear-gradient(135deg, var(--surface) 0%, var(--background) 100%);">
+        <div class="container">
+            <div class="grid grid-2" style="max-width: 1000px; margin: 0 auto; align-items: center; gap: 4rem;">
+                <!-- Left Side - Branding -->
+                <div class="slide-in-left">
+                    <h1>Welkom Terug</h1>
+                    <p style="font-size: 1.125rem; margin-bottom: 2rem;">Toegang tot uw Euramax dashboard om bedreigingen te monitoren, trainingsprogramma's te beheren en uw AI-beveiligingsinstellingen te configureren.</p>
+                    
+                    <div class="card" style="background: var(--primary-color); color: white; border: none;">
+                        <h3 style="color: white; margin-bottom: 1.5rem;">🛡️ Uw Veiligheids Commandocentrum</h3>
+                        <ul style="list-style: none; margin: 0;">
+                            <li style="display: flex; align-items: center; margin-bottom: 1rem;">
+                                <span style="margin-right: 0.75rem;">📊</span>
+                                Real-time bedreigings monitoring en analytics
+                            </li>
+                            <li style="display: flex; align-items: center; margin-bottom: 1rem;">
+                                <span style="margin-right: 0.75rem;">🎓</span>
+                                Medewerker training voortgangscontrole
+                            </li>
+                            <li style="display: flex; align-items: center; margin-bottom: 1rem;">
+                                <span style="margin-right: 0.75rem;">⚙️</span>
+                                AI beschermingssysteem configuratie
+                            </li>
+                            <li style="display: flex; align-items: center;">
+                                <span style="margin-right: 0.75rem;">📈</span>
+                                Uitgebreide beveiligingsrapporten
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Right Side - Login Form -->
+                <div class="card fade-in" style="max-width: 400px;">
+                    <div class="card-header">
+                        <h2 style="text-align: center; margin-bottom: 0.5rem;">Inloggen</h2>
+                        <p style="text-align: center; color: var(--text-secondary); margin: 0;">Voer uw inloggegevens in om toegang te krijgen tot uw dashboard</p>
+                    </div>
+                    
+                    <!-- Login Form -->
+                    <form id="login-form">
+                        <div class="form-group">
+                            <label for="email" class="form-label">E-mailadres</label>
+                            <input type="email" id="email" name="email" class="form-input" placeholder="Voer uw e-mailadres in" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="password" class="form-label">Wachtwoord</label>
+                            <div style="position: relative;">
+                                <input type="password" id="password" name="password" class="form-input" placeholder="Voer uw wachtwoord in" required>
+                                <button type="button" onclick="togglePassword()" style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-secondary); cursor: pointer; padding: 0;" data-tooltip="Wachtwoord tonen/verbergen">
+                                    <span id="password-toggle">👁️</span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                <input type="checkbox" id="remember" name="remember">
+                                <span style="font-size: 0.875rem;">Onthoud mij</span>
+                            </label>
+                            <a href="#forgot-password" style="font-size: 0.875rem; color: var(--primary-color); text-decoration: none;">Wachtwoord vergeten?</a>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%; margin-bottom: 1rem;">
+                            Inloggen
+                        </button>
+                        
+                        <div style="text-align: center; margin-bottom: 1.5rem;">
+                            <span style="color: var(--text-secondary); font-size: 0.875rem;">Heeft u nog geen account? </span>
+                            <a href="contact.html" style="color: var(--primary-color); text-decoration: none; font-weight: 500;">Neem Contact Op</a>
+                        </div>
+                        
+                        <!-- Divider -->
+                        <div style="position: relative; margin: 1.5rem 0; text-align: center;">
+                            <div style="position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: var(--border-color);"></div>
+                            <span style="background: white; padding: 0 1rem; color: var(--text-secondary); font-size: 0.875rem;">Of ga verder met</span>
+                        </div>
+                        
+                        <!-- SSO Options -->
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button type="button" onclick="ssoLogin('microsoft')" class="btn btn-secondary" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                                <span>🏢</span> Microsoft
+                            </button>
+                            <button type="button" onclick="ssoLogin('google')" class="btn btn-secondary" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                                <span>🔍</span> Google
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <!-- Demo Access -->
+                    <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color); text-align: center;">
+                        <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 1rem;">Wilt u ons platform uitproberen?</p>
+                        <button onclick="demoLogin()" class="btn" style="background: var(--surface); color: var(--text-primary); border: 1px solid var(--border-color); width: 100%;">
+                            Toegang Demo Dashboard
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Forgot Password Modal -->
+    <div id="forgot-password-modal" class="modal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.5); z-index: 10000; justify-content: center; align-items: center;">
+        <div class="card" style="max-width: 400px; margin: 2rem;">
+            <div class="card-header">
+                <h3>Wachtwoord Resetten</h3>
+                <p style="margin: 0; color: var(--text-secondary);">Voer uw e-mailadres in om reset instructies te ontvangen</p>
+            </div>
+            
+            <form id="forgot-password-form">
+                <div class="form-group">
+                    <label for="reset-email" class="form-label">E-mailadres</label>
+                    <input type="email" id="reset-email" name="reset-email" class="form-input" placeholder="Voer uw e-mailadres in" required>
+                </div>
+                
+                <div style="display: flex; gap: 1rem;">
+                    <button type="submit" class="btn btn-primary" style="flex: 1;">Verstuur Reset Link</button>
+                    <button type="button" onclick="closeForgotPassword()" class="btn btn-secondary" style="flex: 1;">Annuleren</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Security Features -->
+    <section class="section" style="background: var(--surface);">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fade-in">Enterprise Beveiliging Die U Kunt Vertrouwen</h2>
+                <p class="fade-in">Uw gegevens en privacy zijn beschermd met toonaangevende beveiligingsmaatregelen</p>
+            </div>
+            
+            <div class="grid grid-4">
+                <div class="card fade-in" style="text-align: center;">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">🔐</div>
+                    <h4>Multi-Factor Authenticatie</h4>
+                    <p style="font-size: 0.875rem;">Verbeterde beveiliging met SMS, e-mail en authenticator app ondersteuning</p>
+                </div>
+                
+                <div class="card fade-in" style="text-align: center;">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">🛡️</div>
+                    <h4>SOC 2 Gecertificeerd</h4>
+                    <p style="font-size: 0.875rem;">Rigoureuze beveiligingscontroles en compliance standaarden</p>
+                </div>
+                
+                <div class="card fade-in" style="text-align: center;">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">🔒</div>
+                    <h4>Data Encryptie</h4>
+                    <p style="font-size: 0.875rem;">256-bit AES encryptie voor data at rest en in transit</p>
+                </div>
+                
+                <div class="card fade-in" style="text-align: center;">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">🌐</div>
+                    <h4>Single Sign-On</h4>
+                    <p style="font-size: 0.875rem;">Integratie met Active Directory, Okta en SAML providers</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Status and Support -->
+    <section class="section">
+        <div class="container">
+            <div class="grid grid-2">
+                <div class="card slide-in-left">
+                    <div class="card-header">
+                        <h3>🟢 Systeemstatus</h3>
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                            <span>AI Detectie Engine</span>
+                            <span style="color: var(--accent-color); font-weight: 500;">Operationeel</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                            <span>Trainingsplatform</span>
+                            <span style="color: var(--accent-color); font-weight: 500;">Operationeel</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                            <span>Monitoring Dashboard</span>
+                            <span style="color: var(--accent-color); font-weight: 500;">Operationeel</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span>API Services</span>
+                            <span style="color: var(--accent-color); font-weight: 500;">Operationeel</span>
+                        </div>
+                    </div>
+                    <div style="text-align: center;">
+                        <span style="color: var(--text-secondary); font-size: 0.875rem;">99.9% Uptime • Laatst bijgewerkt: 2 minuten geleden</span>
+                    </div>
+                </div>
+                
+                <div class="card slide-in-left">
+                    <div class="card-header">
+                        <h3>Hulp Nodig?</h3>
+                    </div>
+                    <div style="margin-bottom: 1.5rem;">
+                        <p style="margin-bottom: 1rem;">Ons ondersteuningsteam is 24/7 beschikbaar om te helpen met inlogproblemen of technische vragen.</p>
+                        <ul class="feature-list">
+                            <li class="feature-item">Live chat ondersteuning</li>
+                            <li class="feature-item">E-mail ondersteuning binnen 2 uur</li>
+                            <li class="feature-item">Telefoonondersteuning voor Enterprise klanten</li>
+                            <li class="feature-item">Uitgebreide hulp documentatie</li>
+                        </ul>
+                    </div>
+                    <a href="contact.html" class="btn btn-secondary">Neem Contact Op</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Euramax</h3>
+                    <p>Geavanceerd AI-aangedreven phishing beveiligingssysteem dat geautomatiseerde bedreigingsdetectie en uitgebreide medewerkerstraining biedt.</p>
+                    <div style="margin-top: 1rem;">
+                        <span style="color: rgba(255, 255, 255, 0.7);">Volg ons:</span>
+                        <div style="margin-top: 0.5rem; display: flex; gap: 1rem;">
+                            <a href="#" style="color: rgba(255, 255, 255, 0.7); text-decoration: none;">LinkedIn</a>
+                            <a href="#" style="color: rgba(255, 255, 255, 0.7); text-decoration: none;">Twitter</a>
+                            <a href="#" style="color: rgba(255, 255, 255, 0.7); text-decoration: none;">YouTube</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Diensten</h3>
+                    <ul class="footer-links">
+                        <li><a href="services.html">AI Bedreigingsdetectie</a></li>
+                        <li><a href="services.html">Medewerkerstraining</a></li>
+                        <li><a href="services.html">Real-time Monitoring</a></li>
+                        <li><a href="services.html">Incident Response</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Bedrijf</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html">Over Ons</a></li>
+                        <li><a href="education.html">Training</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="#">Privacybeleid</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Ondersteuning</h3>
+                    <ul class="footer-links">
+                        <li><a href="contact.html">Helpcentrum</a></li>
+                        <li><a href="contact.html">Documentatie</a></li>
+                        <li><a href="contact.html">API Referentie</a></li>
+                        <li><a href="contact.html">Status Pagina</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Euramax. Alle rechten voorbehouden. | Organisaties wereldwijd beschermen tegen phishing-bedreigingen.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Password visibility toggle
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const toggleIcon = document.getElementById('password-toggle');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.textContent = '🙈';
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.textContent = '👁️';
+            }
+        }
+        
+        // Login form handling
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const remember = document.getElementById('remember').checked;
+            
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.innerHTML = '<span class="loading"></span> Inloggen...';
+            submitBtn.disabled = true;
+            
+            // Simulate login process
+            setTimeout(() => {
+                if (email && password) {
+                    EuramaxJS.showNotification('Inloggen succesvol! Doorverwijzen naar dashboard...', 'success');
+                    setTimeout(() => {
+                        // In a real app, this would redirect to the actual dashboard
+                        EuramaxJS.showNotification('In een echte applicatie zou u nu doorverwezen worden naar uw dashboard met volledige toegang tot:\n\n• Real-time bedreigings monitoring\n• Training beheer\n• Beveiligings analytics\n• Configuratie instellingen\n• Incident response tools', 'info');
+                    }, 1500);
+                } else {
+                    EuramaxJS.showNotification('Voer zowel e-mailadres als wachtwoord in', 'error');
+                }
+                
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }, 2000);
+        });
+        
+        // SSO login simulation
+        function ssoLogin(provider) {
+            EuramaxJS.showNotification(`Doorverwijzen naar ${provider} login...`, 'info');
+            setTimeout(() => {
+                EuramaxJS.showNotification(`In een echte implementatie zou dit doorverwijzen naar ${provider} OAuth flow voor veilige authenticatie.`, 'info');
+            }, 1000);
+        }
+        
+        // Demo login
+        function demoLogin() {
+            EuramaxJS.showNotification('Demo dashboard wordt geladen...', 'info');
+            setTimeout(() => {
+                EuramaxJS.showNotification('Demo Dashboard Toegang:\n\n✓ Voorbeeld bedreigingsgegevens\n✓ Training module voorbeelden\n✓ Interactieve analytics\n✓ Configuratie doorloop\n\nIn een echte implementatie zou dit beperkte toegang bieden om de platform functies te verkennen.', 'info');
+            }, 1500);
+        }
+        
+        // Forgot password functionality
+        document.querySelector('a[href="#forgot-password"]').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('forgot-password-modal').style.display = 'flex';
+        });
+        
+        function closeForgotPassword() {
+            document.getElementById('forgot-password-modal').style.display = 'none';
+        }
+        
+        document.getElementById('forgot-password-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('reset-email').value;
+            
+            if (email) {
+                EuramaxJS.showNotification('Wachtwoord reset link verstuurd naar uw e-mail!', 'success');
+                closeForgotPassword();
+                this.reset();
+            }
+        });
+        
+        // Close modal when clicking outside
+        document.getElementById('forgot-password-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeForgotPassword();
+            }
+        });
+        
+        // Auto-focus email field on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('email').focus();
+        });
+    </script>
+</body>
+</html>
