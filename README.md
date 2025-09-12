@@ -42,10 +42,9 @@
 
 ### 🏢 Over Euramax
 
-**Euramax** is een gevestigde Nederlandse onderneming gespecialiseerd in bouwmaterialen en cladding oplossingen. Dit cybersecurity project is **intern ontwikkeld** door het IT-team van Euramax om de **digitale veiligheid** van het bedrijf en haar partners te waarborgen. 
+**Euramax** is een gevestigde Nederlandse onderneming gespecialiseerd in cladding oplossingen. Dit cybersecurity project is **intern ontwikkeld** door het IT-team van Euramax om de **digitale veiligheid** van het bedrijf en haar partners te waarborgen. 
 
-**Waarom dit systeem?**
-- **🇳🇱 Nederlandse compliance**: Voldoet aan lokale privacy- en veiligheidseisen  
+**Waarom dit systeem?**  
 - **👥 Interne ontwikkeling**: Volledige controle over beveiliging en functionaliteit
 - **🔄 Continuous improvement**: Voortdurende updates gebaseerd op interne behoeften
 
@@ -55,8 +54,6 @@ Voor meer informatie over Euramax als bedrijf: [euramaxcladding.com](https://eur
 
 ### 🚀 Probeer de Training Direct Online
 **Bezoek onze live demo:** 👉 **[https://infopinkbalaclava-design.github.io/Euramax/static/cybersecurity-course.html](https://infopinkbalaclava-design.github.io/Euramax/static/cybersecurity-course.html)**
-
-**🔗 [Live Demo Link](http://example.com) - *Link to be updated with live deployment URL.***
 
 De live demo bevat:
 - ✅ **Enhanced cybersecurity training** - Alle 5 modules met progress tracking
