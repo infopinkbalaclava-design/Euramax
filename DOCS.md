@@ -1,6 +1,6 @@
 # Euramax Documentation
 
-Welcome to the documentation for Euramax, the AI-powered cybersecurity defense system.
+Welcome to the documentation for Euramax, the internal cybersecurity platform for threat detection and employee education.
 
 ## Table of Contents
 
@@ -15,7 +15,7 @@ Welcome to the documentation for Euramax, the AI-powered cybersecurity defense s
 
 ### Introduction
 
-Euramax is a fully automated AI-powered cybersecurity defense system designed to protect organizations in the Netherlands from a wide range of cyber threats. It provides real-time detection, analysis, and response.
+Euramax is an internal cybersecurity platform for threat detection and employee education designed to protect organizations in the Netherlands from a wide range of cyber threats. It provides real-time detection, analysis, and response.
 
 ### Installation
 

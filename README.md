@@ -27,7 +27,7 @@
 
 ## 🛡️ Overzicht
 
- **Volledig geautomatiseerd AI-aangedreven cybersecurity verdedigingssysteem** ontwikkeld door Euramax voor **interne beveiliging en bedreigingsbeheer**. Het systeem biedt **real-time bescherming** tegen alle soorten cyberbedreigingen met gespecialiseerde **anti-phishing capaciteiten**, **autonome AI-bot automatisering**, en een **uitgebreide Nederlandse cybersecurity training** voor medewerkers.
+ **Volledig geautomatiseerd AI-aangedreven internal cybersecurity platform for threat detection and employee education** ontwikkeld door Euramax voor **interne beveiliging en bedreigingsbeheer**. Het systeem biedt **real-time bescherming** tegen alle soorten cyberbedreigingen met gespecialiseerde **anti-phishing capaciteiten**, **autonome AI-bot automatisering**, en een **uitgebreide Nederlandse cybersecurity training** voor medewerkers.
 
 ### 🎯 Kernfunctionaliteiten
 
@@ -56,6 +56,8 @@ Voor meer informatie over Euramax als bedrijf: [euramaxcladding.com](https://eur
 
 ### 🚀 Probeer de Training Direct Online
 **Bezoek onze live demo:** 👉 **[https://infopinkbalaclava-design.github.io/Euramax/static/cybersecurity-course.html](https://infopinkbalaclava-design.github.io/Euramax/static/cybersecurity-course.html)**
+
+**🔗 [Live Demo Link](http://example.com) - *Link to be updated with live deployment URL.***
 
 De live demo bevat:
 - ✅ **Enhanced cybersecurity training** - Alle 5 modules met progress tracking
