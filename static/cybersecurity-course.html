@@ -4,50 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Euramax Cybersecurity Training - Internal Platform for Threat Detection and Employee Education</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .header {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 2rem;
-            border-radius: 15px;
-            margin-bottom: 2rem;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-            backdrop-filter: blur(10px);
-            text-align: center;
-        }
-
-        .header h1 {
-            color: #2c3e50;
-            font-size: 2.2rem;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-
-        .header p {
-            color: #7f8c8d;
-            font-size: 1.1rem;
+    <meta name="description" content="Comprehensive cybersecurity training platform for Euramax employees. Learn about threat detection, phishing protection, and security best practices.">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <img src="https://www.euramax.com/wp-content/uploads/2022/03/Euramax-logo-300x100-1.png" alt="Euramax Logo" style="height: 40px; width: auto;">
+                    <span style="font-size: 0.875rem; color: var(--text-secondary); margin-left: 1rem; font-weight: 400;">
+                        Internal Cybersecurity Platform
+                    </span>
+                </a>
+                
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">🏠 Home</a></li>
+                    <li><a href="dashboard.html" class="nav-link">📊 Security Dashboard</a></li>
+                    <li><a href="cybersecurity-course.html" class="nav-link active">📚 Training</a></li>
+                    <li><a href="phishing-simulation-demo.html" class="nav-link">🎯 Phishing Test</a></li>
+                    <li><a href="about.html" class="nav-link">ℹ️ About Euramax</a></li>
+                    <li><a href="services.html" class="nav-link">🔧 Tools</a></li>
+                    <li><a href="education.html" class="nav-link">🎓 Education</a></li>
+                    <li><a href="contact.html" class="nav-link">📞 Support</a></li>
+                    <li><a href="login.html" class="btn btn-primary">🔐 Admin Login</a></li>
+                </ul>
+                
+                <div class="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+            
+            <!-- Internal Use Banner -->
+            <div class="internal-use-banner" style="
+                background: linear-gradient(135deg, #fef3c7, #fed7d7);
+                color: #9a3412;
+                padding: 0.5rem 1rem;
+                border-radius: 0.5rem;
+                text-align: center;
+                font-size: 0.875rem;
+                font-weight: 500;
+                margin-top: 1rem;
+                border: 1px solid #fed7aa;
+            ">
+                🔒 <strong>INTERNAL USE ONLY</strong> - Euramax Cybersecurity Platform voor medewerkers en partners
+            </div>
+        </div>
+    </header>
         }
 
         .course-content {
@@ -642,53 +651,84 @@
             .course-content h3 {
                 font-size: 1.1rem;
             }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <h1>
-                🛡️ Euramax Cybersecurity Training
-                <span style="font-size: 1.5rem;">🇳🇱</span>
-            </h1>
-            <p>Geavanceerde Cybersecurity Training voor Medewerkers met Toegang tot Gevoelige Data</p>
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressBar" style="width: 0%;"></div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>🛡️ Euramax Cybersecurity Training</h1>
+                <p>Comprehensive cybersecurity education for Euramax employees with access to sensitive data. Learn about threat detection, phishing protection, and security best practices.</p>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="#basic-training" class="btn btn-primary">Start Basic Training</a>
+                    <a href="#advanced-training" class="btn btn-secondary">Advanced Modules</a>
+                </div>
             </div>
         </div>
+    </section>
 
-        <!-- Enhanced Course Menu with Progress Tracking -->
-        <div class="course-menu" id="courseMenu">
-            <h3>📚 Cursus Inhoud</h3>
-            
-            <!-- Learning Path Indicator -->
-            <div id="learningPath" style="background: #f8f9fa; padding: 1rem; border-radius: 10px; margin-bottom: 1rem;">
-                <h4 style="margin-bottom: 0.5rem; color: #2c3e50;">🎯 Leerpad</h4>
-                <div id="pathIndicator" style="display: flex; align-items: center; gap: 0.5rem; overflow-x: auto; padding: 0.5rem 0;">
-                    <!-- Path steps will be generated by JavaScript -->
-                </div>
+    <!-- Training Progress Section -->
+    <section class="section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fade-in">Training Modules Overview</h2>
+                <p class="fade-in">Progress through our structured cybersecurity training program</p>
             </div>
             
-            <!-- Progress Dashboard -->
-            <div id="progressDashboard" style="background: #f8f9fa; padding: 1rem; border-radius: 10px; margin-bottom: 1rem;">
-                <h4 style="margin-bottom: 0.5rem; color: #2c3e50;">📊 Uw Voortgang</h4>
-                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                    <span id="progressText">0% voltooid</span>
-                    <span id="timeSpent">Tijd besteed: 0 min</span>
+            <div class="grid grid-3">
+                <div class="card fade-in">
+                    <div class="card-header">
+                        <span class="card-icon">🔰</span>
+                        <h3>Basic Security</h3>
+                    </div>
+                    <p>Foundation cybersecurity concepts every employee should know. Password security, email safety, and basic threat recognition.</p>
+                    <a href="#basic-module" class="btn btn-secondary">Start Module</a>
                 </div>
-                <div style="display: flex; justify-content: space-between; font-size: 0.9rem; color: #7f8c8d;">
-                    <span id="completedModules">0/6 modules</span>
-                    <span id="quizScore">Toets: Niet voltooid</span>
+                
+                <div class="card fade-in">
+                    <div class="card-header">
+                        <span class="card-icon">🎯</span>
+                        <h3>Phishing Detection</h3>
+                    </div>
+                    <p>Learn to identify and respond to phishing attempts. Interactive training with real-world examples and simulations.</p>
+                    <a href="phishing-simulation-demo.html" class="btn btn-secondary">View Simulation</a>
                 </div>
-                <!-- Achievement badges -->
-                <div id="achievementBadges" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                    <!-- Badges will be added dynamically -->
+                
+                <div class="card fade-in">
+                    <div class="card-header">
+                        <span class="card-icon">🔒</span>
+                        <h3>Advanced Security</h3>
+                    </div>
+                    <p>Advanced topics for employees with elevated access. Data protection, incident response, and security protocols.</p>
+                    <a href="#advanced-module" class="btn btn-secondary">Start Module</a>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <button class="menu-item active" onclick="showSection('intro')" id="menu-intro">
+    <!-- Interactive Training Section -->
+    <section class="section" style="background: var(--surface);">
+        <div class="container">
+            <div class="grid grid-2" style="align-items: center;">
+                <div class="slide-in-left">
+                    <h2>Interactive Learning Platform</h2>
+                    <p>Our cybersecurity training platform provides hands-on learning experiences designed specifically for Euramax employees. Each module includes practical exercises, real-world scenarios, and progress tracking.</p>
+                    <ul class="feature-list">
+                        <li class="feature-item">Self-paced learning modules with instant feedback</li>
+                        <li class="feature-item">Practical phishing simulation exercises</li>
+                        <li class="feature-item">Progress tracking and certification management</li>
+                        <li class="feature-item">Regular security awareness updates and alerts</li>
+                    </ul>
+                </div>
+                <div class="card fade-in">
+                    <div style="text-align: center; padding: 2rem;">
+                        <div style="font-size: 4rem; margin-bottom: 1rem;">📚</div>
+                        <h3>Training Features</h3>
+                        <p>Interactive modules, practical simulations, and comprehensive assessments to ensure effective cybersecurity education.</p>
+                        <a href="dashboard.html" class="btn btn-primary">View Dashboard</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
                 🏁 Introductie <span class="module-status" id="status-intro"></span>
             </button>
             <button class="menu-item" onclick="showSection('phishing')" id="menu-phishing">
@@ -1314,18 +1354,54 @@
                 <li><strong>Incident simulations:</strong> Oefeningen voor emergency response</li>
             </ul>
 
-            <div class="info-box">
-                <strong>💡 Euramax Data Protection Commitment:</strong> Wij hanteren een zero-tolerance beleid voor ongeautoriseerde data toegang. Alle data behandeling wordt gelogd en gemonitord. Medewerkers hebben de verantwoordelijkheid om privacy by design te implementeren in alle processen.
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="grid grid-3">
+                <div>
+                    <h3>Euramax Security</h3>
+                    <p>Internal cybersecurity platform for comprehensive employee protection and education.</p>
+                </div>
+                <div>
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="dashboard.html">Security Dashboard</a></li>
+                        <li><a href="phishing-simulation-demo.html">Phishing Test</a></li>
+                        <li><a href="contact.html">Support</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Support</h3>
+                    <p>Email: security@euramax.eu</p>
+                    <p>24/7 Emergency: +31 (0)20 123 4567</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Euramax. Internal Security Platform - Confidential Use Only.</p>
             </div>
         </div>
+    </footer>
 
-        <!-- Navigation -->
-        <div class="navigation">
-            <button class="btn" id="prevBtn" onclick="previousSection()" disabled>← Vorige</button>
-            <button class="btn" id="nextBtn" onclick="nextSection()">Volgende →</button>
-        </div>
-    </div>
-
-    <script src="cybersecurity-course.js"></script>
+    <script>
+        // Basic animation scripts
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fade in animations
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+            });
+            
+            setTimeout(() => {
+                fadeElements.forEach((el, index) => {
+                    setTimeout(() => {
+                        el.style.transition = 'all 0.6s ease';
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0)';
+                    }, index * 100);
+                });
+            }, 100);
+        });
+    </script>
 </body>
 </html>
