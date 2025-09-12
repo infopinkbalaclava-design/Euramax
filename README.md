@@ -1,4 +1,4 @@
-# 🛡️ Euramax Cybersecurity Defense System - Intern AI-Gedreven Beveiligingsplatform
+# 🛡️ Euramax Cybersecurity Defense System - AI-Gedreven Beveiligingsplatform
 
 [![Nederlandse Implementatie](https://img.shields.io/badge/Taal-Nederlands-orange)](https://github.com/infopinkbalaclava-design/Euramax)
 [![AI-Powered](https://img.shields.io/badge/AI-Powered-blue)](https://github.com/infopinkbalaclava-design/Euramax)
@@ -27,7 +27,7 @@
 
 ## 🛡️ Overzicht
 
- **Volledig geautomatiseerd AI-aangedreven cybersecurity verdedigingssysteem** ontwikkeld door Euramax voor **interne beveiliging en bedreigingsbeheer**. Het systeem biedt **real-time bescherming** tegen alle soorten cyberbedreigingen met gespecialiseerde **anti-phishing capaciteiten**, **autonome AI-bot automatisering**, en een **uitgebreide Nederlandse cybersecurity training** voor medewerkers.
+ **Volledig geautomatiseerd AI-aangedreven cybersecurity verdedigingssysteem** ontwikkeld door Euramax voor **geavanceerde bedreigingsdetectie en cybersecurity training**. Het systeem biedt **real-time bescherming** tegen alle soorten cyberbedreigingen met gespecialiseerde **anti-phishing capaciteiten**, **autonome AI-bot automatisering**, en een **uitgebreide Nederlandse cybersecurity training** voor organisaties.
 
 ### 🎯 Kernfunctionaliteiten
 
@@ -47,15 +47,17 @@
 **Waarom dit systeem?**
 - **🏗️ Sector-specifieke beveiliging**: Aangepast aan de bouw- en materiaalsector
 - **🇳🇱 Nederlandse compliance**: Voldoet aan lokale privacy- en veiligheidseisen  
-- **👥 Interne ontwikkeling**: Volledige controle over beveiliging en functionaliteit
-- **🔄 Continuous improvement**: Voortdurende updates gebaseerd op interne behoeften
+- **👥 Professionele ontwikkeling**: Volledige controle over beveiliging en functionaliteit
+- **🔄 Continuous improvement**: Voortdurende updates gebaseerd op cybersecurity trends
 
 Voor meer informatie over Euramax als bedrijf: [euramaxcladding.com](https://euramaxcladding.com)
 
 ## 🌟 Live Demo
 
-### 🚀 Probeer de Training Direct Online
-**Bezoek onze live demo:** 👉 **[https://infopinkbalaclava-design.github.io/Euramax/static/cybersecurity-course.html](https://infopinkbalaclava-design.github.io/Euramax/static/cybersecurity-course.html)**
+### 🚀 Probeer de Cybersecurity Training Direct Online
+**🎯 Hoofddemo:** 👉 **[https://infopinkbalaclava-design.github.io/Euramax/static/](https://infopinkbalaclava-design.github.io/Euramax/static/)**
+
+**📚 Training Module:** 👉 **[https://infopinkbalaclava-design.github.io/Euramax/static/cybersecurity-course.html](https://infopinkbalaclava-design.github.io/Euramax/static/cybersecurity-course.html)**
 
 De live demo bevat:
 - ✅ **Enhanced cybersecurity training** - Alle 5 modules met progress tracking
@@ -97,6 +99,7 @@ De live demo bevat:
 *Comprehensive Quiz Interface with 15 Challenging Questions and AI-Powered Feedback*
 
 ### 🎯 Direct Toegang tot Specifieke Onderdelen
+- **[🏠 Hoofdpagina Demo](https://infopinkbalaclava-design.github.io/Euramax/static/)** - Complete overzicht van alle functies
 - **[📚 Complete Cybersecurity Cursus](https://infopinkbalaclava-design.github.io/Euramax/static/cybersecurity-course.html)** - Start direct met de training
 - **[📊 Dashboard Interface](https://infopinkbalaclava-design.github.io/Euramax/static/dashboard.html)** - Bekijk het monitoring dashboard
 
@@ -654,7 +657,7 @@ Dit project is gelicentieerd onder de MIT License - zie het [LICENSE](LICENSE) b
 
 ## 🏢 Over Euramax
 
-**Dit cybersecurity systeem is een intern project ontwikkeld door en voor Euramax.**
+**Dit cybersecurity systeem is een geavanceerd project ontwikkeld door Euramax om cybersecurity training en bedreigingsdetectie te demonstreren.**
 
 **Euramax** is het bedrijf achter dit cybersecurity systeem. Euramax is primair gespecialiseerd in bouwmaterialen, dakbedekking en gevelbekleding en heeft meer dan 35 jaar ervaring in deze sector. 
 
@@ -664,7 +667,7 @@ Dit project is gelicentieerd onder de MIT License - zie het [LICENSE](LICENSE) b
 - **Expertise**: Dakbedekking, gevelbekleding, regenwaterafvoersystemen
 - **Experience**: 35+ jaar in de bouwsector
 
-### 🛡️ Waarom Intern Cybersecurity?
+### 🛡️ Waarom Cybersecurity Innovatie?
 Dit AI-gedreven cybersecurity systeem is ontwikkeld om:
 - **Digitale assets** van Euramax te beschermen
 - **Medewerkers** te trainen in cybersecurity awareness
