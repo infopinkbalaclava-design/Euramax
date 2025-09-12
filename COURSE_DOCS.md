@@ -2,7 +2,7 @@
 
 ## Overzicht
 
-De Euramax Cybersecurity Cursus is een uitgebreide Nederlandse educatieve applicatie ontworpen voor werknemers die gevoelige gegevens behandelen. De cursus biedt interactieve leerervaringen met intelligente quiz-systemen, voortgangsregistratie en geavanceerde foutanalyse.
+De Euramax Cybersecurity Cursus is een uitgebreide Nederlandse educatieve applicatie onderdeel van ons internal cybersecurity platform for threat detection and employee education, speciaal ontworpen voor werknemers die gevoelige gegevens behandelen. De cursus biedt interactieve leerervaringen met intelligente quiz-systemen, voortgangsregistratie en geavanceerde foutanalyse.
 
 ## Functies
 
