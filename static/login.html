@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inloggen - Euramax AI Phishing Beveiliging</title>
+    <meta name="description" content="Toegang tot uw Euramax dashboard om bedreigingen te monitoren, training te beheren en uw AI phishing beveiligingsinstellingen te configureren.">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">Euramax</a>
+                
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="about.html" class="nav-link">Over Ons</a></li>
+                    <li><a href="services.html" class="nav-link">Diensten</a></li>
+                    <li><a href="education.html" class="nav-link">Training</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                    <li><a href="login.html" class="btn btn-primary active">Inloggen</a></li>
+                </ul>
+                
+                <div class="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Login Section -->
+    <section class="section" style="padding-top: 8rem; min-height: 100vh; background: linear-gradient(135deg, var(--surface) 0%, var(--background) 100%);">
+        <div class="container">
+            <div class="grid grid-2" style="max-width: 1000px; margin: 0 auto; align-items: center; gap: 4rem;">
+                <!-- Left Side - Branding -->
+                <div class="slide-in-left">
+                    <h1>Welkom Terug</h1>
+                    <p style="font-size: 1.125rem; margin-bottom: 2rem;">Toegang tot uw Euramax dashboard om bedreigingen te monitoren, trainingsprogramma's te beheren en uw AI-beveiligingsinstellingen te configureren.</p>
+                    
+                    <div class="card" style="background: var(--primary-color); color: white; border: none;">
+                        <h3 style="color: white; margin-bottom: 1.5rem;">🛡️ Uw Veiligheids Commandocentrum</h3>
+                        <ul style="list-style: none; margin: 0;">
+                            <li style="display: flex; align-items: center; margin-bottom: 1rem;">
+                                <span style="margin-right: 0.75rem;">📊</span>
+                                Real-time threat monitoring and analytics
+                            </li>
+                            <li style="display: flex; align-items: center; margin-bottom: 1rem;">
+                                <span style="margin-right: 0.75rem;">🎓</span>
+                                Employee training progress tracking
+                            </li>
+                            <li style="display: flex; align-items: center; margin-bottom: 1rem;">
+                                <span style="margin-right: 0.75rem;">⚙️</span>
+                                AI protection system configuration
+                            </li>
+                            <li style="display: flex; align-items: center;">
+                                <span style="margin-right: 0.75rem;">📈</span>
+                                Comprehensive security reports
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Right Side - Login Form -->
+                <div class="card fade-in" style="max-width: 400px;">
+                    <div class="card-header">
+                        <h2 style="text-align: center; margin-bottom: 0.5rem;">Sign In</h2>
+                        <p style="text-align: center; color: var(--text-secondary); margin: 0;">Enter your credentials to access your dashboard</p>
+                    </div>
+                    
+                    <!-- Login Form -->
+                    <form id="login-form">
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="password" class="form-label">Password</label>
+                            <div style="position: relative;">
+                                <input type="password" id="password" name="password" class="form-input" placeholder="Enter your password" required>
+                                <button type="button" onclick="togglePassword()" style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-secondary); cursor: pointer; padding: 0;" data-tooltip="Show/hide password">
+                                    <span id="password-toggle">👁️</span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                <input type="checkbox" id="remember" name="remember">
+                                <span style="font-size: 0.875rem;">Remember me</span>
+                            </label>
+                            <a href="#forgot-password" style="font-size: 0.875rem; color: var(--primary-color); text-decoration: none;">Forgot password?</a>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%; margin-bottom: 1rem;">
+                            Sign In
+                        </button>
+                        
+                        <div style="text-align: center; margin-bottom: 1.5rem;">
+                            <span style="color: var(--text-secondary); font-size: 0.875rem;">Don't have an account? </span>
+                            <a href="contact.html" style="color: var(--primary-color); text-decoration: none; font-weight: 500;">Contact Sales</a>
+                        </div>
+                        
+                        <!-- Divider -->
+                        <div style="position: relative; margin: 1.5rem 0; text-align: center;">
+                            <div style="position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: var(--border-color);"></div>
+                            <span style="background: white; padding: 0 1rem; color: var(--text-secondary); font-size: 0.875rem;">Or continue with</span>
+                        </div>
+                        
+                        <!-- SSO Options -->
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button type="button" onclick="ssoLogin('microsoft')" class="btn btn-secondary" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                                <span>🏢</span> Microsoft
+                            </button>
+                            <button type="button" onclick="ssoLogin('google')" class="btn btn-secondary" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                                <span>🔍</span> Google
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <!-- Demo Access -->
+                    <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color); text-align: center;">
+                        <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 1rem;">Want to try our platform?</p>
+                        <button onclick="demoLogin()" class="btn" style="background: var(--surface); color: var(--text-primary); border: 1px solid var(--border-color); width: 100%;">
+                            Access Demo Dashboard
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Forgot Password Modal -->
+    <div id="forgot-password-modal" class="modal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.5); z-index: 10000; justify-content: center; align-items: center;">
+        <div class="card" style="max-width: 400px; margin: 2rem;">
+            <div class="card-header">
+                <h3>Reset Password</h3>
+                <p style="margin: 0; color: var(--text-secondary);">Enter your email to receive reset instructions</p>
+            </div>
+            
+            <form id="forgot-password-form">
+                <div class="form-group">
+                    <label for="reset-email" class="form-label">Email Address</label>
+                    <input type="email" id="reset-email" name="reset-email" class="form-input" placeholder="Enter your email" required>
+                </div>
+                
+                <div style="display: flex; gap: 1rem;">
+                    <button type="submit" class="btn btn-primary" style="flex: 1;">Send Reset Link</button>
+                    <button type="button" onclick="closeForgotPassword()" class="btn btn-secondary" style="flex: 1;">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Security Features -->
+    <section class="section" style="background: var(--surface);">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fade-in">Enterprise Security You Can Trust</h2>
+                <p class="fade-in">Your data and privacy are protected with industry-leading security measures</p>
+            </div>
+            
+            <div class="grid grid-4">
+                <div class="card fade-in" style="text-align: center;">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">🔐</div>
+                    <h4>Multi-Factor Authentication</h4>
+                    <p style="font-size: 0.875rem;">Enhanced security with SMS, email, and authenticator app support</p>
+                </div>
+                
+                <div class="card fade-in" style="text-align: center;">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">🛡️</div>
+                    <h4>SOC 2 Certified</h4>
+                    <p style="font-size: 0.875rem;">Rigorous security controls and compliance standards</p>
+                </div>
+                
+                <div class="card fade-in" style="text-align: center;">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">🔒</div>
+                    <h4>Data Encryption</h4>
+                    <p style="font-size: 0.875rem;">256-bit AES encryption for data at rest and in transit</p>
+                </div>
+                
+                <div class="card fade-in" style="text-align: center;">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">🌐</div>
+                    <h4>Single Sign-On</h4>
+                    <p style="font-size: 0.875rem;">Integration with Active Directory, Okta, and SAML providers</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Status and Support -->
+    <section class="section">
+        <div class="container">
+            <div class="grid grid-2">
+                <div class="card slide-in-left">
+                    <div class="card-header">
+                        <h3>🟢 System Status</h3>
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                            <span>AI Detection Engine</span>
+                            <span style="color: var(--accent-color); font-weight: 500;">Operational</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                            <span>Training Platform</span>
+                            <span style="color: var(--accent-color); font-weight: 500;">Operational</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                            <span>Monitoring Dashboard</span>
+                            <span style="color: var(--accent-color); font-weight: 500;">Operational</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span>API Services</span>
+                            <span style="color: var(--accent-color); font-weight: 500;">Operational</span>
+                        </div>
+                    </div>
+                    <div style="text-align: center;">
+                        <span style="color: var(--text-secondary); font-size: 0.875rem;">99.9% Uptime • Last updated: 2 minutes ago</span>
+                    </div>
+                </div>
+                
+                <div class="card slide-in-left">
+                    <div class="card-header">
+                        <h3>Need Help?</h3>
+                    </div>
+                    <div style="margin-bottom: 1.5rem;">
+                        <p style="margin-bottom: 1rem;">Our support team is available 24/7 to help with any login issues or technical questions.</p>
+                        <ul class="feature-list">
+                            <li class="feature-item">Live chat support</li>
+                            <li class="feature-item">Email support within 2 hours</li>
+                            <li class="feature-item">Phone support for Enterprise customers</li>
+                            <li class="feature-item">Comprehensive help documentation</li>
+                        </ul>
+                    </div>
+                    <a href="contact.html" class="btn btn-secondary">Contact Support</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Euramax</h3>
+                    <p>Advanced AI-powered phishing protection system providing automated threat detection and comprehensive employee education.</p>
+                    <div style="margin-top: 1rem;">
+                        <span style="color: rgba(255, 255, 255, 0.7);">Follow us:</span>
+                        <div style="margin-top: 0.5rem; display: flex; gap: 1rem;">
+                            <a href="#" style="color: rgba(255, 255, 255, 0.7); text-decoration: none;">LinkedIn</a>
+                            <a href="#" style="color: rgba(255, 255, 255, 0.7); text-decoration: none;">Twitter</a>
+                            <a href="#" style="color: rgba(255, 255, 255, 0.7); text-decoration: none;">YouTube</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="services.html">AI Threat Detection</a></li>
+                        <li><a href="services.html">Employee Training</a></li>
+                        <li><a href="services.html">Real-time Monitoring</a></li>
+                        <li><a href="services.html">Incident Response</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="education.html">Education</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="contact.html">Help Center</a></li>
+                        <li><a href="contact.html">Documentation</a></li>
+                        <li><a href="contact.html">API Reference</a></li>
+                        <li><a href="contact.html">Status Page</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Euramax. All rights reserved. | Protecting organizations from phishing threats worldwide.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Password visibility toggle
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const toggleIcon = document.getElementById('password-toggle');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.textContent = '🙈';
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.textContent = '👁️';
+            }
+        }
+        
+        // Login form handling
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const remember = document.getElementById('remember').checked;
+            
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.innerHTML = '<span class="loading"></span> Signing In...';
+            submitBtn.disabled = true;
+            
+            // Simulate login process
+            setTimeout(() => {
+                if (email && password) {
+                    showNotification('Login successful! Redirecting to dashboard...', 'success');
+                    setTimeout(() => {
+                        // In a real app, this would redirect to the actual dashboard
+                        alert('In a real application, you would now be redirected to your dashboard with full access to:\n\n• Real-time threat monitoring\n• Training management\n• Security analytics\n• Configuration settings\n• Incident response tools');
+                    }, 1500);
+                } else {
+                    showNotification('Please enter both email and password', 'error');
+                }
+                
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }, 2000);
+        });
+        
+        // SSO login simulation
+        function ssoLogin(provider) {
+            showNotification(`Redirecting to ${provider} login...`, 'info');
+            setTimeout(() => {
+                alert(`In a real implementation, this would redirect to ${provider} OAuth flow for secure authentication.`);
+            }, 1000);
+        }
+        
+        // Demo login
+        function demoLogin() {
+            showNotification('Loading demo dashboard...', 'info');
+            setTimeout(() => {
+                alert('Demo Dashboard Access:\n\n✓ Sample threat data\n✓ Training module previews\n✓ Interactive analytics\n✓ Configuration walkthrough\n\nIn a real implementation, this would provide limited access to explore the platform features.');
+            }, 1500);
+        }
+        
+        // Forgot password functionality
+        document.querySelector('a[href="#forgot-password"]').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('forgot-password-modal').style.display = 'flex';
+        });
+        
+        function closeForgotPassword() {
+            document.getElementById('forgot-password-modal').style.display = 'none';
+        }
+        
+        document.getElementById('forgot-password-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('reset-email').value;
+            
+            if (email) {
+                showNotification('Password reset link sent to your email!', 'success');
+                closeForgotPassword();
+                this.reset();
+            }
+        });
+        
+        // Close modal when clicking outside
+        document.getElementById('forgot-password-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeForgotPassword();
+            }
+        });
+        
+        // Auto-focus email field on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('email').focus();
+        });
+    </script>
+</body>
+</html>
