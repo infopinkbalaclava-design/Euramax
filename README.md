@@ -42,7 +42,7 @@
 
 ### 🏢 Over Euramax
 
-**Euramax** is een gevestigde Nederlandse onderneming gespecialiseerd in bouwmaterialen en cladding oplossingen. Dit cybersecurity project is **intern ontwikkeld** door het IT-team van Euramax om de **digitale veiligheid** van het bedrijf en haar partners te waarborgen. 
+**Euramax** is een gevestigde Nederlandse onderneming gespecialiseerd in bouwmaterialen en cladding oplossingen. Dit cybersecurity project is **professioneel ontwikkeld** door het IT-team van Euramax om **geavanceerde cybersecurity training en demonstratie** aan te bieden. 
 
 **Waarom dit systeem?**
 - **🏗️ Sector-specifieke beveiliging**: Aangepast aan de bouw- en materiaalsector
@@ -671,7 +671,7 @@ Dit project is gelicentieerd onder de MIT License - zie het [LICENSE](LICENSE) b
 Dit AI-gedreven cybersecurity systeem is ontwikkeld om:
 - **Digitale assets** van Euramax te beschermen
 - **Medewerkers** te trainen in cybersecurity awareness
-- **Interne processen** veilig te houden van cyber bedreigingen
+- **Bedrijfsprocessen** veilig te houden van cyber bedreigingen
 - **Klantgegevens** en projectinformatie te beveiligen
 
 **Euramax** - Bescherming uw organisatie tegen alle cybersecurity bedreigingen met Nederlandse kwaliteit en AI-innovatie. 🇳🇱🛡️🤖
