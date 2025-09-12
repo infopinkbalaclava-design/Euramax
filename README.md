@@ -45,7 +45,6 @@
 **Euramax** is een gevestigde Nederlandse onderneming gespecialiseerd in bouwmaterialen en cladding oplossingen. Dit cybersecurity project is **intern ontwikkeld** door het IT-team van Euramax om de **digitale veiligheid** van het bedrijf en haar partners te waarborgen. 
 
 **Waarom dit systeem?**
-- **🏗️ Sector-specifieke beveiliging**: Aangepast aan de bouw- en materiaalsector
 - **🇳🇱 Nederlandse compliance**: Voldoet aan lokale privacy- en veiligheidseisen  
 - **👥 Interne ontwikkeling**: Volledige controle over beveiliging en functionaliteit
 - **🔄 Continuous improvement**: Voortdurende updates gebaseerd op interne behoeften
