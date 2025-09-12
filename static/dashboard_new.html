@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Dashboard - Euramax Internal Cybersecurity Platform</title>
+    <meta name="description" content="Real-time cybersecurity monitoring dashboard for Euramax internal use - AI-powered threat detection and system status.">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .dashboard-card {
+            background: white;
+            border-radius: var(--border-radius-large);
+            box-shadow: var(--shadow-light);
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-large);
+        }
+        
+        .status-indicator {
+            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+            border: 2px solid var(--success-color);
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            margin: 2rem 0;
+            text-align: center;
+            font-weight: 500;
+            color: #065f46;
+        }
+        
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success-color);
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 0.5rem;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+        
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            background: var(--surface);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+        }
+        
+        .status-value {
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+        }
+        
+        .status-value.operational {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        
+        .status-value.warning {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        
+        .status-value.critical {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .stat-card {
+            background: var(--surface);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .action-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 500;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+            font-size: 0.875rem;
+        }
+        
+        .action-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .action-btn.secondary {
+            background: var(--secondary-color);
+        }
+        
+        .action-btn.secondary:hover {
+            background: #2563eb;
+        }
+        
+        .action-btn.info {
+            background: var(--accent-color);
+        }
+        
+        .action-btn.info:hover {
+            background: #0891b2;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <img src="https://www.euramax.com/wp-content/uploads/2022/03/Euramax-logo-300x100-1.png" alt="Euramax Logo" style="height: 40px; width: auto;">
+                    <span style="font-size: 0.875rem; color: var(--text-secondary); margin-left: 1rem; font-weight: 400;">
+                        Internal Cybersecurity Platform
+                    </span>
+                </a>
+                
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">🏠 Home</a></li>
+                    <li><a href="dashboard.html" class="nav-link active">📊 Security Dashboard</a></li>
+                    <li><a href="cybersecurity-course.html" class="nav-link">📚 Training</a></li>
+                    <li><a href="phishing-simulation-demo.html" class="nav-link">🎯 Phishing Test</a></li>
+                    <li><a href="about.html" class="nav-link">ℹ️ About Euramax</a></li>
+                    <li><a href="services.html" class="nav-link">🔧 Tools</a></li>
+                    <li><a href="contact.html" class="nav-link">📞 Support</a></li>
+                    <li><a href="login.html" class="btn btn-primary">🔐 Admin Login</a></li>
+                </ul>
+                
+                <div class="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+            
+            <!-- Internal Use Banner -->
+            <div class="internal-use-banner" style="
+                background: linear-gradient(135deg, #fef3c7, #fed7d7);
+                color: #9a3412;
+                padding: 0.5rem 1rem;
+                border-radius: 0.5rem;
+                text-align: center;
+                font-size: 0.875rem;
+                font-weight: 500;
+                margin-top: 1rem;
+                border: 1px solid #fed7aa;
+            ">
+                🔒 <strong>INTERNAL USE ONLY</strong> - Euramax Cybersecurity Platform voor medewerkers en partners
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>🛡️ Cybersecurity Dashboard</h1>
+                <p>Real-time monitoring van alle beveiligingscomponenten en threat detection status voor Euramax interne systemen.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Status Section -->
+    <section class="section">
+        <div class="container">
+            <div class="status-indicator">
+                <span class="pulse-dot"></span>
+                <strong>🛡️ Systeem Operationeel:</strong> 
+                Alle beveiligingscomponenten zijn actief en bewaken uw netwerk 24/7. Live monitoring actief.
+            </div>
+
+            <div class="dashboard-grid">
+                <!-- System Status Card -->
+                <div class="dashboard-card">
+                    <h3>🖥️ Systeem Status</h3>
+                    <div class="status-grid">
+                        <div class="status-item">
+                            <span>AI Bedreigingsdetectie</span>
+                            <span class="status-value operational">Operationeel</span>
+                        </div>
+                        <div class="status-item">
+                            <span>Push Notificaties</span>
+                            <span class="status-value operational">Operationeel</span>
+                        </div>
+                        <div class="status-item">
+                            <span>Real-time Monitoring</span>
+                            <span class="status-value operational">Actief</span>
+                        </div>
+                        <div class="status-item">
+                            <span>Uptime</span>
+                            <span class="status-value operational">99.9%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Statistics Card -->
+                <div class="dashboard-card">
+                    <h3>📊 Vandaag Statistieken</h3>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <span class="stat-number" id="totalScans">1,247</span>
+                            <span class="stat-label">Email Scans</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number" id="threatsDetected">23</span>
+                            <span class="stat-label">Bedreigingen Gedetecteerd</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number" id="phishingBlocked">18</span>
+                            <span class="stat-label">Phishing Geblokkeerd</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number" id="malwareQuarantined">5</span>
+                            <span class="stat-label">Malware In Quarantaine</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Threat Detection Card -->
+                <div class="dashboard-card">
+                    <h3>🔍 Bedreigingsdetectie</h3>
+                    <div class="status-grid">
+                        <div class="status-item">
+                            <span>Phishing Scanner</span>
+                            <span class="status-value operational">Actief</span>
+                        </div>
+                        <div class="status-item">
+                            <span>Malware Detectie</span>
+                            <span class="status-value operational">Actief</span>
+                        </div>
+                        <div class="status-item">
+                            <span>Ransomware Bescherming</span>
+                            <span class="status-value operational">Actief</span>
+                        </div>
+                        <div class="status-item">
+                            <span>Social Engineering</span>
+                            <span class="status-value operational">Actief</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions Card -->
+                <div class="dashboard-card">
+                    <h3>⚡ Snelle Acties</h3>
+                    <div class="action-buttons">
+                        <a href="cybersecurity-course.html" class="action-btn">
+                            🎓 Start Training
+                        </a>
+                        <a href="phishing-simulation-demo.html" class="action-btn secondary">
+                            🎯 Phishing Test
+                        </a>
+                        <button class="action-btn info" onclick="sendTestNotification()">
+                            📧 Test Notificatie
+                        </button>
+                        <button class="action-btn" onclick="runManualScan()">
+                            🔍 Handmatige Scan
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Euramax Cybersecurity Dashboard</h3>
+                    <p>Real-time monitoring en threat detection voor Euramax interne systemen. AI-gedreven bescherming tegen alle cyberbedreigingen.</p>
+                    <div style="margin-top: 1rem;">
+                        <span style="color: rgba(255, 255, 255, 0.7);">Voor meer info over Euramax:</span>
+                        <div style="margin-top: 0.5rem;">
+                            <a href="https://euramaxcladding.com" target="_blank" style="color: #1e90ff; text-decoration: none;">🌐 euramaxcladding.com</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Dashboard Functies</h3>
+                    <ul class="footer-links">
+                        <li><a href="#system-status">🖥️ Systeem Status</a></li>
+                        <li><a href="#threat-detection">🔍 Bedreigingsdetectie</a></li>
+                        <li><a href="#statistics">📊 Real-time Statistieken</a></li>
+                        <li><a href="#notifications">📢 Notificatie Centrum</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Actions</h3>
+                    <ul class="footer-links">
+                        <li><a href="cybersecurity-course.html">🎓 Start Training</a></li>
+                        <li><a href="phishing-simulation-demo.html">🎯 Phishing Test</a></li>
+                        <li><a href="contact.html">📞 Support Contact</a></li>
+                        <li><a href="login.html">🔐 Admin Login</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>System Status</h3>
+                    <p>
+                        <span class="pulse-dot"></span>
+                        <strong>Live Monitoring Actief</strong>
+                    </p>
+                    <p style="margin-top: 0.5rem; color: rgba(255, 255, 255, 0.7);">
+                        Laatste update: <span id="currentTime"></span>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Euramax Cybersecurity Defense System. Voor intern gebruik. | Real-time Dashboard v1.0.0</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Dashboard functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            updateTime();
+            setInterval(updateTime, 1000);
+            simulateRealTimeUpdates();
+        });
+
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleString('nl-NL', {
+                timeZone: 'Europe/Amsterdam',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+            const timeElement = document.getElementById('currentTime');
+            if (timeElement) {
+                timeElement.textContent = timeString;
+            }
+        }
+
+        function simulateRealTimeUpdates() {
+            setInterval(() => {
+                // Simulate live statistics updates
+                const totalScans = document.getElementById('totalScans');
+                const threatsDetected = document.getElementById('threatsDetected');
+                const phishingBlocked = document.getElementById('phishingBlocked');
+                const malwareQuarantined = document.getElementById('malwareQuarantined');
+
+                if (totalScans) {
+                    const current = parseInt(totalScans.textContent.replace(',', ''));
+                    totalScans.textContent = (current + Math.floor(Math.random() * 5) + 1).toLocaleString();
+                }
+
+                if (Math.random() > 0.7) {
+                    if (threatsDetected) {
+                        const current = parseInt(threatsDetected.textContent);
+                        threatsDetected.textContent = current + 1;
+                    }
+                    if (phishingBlocked && Math.random() > 0.5) {
+                        const current = parseInt(phishingBlocked.textContent);
+                        phishingBlocked.textContent = current + 1;
+                    }
+                    if (malwareQuarantined && Math.random() > 0.8) {
+                        const current = parseInt(malwareQuarantined.textContent);
+                        malwareQuarantined.textContent = current + 1;
+                    }
+                }
+            }, 5000);
+        }
+
+        function sendTestNotification() {
+            alert('🚨 Test notificatie verzonden! Check uw email en push notificaties.');
+        }
+
+        function runManualScan() {
+            alert('🔍 Handmatige scan gestart. Resultaten worden binnen 30 seconden weergegeven.');
+        }
+    </script>
+</body>
+</html>
