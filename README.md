@@ -1,4 +1,4 @@
-# 🛡️ Euramax - AI-Gestuurde Cybersecurity Verdedigingssysteem
+# 🛡️ Euramax Cybersecurity Defense System - Intern AI-Gedreven Beveiligingsplatform
 
 [![Nederlandse Implementatie](https://img.shields.io/badge/Taal-Nederlands-orange)](https://github.com/infopinkbalaclava-design/Euramax)
 [![AI-Powered](https://img.shields.io/badge/AI-Powered-blue)](https://github.com/infopinkbalaclava-design/Euramax)
@@ -27,7 +27,7 @@
 
 ## 🛡️ Overzicht
 
- **Volledig geautomatiseerd AI-aangedreven cybersecurity verdedigingssysteem** dat is ontworpen voor Euramax Het systeem biedt **real-time bescherming** tegen alle soorten cyberbedreigingen met gespecialiseerde **anti-phishing capaciteiten**, **autonome AI-bot automatisering**, en een **uitgebreide Nederlandse cybersecurity training**.
+ **Volledig geautomatiseerd AI-aangedreven internal cybersecurity platform for threat detection and employee education** ontwikkeld door Euramax voor **interne beveiliging en bedreigingsbeheer**. Het systeem biedt **real-time bescherming** tegen alle soorten cyberbedreigingen met gespecialiseerde **anti-phishing capaciteiten**, **autonome AI-bot automatisering**, en een **uitgebreide Nederlandse cybersecurity training** voor medewerkers.
 
 ### 🎯 Kernfunctionaliteiten
 
@@ -39,6 +39,16 @@
 - **🇳🇱 Nederlandse Implementatie**: Volledig gelokaliseerde interface en communicatie
 - **📊 Live Dashboard**: Real-time monitoring en analytics
 - **🎓 Automatische Educatie**: Contextuele gebruikersinstructies per bedreiging
+
+### 🏢 Over Euramax
+
+**Euramax** is een gevestigde Nederlandse onderneming gespecialiseerd in cladding oplossingen. Dit cybersecurity project is **intern ontwikkeld** door het IT-team van Euramax om de **digitale veiligheid** van het bedrijf en haar partners te waarborgen. 
+
+**Waarom dit systeem?**  
+- **👥 Interne ontwikkeling**: Volledige controle over beveiliging en functionaliteit
+- **🔄 Continuous improvement**: Voortdurende updates gebaseerd op interne behoeften
+
+Voor meer informatie over Euramax als bedrijf: [euramaxcladding.com](https://euramaxcladding.com)
 
 ## 🌟 Live Demo
 
@@ -639,5 +649,24 @@ Dit project is gelicentieerd onder de MIT License - zie het [LICENSE](LICENSE) b
 - Alle contributors en testers
 
 ---
+
+## 🏢 Over Euramax
+
+**Dit cybersecurity systeem is een intern project ontwikkeld door en voor Euramax.**
+
+**Euramax** is het bedrijf achter dit cybersecurity systeem. Euramax is primair gespecialiseerd in bouwmaterialen, dakbedekking en gevelbekleding en heeft meer dan 35 jaar ervaring in deze sector. 
+
+### 🔗 Meer Informatie Over Euramax
+- **Hoofdactiviteit**: Bouwmaterialen & Cladding Specialist
+- **Website**: [euramaxcladding.com](https://euramaxcladding.com)
+- **Expertise**: Dakbedekking, gevelbekleding, regenwaterafvoersystemen
+- **Experience**: 35+ jaar in de bouwsector
+
+### 🛡️ Waarom Intern Cybersecurity?
+Dit AI-gedreven cybersecurity systeem is ontwikkeld om:
+- **Digitale assets** van Euramax te beschermen
+- **Medewerkers** te trainen in cybersecurity awareness
+- **Interne processen** veilig te houden van cyber bedreigingen
+- **Klantgegevens** en projectinformatie te beveiligen
 
 **Euramax** - Bescherming uw organisatie tegen alle cybersecurity bedreigingen met Nederlandse kwaliteit en AI-innovatie. 🇳🇱🛡️🤖

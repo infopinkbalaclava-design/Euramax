@@ -3,1884 +3,259 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Euramax Live Phishing Simulation Demo - Interactive Cybersecurity Training</title>
-    <style>
-        :root {
-            /* Light theme colors */
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --text-primary: #2c3e50;
-            --text-secondary: #7f8c8d;
-            --background: #ffffff;
-            --surface: rgba(255, 255, 255, 0.95);
-            --surface-hover: rgba(255, 255, 255, 0.98);
-            --border: #e0e6ed;
-            --shadow: rgba(0, 0, 0, 0.1);
-            --success: #27ae60;
-            --warning: #f39c12;
-            --danger: #e74c3c;
-            --info: #3498db;
-        }
-
-        [data-theme="dark"] {
-            /* Dark theme colors */
-            --primary-gradient: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-            --secondary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --accent-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --text-primary: #ecf0f1;
-            --text-secondary: #bdc3c7;
-            --background: #1a1a1a;
-            --surface: rgba(44, 62, 80, 0.95);
-            --surface-hover: rgba(44, 62, 80, 0.98);
-            --border: #34495e;
-            --shadow: rgba(0, 0, 0, 0.3);
-            --success: #2ecc71;
-            --warning: #f1c40f;
-            --danger: #e74c3c;
-            --info: #3498db;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--text-primary);
-            background: var(--primary-gradient);
-            min-height: 100vh;
-            padding: 20px;
-            transition: all 0.3s ease;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        /* Dark mode toggle */
-        .theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            background: var(--surface);
-            border: 2px solid var(--border);
-            border-radius: 50px;
-            padding: 10px 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px var(--shadow);
-            backdrop-filter: blur(10px);
-        }
-
-        .theme-toggle:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px var(--shadow);
-        }
-
-        .theme-toggle span {
-            font-size: 1.2rem;
-            margin: 0 5px;
-        }
-
-        .header {
-            background: var(--surface);
-            padding: 2.5rem 2rem;
-            border-radius: 20px;
-            margin-bottom: 2rem;
-            box-shadow: 0 10px 30px var(--shadow);
-            backdrop-filter: blur(15px);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 4px;
-            background: var(--accent-gradient);
-            animation: shimmer 3s ease-in-out infinite;
-        }
-
-        @keyframes shimmer {
-            0% { left: -100%; }
-            50% { left: 100%; }
-            100% { left: 100%; }
-        }
-
-        .header h1 {
-            color: var(--text-primary);
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            background: var(--secondary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: pulse-glow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes pulse-glow {
-            from { filter: brightness(1); }
-            to { filter: brightness(1.2); }
-        }
-
-        .header p {
-            color: var(--text-secondary);
-            font-size: 1.2rem;
-            font-weight: 400;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .demo-section {
-            background: var(--surface);
-            padding: 2.5rem 2rem;
-            border-radius: 20px;
-            margin-bottom: 2rem;
-            box-shadow: 0 10px 30px var(--shadow);
-            backdrop-filter: blur(15px);
-            border: 1px solid var(--border);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .demo-section:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 40px var(--shadow);
-        }
-
-        .demo-section h2, .demo-section h3 {
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .demo-section h2 {
-            font-size: 1.8rem;
-            background: var(--secondary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .demo-section p {
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-            line-height: 1.7;
-        }
-
-        .demo-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        @media (max-width: 768px) {
-            .demo-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-            
-            .header {
-                padding: 2rem 1.5rem;
-            }
-            
-            .header h1 {
-                font-size: 2rem;
-                flex-direction: column;
-                gap: 0.3rem;
-            }
-            
-            .header p {
-                font-size: 1rem;
-            }
-            
-            .demo-section {
-                padding: 2rem 1.5rem;
-            }
-            
-            .theme-toggle {
-                top: 15px;
-                right: 15px;
-                padding: 8px 12px;
-            }
-        }
-
-        .email-simulator {
-            border: 2px solid var(--border);
-            border-radius: 15px;
-            padding: 2rem;
-            background: var(--surface);
-            transition: all 0.3s ease;
-        }
-
-        .email-simulator:hover {
-            border-color: var(--info);
-            box-shadow: 0 5px 20px var(--shadow);
-        }
-
-        .email-header {
-            background: var(--surface-hover);
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin-bottom: 1.5rem;
-            border-left: 4px solid var(--info);
-            transition: all 0.3s ease;
-        }
-
-        .email-field {
-            margin-bottom: 0.8rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .email-field label {
-            font-weight: 600;
-            color: var(--text-primary);
-            min-width: 80px;
-        }
-
-        .email-field span {
-            color: var(--text-secondary);
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .email-content {
-            background: var(--surface-hover);
-            padding: 1.5rem;
-            border-radius: 12px;
-            border: 2px solid var(--border);
-            min-height: 200px;
-            white-space: pre-wrap;
-            font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
-            line-height: 1.6;
-            color: var(--text-primary);
-            transition: all 0.3s ease;
-            resize: vertical;
-        }
-
-        .email-content:focus {
-            outline: none;
-            border-color: var(--info);
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
-        }
-
-        .ai-analysis {
-            border: 2px solid var(--border);
-            border-radius: 15px;
-            padding: 2rem;
-            background: var(--surface);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .ai-analysis::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--accent-gradient);
-            opacity: 0.8;
-        }
-
-        .analysis-header {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .threat-indicator {
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin-bottom: 1.5rem;
-            font-weight: 600;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .threat-indicator::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .threat-indicator:hover::before {
-            left: 100%;
-        }
-
-        .threat-safe {
-            background: linear-gradient(135deg, #d4edda, #c3e6cb);
-            color: #155724;
-            border: 1px solid #c3e6cb;
-            box-shadow: 0 4px 15px rgba(21, 87, 36, 0.1);
-        }
-
-        .threat-low {
-            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
-            color: #856404;
-            border: 1px solid #ffeaa7;
-            box-shadow: 0 4px 15px rgba(133, 100, 4, 0.1);
-        }
-
-        .threat-medium {
-            background: linear-gradient(135deg, #f8d7da, #f5c6cb);
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-            box-shadow: 0 4px 15px rgba(114, 28, 36, 0.1);
-        }
-
-        .threat-high {
-            background: linear-gradient(135deg, #f5c6cb, #f1b0b7);
-            color: #721c24;
-            border: 1px solid #f1b0b7;
-            box-shadow: 0 4px 15px rgba(114, 28, 36, 0.15);
-        }
-
-        .threat-critical {
-            background: linear-gradient(135deg, #d1ecf1, #bee5eb);
-            color: #0c5460;
-            border: 1px solid #bee5eb;
-            animation: pulse-critical 2s infinite;
-            box-shadow: 0 4px 15px rgba(12, 84, 96, 0.2);
-        }
-
-        @keyframes pulse-critical {
-            0% { transform: scale(1); box-shadow: 0 4px 15px rgba(12, 84, 96, 0.2); }
-            50% { transform: scale(1.02); box-shadow: 0 6px 20px rgba(12, 84, 96, 0.3); }
-            100% { transform: scale(1); box-shadow: 0 4px 15px rgba(12, 84, 96, 0.2); }
-        }
-
-        .confidence-meter {
-            margin: 1.5rem 0;
-            padding: 1rem;
-            background: var(--surface-hover);
-            border-radius: 12px;
-            border: 1px solid var(--border);
-        }
-
-        .confidence-meter h4 {
-            color: var(--text-primary);
-            margin-bottom: 0.8rem;
-            font-weight: 600;
-        }
-
-        .confidence-bar {
-            background: var(--border);
-            height: 12px;
-            border-radius: 6px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .confidence-bar::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, 
-                rgba(255,255,255,0.1) 0%, 
-                rgba(255,255,255,0.3) 50%, 
-                rgba(255,255,255,0.1) 100%);
-            animation: confidence-shimmer 2s ease-in-out infinite;
-        }
-
-        @keyframes confidence-shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
-        .confidence-fill {
-            height: 100%;
-            background: linear-gradient(to right, var(--success), var(--warning), var(--danger));
-            border-radius: 6px;
-            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-        }
-
-        .confidence-fill::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 3px;
-            height: 100%;
-            background: rgba(255,255,255,0.8);
-            border-radius: 0 6px 6px 0;
-        }
-
-        .indicators-list {
-            background: var(--surface-hover);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            border: 1px solid var(--border);
-            transition: all 0.3s ease;
-        }
-
-        .indicators-list h4 {
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .indicator-item {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            padding: 0.8rem;
-            margin-bottom: 0.5rem;
-            border-radius: 8px;
-            background: var(--surface);
-            border-left: 3px solid var(--warning);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .indicator-item:hover {
-            transform: translateX(5px);
-            box-shadow: 0 3px 10px var(--shadow);
-        }
-
-        .indicator-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .recommendations {
-            background: linear-gradient(135deg, #e7f3ff, #f0f8ff);
-            border: 2px solid var(--info);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .recommendations::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: var(--info);
-        }
-
-        .recommendations h4 {
-            color: var(--info);
-            margin-bottom: 1rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .recommendation-item {
-            padding: 0.8rem 0;
-            border-bottom: 1px solid rgba(52, 152, 219, 0.1);
-            color: var(--text-primary);
-            transition: all 0.3s ease;
-            position: relative;
-            padding-left: 1rem;
-        }
-
-        .recommendation-item:hover {
-            background: rgba(52, 152, 219, 0.05);
-            padding-left: 1.5rem;
-        }
-
-        .recommendation-item:last-child {
-            border-bottom: none;
-        }
-
-        .sample-emails {
-            margin: 2rem 0;
-        }
-
-        .sample-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1.5rem;
-            margin: 1.5rem 0;
-        }
-
-        .sample-email {
-            background: var(--surface);
-            border: 2px solid var(--border);
-            border-radius: 15px;
-            padding: 1.5rem;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .sample-email::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--accent-gradient);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .sample-email:hover {
-            border-color: var(--info);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px var(--shadow);
-        }
-
-        .sample-email:hover::before {
-            transform: scaleX(1);
-        }
-
-        .sample-email h4 {
-            color: var(--text-primary);
-            margin-bottom: 0.8rem;
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        .sample-preview {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            line-height: 1.5;
-            font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
-        }
-
-        .analyze-btn {
-            background: var(--secondary-gradient);
-            color: white;
-            border: none;
-            padding: 1.2rem 2.5rem;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            margin: 1.5rem 0;
-            display: block;
-            width: 100%;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .analyze-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.6s;
-        }
-
-        .analyze-btn:hover::before {
-            left: 100%;
-        }
-
-        .analyze-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-        }
-
-        .analyze-btn:active {
-            transform: translateY(-1px);
-        }
-
-        .analyze-btn:disabled {
-            background: linear-gradient(135deg, #bdc3c7, #95a5a6);
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        .analyze-btn:disabled:hover {
-            transform: none;
-        }
-
-        .loading {
-            display: none;
-            text-align: center;
-            padding: 2.5rem;
-            background: var(--surface-hover);
-            border-radius: 12px;
-            margin: 1rem 0;
-        }
-
-        .loading.active {
-            display: block;
-            animation: fadeIn 0.3s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .spinner {
-            border: 4px solid var(--border);
-            border-top: 4px solid var(--info);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 1.5rem;
-            position: relative;
-        }
-
-        .spinner::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--info);
-            animation: pulse-center 1.5s ease-in-out infinite;
-        }
-
-        @keyframes pulse-center {
-            0%, 100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.5; }
-            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .loading p {
-            color: var(--text-secondary);
-            font-weight: 500;
-            animation: pulse-text 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse-text {
-            0%, 100% { opacity: 0.7; }
-            50% { opacity: 1; }
-        }
-
-        .threat-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .stat-card {
-            background: var(--surface);
-            padding: 2rem 1.5rem;
-            border-radius: 15px;
-            text-align: center;
-            border-left: 4px solid var(--info);
-            transition: all 0.3s ease;
-            border: 1px solid var(--border);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--accent-gradient);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px var(--shadow);
-            border-left-color: var(--success);
-        }
-
-        .stat-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-            background: var(--secondary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            margin-top: 0.5rem;
-            font-weight: 500;
-        }
-
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--info);
-            text-decoration: none;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            padding: 0.8rem 1.2rem;
-            border-radius: 25px;
-            background: var(--surface);
-            border: 2px solid var(--border);
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .back-link:hover {
-            color: white;
-            background: var(--info);
-            transform: translateX(-5px);
-            box-shadow: 0 5px 15px var(--shadow);
-        }
-
-        /* Tutorial overlay styles */
-        .tutorial-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 10000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(5px);
-        }
-
-        .tutorial-step {
-            background: var(--surface);
-            border-radius: 15px;
-            padding: 2rem;
-            max-width: 500px;
-            margin: 1rem;
-            text-align: center;
-            position: relative;
-            animation: slideInUp 0.3s ease-out;
-        }
-
-        @keyframes slideInUp {
-            from { transform: translateY(30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .tutorial-controls {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-top: 1.5rem;
-        }
-
-        .tutorial-btn {
-            padding: 0.8rem 1.5rem;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .tutorial-btn.primary {
-            background: var(--secondary-gradient);
-            color: white;
-        }
-
-        .tutorial-btn.secondary {
-            background: var(--border);
-            color: var(--text-primary);
-        }
-
-        .tutorial-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px var(--shadow);
-        }
-        /* Enhanced Dashboard Styles */
-        .analytics-card {
-            background: var(--surface);
-            padding: 1.5rem;
-            border-radius: 15px;
-            border: 1px solid var(--border);
-            transition: all 0.3s ease;
-        }
-
-        .analytics-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px var(--shadow);
-        }
-
-        .analytics-card h4 {
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .history-list {
-            max-height: 150px;
-            overflow-y: auto;
-        }
-
-        .history-item {
-            padding: 0.5rem;
-            background: var(--surface-hover);
-            border-radius: 8px;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
-
-        .comparison-view {
-            animation: slideDown 0.3s ease-out;
-        }
-
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Share modal styles */
-        .share-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 10000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(5px);
-        }
-
-        .share-content {
-            background: var(--surface);
-            border-radius: 15px;
-            padding: 2rem;
-            max-width: 500px;
-            margin: 1rem;
-            text-align: center;
-        }
-
-        .share-options {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 1rem;
-            margin: 1.5rem 0;
-        }
-
-        .share-btn {
-            padding: 1rem;
-            border: 2px solid var(--border);
-            border-radius: 12px;
-            background: var(--surface-hover);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            color: var(--text-primary);
-        }
-
-        .share-btn:hover {
-            border-color: var(--info);
-            background: var(--info);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        /* Mobile optimizations */
-        @media (max-width: 480px) {
-            .sample-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .threat-stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .tutorial-step {
-                margin: 0.5rem;
-                padding: 1.5rem;
-            }
-            
-            .share-content {
-                margin: 0.5rem;
-                padding: 1.5rem;
-            }
-        }
-
-        /* Enhanced animations */
-        @keyframes fadeInScale {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        .demo-section {
-            animation: fadeInScale 0.6s ease-out;
-        }
-
-        .demo-section:nth-child(even) {
-            animation-delay: 0.1s;
-        }
-
-        .demo-section:nth-child(odd) {
-            animation-delay: 0.2s;
-        }
-    </style>
+    <title>Euramax Phishing Simulation - Internal Cybersecurity Platform for Threat Detection and Employee Education</title>
+    <meta name="description" content="Interactive phishing simulation for Euramax employees. Practice identifying and responding to phishing attempts in a safe environment.">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Dark mode toggle -->
-    <div class="theme-toggle" onclick="toggleTheme()">
-        <span>🌙</span>
-        <span>☀️</span>
-    </div>
-
-    <!-- Tutorial overlay -->
-    <div class="tutorial-overlay" id="tutorialOverlay">
-        <div class="tutorial-step" id="tutorialStep">
-            <h3 id="tutorialTitle">Welcome to Phishing Simulation Demo</h3>
-            <p id="tutorialText">This interactive demo will guide you through the process of identifying phishing emails using AI analysis.</p>
-            <div class="tutorial-controls">
-                <button class="tutorial-btn secondary" onclick="skipTutorial()">Skip Tutorial</button>
-                <button class="tutorial-btn primary" onclick="nextTutorialStep()">Get Started</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <a href="cybersecurity-course.html" class="back-link">
-            ← Terug naar Cybersecurity Training
-        </a>
-
-        <div class="header">
-            <h1>
-                🛡️ Live Phishing Simulation Demo
-                <span style="color: #e74c3c;">🤖 AI</span>
-            </h1>
-            <p>Ervaar hoe de Euramax AI-powered phishing detectie systeem in real-time bedreigingen identificeert en neutraliseert</p>
-        </div>
-
-        <div class="demo-section">
-            <h2>🎯 Interactieve Demo Experience</h2>
-            <p>Selecteer een email scenario hieronder of voer uw eigen email in voor real-time AI analyse. 
-            Het systeem gebruikt geavanceerde machine learning om phishing indicatoren te detecteren en 
-            onmiddellijke waarschuwingen te geven.</p>
-        </div>
-
-        <div class="demo-section sample-emails">
-            <h3>📧 Sample Email Scenarios</h3>
-            <p>Klik op een scenario om de AI-detectie in actie te zien:</p>
-            
-            <div class="sample-grid">
-                <div class="sample-email" onclick="loadSampleEmail('suspicious_bank')">
-                    <h4>🚨 Verdachte Bank Email</h4>
-                    <div class="sample-preview">
-                        Van: security@ing-bank-verificatie.com<br>
-                        Onderwerp: URGENT: Account geblokkeerd - Verificatie vereist<br>
-                        "Uw account is tijdelijk geblokkeerd vanwege verdachte activiteit..."
-                    </div>
-                </div>
-
-                <div class="sample-email" onclick="loadSampleEmail('fake_microsoft')">
-                    <h4>💼 Nep Microsoft Alert</h4>
-                    <div class="sample-preview">
-                        Van: security@microsoft-account-team.com<br>
-                        Onderwerp: Beveiligingswaarschuwing voor uw account<br>
-                        "Er zijn 5 mislukte inlogpogingen gedetecteerd op uw Microsoft account..."
-                    </div>
-                </div>
-
-                <div class="sample-email" onclick="loadSampleEmail('crypto_scam')">
-                    <h4>₿ Cryptocurrency Oplichting</h4>
-                    <div class="sample-preview">
-                        Van: admin@btc-rewards-program.eu<br>
-                        Onderwerp: Gefeliciteerd! U heeft 0.5 BTC gewonnen!<br>
-                        "U bent geselecteerd voor ons exclusieve Bitcoin programma..."
-                    </div>
-                </div>
-
-                <div class="sample-email" onclick="loadSampleEmail('legitimate_email')">
-                    <h4>✅ Legitieme Email</h4>
-                    <div class="sample-preview">
-                        Van: info@euramax.eu<br>
-                        Onderwerp: Maandelijks beveiligingsrapport - December 2024<br>
-                        "Uw maandelijkse cybersecurity rapport is nu beschikbaar..."
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="demo-grid">
-            <div class="email-simulator">
-                <h3>📧 Email Simulator</h3>
+    <!-- Header & Navigation -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <img src="https://www.euramax.com/wp-content/uploads/2022/03/Euramax-logo-300x100-1.png" alt="Euramax Logo" style="height: 40px; width: auto;">
+                    <span style="font-size: 0.875rem; color: var(--text-secondary); margin-left: 1rem; font-weight: 400;">
+                        Internal Cybersecurity Platform
+                    </span>
+                </a>
                 
-                <div class="email-header">
-                    <div class="email-field">
-                        <label>Van:</label>
-                        <span id="email-sender">Selecteer een scenario</span>
-                    </div>
-                    <div class="email-field">
-                        <label>Onderwerp:</label>
-                        <span id="email-subject">Kies een email hierboven</span>
-                    </div>
-                    <div class="email-field">
-                        <label>Datum:</label>
-                        <span id="email-date">-</span>
-                    </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">🏠 Home</a></li>
+                    <li><a href="dashboard.html" class="nav-link">📊 Security Dashboard</a></li>
+                    <li><a href="cybersecurity-course.html" class="nav-link">📚 Training</a></li>
+                    <li><a href="phishing-simulation-demo.html" class="nav-link active">🎯 Phishing Test</a></li>
+                    <li><a href="about.html" class="nav-link">ℹ️ About Euramax</a></li>
+                    <li><a href="services.html" class="nav-link">🔧 Tools</a></li>
+                    <li><a href="education.html" class="nav-link">🎓 Education</a></li>
+                    <li><a href="contact.html" class="nav-link">📞 Support</a></li>
+                    <li><a href="login.html" class="btn btn-primary">🔐 Admin Login</a></li>
+                </ul>
+                
+                <div class="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </div>
+            </nav>
+            
+            <!-- Internal Use Banner -->
+            <div class="internal-use-banner" style="
+                background: linear-gradient(135deg, #fef3c7, #fed7d7);
+                color: #9a3412;
+                padding: 0.5rem 1rem;
+                border-radius: 0.5rem;
+                text-align: center;
+                font-size: 0.875rem;
+                font-weight: 500;
+                margin-top: 1rem;
+                border: 1px solid #fed7aa;
+            ">
+                🔒 <strong>INTERNAL USE ONLY</strong> - Euramax Cybersecurity Platform voor medewerkers en partners
+            </div>
+        </div>
+    </header>
 
-                <div class="email-content" id="email-content">
-                    Selecteer een sample email scenario om de AI-detectie demonstratie te starten.
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>🎯 Euramax Phishing Simulation</h1>
+                <p>Practice identifying and responding to phishing attempts in a safe, controlled environment. Test your skills and learn to protect Euramax from cyber threats.</p>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="#email-test" class="btn btn-primary">Start Email Test</a>
+                    <a href="#scenarios" class="btn btn-secondary">View Scenarios</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Simulation Overview Section -->
+    <section class="section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fade-in">Phishing Test Overview</h2>
+                <p class="fade-in">Interactive simulations designed to enhance your cybersecurity awareness</p>
+            </div>
+            
+            <div class="grid grid-3">
+                <div class="card fade-in">
+                    <div class="card-header">
+                        <span class="card-icon">📧</span>
+                        <h3>Email Scenarios</h3>
+                    </div>
+                    <p>Practice identifying suspicious emails with real-world examples based on actual threats targeting businesses like Euramax.</p>
+                    <a href="#email-simulation" class="btn btn-secondary">Test Now</a>
+                </div>
+                
+                <div class="card fade-in">
+                    <div class="card-header">
+                        <span class="card-icon">📱</span>
+                        <h3>SMS Phishing</h3>
+                    </div>
+                    <p>Learn to recognize smishing attempts targeting mobile devices with interactive text message scenarios.</p>
+                    <a href="#sms-simulation" class="btn btn-secondary">Try SMS Test</a>
+                </div>
+                
+                <div class="card fade-in">
+                    <div class="card-header">
+                        <span class="card-icon">🌐</span>
+                        <h3>Website Spoofs</h3>
+                    </div>
+                    <p>Identify fake websites and malicious links designed to steal credentials or install malware.</p>
+                    <a href="#website-simulation" class="btn btn-secondary">Check Websites</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Demo Section -->
+    <section class="section" id="email-simulation" style="background: var(--surface);">
+        <div class="container">
+            <div class="grid grid-2" style="align-items: center;">
+                <div class="slide-in-left">
+                    <h2>Interactive Email Phishing Test</h2>
+                    <p>Below is an example of a suspicious email. Can you identify the red flags that indicate this might be a phishing attempt?</p>
                     
-                    U kunt ook uw eigen email content hier invoeren voor real-time analyse.
-                </div>
-
-                <button class="analyze-btn" onclick="analyzeCurrentEmail()" id="analyze-btn" disabled>
-                    🤖 Analyseer met AI Systeem
-                </button>
-            </div>
-
-            <div class="ai-analysis">
-                <div class="analysis-header">
-                    🧠 Live AI Threat Analysis
-                </div>
-
-                <div class="loading" id="analysis-loading">
-                    <div class="spinner"></div>
-                    <p>AI systeem analyseert email op phishing indicatoren...</p>
-                </div>
-
-                <div id="analysis-results" style="display: none;">
-                    <div class="threat-indicator" id="threat-status">
-                        Wachten op analyse...
-                    </div>
-
-                    <div class="confidence-meter">
-                        <h4>Betrouwbaarheid Score</h4>
-                        <div class="confidence-bar">
-                            <div class="confidence-fill" id="confidence-fill" style="width: 0%"></div>
+                    <!-- Sample Phishing Email -->
+                    <div class="card" style="background: #fff; margin: 2rem 0; border: 1px solid #ddd;">
+                        <div style="background: #f8f9fa; padding: 1rem; border-bottom: 1px solid #ddd;">
+                            <strong>From:</strong> admin@euramax-security.org<br>
+                            <strong>To:</strong> you@euramax.eu<br>
+                            <strong>Subject:</strong> URGENT: Security Update Required - Action Needed Within 24 Hours
                         </div>
-                        <p><span id="confidence-percentage">0%</span> - AI betrouwbaarheid van detectie</p>
-                    </div>
-
-                    <div class="indicators-list" id="threat-indicators">
-                        <h4>🔍 Gedetecteerde Indicatoren</h4>
-                        <div id="indicators-content">
-                            Geen analyse beschikbaar
+                        <div style="padding: 1.5rem;">
+                            <p>Dear Euramax Employee,</p>
+                            <p>We have detected suspicious activity on your account and need you to verify your credentials immediately.</p>
+                            <p><strong>IMPORTANT:</strong> If you do not update your security settings within 24 hours, your account will be suspended.</p>
+                            <p>Click here to verify your account: <a href="#" style="color: #e74c3c;">https://euramax-security-update.org/verify</a></p>
+                            <p>Best regards,<br>Euramax IT Security Team</p>
                         </div>
                     </div>
-
-                    <div class="recommendations" id="recommendations-section">
-                        <h4>💡 Aanbevolen Acties</h4>
-                        <div id="recommendations-content">
-                            Wachten op AI analyse...
+                    
+                    <h3>Can you spot the red flags?</h3>
+                    <ul class="feature-list">
+                        <li class="feature-item">Suspicious sender domain (.org instead of .eu)</li>
+                        <li class="feature-item">Creates urgency with 24-hour deadline</li>
+                        <li class="feature-item">Threatens account suspension</li>
+                        <li class="feature-item">Requests credential verification via email</li>
+                        <li class="feature-item">External link to non-Euramax domain</li>
+                    </ul>
+                </div>
+                <div class="card fade-in">
+                    <div style="text-align: center; padding: 2rem;">
+                        <div style="font-size: 4rem; margin-bottom: 1rem;">🚨</div>
+                        <h3>Phishing Alert!</h3>
+                        <p>This email shows multiple signs of being a phishing attempt. Never click suspicious links or provide credentials via email.</p>
+                        <div style="margin-top: 1.5rem;">
+                            <a href="contact.html" class="btn btn-primary">Report Suspicious Email</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
 
-        <div class="demo-section">
-            <h3>📊 Live Threat Detection Statistics</h3>
-            <div class="threat-stats" id="threat-stats">
-                <div class="stat-card">
-                    <div class="stat-number" id="total-scans">0</div>
-                    <div class="stat-label">Totaal Gescande Emails</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="threats-detected">0</div>
-                    <div class="stat-label">Bedreigingen Gedetecteerd</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="detection-accuracy">98.7%</div>
-                    <div class="stat-label">AI Detectie Accuraatheid</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="response-time">< 1s</div>
-                    <div class="stat-label">Gemiddelde Responstijd</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="demo-section">
-            <h3>🔍 Email Comparison Tool</h3>
-            <p>Compare phishing emails with legitimate ones to understand the differences and improve your detection skills.</p>
-            
-            <div class="comparison-controls" style="margin: 1.5rem 0;">
-                <button class="analyze-btn" onclick="showComparison()" style="width: auto; display: inline-block; margin-right: 1rem;">
-                    🔬 Compare Emails
-                </button>
-                <button class="analyze-btn" onclick="startTutorial()" style="width: auto; display: inline-block; background: var(--accent-gradient);">
-                    🎓 Start Tutorial
-                </button>
-            </div>
-
-            <div class="comparison-view" id="comparisonView" style="display: none;">
-                <div class="demo-grid">
-                    <div class="email-simulator">
-                        <h4 style="color: var(--danger); margin-bottom: 1rem;">🚨 Phishing Email</h4>
-                        <div id="phishingComparison" class="email-content" style="min-height: 300px;">
-                            Loading phishing example...
-                        </div>
-                        <div id="phishingIndicators" style="margin-top: 1rem;"></div>
-                    </div>
-                    <div class="email-simulator">
-                        <h4 style="color: var(--success); margin-bottom: 1rem;">✅ Legitimate Email</h4>
-                        <div id="legitimateComparison" class="email-content" style="min-height: 300px;">
-                            Loading legitimate example...
-                        </div>
-                        <div id="legitimateIndicators" style="margin-top: 1rem;"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="demo-section">
-            <h3>📊 Enhanced Analytics Dashboard</h3>
-            <div class="dashboard-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
-                <div class="analytics-card">
-                    <h4>📈 Detection Trends</h4>
-                    <div class="trend-chart" id="trendChart">
-                        <div class="chart-placeholder" style="height: 150px; background: var(--border); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--text-secondary);">
-                            📊 Real-time trends visualization
-                        </div>
-                    </div>
-                </div>
-                <div class="analytics-card">
-                    <h4>🎯 Analysis Results</h4>
-                    <div id="analysisHistory" class="history-list">
-                        <div class="history-item">No analysis performed yet</div>
-                    </div>
-                </div>
-                <div class="analytics-card">
-                    <h4>🌍 Global Threat Map</h4>
-                    <div class="threat-map" style="height: 150px; background: var(--border); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--text-secondary);">
-                        🗺️ Interactive threat visualization
-                    </div>
-                </div>
+    <!-- Best Practices Section -->
+    <section class="section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fade-in">Phishing Prevention Best Practices</h2>
+                <p class="fade-in">Key strategies to protect yourself and Euramax from phishing attacks</p>
             </div>
             
-            <div style="margin-top: 2rem; text-align: center;">
-                <button class="analyze-btn" onclick="shareResults()" style="width: auto; display: inline-block; background: var(--accent-gradient);">
-                    📤 Share Analysis Results
-                </button>
+            <div class="grid grid-2">
+                <div class="card fade-in">
+                    <div class="card-header">
+                        <span class="card-icon">✅</span>
+                        <h3>Do This</h3>
+                    </div>
+                    <ul>
+                        <li>Verify sender identity through secondary channels</li>
+                        <li>Check URLs carefully before clicking</li>
+                        <li>Use multi-factor authentication</li>
+                        <li>Keep software updated</li>
+                        <li>Report suspicious emails immediately</li>
+                        <li>Think before you click</li>
+                    </ul>
+                </div>
+                
+                <div class="card fade-in">
+                    <div class="card-header">
+                        <span class="card-icon">❌</span>
+                        <h3>Never Do This</h3>
+                    </div>
+                    <ul>
+                        <li>Click links in suspicious emails</li>
+                        <li>Download attachments from unknown senders</li>
+                        <li>Provide credentials via email</li>
+                        <li>Ignore your instincts about suspicious content</li>
+                        <li>Use the same password across multiple accounts</li>
+                        <li>Share sensitive information over unsecured channels</li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Share modal -->
-    <div class="share-modal" id="shareModal">
-        <div class="share-content">
-            <h3>📤 Share Analysis Results</h3>
-            <p>Share your phishing analysis results with colleagues or save for future reference.</p>
-            <div class="share-options">
-                <a href="#" class="share-btn" onclick="shareViaEmail()">
-                    📧<br>Email
-                </a>
-                <a href="#" class="share-btn" onclick="copyToClipboard()">
-                    📋<br>Copy Link
-                </a>
-                <a href="#" class="share-btn" onclick="downloadReport()">
-                    💾<br>Download
-                </a>
-                <a href="#" class="share-btn" onclick="shareToTeams()">
-                    👥<br>Teams
-                </a>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="grid grid-3">
+                <div>
+                    <h3>Euramax Security</h3>
+                    <p>Internal cybersecurity platform for comprehensive employee protection and education.</p>
+                </div>
+                <div>
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="dashboard.html">Security Dashboard</a></li>
+                        <li><a href="cybersecurity-course.html">Training</a></li>
+                        <li><a href="contact.html">Support</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Emergency Support</h3>
+                    <p>Email: security@euramax.eu</p>
+                    <p>24/7 Emergency: +31 (0)20 123 4567</p>
+                </div>
             </div>
-            <button class="tutorial-btn secondary" onclick="closeShareModal()">Close</button>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Euramax. Internal Security Platform - Confidential Use Only.</p>
+            </div>
         </div>
-    </div>
+    </footer>
 
     <script>
-        // Sample email data for demonstration
-        const sampleEmails = {
-            suspicious_bank: {
-                sender: "security@ing-bank-verificatie.com",
-                subject: "URGENT: Account geblokkeerd - Onmiddellijke verificatie vereist",
-                content: `Beste klant,
-
-Uw ING Bank account is tijdelijk geblokkeerd vanwege verdachte activiteiten die zijn gedetecteerd.
-
-Om uw account te deblokkeren, moet u uw gegevens verifiëren via de onderstaande link:
-
-https://ing-verificatie-center.secure-login-portal.com/verify
-
-BELANGRIJK: U heeft 24 uur om deze verificatie te voltooien, anders wordt uw account permanent gesloten.
-
-Klik hier om nu te verifiëren: [VERIFIEER NU]
-
-Met vriendelijke groet,
-ING Beveiligingsteam
-security@ing-bank-verificatie.com
-
-Dit is een geautomatiseerd bericht. Reageer niet op deze email.`
-            },
-
-            fake_microsoft: {
-                sender: "security@microsoft-account-team.com", 
-                subject: "Beveiligingswaarschuwing: 5 mislukte inlogpogingen gedetecteerd",
-                content: `Microsoft Account Beveiligingsmelding
-
-Hallo,
-
-Er zijn 5 mislukte inlogpogingen gedetecteerd op uw Microsoft account vanaf het IP-adres 192.168.1.100.
-
-Locatie: Amsterdam, Nederland
-Tijd: Vandaag om 14:32
-
-Als dit niet uw eigen activiteit was, beveilig dan onmiddellijk uw account:
-
-1. Klik hier om uw wachtwoord te wijzigen
-2. Schakel twee-factor authenticatie in
-3. Controleer recente activiteit
-
->>> BEVEILIG ACCOUNT NU <<<
-https://microsoft-security-center.account-protection.com
-
-Het Microsoft Beveiligingsteam
-account-security@microsoft-account-team.com`
-            },
-
-            crypto_scam: {
-                sender: "admin@btc-rewards-program.eu",
-                subject: "🎉 Gefeliciteerd! U heeft 0.5 BTC gewonnen! (€15,000+)",
-                content: `GEFELICITEERD! 
-
-U bent GESELECTEERD voor ons exclusieve Bitcoin Rewards Program!
-
-🏆 U heeft gewonnen: 0.5 BTC (ter waarde van €15,247)
-
-Om uw Bitcoin prijs te claimen:
-
-1. Bevestig uw wallet adres
-2. Betaal een kleine verificatie fee van €50
-3. Ontvang binnen 24 uur uw 0.5 BTC
-
-⚡ BEPERKTE TIJD: Deze aanbieding verloopt over 6 uur!
-
-CLAIM NU: https://btc-rewards-claim.crypto-winner.eu/claim?id=NL-2024-XK8901
-
-Voer verificatie code in: BTC-WINNER-2024
-
-Dit is een eenmalige kans! Duizenden mensen missen deze kans.
-
-Bitcoin Rewards Team
-admin@btc-rewards-program.eu`
-            },
-
-            legitimate_email: {
-                sender: "info@euramax.eu",
-                subject: "Maandelijks Cybersecurity Rapport - December 2024", 
-                content: `Beste [Naam],
-
-Uw maandelijkse cybersecurity rapport voor december 2024 is nu beschikbaar.
-
-SAMENVATTING DEZE MAAND:
-• 247 emails gescand
-• 12 phishing pogingen geblokkeerd  
-• 3 malware detecties
-• 99.2% uptime beveiliging
-
-BELANGRIJKE UPDATES:
-- Nieuwe phishing campagne targeting Nederlandse banken
-- Security patch geïnstalleerd op 15 december
-- Volgende security training: 8 januari 2025
-
-Het volledige rapport kunt u inzien via uw dashboard:
-https://dashboard.euramax.eu/reports/monthly
-
-Voor vragen kunt u contact opnemen met ons security team via security@euramax.eu.
-
-Met vriendelijke groet,
-Het Euramax Beveiligingsteam
-
-Euramax Cybersecurity Systems
-Postbus 1234, 1000 AB Amsterdam
-www.euramax.eu`
-            }
-        };
-
-        let currentEmailData = null;
-        let demoStats = {
-            totalScans: 0,
-            threatsDetected: 0
-        };
-        let analysisHistory = [];
-        let currentTutorialStep = 0;
-        let isDarkMode = false;
-
-        // Tutorial steps
-        const tutorialSteps = [
-            {
-                title: "Welcome to Phishing Simulation Demo",
-                text: "This interactive demo will guide you through the process of identifying phishing emails using AI analysis."
-            },
-            {
-                title: "Step 1: Select an Email",
-                text: "Choose one of the sample email scenarios below to see how they look in real phishing attempts."
-            },
-            {
-                title: "Step 2: AI Analysis",
-                text: "Click the 'Analyze with AI System' button to see our advanced machine learning in action."
-            },
-            {
-                title: "Step 3: Review Results",
-                text: "Examine the threat level, confidence score, and detailed indicators to understand the analysis."
-            },
-            {
-                title: "Step 4: Learn from Recommendations",
-                text: "Review the AI-generated recommendations to understand how to respond to threats."
-            },
-            {
-                title: "Tutorial Complete!",
-                text: "You're now ready to use the demo. Try different email scenarios and explore the comparison tool!"
-            }
-        ];
-
-        // Dark mode functionality
-        function toggleTheme() {
-            isDarkMode = !isDarkMode;
-            document.documentElement.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
-            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-            
-            // Update toggle button
-            const toggle = document.querySelector('.theme-toggle');
-            toggle.style.transform = 'rotate(360deg)';
-            setTimeout(() => {
-                toggle.style.transform = 'rotate(0deg)';
-            }, 300);
-        }
-
-        // Initialize theme from localStorage
-        function initializeTheme() {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) {
-                isDarkMode = savedTheme === 'dark';
-                document.documentElement.setAttribute('data-theme', savedTheme);
-            }
-        }
-
-        // Tutorial functionality
-        function startTutorial() {
-            currentTutorialStep = 0;
-            showTutorialStep();
-            document.getElementById('tutorialOverlay').style.display = 'flex';
-        }
-
-        function showTutorialStep() {
-            const step = tutorialSteps[currentTutorialStep];
-            document.getElementById('tutorialTitle').textContent = step.title;
-            document.getElementById('tutorialText').textContent = step.text;
-            
-            const controls = document.querySelector('.tutorial-controls');
-            if (currentTutorialStep === 0) {
-                controls.innerHTML = `
-                    <button class="tutorial-btn secondary" onclick="skipTutorial()">Skip Tutorial</button>
-                    <button class="tutorial-btn primary" onclick="nextTutorialStep()">Get Started</button>
-                `;
-            } else if (currentTutorialStep === tutorialSteps.length - 1) {
-                controls.innerHTML = `
-                    <button class="tutorial-btn secondary" onclick="previousTutorialStep()">Back</button>
-                    <button class="tutorial-btn primary" onclick="completeTutorial()">Complete</button>
-                `;
-            } else {
-                controls.innerHTML = `
-                    <button class="tutorial-btn secondary" onclick="previousTutorialStep()">Back</button>
-                    <button class="tutorial-btn primary" onclick="nextTutorialStep()">Next</button>
-                `;
-            }
-        }
-
-        function nextTutorialStep() {
-            if (currentTutorialStep < tutorialSteps.length - 1) {
-                currentTutorialStep++;
-                showTutorialStep();
-            }
-        }
-
-        function previousTutorialStep() {
-            if (currentTutorialStep > 0) {
-                currentTutorialStep--;
-                showTutorialStep();
-            }
-        }
-
-        function skipTutorial() {
-            document.getElementById('tutorialOverlay').style.display = 'none';
-        }
-
-        function completeTutorial() {
-            document.getElementById('tutorialOverlay').style.display = 'none';
-            // Show a completion notification
-            showNotification('🎓 Tutorial completed! You can now explore the demo freely.');
-        }
-
-        // Email comparison functionality
-        function showComparison() {
-            const comparisonView = document.getElementById('comparisonView');
-            if (comparisonView.style.display === 'none') {
-                comparisonView.style.display = 'block';
-                loadComparisonEmails();
-            } else {
-                comparisonView.style.display = 'none';
-            }
-        }
-
-        function loadComparisonEmails() {
-            const phishingEmail = sampleEmails.suspicious_bank;
-            const legitimateEmail = sampleEmails.legitimate_email;
-            
-            document.getElementById('phishingComparison').textContent = 
-                `From: ${phishingEmail.sender}\nSubject: ${phishingEmail.subject}\n\n${phishingEmail.content}`;
-            
-            document.getElementById('legitimateComparison').textContent = 
-                `From: ${legitimateEmail.sender}\nSubject: ${legitimateEmail.subject}\n\n${legitimateEmail.content}`;
-            
-            // Add indicators
-            document.getElementById('phishingIndicators').innerHTML = `
-                <div class="indicator-item" style="border-left-color: var(--danger);">⚠️ Suspicious domain mimicking legitimate service</div>
-                <div class="indicator-item" style="border-left-color: var(--danger);">⚠️ Urgent language creating pressure</div>
-                <div class="indicator-item" style="border-left-color: var(--danger);">⚠️ External suspicious links</div>
-            `;
-            
-            document.getElementById('legitimateIndicators').innerHTML = `
-                <div class="indicator-item" style="border-left-color: var(--success);">✅ Official domain verified</div>
-                <div class="indicator-item" style="border-left-color: var(--success);">✅ Professional tone</div>
-                <div class="indicator-item" style="border-left-color: var(--success);">✅ No suspicious requests</div>
-            `;
-        }
-
-        // Share functionality
-        function shareResults() {
-            document.getElementById('shareModal').style.display = 'flex';
-        }
-
-        function closeShareModal() {
-            document.getElementById('shareModal').style.display = 'none';
-        }
-
-        function shareViaEmail() {
-            const subject = 'Phishing Analysis Results - Euramax Demo';
-            const body = generateReportText();
-            window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-            closeShareModal();
-        }
-
-        function copyToClipboard() {
-            const reportText = generateReportText();
-            navigator.clipboard.writeText(reportText).then(() => {
-                showNotification('📋 Results copied to clipboard!');
-            });
-            closeShareModal();
-        }
-
-        function downloadReport() {
-            const reportText = generateReportText();
-            const blob = new Blob([reportText], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `phishing-analysis-${new Date().toISOString().split('T')[0]}.txt`;
-            a.click();
-            URL.revokeObjectURL(url);
-            closeShareModal();
-        }
-
-        function shareToTeams() {
-            const reportText = generateReportText();
-            // This would integrate with Microsoft Teams API in a real implementation
-            showNotification('🚀 Teams integration would be implemented here');
-            closeShareModal();
-        }
-
-        function generateReportText() {
-            return `EURAMAX PHISHING ANALYSIS REPORT
-Generated: ${new Date().toLocaleString()}
-
-STATISTICS:
-- Total Emails Scanned: ${demoStats.totalScans}
-- Threats Detected: ${demoStats.threatsDetected}
-- Detection Accuracy: 98.7%
-
-RECENT ANALYSIS:
-${analysisHistory.slice(-3).map(item => `- ${item}`).join('\n')}
-
-This report was generated by the Euramax AI-powered phishing detection system.
-Visit: https://euramax.eu for more information.`;
-        }
-
-        // Enhanced notification system
-        function showNotification(message, type = 'info') {
-            const notification = document.createElement('div');
-            notification.style.cssText = `
-                position: fixed;
-                top: 80px;
-                right: 20px;
-                background: var(--surface);
-                color: var(--text-primary);
-                padding: 1rem 1.5rem;
-                border-radius: 12px;
-                box-shadow: 0 8px 25px var(--shadow);
-                z-index: 10001;
-                border-left: 4px solid var(--info);
-                backdrop-filter: blur(10px);
-                animation: slideInRight 0.3s ease-out;
-                max-width: 350px;
-            `;
-            
-            notification.textContent = message;
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.style.animation = 'slideOutRight 0.3s ease-in forwards';
-                setTimeout(() => notification.remove(), 300);
-            }, 4000);
-        }
-
-        // Enhanced analytics
-        function updateAnalysisHistory(emailType, result) {
-            const timestamp = new Date().toLocaleTimeString();
-            const historyItem = `${timestamp}: ${emailType} - ${result.severity.toUpperCase()} threat (${Math.round(result.confidence * 100)}% confidence)`;
-            analysisHistory.push(historyItem);
-            
-            // Update dashboard
-            const historyContainer = document.getElementById('analysisHistory');
-            if (historyContainer) {
-                historyContainer.innerHTML = analysisHistory.slice(-5).reverse()
-                    .map(item => `<div class="history-item">${item}</div>`)
-                    .join('');
-            }
-        }
-
-        function loadSampleEmail(emailType) {
-            const email = sampleEmails[emailType];
-            if (!email) return;
-
-            currentEmailData = email;
-            
-            // Update email display
-            document.getElementById('email-sender').textContent = email.sender;
-            document.getElementById('email-subject').textContent = email.subject;
-            document.getElementById('email-date').textContent = new Date().toLocaleDateString('nl-NL');
-            document.getElementById('email-content').textContent = email.content;
-            
-            // Enable analyze button
-            document.getElementById('analyze-btn').disabled = false;
-            
-            // Hide previous results
-            document.getElementById('analysis-results').style.display = 'none';
-        }
-
-        async function analyzeCurrentEmail() {
-            if (!currentEmailData) return;
-            
-            // Show loading state
-            document.getElementById('analysis-loading').classList.add('active');
-            document.getElementById('analysis-results').style.display = 'none';
-            document.getElementById('analyze-btn').disabled = true;
-            
-            try {
-                // Simulate API call to the real backend
-                const response = await fetch('/api/v1/security/analyze/email', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        email_content: currentEmailData.content,
-                        sender: currentEmailData.sender,
-                        subject: currentEmailData.subject
-                    })
-                });
-
-                let result;
-                if (response.ok) {
-                    // Use real API response if available
-                    result = await response.json();
-                } else {
-                    // Fallback to simulated analysis if API not available
-                    result = simulateAIAnalysis(currentEmailData);
-                }
-                
-                // Update statistics
-                demoStats.totalScans++;
-                if (result.threat_detected) {
-                    demoStats.threatsDetected++;
-                }
-                updateStatistics();
-                updateAnalysisHistory(currentEmailData.sender.includes('euramax') ? 'Legitimate' : 'Phishing', result);
-                
-                // Display results after short delay for effect
-                setTimeout(() => {
-                    displayAnalysisResults(result);
-                    document.getElementById('analysis-loading').classList.remove('active');
-                    document.getElementById('analysis-results').style.display = 'block';
-                    document.getElementById('analyze-btn').disabled = false;
-                }, 1500);
-                
-            } catch (error) {
-                console.log('API not available, using simulated analysis');
-                // Fallback to simulated analysis
-                const result = simulateAIAnalysis(currentEmailData);
-                
-                demoStats.totalScans++;
-                if (result.threat_detected) {
-                    demoStats.threatsDetected++;
-                }
-                updateStatistics();
-                
-                setTimeout(() => {
-                    displayAnalysisResults(result);
-                    document.getElementById('analysis-loading').classList.remove('active');
-                    document.getElementById('analysis-results').style.display = 'block';
-                    document.getElementById('analyze-btn').disabled = false;
-                }, 1500);
-            }
-        }
-
-        function simulateAIAnalysis(emailData) {
-            // Simulate AI analysis based on email content
-            const indicators = [];
-            let confidence = 0.1; // Base confidence
-            
-            // Check for suspicious domain
-            if (!emailData.sender.includes('euramax.eu') && 
-                (emailData.sender.includes('ing-') || emailData.sender.includes('microsoft-') || emailData.sender.includes('btc-'))) {
-                indicators.push('Verdachte domein naam die legitieme service imiteert');
-                confidence += 0.3;
-            }
-            
-            // Check for urgent language
-            if (emailData.content.toLowerCase().includes('urgent') || 
-                emailData.subject.toLowerCase().includes('urgent')) {
-                indicators.push('Urgentietaal gebruikt om druk te creëren');
-                confidence += 0.2;
-            }
-            
-            // Check for suspicious links
-            if (emailData.content.includes('http') && !emailData.content.includes('euramax.eu')) {
-                indicators.push('Verdachte externe links gedetecteerd');
-                confidence += 0.3;
-            }
-            
-            // Check for financial incentives
-            if (emailData.content.includes('€') || emailData.content.includes('BTC') || 
-                emailData.content.includes('gewonnen') || emailData.content.includes('prize')) {
-                indicators.push('Financiële prikkels of loterij-achtige claims');
-                confidence += 0.4;
-            }
-            
-            // Check for credential requests
-            if (emailData.content.toLowerCase().includes('verifieer') || 
-                emailData.content.toLowerCase().includes('wachtwoord') ||
-                emailData.content.toLowerCase().includes('inloggen')) {
-                indicators.push('Verzoek om gevoelige gegevens of credentials');
-                confidence += 0.3;
-            }
-            
-            // Determine threat level
-            let severity, threatType;
-            if (confidence >= 0.8) {
-                severity = 'critical';
-                threatType = 'phishing';
-            } else if (confidence >= 0.6) {
-                severity = 'high';
-                threatType = 'phishing';
-            } else if (confidence >= 0.4) {
-                severity = 'medium';
-                threatType = 'phishing';
-            } else if (confidence >= 0.2) {
-                severity = 'low';
-                threatType = 'phishing';
-            } else {
-                severity = 'info';
-                threatType = 'clean';
-            }
-            
-            // Generate recommendations
-            const recommendations = generateRecommendations(severity, indicators);
-            
-            return {
-                threat_detected: confidence > 0.5,
-                threat_type: threatType,
-                severity: severity,
-                confidence: Math.min(confidence, 1.0),
-                dutch_description: generateDutchDescription(confidence, indicators.length),
-                indicators: indicators,
-                recommended_actions: recommendations,
-                timestamp: new Date().toISOString()
-            };
-        }
-
-        function generateRecommendations(severity, indicators) {
-            const baseActions = [
-                "Verwijder email onmiddellijk",
-                "Rapporteer incident aan IT-beveiliging",
-                "Klik niet op links of bijlagen"
-            ];
-            
-            if (severity === 'critical' || severity === 'high') {
-                return baseActions.concat([
-                    "Waarschuw alle medewerkers",
-                    "Activeer incident response protocol",
-                    "Blokkeer afzender domein",
-                    "Voer netwerkbeveiliging controle uit"
-                ]);
-            } else if (severity === 'medium') {
-                return baseActions.concat([
-                    "Informeer beveiligingsteam",
-                    "Controleer andere emails van afzender"
-                ]);
-            } else {
-                return ["Email lijkt legitiem", "Blijf waakzaam voor verdachte elementen"];
-            }
-        }
-
-        function generateDutchDescription(confidence, indicatorCount) {
-            if (confidence >= 0.8) {
-                return `HOOGRISICO phishing-aanval gedetecteerd met ${indicatorCount} verdachte indicatoren. Onmiddellijke actie vereist.`;
-            } else if (confidence >= 0.6) {
-                return `Waarschijnlijke phishing-poging gedetecteerd. ${indicatorCount} verdachte elementen gevonden.`;
-            } else if (confidence >= 0.4) {
-                return `Mogelijk verdachte email. ${indicatorCount} indicatoren vereisen aandacht.`;
-            } else {
-                return "Email gescand - geen significante bedreigingen gedetecteerd.";
-            }
-        }
-
-        function displayAnalysisResults(result) {
-            // Update threat indicator
-            const threatStatus = document.getElementById('threat-status');
-            threatStatus.textContent = result.dutch_description;
-            
-            // Set threat level styling
-            threatStatus.className = 'threat-indicator';
-            if (result.severity === 'critical') {
-                threatStatus.classList.add('threat-critical');
-            } else if (result.severity === 'high') {
-                threatStatus.classList.add('threat-high');
-            } else if (result.severity === 'medium') {
-                threatStatus.classList.add('threat-medium');
-            } else if (result.severity === 'low') {
-                threatStatus.classList.add('threat-low');
-            } else {
-                threatStatus.classList.add('threat-safe');
-            }
-            
-            // Update confidence meter
-            const confidencePercentage = Math.round(result.confidence * 100);
-            document.getElementById('confidence-fill').style.width = confidencePercentage + '%';
-            document.getElementById('confidence-percentage').textContent = confidencePercentage + '%';
-            
-            // Update indicators
-            const indicatorsContent = document.getElementById('indicators-content');
-            if (result.indicators && result.indicators.length > 0) {
-                indicatorsContent.innerHTML = result.indicators
-                    .map(indicator => `<div class="indicator-item">⚠️ ${indicator}</div>`)
-                    .join('');
-            } else {
-                indicatorsContent.innerHTML = '<div class="indicator-item">✅ Geen verdachte indicatoren gevonden</div>';
-            }
-            
-            // Update recommendations
-            const recommendationsContent = document.getElementById('recommendations-content');
-            if (result.recommended_actions && result.recommended_actions.length > 0) {
-                recommendationsContent.innerHTML = result.recommended_actions
-                    .map(action => `<div class="recommendation-item">• ${action}</div>`)
-                    .join('');
-            } else {
-                recommendationsContent.innerHTML = '<div class="recommendation-item">• Geen specifieke acties vereist</div>';
-            }
-        }
-
-        function updateStatistics() {
-            document.getElementById('total-scans').textContent = demoStats.totalScans;
-            document.getElementById('threats-detected').textContent = demoStats.threatsDetected;
-            
-            // Update response time with random variation for realism
-            const responseTime = (Math.random() * 0.5 + 0.3).toFixed(1);
-            document.getElementById('response-time').textContent = `${responseTime}s`;
-        }
-
-        // Initialize demo
+        // Basic animation scripts
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Phishing Simulation Demo loaded successfully');
-            initializeTheme();
+            // Fade in animations
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+            });
             
-            // Add CSS animations
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes slideInRight {
-                    from { transform: translateX(100%); opacity: 0; }
-                    to { transform: translateX(0); opacity: 1; }
-                }
-                
-                @keyframes slideOutRight {
-                    from { transform: translateX(0); opacity: 1; }
-                    to { transform: translateX(100%); opacity: 0; }
-                }
-            `;
-            document.head.appendChild(style);
-            
-            // Auto-start tutorial for first-time visitors
-            if (!localStorage.getItem('tutorialCompleted')) {
-                setTimeout(() => startTutorial(), 1000);
-                localStorage.setItem('tutorialCompleted', 'true');
-            }
+            setTimeout(() => {
+                fadeElements.forEach((el, index) => {
+                    setTimeout(() => {
+                        el.style.transition = 'all 0.6s ease';
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0)';
+                    }, index * 100);
+                });
+            }, 100);
+
+            // Interactive email test
+            const emailLinks = document.querySelectorAll('#email-simulation a[href="#"]');
+            emailLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('🚨 Good catch! This would have been a phishing link. Never click suspicious links in real emails.');
+                });
+            });
         });
     </script>
 </body>
