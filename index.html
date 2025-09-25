@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Euramax Werknemersapp</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Welkom bij de Euramax Werknemersapp</h1>
+        <nav>
+            <ul>
+                <li><a href="#login">Inloggen</a></li>
+                <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="#team-selector">Ploeguitje Kiezer</a></li>
+                <li><a href="#paint-order">Verf Bestellen</a></li>
+                <li><a href="#warehouse-order">Voorraad Bestellen</a></li>
+                <li><a href="#learning">Leerplatform</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="login">
+            <h2>Inloggen</h2>
+            <!-- Professioneel inlogsysteem -->
+            <form action="/login" method="POST">
+                <label for="username">Gebruikersnaam:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Wachtwoord:</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit">Inloggen</button>
+            </form>
+        </section>
+        <section id="homepage">
+            <h2>Homepage met Social Media Nieuws</h2>
+            <!-- Nieuwsaggregatie -->
+            <div id="news-feed">
+                <p>Nieuws van social media komt hier...</p>
+            </div>
+        </section>
+        <section id="dashboard">
+            <h2>Team Dashboard</h2>
+            <!-- Dashboard voor teams -->
+            <p>Dashboard functionaliteit komt hier...</p>
+        </section>
+        <section id="team-selector">
+            <h2>Ploeguitje Kiezer</h2>
+            <!-- Teamselector -->
+            <p>Selecteer uw team hier...</p>
+        </section>
+        <section id="paint-order">
+            <h2>Verf Bestellen</h2>
+            <!-- Verf bestelsysteem -->
+            <p>Systeem voor verf bestellen komt hier...</p>
+        </section>
+        <section id="warehouse-order">
+            <h2>Voorraad Bestellen</h2>
+            <!-- Voorraad bestelsysteem -->
+            <p>Systeem voor voorraad bestellen komt hier...</p>
+        </section>
+        <section id="learning">
+            <h2>Leerplatform</h2>
+            <!-- Cybersecurity cursussen -->
+            <p>Cybersecurity cursussen komen hier...</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Euramax. Alle rechten voorbehouden.</p>
+    </footer>
+</body>
+</html>
